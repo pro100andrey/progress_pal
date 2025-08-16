@@ -34,5 +34,11 @@
 </head>
 <body>
   <script src="flutter_bootstrap.js" async></script>
+  <script>
+    document.addEventListener('touchstart', (startEvent) => {
+        if (startEvent.touches.length > 1) return;
+        startEvent.preventDefault();
+      }, { passive: false });
+  </script>
 </body>
 </html>
