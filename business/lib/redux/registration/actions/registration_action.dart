@@ -15,6 +15,7 @@ class RegistrationAction extends ReduxAction<AppState> {
 
   @override
   Future<AppState?> reduce() async {
+    final name = selectRegistrationName(state)!;
     final email = selectRegistrationEmail(state)!;
     final password = selectRegistrationPassword(state)!;
 
@@ -25,7 +26,7 @@ class RegistrationAction extends ReduxAction<AppState> {
             body: {
               'email': email,
               'emailVisibility': true,
-              'name': 'test',
+              'name': name,
               'password': password,
               'passwordConfirm': password,
             },
