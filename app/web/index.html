@@ -35,10 +35,30 @@
 <body>
   <script src="flutter_bootstrap.js" async></script>
   <script>
-    document.addEventListener('touchstart', (startEvent) => {
-        if (startEvent.touches.length > 1) return;
-        startEvent.preventDefault();
-      }, { passive: false });
+    document.addEventListener(
+        'touchstart',
+        (event) => {
+          const target = event.target;
+          if (
+            target.tagName === 'INPUT' ||
+            target.tagName === 'TEXTAREA' ||
+            target.isContentEditable
+          ) {
+            return;
+          }
+
+          // Prevent the back-swipe ghost page only if single touch
+          if (event.touches.length === 1 && event.changedTouches.length === 1) {
+            const touchX = event.touches[0].clientX;
+
+            // Block only if swipe begins at the left edge (back gesture)
+            if (touchX < 20) {
+              event.preventDefault();
+            }
+          }
+        },
+        { passive: false }
+      ); 
   </script>
 </body>
 </html>
