@@ -15,11 +15,11 @@ dependencies:
   flutter_dotenv: ^5.2.1
   freezed_annotation: ^3.1.0
   get_it: ^8.2.0
-  http_client:
-    path: ../http_client
   logging: ^1.3.0
   models:
     path: ../models
+  pocket:
+    path: ../pocket
   storage:
     path: ../storage
 

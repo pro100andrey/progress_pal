@@ -17,8 +17,8 @@
             "path": "business"
         },
         {
-            "name": "http_client",
-            "path": "http_client"
+            "name": "pocket",
+            "path": "pocket"
         },
         {
             "name": "models",
@@ -56,7 +56,10 @@
         "files.associations": {
             "*.arb": "json"
         },
-        "cSpell.words": ["dotenv", "unawaited"],
+        "cSpell.words": [
+            "dotenv",
+            "unawaited"
+        ],
         "explorer.fileNesting.patterns": {
             "*.dart": "${capture}.g.theme.dart"
         }
