@@ -12,11 +12,13 @@ import 'package:window_manager/window_manager.dart';
 
 import 'app.dart';
 
-bool get isDesktop => [
-  TargetPlatform.windows,
-  TargetPlatform.macOS,
-  TargetPlatform.linux,
-].contains(defaultTargetPlatform);
+bool get isDesktop =>
+    [
+      TargetPlatform.windows,
+      TargetPlatform.macOS,
+      TargetPlatform.linux,
+    ].contains(defaultTargetPlatform) &&
+    !kIsWeb;
 
 Future<void> runEnv(Environment env) async {
   WidgetsFlutterBinding.ensureInitialized();

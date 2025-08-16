@@ -1,6 +1,3 @@
-import 'package:flutter/foundation.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
-
 enum EnvironmentType {
   development,
   production;
@@ -22,14 +19,11 @@ final class Environment {
     const baseUrl = 'https://dev.com';
     const type = EnvironmentType.development;
 
-    if (!kReleaseMode) {
-      await dotenv.load(isOptional: true);
-
-      return Environment._(
-        baseUrl: dotenv.maybeGet('BASE_URL', fallback: baseUrl)!,
-        type: type,
-      );
-    }
+    // try {
+    //   await dotenv.load(isOptional: true);
+    // } on Exception catch (e) {
+    //   debugPrint('Failed to load .env file: $e');
+    // }
 
     return const Environment._(baseUrl: baseUrl, type: type);
   }
