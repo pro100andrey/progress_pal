@@ -17,10 +17,6 @@
             "path": "business"
         },
         {
-            "name": "pocket",
-            "path": "pocket"
-        },
-        {
             "name": "models",
             "path": "models"
         },

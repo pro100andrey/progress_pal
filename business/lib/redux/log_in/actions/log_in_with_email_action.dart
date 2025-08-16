@@ -1,7 +1,9 @@
 import 'dart:async';
 
 import 'package:async_redux/async_redux.dart';
+import 'package:pocketbase/pocketbase.dart';
 
+import '../../../service_locator.dart';
 import '../../app_state.dart';
 import '../log_in_selectors.dart';
 import '../models/log_in_state.dart';
@@ -19,17 +21,14 @@ class LogInWithEmailAction extends ReduxAction<AppState> {
     final email = selectLogInEmail(state)!;
     final password = selectLogInPassword(state)!;
 
-    await _logInWithEmailRequest(email: email, password: password);
+    try {
+      final userData = await getPocketBase
+          .collection('users')
+          .authWithPassword(email, password);
+    } on ClientException catch (e) {
+      throw UserException('Error', reason: e.response['message']);
+    }
 
     return state.copyWith(logIn: const LogInState());
   }
-}
-
-Future<void> _logInWithEmailRequest({
-  required String email,
-  required String password,
-}) async {
-  await Future<dynamic>.delayed(const Duration(seconds: 2));
-
-  throw const UserException('Not implemented yet.');
 }

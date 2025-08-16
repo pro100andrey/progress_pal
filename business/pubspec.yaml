@@ -18,8 +18,7 @@ dependencies:
   logging: ^1.3.0
   models:
     path: ../models
-  pocket:
-    path: ../pocket
+  pocketbase: ^0.23.0
   storage:
     path: ../storage
 

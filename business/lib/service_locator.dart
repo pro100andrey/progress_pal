@@ -1,5 +1,6 @@
 import 'package:async_redux/async_redux.dart';
 import 'package:get_it/get_it.dart';
+import 'package:pocketbase/pocketbase.dart';
 import 'package:storage/storage.dart';
 
 import 'environment.dart';
@@ -12,6 +13,7 @@ final _locator = GetIt.instance;
 
 ConnectivityService get getConnectivity => _locator.get<ConnectivityService>();
 KeyValueStorage get getSettingsStorage => _locator.get<KeyValueStorage>();
+PocketBase get getPocketBase => _locator.get<PocketBase>();
 
 Future<void> initLocator(Store<AppState> store, Environment env) async {
   final settingsStorage = KeyValueStorage();
@@ -26,6 +28,9 @@ Future<void> initLocator(Store<AppState> store, Environment env) async {
 
   await connectivity.start();
   _locator.registerSingleton(connectivity);
+
+  final pb = PocketBase('https://progress-pal.pockethost.io/');
+  _locator.registerSingleton(pb);
 
   // ...
   // Other services

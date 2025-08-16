@@ -43,6 +43,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "mustContainAtLeastOneUppercase": MessageLookupByLibrary.simpleMessage(
       "Must contain at least one uppercase",
     ),
+    "name": MessageLookupByLibrary.simpleMessage("Name"),
     "ok": MessageLookupByLibrary.simpleMessage("OK"),
     "password": MessageLookupByLibrary.simpleMessage("Password"),
     "passwordsDoNotMatch": MessageLookupByLibrary.simpleMessage(

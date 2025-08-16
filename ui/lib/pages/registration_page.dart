@@ -6,10 +6,12 @@ import '../containers/auth_from_container.dart';
 import '../inputs/confirm_password_input.dart';
 import '../inputs/email_input.dart';
 import '../inputs/password_input.dart';
+import '../inputs/user_name_input.dart';
 import '../models/value_changed.dart';
 
 class RegistrationPage extends StatelessWidget {
   const RegistrationPage({
+    required this.name,
     required this.email,
     required this.password,
     required this.confirmPassword,
@@ -17,7 +19,7 @@ class RegistrationPage extends StatelessWidget {
     required this.onPressedBackToLogin,
     super.key,
   });
-
+  final ValueChangedWithErrorVm<String?> name;
   final ValueChangedWithErrorVm<String?> email;
   final ValueChangedWithErrorVm<String?> password;
   final ValueChangedWithErrorVm<String?> confirmPassword;
@@ -33,6 +35,8 @@ class RegistrationPage extends StatelessWidget {
           title: S.current.register,
           children: [
             const SizedBox(height: 24),
+            UserNameInput(vm: name),
+            const SizedBox(height: 16),
             EmailInput(vm: email),
             const SizedBox(height: 16),
             PasswordInput(vm: password),
