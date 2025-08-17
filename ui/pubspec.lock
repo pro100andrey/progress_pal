@@ -49,6 +49,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.2"
+  boxy:
+    dependency: transitive
+    description:
+      name: boxy
+      sha256: "71af0cd1bf7889c09787f26219a345aa4f38ccb98384c8ec24189e4d8e746005"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.2.1"
   build:
     dependency: transitive
     description:
@@ -302,6 +310,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_animate:
+    dependency: transitive
+    description:
+      name: flutter_animate
+      sha256: "7befe2d3252728afb77aecaaea1dec88a89d35b9b1d2eea6d04479e8af9117b5"
+      url: "https://pub.dev"
+    source: hosted
+    version: "4.5.2"
   flutter_gen_core:
     dependency: transitive
     description:
@@ -331,6 +347,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.29"
+  flutter_shaders:
+    dependency: transitive
+    description:
+      name: flutter_shaders
+      sha256: "34794acadd8275d971e02df03afee3dee0f98dbfb8c4837082ad0034f612a3e2"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.1.3"
   flutter_svg:
     dependency: "direct main"
     description:
@@ -420,10 +444,10 @@ packages:
     dependency: "direct main"
     description:
       name: image_picker
-      sha256: "021834d9c0c3de46bf0fe40341fa07168407f694d9b2bb18d532dc1261867f7a"
+      sha256: "736eb56a911cf24d1859315ad09ddec0b66104bc41a7f8c5b96b4e2620cf5041"
       url: "https://pub.dev"
     source: hosted
-    version: "1.1.2"
+    version: "1.2.0"
   image_picker_android:
     dependency: transitive
     description:
@@ -535,6 +559,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.3.0"
+  lucide_icons_flutter:
+    dependency: transitive
+    description:
+      name: lucide_icons_flutter
+      sha256: c88e3611c0aa272ca2f2aa263662174ae4996f5e3ee1c300021514df230b6588
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.0.9"
   matcher:
     dependency: transitive
     description:
@@ -703,6 +735,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.5.0"
+  shadcn_ui:
+    dependency: "direct main"
+    description:
+      name: shadcn_ui
+      sha256: "8f79e25efeb82a0653ef4643e47483bf6d32878f09503a50ee5201f32e036973"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.28.5"
   shelf:
     dependency: transitive
     description:
@@ -820,6 +860,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.2"
+  two_dimensional_scrollables:
+    dependency: transitive
+    description:
+      name: two_dimensional_scrollables
+      sha256: "0f77ecb96596f2f82eec2b0a8e60d9305c58315557da9fa3b610c7dbf5ded621"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.3.7"
   typed_data:
     dependency: transitive
     description:
@@ -828,6 +876,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.4.0"
+  universal_image:
+    dependency: transitive
+    description:
+      name: universal_image
+      sha256: ef47a4a002158cf0b36ed3b7605af132d2476cc42703e41b8067d3603705c40d
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.11"
   vector_graphics:
     dependency: transitive
     description:
@@ -926,4 +982,4 @@ packages:
     version: "3.1.3"
 sdks:
   dart: ">=3.9.0 <4.0.0"
-  flutter: ">=3.29.0"
+  flutter: ">=3.32.0"

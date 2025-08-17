@@ -5,7 +5,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:localization/localization.dart';
-import 'package:ui/theme/common.dart';
+import 'package:shadcn_ui/shadcn_ui.dart';
 
 import 'connectors/top_level_page_connector.dart';
 import 'navigation/routers_flow.dart';
@@ -29,13 +29,18 @@ class _AppConnectorState extends State<AppConnector> {
     builder: (context, vm) {
       final router = RoutersMap.instance.routerWithFlow(vm.flow);
 
-      return MaterialApp.router(
-        debugShowCheckedModeBanner: false,
+      return ShadApp.router(
         routerDelegate: router.routerDelegate,
         routeInformationProvider: router.routeInformationProvider,
-        theme: lightTheme(),
-        darkTheme: darkTheme(),
-        themeMode: ThemeMode.light,
+        themeMode: ThemeMode.dark,
+        darkTheme: ShadThemeData(
+          brightness: Brightness.dark,
+          colorScheme: ShadColorScheme.fromName(
+            'zinc',
+            brightness: Brightness.dark,
+          ),
+        ),
+
         routeInformationParser: router.routeInformationParser,
         localizationsDelegates: const [
           S.delegate,
@@ -44,7 +49,8 @@ class _AppConnectorState extends State<AppConnector> {
           GlobalCupertinoLocalizations.delegate,
         ],
         supportedLocales: S.delegate.supportedLocales,
-        builder: (context, child) => TopLevelPageConnector(child: child),
+        builder: (context, child) =>
+            ShadAppBuilder(child: TopLevelPageConnector(child: child)),
       );
     },
   );

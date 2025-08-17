@@ -16,6 +16,7 @@ dependencies:
   image_picker: ^1.1.2
   localization:
     path: ../localization
+  shadcn_ui: ^0.28.5
   theme_extensions_builder_annotation: ^5.0.0
 
 dev_dependencies:
