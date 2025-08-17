@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:localization/localization.dart';
 
-import 'base_text_input.dart';
+import 'input_form_field.dart';
 
-class UserNameInput extends BaseTextInput {
+class UserNameInput extends InputFormField {
   UserNameInput({required super.vm, super.key})
     : super(
-        labelText: S.current.name,
-        prefixIcon: const Icon(Icons.person_outline),
+        label: Text(S.current.name),
+        leading: const Icon(Icons.person_outline),
         keyboardType: TextInputType.name,
         autofillHints: const [AutofillHints.name],
       );

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:localization/localization.dart';
 
-import '../buttons/styled_elevated_button.dart';
+import '../buttons/primary_button.dart';
 import '../containers/auth_from_container.dart';
 import '../inputs/confirm_password_input.dart';
 import '../inputs/password_input.dart';
@@ -34,7 +34,7 @@ class ResetPasswordPage extends StatelessWidget {
             const SizedBox(height: 16),
             ConfirmPasswordInput(vm: confirmPassword),
             const SizedBox(height: 16),
-            StyledElevatedButton(
+            PrimaryButton(
               title: S.current.resetPassword,
               onPressed: onPressedResetPassword,
             ),

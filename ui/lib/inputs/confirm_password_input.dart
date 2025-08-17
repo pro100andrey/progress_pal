@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:localization/localization.dart';
 
-import 'base_text_input.dart';
+import 'input_form_field.dart';
 
-class ConfirmPasswordInput extends BaseTextInput {
+class ConfirmPasswordInput extends InputFormField {
   ConfirmPasswordInput({required super.vm, super.key})
     : super(
-        labelText: S.current.confirmPassword,
-        prefixIcon: const Icon(Icons.check_outlined),
+        label: Text(S.current.confirmPassword),
+        leading: const Icon(Icons.check_outlined),
         keyboardType: TextInputType.visiblePassword,
         obscureText: true,
       );

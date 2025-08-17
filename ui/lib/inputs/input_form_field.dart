@@ -1,23 +1,24 @@
 import 'package:flutter/material.dart' hide BoxDecoration, BoxShadow;
 import 'package:flutter/services.dart';
+import 'package:shadcn_ui/shadcn_ui.dart';
 
 import '../models/value_changed.dart';
 
-class BaseTextInput extends StatefulWidget {
-  const BaseTextInput({
+class InputFormField extends StatefulWidget {
+  const InputFormField({
     required this.vm,
+    this.id,
     this.obscureText = false,
     this.autofocus = false,
     this.showCounterText = true,
     this.expands = false,
     this.minLines,
     this.maxLines = 1,
-    this.labelText,
-    this.hintText,
-    this.helperText,
-    this.prefixText,
-    this.prefixIcon,
-    this.suffix,
+    this.label,
+    this.placeholder,
+    this.description,
+    this.leading,
+
     this.keyboardType,
     this.textAlignVertical,
     this.filled,
@@ -27,9 +28,10 @@ class BaseTextInput extends StatefulWidget {
     this.autofillHints,
     this.floatingLabelBehavior,
     this.onSubmitted,
+    this.trailingBuilder,
     super.key,
   });
-
+  final String? id;
   final ValueChangedWithErrorVm<String?> vm;
   final bool obscureText;
   final bool autofocus;
@@ -37,12 +39,10 @@ class BaseTextInput extends StatefulWidget {
   final bool expands;
   final int? minLines;
   final int? maxLines;
-  final String? labelText;
-  final String? hintText;
-  final String? helperText;
-  final String? prefixText;
-  final Widget? suffix;
-  final Widget? prefixIcon;
+  final Widget? label;
+  final Widget? placeholder;
+  final Widget? description;
+  final Widget? leading;
   final int? maxLength;
   final bool? filled;
   final TextAlignVertical? textAlignVertical;
@@ -52,19 +52,45 @@ class BaseTextInput extends StatefulWidget {
   final List<String>? autofillHints;
   final FloatingLabelBehavior? floatingLabelBehavior;
   final void Function(String value)? onSubmitted;
+  final Widget Function(InputFormFieldState state)? trailingBuilder;
 
   @override
-  BaseTextInputState createState() => BaseTextInputState();
+  InputFormFieldState createState() => InputFormFieldState();
 }
 
-class BaseTextInputState extends State<BaseTextInput> {
-  bool _isVisible = true;
-
+class InputFormFieldState extends State<InputFormField> {
   final _controller = TextEditingController();
+  late bool obscure;
+
+  @override
+  Widget build(BuildContext context) => ShadInputFormField(
+    id: widget.id,
+    controller: _controller,
+    label: widget.label,
+    placeholder: widget.placeholder,
+    description: widget.description,
+    trailing: widget.trailingBuilder?.call(this),
+    leading: widget.leading,
+    focusNode: widget.focusNode,
+    keyboardType: widget.keyboardType,
+    expands: widget.expands,
+    minLines: widget.minLines,
+    maxLength: widget.maxLength,
+    validator: (t) => widget.vm.error,
+    maxLines: widget.maxLines,
+    obscureText: obscure,
+    autofocus: widget.autofocus,
+    inputFormatters: widget.inputFormatters,
+    onSubmitted: widget.onSubmitted,
+    autofillHints: widget.autofillHints,
+    decoration: ShadDecoration(hasError: widget.vm.isError),
+  );
 
   @override
   void initState() {
     super.initState();
+
+    obscure = widget.obscureText;
 
     _controller.addListener(_controllerChangeListener);
 
@@ -82,7 +108,7 @@ class BaseTextInputState extends State<BaseTextInput> {
   }
 
   @override
-  void didUpdateWidget(BaseTextInput oldWidget) {
+  void didUpdateWidget(InputFormField oldWidget) {
     final text = widget.vm.value ?? '';
     if (_controller.text != text) {
       _controller.value = TextEditingValue(
@@ -96,53 +122,14 @@ class BaseTextInputState extends State<BaseTextInput> {
     super.didUpdateWidget(oldWidget);
   }
 
+  void toggleObscure() {
+    setState(() => obscure = !obscure);
+  }
+
   @override
   void dispose() {
     _controller.dispose();
 
     super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) => TextField(
-    controller: _controller,
-    focusNode: widget.focusNode,
-    keyboardType: widget.keyboardType,
-    expands: widget.expands,
-    minLines: widget.minLines,
-    maxLength: widget.maxLength,
-    maxLines: widget.maxLines,
-    obscureText: _isVisible && widget.obscureText,
-    autofocus: widget.autofocus,
-    inputFormatters: widget.inputFormatters,
-    onSubmitted: widget.onSubmitted,
-    autofillHints: widget.autofillHints,
-    textAlignVertical: widget.textAlignVertical,
-    decoration: InputDecoration(
-      floatingLabelBehavior: widget.floatingLabelBehavior,
-      fillColor: Colors.transparent,
-      counterText: widget.showCounterText ? null : '',
-      enabled: widget.vm.enabled,
-      labelText: widget.labelText,
-      hintText: widget.hintText,
-      helperText: widget.helperText,
-      prefixText: widget.prefixText,
-      prefixIcon: widget.prefixIcon,
-      suffix: widget.suffix,
-      suffixIcon: widget.obscureText
-          ? IconButton(
-              onPressed: _invertVisible,
-              icon: Icon(_isVisible ? Icons.visibility_off : Icons.visibility),
-            )
-          : null,
-      filled: widget.filled,
-      errorText: widget.vm.error,
-    ),
-  );
-
-  void _invertVisible() {
-    setState(() {
-      _isVisible = !_isVisible;
-    });
   }
 }
