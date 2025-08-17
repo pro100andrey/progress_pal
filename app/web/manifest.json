@@ -9,8 +9,7 @@
   "description": "Progress Pal helps you track progress, stay motivated, and achieve your goals.",
   "categories": ["productivity", "lifestyle"],
   "orientation": "portrait-primary",
-  "lang": "en",
-  "dir": "ltr",
+  "scope": "/",
   "prefer_related_applications": false,
   "icons": [
     {
