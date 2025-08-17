@@ -89,9 +89,14 @@ class S {
     );
   }
 
-  /// `Register`
-  String get register {
-    return Intl.message('Register', name: 'register', desc: '', args: []);
+  /// `Registration`
+  String get registration {
+    return Intl.message(
+      'Registration',
+      name: 'registration',
+      desc: '',
+      args: [],
+    );
   }
 
   /// `Reset password`
@@ -129,16 +134,6 @@ class S {
     return Intl.message(
       'Confirm Password',
       name: 'confirmPassword',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Forgot password ?`
-  String get forgotPassword {
-    return Intl.message(
-      'Forgot password ?',
-      name: 'forgotPassword',
       desc: '',
       args: [],
     );
@@ -234,19 +229,54 @@ class S {
     );
   }
 
-  /// `Name`
-  String get name {
-    return Intl.message('Name', name: 'name', desc: '', args: []);
+  /// `First name`
+  String get firstName {
+    return Intl.message('First name', name: 'firstName', desc: '', args: []);
   }
 
-  /// `Don't have an account?`
-  String get dontHaveAnAccount {
+  /// `Last name`
+  String get lastName {
+    return Intl.message('Last name', name: 'lastName', desc: '', args: []);
+  }
+
+  /// `Don't have an account yet?`
+  String get dontHaveAccountYet {
     return Intl.message(
-      'Don\'t have an account?',
-      name: 'dontHaveAnAccount',
+      'Don\'t have an account yet?',
+      name: 'dontHaveAccountYet',
       desc: '',
       args: [],
     );
+  }
+
+  /// `Welcome back!`
+  String get welcomeBack {
+    return Intl.message(
+      'Welcome back!',
+      name: 'welcomeBack',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Forgot password?`
+  String get forgotPassword {
+    return Intl.message(
+      'Forgot password?',
+      name: 'forgotPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Submit`
+  String get submit {
+    return Intl.message('Submit', name: 'submit', desc: '', args: []);
+  }
+
+  /// `Sign up`
+  String get signup {
+    return Intl.message('Sign up', name: 'signup', desc: '', args: []);
   }
 }
 

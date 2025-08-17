@@ -5,13 +5,12 @@
   "cancel": "Cancel",
   "logIn": "Log in",
   "backToLogIn": "Back to logIn",
-  "register": "Register",
+  "registration": "Registration",
   "resetPassword": "Reset password",
   "email": "Email",
   "emailInvalid": "Email is invalid",
   "password": "Password",
   "confirmPassword": "Confirm Password",
-  "forgotPassword": "Forgot password ?",
   "thisFieldIsRequired": "This field is required",
   "invalidEmail": "Invalid email",
   "couldNotConnectToInternet": "Couldn't connect to internet.",
@@ -21,6 +20,11 @@
   "mustContainAtLeastOneUppercase": "Must contain at least one uppercase",
   "passwordsDoNotMatch": "Passwords do not match",
   "requiredField": "Required field",
-  "name": "Name",
-  "dontHaveAnAccount": "Don't have an account?"
+  "firstName": "First name",
+  "lastName": "Last name",
+  "dontHaveAccountYet": "Don't have an account yet?",
+  "welcomeBack": "Welcome back!",
+  "forgotPassword": "Forgot password?",
+  "submit": "Submit",
+  "signup": "Sign up"
 }

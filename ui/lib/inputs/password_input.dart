@@ -8,15 +8,16 @@ class PasswordInput extends InputFormField {
   PasswordInput({required super.vm, super.key})
     : super(
         id: 'password',
-        // label: Text(S.current.password),
         placeholder: Text(S.current.password),
-        leading: const Icon(Icons.password_outlined),
+        leading: const Icon(LucideIcons.key100),
         trailingBuilder: (state) => ShadButton(
           width: 24,
           height: 24,
           padding: EdgeInsets.zero,
           onPressed: state.toggleObscure,
-          child: Icon(state.obscure ? LucideIcons.eyeOff : LucideIcons.eye),
+          child: Icon(
+            state.obscure ? LucideIcons.eyeOff200 : LucideIcons.eye200,
+          ),
         ),
 
         keyboardType: TextInputType.visiblePassword,

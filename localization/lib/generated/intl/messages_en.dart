@@ -31,13 +31,15 @@ class MessageLookup extends MessageLookupByLibrary {
     "couldNotConnectToInternet": MessageLookupByLibrary.simpleMessage(
       "Couldn\'t connect to internet.",
     ),
-    "dontHaveAnAccount": MessageLookupByLibrary.simpleMessage(
-      "Don\'t have an account?",
+    "dontHaveAccountYet": MessageLookupByLibrary.simpleMessage(
+      "Don\'t have an account yet?",
     ),
     "email": MessageLookupByLibrary.simpleMessage("Email"),
     "emailInvalid": MessageLookupByLibrary.simpleMessage("Email is invalid"),
-    "forgotPassword": MessageLookupByLibrary.simpleMessage("Forgot password ?"),
+    "firstName": MessageLookupByLibrary.simpleMessage("First name"),
+    "forgotPassword": MessageLookupByLibrary.simpleMessage("Forgot password?"),
     "invalidEmail": MessageLookupByLibrary.simpleMessage("Invalid email"),
+    "lastName": MessageLookupByLibrary.simpleMessage("Last name"),
     "logIn": MessageLookupByLibrary.simpleMessage("Log in"),
     "minimumLengthSymbols": m0,
     "mustContainAtLeastOneLowercase": MessageLookupByLibrary.simpleMessage(
@@ -46,7 +48,6 @@ class MessageLookup extends MessageLookupByLibrary {
     "mustContainAtLeastOneUppercase": MessageLookupByLibrary.simpleMessage(
       "Must contain at least one uppercase",
     ),
-    "name": MessageLookupByLibrary.simpleMessage("Name"),
     "ok": MessageLookupByLibrary.simpleMessage("OK"),
     "password": MessageLookupByLibrary.simpleMessage("Password"),
     "passwordsDoNotMatch": MessageLookupByLibrary.simpleMessage(
@@ -55,12 +56,15 @@ class MessageLookup extends MessageLookupByLibrary {
     "pleaseCheckYorNetworkSettings": MessageLookupByLibrary.simpleMessage(
       "Please check yor network settings.",
     ),
-    "register": MessageLookupByLibrary.simpleMessage("Register"),
+    "registration": MessageLookupByLibrary.simpleMessage("Registration"),
     "requiredField": MessageLookupByLibrary.simpleMessage("Required field"),
     "resetPassword": MessageLookupByLibrary.simpleMessage("Reset password"),
+    "signup": MessageLookupByLibrary.simpleMessage("Sign up"),
+    "submit": MessageLookupByLibrary.simpleMessage("Submit"),
     "thisFieldIsRequired": MessageLookupByLibrary.simpleMessage(
       "This field is required",
     ),
     "title": MessageLookupByLibrary.simpleMessage("title"),
+    "welcomeBack": MessageLookupByLibrary.simpleMessage("Welcome back!"),
   };
 }
