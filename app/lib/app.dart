@@ -32,8 +32,10 @@ class _AppConnectorState extends State<AppConnector> {
       return ShadApp.router(
         routerDelegate: router.routerDelegate,
         routeInformationProvider: router.routeInformationProvider,
+        
         themeMode: ThemeMode.dark,
         darkTheme: ShadThemeData(
+          
           brightness: Brightness.dark,
           colorScheme: ShadColorScheme.fromName(
             'zinc',

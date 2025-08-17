@@ -26,3 +26,13 @@ final passwordValidator = MultiValidator(
 final passwordsMatchValidator = MatchValidator(
   error: S.current.passwordsDoNotMatch,
 );
+
+final nameValidator = MultiValidator(
+  validators: [
+    RequiredValidator(
+      error: S.current.thisFieldIsRequired,
+      ignoreEmptyValues: false,
+    ),
+    MinLengthValidator(min: 2, error: S.current.minimumLengthSymbols(2)),
+  ],
+);

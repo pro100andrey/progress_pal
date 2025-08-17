@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart' hide BoxDecoration, BoxShadow;
+import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
 
@@ -110,15 +111,17 @@ class InputFormFieldState extends State<InputFormField> {
 
   @override
   void didUpdateWidget(InputFormField oldWidget) {
-    final text = widget.vm.value ?? '';
-    if (_controller.text != text) {
-      _controller.value = TextEditingValue(
-        text: text,
-        selection: TextSelection.fromPosition(
-          TextPosition(offset: text.length),
-        ),
-      );
-    }
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      final text = widget.vm.value ?? '';
+      if (_controller.text != text) {
+        _controller.value = TextEditingValue(
+          text: text,
+          selection: TextSelection.fromPosition(
+            TextPosition(offset: text.length),
+          ),
+        );
+      }
+    });
 
     super.didUpdateWidget(oldWidget);
   }

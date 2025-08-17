@@ -1,9 +1,9 @@
 import '../app_state.dart';
-import 'models/registration_state.dart';
+import 'actions/registration_action.dart';
 
 /// returns waiting value
 bool selectRegistrationIsWaiting(AppState state) =>
-    state.wait.isWaiting(RegistrationWaiting.wait);
+    state.wait.isWaitingForType<RegistrationAction>();
 
 /// Returns email value
 String? selectRegistrationEmail(AppState state) => state.registration.email;
@@ -12,8 +12,13 @@ String? selectRegistrationEmail(AppState state) => state.registration.email;
 String? selectRegistrationPassword(AppState state) =>
     state.registration.password;
 
-/// Returns name value
-String? selectRegistrationName(AppState state) => state.registration.name;
+/// Returns first name value
+String? selectRegistrationFirstName(AppState state) =>
+    state.registration.firstName;
+
+/// Returns last name value
+String? selectRegistrationLastName(AppState state) =>
+    state.registration.lastName;
 
 /// Returns confirm password value
 String? selectRegistrationConfirmPassword(AppState state) =>

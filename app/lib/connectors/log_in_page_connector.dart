@@ -37,13 +37,7 @@ class _Factory extends VmFactory<AppState, LogInPageConnector, _Vm> {
   _Vm fromStore() {
     final email = selectLogInEmail(state);
     final password = selectLogInPassword(state);
-    // final emailError = emailValidator(email);
-    // final passwordError = passwordValidator(password);
-    // final formIsValid =
-    //     selectLogInDataIsSet(state) &&
-    //     emailError == null &&
-    //     passwordError == null;
-
+    
     return _Vm(
       email: ValueChangedVm(
         value: email,

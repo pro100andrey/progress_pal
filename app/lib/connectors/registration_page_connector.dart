@@ -3,7 +3,8 @@ import 'package:business/redux/app_state.dart';
 import 'package:business/redux/registration/actions/registration_action.dart';
 import 'package:business/redux/registration/actions/set_confirm_password_action.dart';
 import 'package:business/redux/registration/actions/set_email_action.dart';
-import 'package:business/redux/registration/actions/set_name_action.dart';
+import 'package:business/redux/registration/actions/set_first_name_action.dart';
+import 'package:business/redux/registration/actions/set_last_name_action.dart';
 import 'package:business/redux/registration/actions/set_password_action.dart';
 import 'package:business/redux/registration/registration_selectors.dart';
 import 'package:equatable/equatable.dart';
@@ -22,7 +23,8 @@ class RegistrationPageConnector extends StatelessWidget {
     debug: this,
     vm: () => _Factory(this),
     builder: (context, vm) => RegistrationPage(
-      name: vm.name,
+      firstName: vm.firstName,
+      lastName: vm.lastName,
       email: vm.email,
       password: vm.password,
       confirmPassword: vm.confirmPassword,
@@ -38,29 +40,25 @@ class _Factory extends VmFactory<AppState, RegistrationPageConnector, _Vm> {
 
   @override
   _Vm fromStore() {
-    final name = selectRegistrationName(state);
+    final firstName = selectRegistrationFirstName(state);
+    final lastName = selectRegistrationLastName(state);
     final email = selectRegistrationEmail(state);
-    final emailError = emailValidator(email);
     final password = selectRegistrationPassword(state);
-    final passwordError = passwordValidator(password);
     final confirmPassword = selectRegistrationConfirmPassword(state);
-    final confirmPasswordError = passwordValidator(confirmPassword);
-    final passwordsMatchError = passwordsMatchValidator(
-      password,
-      confirmPassword,
-    );
-
-    final formIsValid =
-        selectRegistrationDataIsSet(state) &&
-        emailError == null &&
-        passwordError == null &&
-        confirmPasswordError == null &&
-        passwordsMatchError == null;
 
     return _Vm(
-      name: ValueChangedVm(
-        value: name,
-        onChanged: (value) => dispatchSync(SetNameAction(name: value!)),
+      firstName: ValueChangedVm(
+        value: firstName,
+        onChanged: (value) =>
+            dispatchSync(SetFirstNameAction(firstName: value!)),
+        validator: nameValidator.call,
+      ),
+      lastName: ValueChangedVm(
+        value: lastName,
+        validator: nameValidator.call,
+        onChanged: (value) => dispatchSync(
+          SetLastNameAction(lastName: value!),
+        ),
       ),
       email: ValueChangedVm(
         value: email,
@@ -77,17 +75,14 @@ class _Factory extends VmFactory<AppState, RegistrationPageConnector, _Vm> {
         validator: (v) {
           final confirmPasswordError = passwordValidator(v);
           final passwordsMatchError = passwordsMatchValidator(password, v);
-
           return confirmPasswordError ?? passwordsMatchError;
         },
         onChanged: (value) => dispatchSync(SetConfirmPasswordAction(value!)),
       ),
-      onPressedRegister: formIsValid
-          ? () async {
-              await dispatchAndWait(RegistrationAction());
-              router.pop();
-            }
-          : null,
+      onPressedRegister: () async {
+        await dispatchAndWait(RegistrationAction());
+        router.pop();
+      },
       onPressedBackToLogin: router.pop,
     );
   }
@@ -96,7 +91,8 @@ class _Factory extends VmFactory<AppState, RegistrationPageConnector, _Vm> {
 /// The view-model holds the part of the Store state the dumb-widget needs.
 class _Vm extends Vm with EquatableMixin {
   _Vm({
-    required this.name,
+    required this.firstName,
+    required this.lastName,
     required this.email,
     required this.password,
     required this.confirmPassword,
@@ -104,7 +100,8 @@ class _Vm extends Vm with EquatableMixin {
     required this.onPressedBackToLogin,
   });
 
-  final ValueChangedVm<String?> name;
+  final ValueChangedVm<String?> firstName;
+  final ValueChangedVm<String?> lastName;
   final ValueChangedVm<String?> email;
   final ValueChangedVm<String?> password;
   final ValueChangedVm<String?> confirmPassword;
@@ -112,5 +109,11 @@ class _Vm extends Vm with EquatableMixin {
   final VoidCallback? onPressedBackToLogin;
 
   @override
-  List<Object?> get props => [name, email, password, confirmPassword];
+  List<Object?> get props => [
+    firstName,
+    lastName,
+    email,
+    password,
+    confirmPassword,
+  ];
 }

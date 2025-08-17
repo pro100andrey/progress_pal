@@ -28,59 +28,53 @@ class LogInPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Scaffold(
     body: AuthForm(
-      child: Column(
-        spacing: 24,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Text(
-            S.current.welcomeBack,
-            style: ShadTheme.of(context).textTheme.h2,
-          ),
-          BaseForm(
-            formBuilder: (formKey) => Column(
-              spacing: 16,
-              children: [
-                EmailInput(vm: email),
-                PasswordInput(vm: password),
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: ShadButton.link(
-                    onPressed: onPressedForgotPassword,
-                    child: Text(S.current.forgotPassword),
-                  ),
-                ),
-                PrimaryButton(
-                  title: S.current.submit,
-                  onPressed: () {
-                    if (formKey.currentState!.saveAndValidate()) {
-                      onPressedLogIn?.call();
-                    }
-                  },
-                ),
-                const ShadSeparator.horizontal(
-                  thickness: 1,
-                  margin: EdgeInsets.symmetric(horizontal: 20),
-                ),
+      child: BaseForm(
+        formBuilder: (formKey) => Column(
+          spacing: 16,
+          children: [
+            Text(
+              S.current.welcomeBack,
+              style: ShadTheme.of(context).textTheme.h2,
+            ),
+            EmailInput(vm: email),
+            PasswordInput(vm: password),
+            Align(
+              alignment: Alignment.centerRight,
+              child: ShadButton.link(
+                onPressed: onPressedForgotPassword,
+                child: Text(S.current.forgotPassword),
+              ),
+            ),
+            PrimaryButton(
+              title: S.current.submit,
+              onPressed: () {
+                if (formKey.currentState!.saveAndValidate()) {
+                  onPressedLogIn?.call();
+                }
+              },
+            ),
+            const ShadSeparator.horizontal(
+              thickness: 1,
+              margin: EdgeInsets.symmetric(horizontal: 20),
+            ),
 
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      S.current.dontHaveAccountYet,
-                      style: ShadTheme.of(
-                        context,
-                      ).textTheme.muted,
-                    ),
-                    ShadButton.link(
-                      onPressed: onPressedRegister,
-                      child: Text(S.current.signup),
-                    ),
-                  ],
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  S.current.dontHaveAccountYet,
+                  style: ShadTheme.of(
+                    context,
+                  ).textTheme.muted,
+                ),
+                ShadButton.link(
+                  onPressed: onPressedRegister,
+                  child: Text(S.current.signup),
                 ),
               ],
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     ),
   );
