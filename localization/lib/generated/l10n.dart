@@ -219,16 +219,6 @@ class S {
     );
   }
 
-  /// `Required field`
-  String get requiredField {
-    return Intl.message(
-      'Required field',
-      name: 'requiredField',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `First name`
   String get firstName {
     return Intl.message('First name', name: 'firstName', desc: '', args: []);

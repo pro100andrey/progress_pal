@@ -19,7 +19,6 @@
   "mustContainAtLeastOneLowercase": "Must contain at least one lowercase",
   "mustContainAtLeastOneUppercase": "Must contain at least one uppercase",
   "passwordsDoNotMatch": "Passwords do not match",
-  "requiredField": "Required field",
   "firstName": "First name",
   "lastName": "Last name",
   "dontHaveAccountYet": "Don't have an account yet?",

@@ -13,7 +13,10 @@ final emailValidator = MultiValidator(
 
 final passwordValidator = MultiValidator(
   validators: [
-    RequiredValidator(error: S.current.requiredField, ignoreEmptyValues: false),
+    RequiredValidator(
+      error: S.current.thisFieldIsRequired,
+      ignoreEmptyValues: false,
+    ),
     MinLengthValidator(min: 8, error: S.current.minimumLengthSymbols(8)),
     HasUppercaseValidator(error: S.current.mustContainAtLeastOneUppercase),
     HasLowercaseValidator(error: S.current.mustContainAtLeastOneLowercase),
