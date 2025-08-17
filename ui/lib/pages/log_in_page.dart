@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:localization/localization.dart';
+import 'package:shadcn_ui/shadcn_ui.dart';
 
 import '../buttons/primary_button.dart';
-import '../containers/auth_from_container.dart';
+import '../forms/base_form.dart';
 import '../inputs/email_input.dart';
 import '../inputs/password_input.dart';
 import '../models/value_changed.dart';
@@ -17,42 +18,62 @@ class LogInPage extends StatelessWidget {
     super.key,
   });
 
-  final ValueChangedWithErrorVm<String?> email;
-  final ValueChangedWithErrorVm<String?> password;
+  final ValueChangedVm<String?> email;
+  final ValueChangedVm<String?> password;
   final VoidCallback? onPressedLogIn;
   final VoidCallback onPressedForgotPassword;
   final VoidCallback onPressedRegister;
 
   @override
   Widget build(BuildContext context) => Scaffold(
-    body: Stack(
-      fit: StackFit.expand,
-      children: [
-        AuthFormContainer(
-          title: S.current.logIn,
-          children: [
-            const SizedBox(height: 16),
-            EmailInput(vm: email),
-            const SizedBox(height: 16),
-            PasswordInput(vm: password),
-            const SizedBox(height: 16),
-            Align(
-              alignment: Alignment.centerRight,
-              child: TextButton(
-                onPressed: onPressedForgotPassword,
-                child: Text(S.current.forgotPassword),
+    body: Center(
+      child: SingleChildScrollView(
+        child: ShadCard(
+          width: 320,
+          child: Column(
+            spacing: 24,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text('Wellcome back', style: ShadTheme.of(context).textTheme.h2),
+              BaseForm(
+                formBuilder: (formKey) => Column(
+                  spacing: 16,
+                  children: [
+                    EmailInput(vm: email),
+                    PasswordInput(vm: password),
+                    Align(
+                      alignment: Alignment.centerRight,
+                      child: ShadButton.link(
+                        onPressed: onPressedForgotPassword,
+                        child: Text(S.current.forgotPassword),
+                      ),
+                    ),
+                    PrimaryButton(
+                      title: S.current.logIn,
+                      onPressed: () {
+                        if (formKey.currentState!.saveAndValidate()) {
+                          onPressedLogIn?.call();
+                        }
+                      },
+                    ),
+
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(S.current.dontHaveAnAccount),
+                        ShadButton.link(
+                          onPressed: onPressedRegister,
+                          child: Text(S.current.register),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
-            ),
-            const SizedBox(height: 16),
-            PrimaryButton(title: S.current.logIn, onPressed: onPressedLogIn),
-            const SizedBox(height: 16),
-            PrimaryButton(
-              title: S.current.register,
-              onPressed: onPressedRegister,
-            ),
-          ],
+            ],
+          ),
         ),
-      ],
+      ),
     ),
   );
 }

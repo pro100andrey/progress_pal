@@ -18,7 +18,6 @@ class InputFormField extends StatefulWidget {
     this.placeholder,
     this.description,
     this.leading,
-
     this.keyboardType,
     this.textAlignVertical,
     this.filled,
@@ -29,10 +28,12 @@ class InputFormField extends StatefulWidget {
     this.floatingLabelBehavior,
     this.onSubmitted,
     this.trailingBuilder,
+
     super.key,
   });
+
+  final ValueChangedVm<String?> vm;
   final String? id;
-  final ValueChangedWithErrorVm<String?> vm;
   final bool obscureText;
   final bool autofocus;
   final bool showCounterText;
@@ -52,6 +53,7 @@ class InputFormField extends StatefulWidget {
   final List<String>? autofillHints;
   final FloatingLabelBehavior? floatingLabelBehavior;
   final void Function(String value)? onSubmitted;
+
   final Widget Function(InputFormFieldState state)? trailingBuilder;
 
   @override
@@ -76,14 +78,13 @@ class InputFormFieldState extends State<InputFormField> {
     expands: widget.expands,
     minLines: widget.minLines,
     maxLength: widget.maxLength,
-    validator: (t) => widget.vm.error,
+    validator: widget.vm.validator,
     maxLines: widget.maxLines,
     obscureText: obscure,
     autofocus: widget.autofocus,
     inputFormatters: widget.inputFormatters,
     onSubmitted: widget.onSubmitted,
     autofillHints: widget.autofillHints,
-    decoration: ShadDecoration(hasError: widget.vm.isError),
   );
 
   @override

@@ -49,14 +49,19 @@ class _Factory extends VmFactory<AppState, ResetPasswordPageConnector, _Vm> {
         passwordsMatchError == null;
 
     return _Vm(
-      password: ValueChangedWithErrorVm(
+      password: ValueChangedVm(
         value: password,
-        error: passwordError,
+        validator: passwordValidator.call,
         onChanged: (value) => dispatchSync(SetPasswordAction(value!)),
       ),
-      confirmPassword: ValueChangedWithErrorVm(
+      confirmPassword: ValueChangedVm(
         value: confirmPassword,
-        error: confirmPasswordError ?? passwordsMatchError,
+        validator: (v) {
+          final confirmPasswordError = passwordValidator(v);
+          final passwordsMatchError = passwordsMatchValidator(password, v);
+
+          return confirmPasswordError ?? passwordsMatchError;
+        },
         onChanged: (value) => dispatchSync(SetConfirmPasswordAction(value!)),
       ),
       onPressedResetPassword: formIsValid
@@ -76,8 +81,8 @@ class _Vm extends Vm with EquatableMixin {
     required this.onPressedBackToLogin,
   });
 
-  final ValueChangedWithErrorVm<String?> password;
-  final ValueChangedWithErrorVm<String?> confirmPassword;
+  final ValueChangedVm<String?> password;
+  final ValueChangedVm<String?> confirmPassword;
   final VoidCallback? onPressedResetPassword;
   final VoidCallback? onPressedBackToLogin;
 

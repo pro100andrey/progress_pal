@@ -52,10 +52,12 @@ class ValueChangedVm<T> extends BaseValueChangedVm<T> {
   const ValueChangedVm({
     required this.value,
     super.onChanged = printD,
+    this.validator,
     super.enabled,
   });
 
   final T value;
+  final String? Function(String)? validator;
 
   @override
   List<Object?> get props => [value, enabled];
@@ -74,21 +76,4 @@ class ValueChangedWithItemsVm<T> extends BaseValueChangedVm<T> {
 
   @override
   List<Object?> get props => super.props + items + [value];
-}
-
-class ValueChangedWithErrorVm<T> extends BaseValueChangedVm<T> {
-  const ValueChangedWithErrorVm({
-    required this.value,
-    super.onChanged,
-    super.enabled = true,
-    this.error,
-  });
-
-  final T value;
-  final String? error;
-
-  bool get isError => error != null;
-
-  @override
-  List<Object?> get props => super.props + [error, value];
 }

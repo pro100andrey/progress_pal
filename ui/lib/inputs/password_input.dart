@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:localization/localization.dart';
+import 'package:localization/generated/l10n.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
 
 import 'input_form_field.dart';
@@ -8,7 +8,8 @@ class PasswordInput extends InputFormField {
   PasswordInput({required super.vm, super.key})
     : super(
         id: 'password',
-        label: Text(S.current.password),
+        // label: Text(S.current.password),
+        placeholder: Text(S.current.password),
         leading: const Icon(Icons.password_outlined),
         trailingBuilder: (state) => ShadButton(
           width: 24,

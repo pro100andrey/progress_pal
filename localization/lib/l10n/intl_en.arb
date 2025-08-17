@@ -21,5 +21,6 @@
   "mustContainAtLeastOneUppercase": "Must contain at least one uppercase",
   "passwordsDoNotMatch": "Passwords do not match",
   "requiredField": "Required field",
-  "name": "Name"
+  "name": "Name",
+  "dontHaveAnAccount": "Don't have an account?"
 }

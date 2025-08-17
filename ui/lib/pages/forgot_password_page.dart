@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:localization/localization.dart';
 
 import '../buttons/primary_button.dart';
-import '../containers/auth_from_container.dart';
 import '../inputs/email_input.dart';
 import '../models/value_changed.dart';
 
@@ -16,7 +15,7 @@ class ForgotPasswordPage extends StatelessWidget {
   });
 
   final bool isWaiting;
-  final ValueChangedWithErrorVm<String?> email;
+  final ValueChangedVm<String?> email;
   final VoidCallback? onPressedResetPassword;
   final VoidCallback onPressedBackToLogin;
 
@@ -25,8 +24,7 @@ class ForgotPasswordPage extends StatelessWidget {
     body: Stack(
       fit: StackFit.expand,
       children: [
-        AuthFormContainer(
-          title: S.current.forgotPassword,
+        Column(
           children: [
             const SizedBox(height: 24),
             EmailInput(vm: email),

@@ -31,6 +31,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "couldNotConnectToInternet": MessageLookupByLibrary.simpleMessage(
       "Couldn\'t connect to internet.",
     ),
+    "dontHaveAnAccount": MessageLookupByLibrary.simpleMessage(
+      "Don\'t have an account?",
+    ),
     "email": MessageLookupByLibrary.simpleMessage("Email"),
     "emailInvalid": MessageLookupByLibrary.simpleMessage("Email is invalid"),
     "forgotPassword": MessageLookupByLibrary.simpleMessage("Forgot password ?"),

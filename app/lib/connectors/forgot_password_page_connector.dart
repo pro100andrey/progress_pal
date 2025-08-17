@@ -34,13 +34,13 @@ class _Factory extends VmFactory<AppState, ForgotPasswordPageConnector, _Vm> {
   @override
   _Vm fromStore() {
     final email = selectForgotPasswordEmail(state);
-    final emailError = emailValidator(email);
+    // final emailError = emailValidator(email);
 
     return _Vm(
       isWaiting: false,
-      email: ValueChangedWithErrorVm(
+      email: ValueChangedVm(
         value: email,
-        error: emailError,
+        validator: emailValidator.call,
         onChanged: (value) => dispatchSync(SetEmailAction(email: value!)),
       ),
       onPressedResetPassword: () => dispatchSync(ForgotPasswordAction()),
@@ -59,7 +59,7 @@ class _Vm extends Vm with EquatableMixin {
   });
 
   final bool isWaiting;
-  final ValueChangedWithErrorVm<String?> email;
+  final ValueChangedVm<String?> email;
   final VoidCallback? onPressedResetPassword;
   final VoidCallback onPressedBackToLogin;
 

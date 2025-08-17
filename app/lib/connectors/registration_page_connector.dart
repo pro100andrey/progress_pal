@@ -58,23 +58,28 @@ class _Factory extends VmFactory<AppState, RegistrationPageConnector, _Vm> {
         passwordsMatchError == null;
 
     return _Vm(
-      name: ValueChangedWithErrorVm(
+      name: ValueChangedVm(
         value: name,
         onChanged: (value) => dispatchSync(SetNameAction(name: value!)),
       ),
-      email: ValueChangedWithErrorVm(
+      email: ValueChangedVm(
         value: email,
-        error: emailError,
+        validator: emailValidator.call,
         onChanged: (value) => dispatchSync(SetEmailAction(value!)),
       ),
-      password: ValueChangedWithErrorVm(
+      password: ValueChangedVm(
         value: password,
-        error: passwordError,
+        validator: passwordValidator.call,
         onChanged: (value) => dispatchSync(SetPasswordAction(value!)),
       ),
-      confirmPassword: ValueChangedWithErrorVm(
+      confirmPassword: ValueChangedVm(
         value: confirmPassword,
-        error: confirmPasswordError ?? passwordsMatchError,
+        validator: (v) {
+          final confirmPasswordError = passwordValidator(v);
+          final passwordsMatchError = passwordsMatchValidator(password, v);
+
+          return confirmPasswordError ?? passwordsMatchError;
+        },
         onChanged: (value) => dispatchSync(SetConfirmPasswordAction(value!)),
       ),
       onPressedRegister: formIsValid
@@ -99,10 +104,10 @@ class _Vm extends Vm with EquatableMixin {
     required this.onPressedBackToLogin,
   });
 
-  final ValueChangedWithErrorVm<String?> name;
-  final ValueChangedWithErrorVm<String?> email;
-  final ValueChangedWithErrorVm<String?> password;
-  final ValueChangedWithErrorVm<String?> confirmPassword;
+  final ValueChangedVm<String?> name;
+  final ValueChangedVm<String?> email;
+  final ValueChangedVm<String?> password;
+  final ValueChangedVm<String?> confirmPassword;
   final VoidCallback? onPressedRegister;
   final VoidCallback? onPressedBackToLogin;
 

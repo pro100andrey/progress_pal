@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:localization/localization.dart';
 
 import '../buttons/primary_button.dart';
-import '../containers/auth_from_container.dart';
 import '../inputs/confirm_password_input.dart';
 import '../inputs/email_input.dart';
 import '../inputs/password_input.dart';
@@ -19,10 +18,10 @@ class RegistrationPage extends StatelessWidget {
     required this.onPressedBackToLogin,
     super.key,
   });
-  final ValueChangedWithErrorVm<String?> name;
-  final ValueChangedWithErrorVm<String?> email;
-  final ValueChangedWithErrorVm<String?> password;
-  final ValueChangedWithErrorVm<String?> confirmPassword;
+  final ValueChangedVm<String?> name;
+  final ValueChangedVm<String?> email;
+  final ValueChangedVm<String?> password;
+  final ValueChangedVm<String?> confirmPassword;
   final VoidCallback? onPressedRegister;
   final VoidCallback? onPressedBackToLogin;
 
@@ -31,8 +30,7 @@ class RegistrationPage extends StatelessWidget {
     body: Stack(
       fit: StackFit.expand,
       children: [
-        AuthFormContainer(
-          title: S.current.register,
+        Column(
           children: [
             const SizedBox(height: 24),
             UserNameInput(vm: name),

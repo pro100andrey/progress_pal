@@ -37,27 +37,25 @@ class _Factory extends VmFactory<AppState, LogInPageConnector, _Vm> {
   _Vm fromStore() {
     final email = selectLogInEmail(state);
     final password = selectLogInPassword(state);
-    final emailError = emailValidator(email);
-    final passwordError = passwordValidator(password);
-    final formIsValid =
-        selectLogInDataIsSet(state) &&
-        emailError == null &&
-        passwordError == null;
+    // final emailError = emailValidator(email);
+    // final passwordError = passwordValidator(password);
+    // final formIsValid =
+    //     selectLogInDataIsSet(state) &&
+    //     emailError == null &&
+    //     passwordError == null;
 
     return _Vm(
-      email: ValueChangedWithErrorVm(
+      email: ValueChangedVm(
         value: email,
-        error: emailError,
+        validator: emailValidator.call,
         onChanged: (value) => dispatchSync(SetEmailAction(value!)),
       ),
-      password: ValueChangedWithErrorVm(
+      password: ValueChangedVm(
         value: password,
-        error: passwordError,
+        validator: passwordValidator.call,
         onChanged: (value) => dispatchSync(SetPasswordAction(password: value!)),
       ),
-      onPressedLogIn: formIsValid
-          ? () async => dispatchAndWait(LogInWithEmailAction())
-          : null,
+      onPressedLogIn: () async => dispatchAndWait(LogInWithEmailAction()),
       onPressedForgotPassword: () async =>
           router.pushNamed(Routes.forgotPassword),
       onPressedRegister: () async => router.pushNamed(Routes.registration),
@@ -75,8 +73,8 @@ class _Vm extends Vm with EquatableMixin {
     required this.onPressedRegister,
   });
 
-  final ValueChangedWithErrorVm<String?> email;
-  final ValueChangedWithErrorVm<String?> password;
+  final ValueChangedVm<String?> email;
+  final ValueChangedVm<String?> password;
   final VoidCallback? onPressedLogIn;
   final VoidCallback onPressedForgotPassword;
   final VoidCallback onPressedRegister;

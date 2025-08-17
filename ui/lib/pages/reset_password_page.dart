@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:localization/localization.dart';
 
 import '../buttons/primary_button.dart';
-import '../containers/auth_from_container.dart';
 import '../inputs/confirm_password_input.dart';
 import '../inputs/password_input.dart';
 import '../models/value_changed.dart';
@@ -16,8 +15,8 @@ class ResetPasswordPage extends StatelessWidget {
     super.key,
   });
 
-  final ValueChangedWithErrorVm<String?> password;
-  final ValueChangedWithErrorVm<String?> confirmPassword;
+  final ValueChangedVm<String?> password;
+  final ValueChangedVm<String?> confirmPassword;
   final VoidCallback? onPressedResetPassword;
   final VoidCallback? onPressedBackToLogin;
 
@@ -26,8 +25,7 @@ class ResetPasswordPage extends StatelessWidget {
     body: Stack(
       fit: StackFit.expand,
       children: [
-        AuthFormContainer(
-          title: S.current.resetPassword,
+        Column(
           children: [
             const SizedBox(height: 24),
             PasswordInput(vm: password),

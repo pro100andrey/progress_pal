@@ -238,6 +238,16 @@ class S {
   String get name {
     return Intl.message('Name', name: 'name', desc: '', args: []);
   }
+
+  /// `Don't have an account?`
+  String get dontHaveAnAccount {
+    return Intl.message(
+      'Don\'t have an account?',
+      name: 'dontHaveAnAccount',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
