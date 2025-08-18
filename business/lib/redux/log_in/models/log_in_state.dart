@@ -6,5 +6,3 @@ part 'log_in_state.freezed.dart';
 abstract class LogInState with _$LogInState {
   const factory LogInState({String? email, String? password}) = _LogInState;
 }
-
-enum LogInWaiting { wait }

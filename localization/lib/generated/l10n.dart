@@ -129,10 +129,10 @@ class S {
     return Intl.message('Password', name: 'password', desc: '', args: []);
   }
 
-  /// `Confirm Password`
+  /// `Confirm password`
   String get confirmPassword {
     return Intl.message(
-      'Confirm Password',
+      'Confirm password',
       name: 'confirmPassword',
       desc: '',
       args: [],
@@ -219,14 +219,9 @@ class S {
     );
   }
 
-  /// `First name`
-  String get firstName {
-    return Intl.message('First name', name: 'firstName', desc: '', args: []);
-  }
-
-  /// `Last name`
-  String get lastName {
-    return Intl.message('Last name', name: 'lastName', desc: '', args: []);
+  /// `Full name`
+  String get fullName {
+    return Intl.message('Full name', name: 'fullName', desc: '', args: []);
   }
 
   /// `Don't have an account yet?`

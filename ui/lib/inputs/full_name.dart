@@ -4,12 +4,12 @@ import 'package:shadcn_ui/shadcn_ui.dart';
 
 import 'input_form_field.dart';
 
-class LastNameInput extends InputFormField {
-  LastNameInput({required super.vm, super.key})
+class FullName extends InputFormField {
+  FullName({required super.vm, super.key})
     : super(
-        id: 'last_name',
-        placeholder: Text(S.current.lastName),
-        leading: const Icon(LucideIcons.tally2100),
+        id: 'fullName',
+        placeholder: Text(S.current.fullName),
+        leading: const Icon(LucideIcons.userCheck100),
         keyboardType: TextInputType.name,
         autofillHints: const [AutofillHints.name],
       );

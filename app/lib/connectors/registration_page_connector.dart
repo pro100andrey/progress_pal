@@ -3,8 +3,7 @@ import 'package:business/redux/app_state.dart';
 import 'package:business/redux/registration/actions/registration_action.dart';
 import 'package:business/redux/registration/actions/set_confirm_password_action.dart';
 import 'package:business/redux/registration/actions/set_email_action.dart';
-import 'package:business/redux/registration/actions/set_first_name_action.dart';
-import 'package:business/redux/registration/actions/set_last_name_action.dart';
+import 'package:business/redux/registration/actions/set_full_name_action.dart';
 import 'package:business/redux/registration/actions/set_password_action.dart';
 import 'package:business/redux/registration/registration_selectors.dart';
 import 'package:equatable/equatable.dart';
@@ -23,8 +22,7 @@ class RegistrationPageConnector extends StatelessWidget {
     debug: this,
     vm: () => _Factory(this),
     builder: (context, vm) => RegistrationPage(
-      firstName: vm.firstName,
-      lastName: vm.lastName,
+      fullName: vm.fullName,
       email: vm.email,
       password: vm.password,
       confirmPassword: vm.confirmPassword,
@@ -40,26 +38,18 @@ class _Factory extends VmFactory<AppState, RegistrationPageConnector, _Vm> {
 
   @override
   _Vm fromStore() {
-    final firstName = selectRegistrationFirstName(state);
-    final lastName = selectRegistrationLastName(state);
+    final fullName = selectRegistrationFullName(state);
     final email = selectRegistrationEmail(state);
     final password = selectRegistrationPassword(state);
     final confirmPassword = selectRegistrationConfirmPassword(state);
 
     return _Vm(
-      firstName: ValueChangedVm(
-        value: firstName,
-        onChanged: (value) =>
-            dispatchSync(SetFirstNameAction(firstName: value!)),
+      fullName: ValueChangedVm(
+        value: fullName,
+        onChanged: (value) => dispatchSync(SetFullNameAction(fullName: value!)),
         validator: nameValidator.call,
       ),
-      lastName: ValueChangedVm(
-        value: lastName,
-        validator: nameValidator.call,
-        onChanged: (value) => dispatchSync(
-          SetLastNameAction(lastName: value!),
-        ),
-      ),
+
       email: ValueChangedVm(
         value: email,
         validator: emailValidator.call,
@@ -91,8 +81,7 @@ class _Factory extends VmFactory<AppState, RegistrationPageConnector, _Vm> {
 /// The view-model holds the part of the Store state the dumb-widget needs.
 class _Vm extends Vm with EquatableMixin {
   _Vm({
-    required this.firstName,
-    required this.lastName,
+    required this.fullName,
     required this.email,
     required this.password,
     required this.confirmPassword,
@@ -100,8 +89,7 @@ class _Vm extends Vm with EquatableMixin {
     required this.onPressedBackToLogin,
   });
 
-  final ValueChangedVm<String?> firstName;
-  final ValueChangedVm<String?> lastName;
+  final ValueChangedVm<String?> fullName;
   final ValueChangedVm<String?> email;
   final ValueChangedVm<String?> password;
   final ValueChangedVm<String?> confirmPassword;
@@ -110,8 +98,7 @@ class _Vm extends Vm with EquatableMixin {
 
   @override
   List<Object?> get props => [
-    firstName,
-    lastName,
+    fullName,
     email,
     password,
     confirmPassword,

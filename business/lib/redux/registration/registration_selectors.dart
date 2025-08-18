@@ -13,12 +13,9 @@ String? selectRegistrationPassword(AppState state) =>
     state.registration.password;
 
 /// Returns first name value
-String? selectRegistrationFirstName(AppState state) =>
-    state.registration.firstName;
+String? selectRegistrationFullName(AppState state) =>
+    state.registration.fullName;
 
-/// Returns last name value
-String? selectRegistrationLastName(AppState state) =>
-    state.registration.lastName;
 
 /// Returns confirm password value
 String? selectRegistrationConfirmPassword(AppState state) =>

@@ -27,7 +27,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "_locale": MessageLookupByLibrary.simpleMessage("en"),
     "backToLogIn": MessageLookupByLibrary.simpleMessage("Back to logIn"),
     "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
-    "confirmPassword": MessageLookupByLibrary.simpleMessage("Confirm Password"),
+    "confirmPassword": MessageLookupByLibrary.simpleMessage("Confirm password"),
     "couldNotConnectToInternet": MessageLookupByLibrary.simpleMessage(
       "Couldn\'t connect to internet.",
     ),
@@ -36,10 +36,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "email": MessageLookupByLibrary.simpleMessage("Email"),
     "emailInvalid": MessageLookupByLibrary.simpleMessage("Email is invalid"),
-    "firstName": MessageLookupByLibrary.simpleMessage("First name"),
     "forgotPassword": MessageLookupByLibrary.simpleMessage("Forgot password?"),
+    "fullName": MessageLookupByLibrary.simpleMessage("Full name"),
     "invalidEmail": MessageLookupByLibrary.simpleMessage("Invalid email"),
-    "lastName": MessageLookupByLibrary.simpleMessage("Last name"),
     "logIn": MessageLookupByLibrary.simpleMessage("Log in"),
     "minimumLengthSymbols": m0,
     "mustContainAtLeastOneLowercase": MessageLookupByLibrary.simpleMessage(

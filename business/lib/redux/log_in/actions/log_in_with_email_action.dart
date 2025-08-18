@@ -10,11 +10,11 @@ import '../models/log_in_state.dart';
 
 class LogInWithEmailAction extends ReduxAction<AppState> {
   @override
-  void before() => dispatchSync(WaitAction.add(LogInWaiting.wait));
+  void before() => dispatchSync(WaitAction.add(this));
 
   @override
   void after() =>
-      dispatchSync(WaitAction.remove(LogInWaiting.wait), notify: false);
+      dispatchSync(WaitAction.remove(this), notify: false);
 
   @override
   Future<AppState> reduce() async {
@@ -26,8 +26,6 @@ class LogInWithEmailAction extends ReduxAction<AppState> {
     } on ClientException catch (e) {
       throw UserException('Error', reason: e.response['message']);
     }
-
-    final record = getPocketBase.authStore.record;
 
     return state.copyWith(logIn: const LogInState());
   }

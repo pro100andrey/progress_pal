@@ -7,15 +7,13 @@ import '../forms/auth_form.dart';
 import '../forms/base_form.dart';
 import '../inputs/confirm_password_input.dart';
 import '../inputs/email_input.dart';
-import '../inputs/first_name_input.dart';
-import '../inputs/last_name_input.dart';
+import '../inputs/full_name.dart';
 import '../inputs/password_input.dart';
 import '../models/value_changed.dart';
 
 class RegistrationPage extends StatelessWidget {
   const RegistrationPage({
-    required this.firstName,
-    required this.lastName,
+    required this.fullName,
     required this.email,
     required this.password,
     required this.confirmPassword,
@@ -24,8 +22,7 @@ class RegistrationPage extends StatelessWidget {
     super.key,
   });
 
-  final ValueChangedVm<String?> firstName;
-  final ValueChangedVm<String?> lastName;
+  final ValueChangedVm<String?> fullName;
   final ValueChangedVm<String?> email;
   final ValueChangedVm<String?> password;
   final ValueChangedVm<String?> confirmPassword;
@@ -43,8 +40,7 @@ class RegistrationPage extends StatelessWidget {
               S.current.registration,
               style: ShadTheme.of(context).textTheme.h2,
             ),
-            FirstNameInput(vm: firstName),
-            LastNameInput(vm: lastName),
+            FullName(vm: fullName),
             EmailInput(vm: email),
             PasswordInput(vm: password),
             ConfirmPasswordInput(vm: confirmPassword),

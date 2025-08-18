@@ -1,11 +1,10 @@
 import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 
 import '../app_state.dart';
-import 'models/___state_name____state.dart';
 
 /// Returns waiting value
 bool select___StateName___IsWaiting(AppState state) =>
-    state.wait.isWaitingFor(___StateName___Waiting.wait);
+    state.wait.isWaitingForType<Retrieve___StateName___Action>();
 
 /// Returns [IMap<int, Object>] table
 IMap<int, Object> select___StateName___Table(AppState state) =>
