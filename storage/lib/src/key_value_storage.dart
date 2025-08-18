@@ -16,6 +16,8 @@ final class KeyValueStorage extends BaseKeyValueStorage with SembastSetupMixin {
   Future<T?> get<T>(String key) async =>
       await mainStore.record(key).get(db) as T?;
 
+  T? getSync<T>(String key) => mainStore.record(key).getSync(db) as T?;
+
   @override
   Future<void> put<T>(String key, T value) async =>
       mainStore.record(key).put(db, value);

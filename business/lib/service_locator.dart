@@ -17,8 +17,7 @@ PocketBase get getPocketBase => _locator.get<PocketBase>();
 
 Future<void> initLocator(Store<AppState> store, Environment env) async {
   final settingsStorage = KeyValueStorage();
-  await settingsStorage.setupStorage(dbFile: 'settings.db');
-
+  await settingsStorage.setupStorage(dbFile: 'settings.db', password: 'test');
   _locator.registerSingleton(settingsStorage);
 
   // Connectivity Service
@@ -29,7 +28,16 @@ Future<void> initLocator(Store<AppState> store, Environment env) async {
   await connectivity.start();
   _locator.registerSingleton(connectivity);
 
-  final pb = PocketBase('https://progress-pal.pockethost.io/');
+  final authStore = AsyncAuthStore(
+    save: (data) async => settingsStorage.put('pb_auth', data),
+    initial: settingsStorage.getSync('pb_auth'),
+  );
+
+  final pb = PocketBase(
+    'https://progress-pal.pockethost.io/',
+    authStore: authStore,
+  );
+
   _locator.registerSingleton(pb);
 
   // ...

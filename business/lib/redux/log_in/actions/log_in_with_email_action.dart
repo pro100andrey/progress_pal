@@ -22,12 +22,12 @@ class LogInWithEmailAction extends ReduxAction<AppState> {
     final password = selectLogInPassword(state)!;
 
     try {
-      final userData = await getPocketBase
-          .collection('users')
-          .authWithPassword(email, password);
+      await getPocketBase.collection('users').authWithPassword(email, password);
     } on ClientException catch (e) {
       throw UserException('Error', reason: e.response['message']);
     }
+
+    final record = getPocketBase.authStore.record;
 
     return state.copyWith(logIn: const LogInState());
   }
