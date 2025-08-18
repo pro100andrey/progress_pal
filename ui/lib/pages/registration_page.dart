@@ -3,6 +3,7 @@ import 'package:localization/localization.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
 
 import '../avatar/avatar.dart';
+import '../avatar/avatar_selector.dart';
 import '../buttons/primary_button.dart';
 import '../forms/auth_form.dart';
 import '../forms/base_form.dart';
@@ -41,12 +42,14 @@ class RegistrationPage extends StatelessWidget {
               S.current.registration,
               style: ShadTheme.of(context).textTheme.h2,
             ),
-            const Avatar(
-              source: AvatarSource.network(''),
-              size: Size.fromRadius(32),
+            AvatarSelector(
+              source: const AvatarSource.network(''),
+              onTap: () {
+                // Handle avatar tap, e.g., open image picker
+              },
 
               // 'https://app.requestly.io/delay/2000/avatars.githubusercontent.com/u/124599?v=4',
-              placeholder: Text('CN'),
+              // placeholder: Text('CN'),
             ),
             FullName(vm: fullName),
             EmailInput(vm: email),

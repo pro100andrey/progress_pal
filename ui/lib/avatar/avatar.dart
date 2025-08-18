@@ -1,5 +1,6 @@
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
+import 'package:shadcn_ui/shadcn_ui.dart';
 
 sealed class AvatarSource {
   const AvatarSource._();
@@ -58,6 +59,8 @@ class Avatar extends StatelessWidget {
     final backgroundColor = this.backgroundColor ?? const Color(0xFF2E2C31);
     final effectiveShape = shape ?? BoxShape.circle;
     final effectiveFit = fit ?? BoxFit.contain;
+    final effectivePlaceholder =
+        placeholder ?? const Icon(LucideIcons.circleUser100, size: 32);
 
     return Stack(
       alignment: Alignment.center,
@@ -86,7 +89,7 @@ class Avatar extends StatelessWidget {
                 height: effectiveSize.height,
               ),
 
-              LoadState.failed => Center(child: placeholder),
+              LoadState.failed => Center(child: effectivePlaceholder),
             },
           ),
           asset: ExtendedImage.asset,

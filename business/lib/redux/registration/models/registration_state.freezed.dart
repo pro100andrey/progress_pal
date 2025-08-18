@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$RegistrationState {
 
- String? get fullName; String? get email; String? get password; String? get confirmPassword;
+ String? get fullName; String? get email; String? get password; String? get confirmPassword; XFile? get avatar;
 /// Create a copy of RegistrationState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,16 +25,16 @@ $RegistrationStateCopyWith<RegistrationState> get copyWith => _$RegistrationStat
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is RegistrationState&&(identical(other.fullName, fullName) || other.fullName == fullName)&&(identical(other.email, email) || other.email == email)&&(identical(other.password, password) || other.password == password)&&(identical(other.confirmPassword, confirmPassword) || other.confirmPassword == confirmPassword));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is RegistrationState&&(identical(other.fullName, fullName) || other.fullName == fullName)&&(identical(other.email, email) || other.email == email)&&(identical(other.password, password) || other.password == password)&&(identical(other.confirmPassword, confirmPassword) || other.confirmPassword == confirmPassword)&&(identical(other.avatar, avatar) || other.avatar == avatar));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,fullName,email,password,confirmPassword);
+int get hashCode => Object.hash(runtimeType,fullName,email,password,confirmPassword,avatar);
 
 @override
 String toString() {
-  return 'RegistrationState(fullName: $fullName, email: $email, password: $password, confirmPassword: $confirmPassword)';
+  return 'RegistrationState(fullName: $fullName, email: $email, password: $password, confirmPassword: $confirmPassword, avatar: $avatar)';
 }
 
 
@@ -45,7 +45,7 @@ abstract mixin class $RegistrationStateCopyWith<$Res>  {
   factory $RegistrationStateCopyWith(RegistrationState value, $Res Function(RegistrationState) _then) = _$RegistrationStateCopyWithImpl;
 @useResult
 $Res call({
- String? fullName, String? email, String? password, String? confirmPassword
+ String? fullName, String? email, String? password, String? confirmPassword, XFile? avatar
 });
 
 
@@ -62,13 +62,14 @@ class _$RegistrationStateCopyWithImpl<$Res>
 
 /// Create a copy of RegistrationState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? fullName = freezed,Object? email = freezed,Object? password = freezed,Object? confirmPassword = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? fullName = freezed,Object? email = freezed,Object? password = freezed,Object? confirmPassword = freezed,Object? avatar = freezed,}) {
   return _then(_self.copyWith(
 fullName: freezed == fullName ? _self.fullName : fullName // ignore: cast_nullable_to_non_nullable
 as String?,email: freezed == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
 as String?,password: freezed == password ? _self.password : password // ignore: cast_nullable_to_non_nullable
 as String?,confirmPassword: freezed == confirmPassword ? _self.confirmPassword : confirmPassword // ignore: cast_nullable_to_non_nullable
-as String?,
+as String?,avatar: freezed == avatar ? _self.avatar : avatar // ignore: cast_nullable_to_non_nullable
+as XFile?,
   ));
 }
 
@@ -80,13 +81,14 @@ as String?,
 
 
 class _RegistrationState implements RegistrationState {
-  const _RegistrationState({this.fullName, this.email, this.password, this.confirmPassword});
+  const _RegistrationState({this.fullName, this.email, this.password, this.confirmPassword, this.avatar});
   
 
 @override final  String? fullName;
 @override final  String? email;
 @override final  String? password;
 @override final  String? confirmPassword;
+@override final  XFile? avatar;
 
 /// Create a copy of RegistrationState
 /// with the given fields replaced by the non-null parameter values.
@@ -98,16 +100,16 @@ _$RegistrationStateCopyWith<_RegistrationState> get copyWith => __$RegistrationS
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _RegistrationState&&(identical(other.fullName, fullName) || other.fullName == fullName)&&(identical(other.email, email) || other.email == email)&&(identical(other.password, password) || other.password == password)&&(identical(other.confirmPassword, confirmPassword) || other.confirmPassword == confirmPassword));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _RegistrationState&&(identical(other.fullName, fullName) || other.fullName == fullName)&&(identical(other.email, email) || other.email == email)&&(identical(other.password, password) || other.password == password)&&(identical(other.confirmPassword, confirmPassword) || other.confirmPassword == confirmPassword)&&(identical(other.avatar, avatar) || other.avatar == avatar));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,fullName,email,password,confirmPassword);
+int get hashCode => Object.hash(runtimeType,fullName,email,password,confirmPassword,avatar);
 
 @override
 String toString() {
-  return 'RegistrationState(fullName: $fullName, email: $email, password: $password, confirmPassword: $confirmPassword)';
+  return 'RegistrationState(fullName: $fullName, email: $email, password: $password, confirmPassword: $confirmPassword, avatar: $avatar)';
 }
 
 
@@ -118,7 +120,7 @@ abstract mixin class _$RegistrationStateCopyWith<$Res> implements $RegistrationS
   factory _$RegistrationStateCopyWith(_RegistrationState value, $Res Function(_RegistrationState) _then) = __$RegistrationStateCopyWithImpl;
 @override @useResult
 $Res call({
- String? fullName, String? email, String? password, String? confirmPassword
+ String? fullName, String? email, String? password, String? confirmPassword, XFile? avatar
 });
 
 
@@ -135,13 +137,14 @@ class __$RegistrationStateCopyWithImpl<$Res>
 
 /// Create a copy of RegistrationState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? fullName = freezed,Object? email = freezed,Object? password = freezed,Object? confirmPassword = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? fullName = freezed,Object? email = freezed,Object? password = freezed,Object? confirmPassword = freezed,Object? avatar = freezed,}) {
   return _then(_RegistrationState(
 fullName: freezed == fullName ? _self.fullName : fullName // ignore: cast_nullable_to_non_nullable
 as String?,email: freezed == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
 as String?,password: freezed == password ? _self.password : password // ignore: cast_nullable_to_non_nullable
 as String?,confirmPassword: freezed == confirmPassword ? _self.confirmPassword : confirmPassword // ignore: cast_nullable_to_non_nullable
-as String?,
+as String?,avatar: freezed == avatar ? _self.avatar : avatar // ignore: cast_nullable_to_non_nullable
+as XFile?,
   ));
 }
 

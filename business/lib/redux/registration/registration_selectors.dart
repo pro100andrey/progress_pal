@@ -1,3 +1,5 @@
+import 'package:cross_file/cross_file.dart';
+
 import '../app_state.dart';
 import 'actions/registration_action.dart';
 
@@ -16,16 +18,9 @@ String? selectRegistrationPassword(AppState state) =>
 String? selectRegistrationFullName(AppState state) =>
     state.registration.fullName;
 
-
 /// Returns confirm password value
 String? selectRegistrationConfirmPassword(AppState state) =>
     state.registration.confirmPassword;
 
-/// Returns true if email, password, confirmPassword is setted
-bool selectRegistrationDataIsSet(AppState state) {
-  final email = selectRegistrationEmail(state) ?? '';
-  final password = selectRegistrationPassword(state) ?? '';
-  final confirmPassword = selectRegistrationConfirmPassword(state) ?? '';
-
-  return email.isNotEmpty && password.isNotEmpty && confirmPassword.isNotEmpty;
-}
+/// Returns avatar value
+XFile? selectRegistrationAvatar(AppState state) => state.registration.avatar;
