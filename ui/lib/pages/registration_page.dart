@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:localization/localization.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
 
+import '../avatar/avatar.dart';
 import '../buttons/primary_button.dart';
 import '../forms/auth_form.dart';
 import '../forms/base_form.dart';
@@ -39,6 +40,13 @@ class RegistrationPage extends StatelessWidget {
             Text(
               S.current.registration,
               style: ShadTheme.of(context).textTheme.h2,
+            ),
+            const Avatar(
+              source: AvatarSource.network(''),
+              size: Size.fromRadius(32),
+
+              // 'https://app.requestly.io/delay/2000/avatars.githubusercontent.com/u/124599?v=4',
+              placeholder: Text('CN'),
             ),
             FullName(vm: fullName),
             EmailInput(vm: email),
