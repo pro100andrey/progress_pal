@@ -32,17 +32,13 @@ Future<void> runEnv(Environment env) async {
 
   prettyLogging(enable: kDebugMode, ignoredLoggers: ['GoRouter']);
 
-  final store = newStore();
-
-  await initLocator(store, env);
-
   if (isDesktop) {
     await windowManager.ensureInitialized();
 
     const windowOptions = WindowOptions(
-      size: Size(800, 640),
-      center: true,
       minimumSize: Size(320, 640),
+      skipTaskbar: false,
+      
     );
 
     unawaited(
@@ -52,6 +48,9 @@ Future<void> runEnv(Environment env) async {
       }),
     );
   }
+
+  final store = newStore();
+  await initLocator(store, env);
 
   runApp(
     StoreProvider(
