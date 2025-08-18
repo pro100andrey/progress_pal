@@ -17,7 +17,7 @@ PocketBase get getPocketBase => _locator.get<PocketBase>();
 
 Future<void> initLocator(Store<AppState> store, Environment env) async {
   final settingsStorage = KeyValueStorage();
-  await settingsStorage.setupStorage(dbFile: 'settings.db', password: 'test');
+  await settingsStorage.setupStorage(dbFile: 'pp.db');
   _locator.registerSingleton(settingsStorage);
 
   // Connectivity Service

@@ -21,7 +21,7 @@ class RegistrationAction extends ReduxAction<AppState> {
     final password = selectRegistrationPassword(state)!;
 
     try {
-      final record = await getPocketBase
+      await getPocketBase
           .collection('users')
           .create(
             body: {
