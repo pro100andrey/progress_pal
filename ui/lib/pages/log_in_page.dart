@@ -8,6 +8,7 @@ import '../forms/base_form.dart';
 import '../inputs/email_input.dart';
 import '../inputs/password_input.dart';
 import '../models/value_changed.dart';
+import '../tiles/auth_header.dart';
 
 class LogInPage extends StatelessWidget {
   const LogInPage({
@@ -29,12 +30,12 @@ class LogInPage extends StatelessWidget {
   Widget build(BuildContext context) => Scaffold(
     body: AuthForm(
       child: BaseForm(
-        formBuilder: (formKey) => Column(
+        builder: (formKey) => Column(
           spacing: 16,
           children: [
-            Text(
-              S.current.welcomeBack,
-              style: ShadTheme.of(context).textTheme.h2,
+            AuthHeader(
+              title: S.current.welcomeBack,
+              description: S.current.loginInstructions,
             ),
             EmailInput(vm: email),
             PasswordInput(vm: password),

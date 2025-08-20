@@ -8,8 +8,7 @@ import 'package:localization/localization.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
 
 import 'connectors/top_level_page_connector.dart';
-import 'navigation/routers_flow.dart';
-import 'navigation/routes.dart';
+import 'navigation/navigation.dart';
 
 class AppConnector extends StatefulWidget {
   const AppConnector({required this.store, super.key});
@@ -20,42 +19,47 @@ class AppConnector extends StatefulWidget {
   State<AppConnector> createState() => _AppConnectorState();
 }
 
-class _AppConnectorState extends State<AppConnector> {
+class _AppConnectorState extends State<AppConnector>
+    with NavigationServiceDelegate {
+  @override
+  void initState() {
+    super.initState();
+    navigation.delegate = this;
+  }
+
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) => StoreConnector<AppState, _Vm>(
     debug: this,
     vm: () => _Factory(widget),
-    builder: (context, vm) {
-      final router = RoutersMap.instance.routerWithFlow(vm.flow);
-
-      return ShadApp.router(
-        routerDelegate: router.routerDelegate,
-        routeInformationProvider: router.routeInformationProvider,
-        
-        themeMode: ThemeMode.dark,
-        darkTheme: ShadThemeData(
-          
+    builder: (context, vm) => ShadApp.router(
+      routerConfig: navigation.router,
+      // routerDelegate: _router,
+      // routeInformationProvider: router.routeInformationProvider,
+      themeMode: ThemeMode.dark,
+      darkTheme: ShadThemeData(
+        brightness: Brightness.dark,
+        colorScheme: ShadColorScheme.fromName(
+          'zinc',
           brightness: Brightness.dark,
-          colorScheme: ShadColorScheme.fromName(
-            'zinc',
-            brightness: Brightness.dark,
-          ),
         ),
-
-        routeInformationParser: router.routeInformationParser,
-        localizationsDelegates: const [
-          S.delegate,
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
-        ],
-        supportedLocales: S.delegate.supportedLocales,
-        builder: (context, child) =>
-            ShadAppBuilder(child: TopLevelPageConnector(child: child)),
-      );
-    },
+      ),
+      // routeInformationParser: router.routeInformationParser,
+      localizationsDelegates: const [
+        S.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: S.delegate.supportedLocales,
+      builder: (context, child) => ShadAppBuilder(
+        child: TopLevelPageConnector(child: child),
+      ),
+    ),
   );
+
+  @override
+  bool get isLoggedIn => selectIsSessionAvailable(widget.store.state);
 }
 
 /// Factory that creates a view-model for the StoreConnector.
@@ -63,21 +67,15 @@ class _Factory extends VmFactory<AppState, AppConnector, _Vm> {
   _Factory(super._connector);
 
   @override
-  _Vm fromStore() {
-    if (selectIsSessionAvailable(state)) {
-      return _Vm(flow: const HomeFlow());
-    }
-
-    return _Vm(flow: const AuthFlow(redirection: AuthFlowRedirection.login));
-  }
+  _Vm fromStore() => _Vm(language: 0);
 }
 
 /// The view-model holds the part of the Store state the dumb-widget needs.
 class _Vm extends Vm with EquatableMixin {
-  _Vm({required this.flow});
+  _Vm({required this.language});
 
-  final RoutersFlow flow;
+  final int language;
 
   @override
-  List<Object?> get props => [flow];
+  List<Object?> get props => [language];
 }

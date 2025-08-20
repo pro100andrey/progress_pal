@@ -10,7 +10,7 @@ import 'package:ui/models/value_changed.dart';
 import 'package:ui/pages/log_in_page.dart';
 
 import '../common/validators.dart';
-import '../navigation/routes.dart';
+import '../navigation/navigation.dart';
 
 class LogInPageConnector extends StatelessWidget {
   const LogInPageConnector({super.key});
@@ -37,7 +37,7 @@ class _Factory extends VmFactory<AppState, LogInPageConnector, _Vm> {
   _Vm fromStore() {
     final email = selectLogInEmail(state);
     final password = selectLogInPassword(state);
-    
+
     return _Vm(
       email: ValueChangedVm(
         value: email,
@@ -50,9 +50,8 @@ class _Factory extends VmFactory<AppState, LogInPageConnector, _Vm> {
         onChanged: (value) => dispatchSync(SetPasswordAction(password: value!)),
       ),
       onPressedLogIn: () async => dispatchAndWait(LogInWithEmailAction()),
-      onPressedForgotPassword: () async =>
-          router.pushNamed(Routes.forgotPassword),
-      onPressedRegister: () async => router.pushNamed(Routes.registration),
+      onPressedForgotPassword: navigation.goToForgotPassword,
+      onPressedRegister: navigation.goToRegistration,
     );
   }
 }

@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:localization/localization.dart';
+import 'package:shadcn_ui/shadcn_ui.dart';
 
 import '../buttons/primary_button.dart';
+import '../forms/auth_form.dart';
+import '../forms/base_form.dart';
 import '../inputs/email_input.dart';
 import '../models/value_changed.dart';
+import '../tiles/auth_header.dart';
 
 class ForgotPasswordPage extends StatelessWidget {
   const ForgotPasswordPage({
@@ -21,26 +25,31 @@ class ForgotPasswordPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-    body: Stack(
-      fit: StackFit.expand,
-      children: [
-        Column(
+    body: AuthForm(
+      child: BaseForm(
+        builder: (formKey) => Column(
+          spacing: 16,
           children: [
-            const SizedBox(height: 24),
+            AuthHeader(
+              title: S.current.forgotPassword,
+              description: S.current.forgotPasswordInstructions,
+            ),
             EmailInput(vm: email),
-            const SizedBox(height: 16),
             PrimaryButton(
-              title: S.current.resetPassword,
+              title: S.current.submit,
               onPressed: onPressedResetPassword,
             ),
-            const SizedBox(height: 16),
+            const ShadSeparator.horizontal(
+              thickness: 1,
+              margin: EdgeInsets.symmetric(horizontal: 20),
+            ),
             TextButton(
               onPressed: onPressedBackToLogin,
               child: Text(S.current.backToLogIn),
             ),
           ],
         ),
-      ],
+      ),
     ),
   );
 }

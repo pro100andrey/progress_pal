@@ -12,7 +12,7 @@ import 'package:ui/models/value_changed.dart';
 import 'package:ui/pages/registration_page.dart';
 
 import '../common/validators.dart';
-import '../navigation/routes.dart';
+import '../navigation/navigation.dart';
 
 class RegistrationPageConnector extends StatelessWidget {
   const RegistrationPageConnector({super.key});
@@ -71,9 +71,9 @@ class _Factory extends VmFactory<AppState, RegistrationPageConnector, _Vm> {
       ),
       onPressedRegister: () async {
         await dispatchAndWait(RegistrationAction());
-        router.pop();
+        navigation.pop();
       },
-      onPressedBackToLogin: router.pop,
+      onPressedBackToLogin: navigation.goToLogIn,
     );
   }
 }

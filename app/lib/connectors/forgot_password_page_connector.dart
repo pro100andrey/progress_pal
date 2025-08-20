@@ -9,7 +9,7 @@ import 'package:ui/models/value_changed.dart';
 import 'package:ui/pages/forgot_password_page.dart';
 
 import '../common/validators.dart';
-import '../navigation/routes.dart';
+import '../navigation/navigation.dart';
 
 class ForgotPasswordPageConnector extends StatelessWidget {
   const ForgotPasswordPageConnector({super.key});
@@ -44,7 +44,7 @@ class _Factory extends VmFactory<AppState, ForgotPasswordPageConnector, _Vm> {
         onChanged: (value) => dispatchSync(SetEmailAction(email: value!)),
       ),
       onPressedResetPassword: () => dispatchSync(ForgotPasswordAction()),
-      onPressedBackToLogin: router.pop,
+      onPressedBackToLogin: navigation.goToLogIn,
     );
   }
 }

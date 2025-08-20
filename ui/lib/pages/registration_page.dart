@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:localization/localization.dart';
-import 'package:shadcn_ui/shadcn_ui.dart';
 
 import '../avatar/avatar.dart';
 import '../avatar/avatar_selector.dart';
@@ -12,6 +11,7 @@ import '../inputs/email_input.dart';
 import '../inputs/full_name.dart';
 import '../inputs/password_input.dart';
 import '../models/value_changed.dart';
+import '../tiles/auth_header.dart';
 
 class RegistrationPage extends StatelessWidget {
   const RegistrationPage({
@@ -35,21 +35,16 @@ class RegistrationPage extends StatelessWidget {
   Widget build(BuildContext context) => Scaffold(
     body: AuthForm(
       child: BaseForm(
-        formBuilder: (formKey) => Column(
+        builder: (formKey) => Column(
           spacing: 16,
           children: [
-            Text(
-              S.current.registration,
-              style: ShadTheme.of(context).textTheme.h2,
+            AuthHeader(
+              title: S.current.registration,
+              description: S.current.registrationInstructions,
             ),
             AvatarSelector(
               source: const AvatarSource.network(''),
-              onTap: () {
-                // Handle avatar tap, e.g., open image picker
-              },
-
-              // 'https://app.requestly.io/delay/2000/avatars.githubusercontent.com/u/124599?v=4',
-              // placeholder: Text('CN'),
+              onTap: () {},
             ),
             FullName(vm: fullName),
             EmailInput(vm: email),

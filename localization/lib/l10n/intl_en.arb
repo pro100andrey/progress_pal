@@ -6,6 +6,7 @@
   "logIn": "Log in",
   "backToLogIn": "Back to logIn",
   "registration": "Registration",
+  "registrationInstructions": "Please fill out the form below to create your account.",
   "resetPassword": "Reset password",
   "email": "Email",
   "emailInvalid": "Email is invalid",
@@ -22,7 +23,9 @@
   "fullName": "Full name",
   "dontHaveAccountYet": "Don't have an account yet?",
   "welcomeBack": "Welcome back!",
+  "loginInstructions": "Log in to continue your journey.",
   "forgotPassword": "Forgot password?",
+  "forgotPasswordInstructions": "Lost your password? No problem. Just enter the email address associated with your account and we'll send you a link to reset it.",
   "submit": "Submit",
   "signup": "Sign up"
 }

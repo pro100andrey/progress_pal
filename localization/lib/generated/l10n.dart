@@ -99,6 +99,16 @@ class S {
     );
   }
 
+  /// `Please fill out the form below to create your account.`
+  String get registrationInstructions {
+    return Intl.message(
+      'Please fill out the form below to create your account.',
+      name: 'registrationInstructions',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Reset password`
   String get resetPassword {
     return Intl.message(
@@ -244,11 +254,31 @@ class S {
     );
   }
 
+  /// `Log in to continue your journey.`
+  String get loginInstructions {
+    return Intl.message(
+      'Log in to continue your journey.',
+      name: 'loginInstructions',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Forgot password?`
   String get forgotPassword {
     return Intl.message(
       'Forgot password?',
       name: 'forgotPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Lost your password? No problem. Just enter the email address associated with your account and we'll send you a link to reset it.`
+  String get forgotPasswordInstructions {
+    return Intl.message(
+      'Lost your password? No problem. Just enter the email address associated with your account and we\'ll send you a link to reset it.',
+      name: 'forgotPasswordInstructions',
       desc: '',
       args: [],
     );

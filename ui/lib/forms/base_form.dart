@@ -2,9 +2,9 @@ import 'package:flutter/widgets.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
 
 class BaseForm extends StatefulWidget {
-  const BaseForm({required this.formBuilder, super.key});
+  const BaseForm({required this.builder, super.key});
 
-  final Widget Function(GlobalKey<ShadFormState> state) formBuilder;
+  final Widget Function(GlobalKey<ShadFormState> state) builder;
 
   @override
   State<BaseForm> createState() => _BaseFormState();
@@ -16,6 +16,6 @@ class _BaseFormState extends State<BaseForm> {
   @override
   Widget build(BuildContext context) => ShadForm(
     key: formKey,
-    child: widget.formBuilder(formKey),
+    child: widget.builder(formKey),
   );
 }

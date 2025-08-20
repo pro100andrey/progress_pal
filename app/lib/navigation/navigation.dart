@@ -1,0 +1,94 @@
+import 'package:flutter/widgets.dart';
+import 'package:go_router/go_router.dart';
+
+import '../connectors/forgot_password_page_connector.dart';
+import '../connectors/home_page_connector.dart';
+import '../connectors/log_in_page_connector.dart';
+import '../connectors/registration_page_connector.dart';
+import '../connectors/reset_password_page_connector.dart';
+
+mixin NavigationServiceDelegate {
+  bool get isLoggedIn;
+}
+
+final navigation = Navigation();
+
+class Navigation {
+  final _navigatorKey = GlobalKey<NavigatorState>();
+
+  late final NavigationServiceDelegate _delegate;
+
+  // ignore: avoid_setters_without_getters
+  set delegate(NavigationServiceDelegate delegate) {
+    _delegate = delegate;
+  }
+
+  GoRouter get router => _router;
+
+  late final _router = GoRouter(
+    navigatorKey: _navigatorKey,
+    debugLogDiagnostics: true,
+    initialLocation: '/',
+    routes: [
+      GoRoute(
+        path: '/home',
+        builder: (context, state) => const HomePageConnector(),
+      ),
+      GoRoute(
+        path: '/auth/login',
+        builder: (context, state) => const LogInPageConnector(),
+      ),
+      GoRoute(
+        path: '/auth/registration',
+        builder: (context, state) => const RegistrationPageConnector(),
+      ),
+      GoRoute(
+        path: '/auth/forgot-password',
+        builder: (context, state) => const ForgotPasswordPageConnector(),
+      ),
+      GoRoute(
+        path: '/auth/reset-password',
+        builder: (context, state) => const ResetPasswordPageConnector(),
+      ),
+    ],
+    redirect: (context, state) {
+      final isLoggedIn = _delegate.isLoggedIn;
+      final cr = CurrentRoute(state);
+
+      switch ((isLoggedIn, cr)) {
+        case (true, CurrentRoute(isAuth: true)):
+          return '/home';
+        case (false, CurrentRoute(isAuth: false)):
+          return '/auth/login';
+        case (true, CurrentRoute(isIndex: true)):
+          return '/home';
+      }
+
+      return null;
+    },
+  );
+
+  void goToForgotPassword() {
+    router.go('/auth/forgot-password');
+  }
+
+  void goToRegistration() {
+    router.go('/auth/registration');
+  }
+
+  void goToLogIn() {
+    router.go('/auth/login');
+  }
+
+  void pop() {
+    router.pop();
+  }
+}
+
+extension type CurrentRoute(GoRouterState state) {
+  String get fullPath => state.uri.path;
+
+  bool get isAuth => fullPath.startsWith('/auth/');
+
+  bool get isIndex => fullPath == '/';
+}

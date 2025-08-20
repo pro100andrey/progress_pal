@@ -10,7 +10,7 @@ import 'package:ui/models/value_changed.dart';
 import 'package:ui/pages/reset_password_page.dart';
 
 import '../common/validators.dart';
-import '../navigation/routes.dart';
+import '../navigation/navigation.dart';
 
 class ResetPasswordPageConnector extends StatelessWidget {
   const ResetPasswordPageConnector({super.key});
@@ -67,7 +67,7 @@ class _Factory extends VmFactory<AppState, ResetPasswordPageConnector, _Vm> {
       onPressedResetPassword: formIsValid
           ? () => dispatchSync(ResetPasswordAction())
           : null,
-      onPressedBackToLogin: router.pop,
+      onPressedBackToLogin: navigation.goToLogIn,
     );
   }
 }
