@@ -47,7 +47,7 @@ class LogInPage extends StatelessWidget {
               ),
             ),
             PrimaryButton(
-              title: S.current.submit,
+              title: S.current.signIn,
               onPressed: () {
                 if (formKey.currentState!.saveAndValidate()) {
                   onPressedLogIn?.call();
@@ -69,7 +69,7 @@ class LogInPage extends StatelessWidget {
                 ),
                 ShadButton.link(
                   onPressed: onPressedRegister,
-                  child: Text(S.current.signup),
+                  child: Text(S.current.signUp),
                 ),
               ],
             ),

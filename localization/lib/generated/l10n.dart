@@ -79,6 +79,11 @@ class S {
     return Intl.message('Log in', name: 'logIn', desc: '', args: []);
   }
 
+  /// `Sign in`
+  String get signIn {
+    return Intl.message('Sign in', name: 'signIn', desc: '', args: []);
+  }
+
   /// `Back to logIn`
   String get backToLogIn {
     return Intl.message(
@@ -274,24 +279,29 @@ class S {
     );
   }
 
-  /// `Lost your password? No problem. Just enter the email address associated with your account and we'll send you a link to reset it.`
+  /// `Enter your email address to receive a password reset link.`
   String get forgotPasswordInstructions {
     return Intl.message(
-      'Lost your password? No problem. Just enter the email address associated with your account and we\'ll send you a link to reset it.',
+      'Enter your email address to receive a password reset link.',
       name: 'forgotPasswordInstructions',
       desc: '',
       args: [],
     );
   }
 
-  /// `Submit`
-  String get submit {
-    return Intl.message('Submit', name: 'submit', desc: '', args: []);
+  /// `Send Reset Link`
+  String get sendResetLink {
+    return Intl.message(
+      'Send Reset Link',
+      name: 'sendResetLink',
+      desc: '',
+      args: [],
+    );
   }
 
   /// `Sign up`
-  String get signup {
-    return Intl.message('Sign up', name: 'signup', desc: '', args: []);
+  String get signUp {
+    return Intl.message('Sign up', name: 'signUp', desc: '', args: []);
   }
 }
 

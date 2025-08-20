@@ -38,7 +38,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "emailInvalid": MessageLookupByLibrary.simpleMessage("Email is invalid"),
     "forgotPassword": MessageLookupByLibrary.simpleMessage("Forgot password?"),
     "forgotPasswordInstructions": MessageLookupByLibrary.simpleMessage(
-      "Lost your password? No problem. Just enter the email address associated with your account and we\'ll send you a link to reset it.",
+      "Enter your email address to receive a password reset link.",
     ),
     "fullName": MessageLookupByLibrary.simpleMessage("Full name"),
     "invalidEmail": MessageLookupByLibrary.simpleMessage("Invalid email"),
@@ -66,8 +66,9 @@ class MessageLookup extends MessageLookupByLibrary {
       "Please fill out the form below to create your account.",
     ),
     "resetPassword": MessageLookupByLibrary.simpleMessage("Reset password"),
-    "signup": MessageLookupByLibrary.simpleMessage("Sign up"),
-    "submit": MessageLookupByLibrary.simpleMessage("Submit"),
+    "sendResetLink": MessageLookupByLibrary.simpleMessage("Send Reset Link"),
+    "signIn": MessageLookupByLibrary.simpleMessage("Sign in"),
+    "signUp": MessageLookupByLibrary.simpleMessage("Sign up"),
     "thisFieldIsRequired": MessageLookupByLibrary.simpleMessage(
       "This field is required",
     ),

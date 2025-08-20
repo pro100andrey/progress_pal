@@ -36,7 +36,7 @@ class ForgotPasswordPage extends StatelessWidget {
             ),
             EmailInput(vm: email),
             PrimaryButton(
-              title: S.current.submit,
+              title: S.current.sendResetLink,
               onPressed: onPressedResetPassword,
             ),
             const ShadSeparator.horizontal(

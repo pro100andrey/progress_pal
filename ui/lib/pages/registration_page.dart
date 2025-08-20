@@ -51,7 +51,7 @@ class RegistrationPage extends StatelessWidget {
             PasswordInput(vm: password),
             ConfirmPasswordInput(vm: confirmPassword),
             PrimaryButton(
-              title: S.current.submit,
+              title: S.current.signUp,
               onPressed: () {
                 if (formKey.currentState!.saveAndValidate()) {
                   onPressedRegister?.call();
