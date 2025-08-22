@@ -1,10 +1,12 @@
 import 'package:async_redux/async_redux.dart';
 import 'package:business/redux/app_state.dart';
-import 'package:business/redux/registration/actions/confirm_verification_action.dart';
-import 'package:business/redux/registration/registration_selectors.dart';
+import 'package:business/redux/confirm_verification/actions/confirm_verification_action.dart';
+import 'package:business/redux/confirm_verification/confirm_verification_selectors.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:ui/pages/confirm_verification_page.dart';
+
+import '../navigation/navigation.dart';
 
 class ConfirmVerificationPageConnector extends StatelessWidget {
   const ConfirmVerificationPageConnector({required this.token, super.key});
@@ -15,8 +17,14 @@ class ConfirmVerificationPageConnector extends StatelessWidget {
   Widget build(BuildContext context) => StoreConnector<AppState, _Vm>(
     debug: this,
     vm: () => _Factory(this),
-    builder: (context, vm) => ConfirmVerificationPage(isWaiting: vm.isWaiting),
-    onInit: (store) => store.dispatch(ConfirmVerificationAction(token: token)),
+    builder: (context, vm) => ConfirmVerificationPage(
+      isWaiting: vm.isWaiting,
+      success: vm.success,
+      onPressedBackToLogin: vm.onPressedBackToLogin,
+    ),
+    onInit: (store) => store.dispatch(
+      ConfirmVerificationAction(token: token),
+    ),
   );
 }
 
@@ -27,18 +35,29 @@ class _Factory
 
   @override
   _Vm fromStore() {
-    final isWaiting = selectRegistrationConfirmVerificationIsWaiting(state);
+    final isWaiting = selectConfirmVerificationIsWaiting(state);
+    final success = selectConfirmVerificationSuccess(state);
 
-    return _Vm(isWaiting: isWaiting);
+    return _Vm(
+      isWaiting: isWaiting,
+      success: success,
+      onPressedBackToLogin: navigation.goToLogIn,
+    );
   }
 }
 
 /// The view-model holds the part of the Store state the dumb-widget needs.
 class _Vm extends Vm with EquatableMixin {
-  _Vm({required this.isWaiting});
+  _Vm({
+    required this.isWaiting,
+    required this.success,
+    required this.onPressedBackToLogin,
+  });
 
   final bool isWaiting;
+  final bool success;
+  final VoidCallback onPressedBackToLogin;
 
   @override
-  List<Object?> get props => [isWaiting];
+  List<Object?> get props => [isWaiting, success];
 }

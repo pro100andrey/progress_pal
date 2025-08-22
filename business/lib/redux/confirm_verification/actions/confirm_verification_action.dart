@@ -11,15 +11,21 @@ class ConfirmVerificationAction extends ReduxAction<AppState> {
 
   @override
   void after() {
-    dispatchSync(WaitAction.remove(this));
+    dispatchSync(
+      WaitAction.remove(this),
+    );
   }
 
   final String token;
 
   @override
   Future<AppState?> reduce() async {
-    await getPocketBase.collection('users').confirmVerification(token);
+    try {
+      await getPocketBase.collection('users').confirmVerification(token);
+    } on Exception catch (_) {
+      return state.copyWith.confirmVerification(success: false);
+    }
 
-    return null;
+    return state.copyWith.confirmVerification(success: true);
   }
 }

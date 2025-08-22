@@ -36,5 +36,6 @@
   "reset": "Reset",
   "done": "Done",
   "registrationComplete": "Registration complete",
-  "registrationEmailSent": "A confirmation link has been sent to {email}. Please check your inbox."
+  "registrationEmailSent": "A confirmation link has been sent to {email}. Please check your inbox.",
+  "verificationSuccessful": "Verification successful!"
 }

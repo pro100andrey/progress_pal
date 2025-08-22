@@ -90,6 +90,9 @@ class MessageLookup extends MessageLookupByLibrary {
       "This field is required",
     ),
     "title": MessageLookupByLibrary.simpleMessage("title"),
+    "verificationSuccessful": MessageLookupByLibrary.simpleMessage(
+      "Verification successful!",
+    ),
     "welcomeBack": MessageLookupByLibrary.simpleMessage("Welcome back!"),
   };
 }

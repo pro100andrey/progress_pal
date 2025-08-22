@@ -1,6 +1,7 @@
 import 'package:async_redux/async_redux.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import 'confirm_verification/models/confirm_verification_state.dart';
 import 'connectivity/models/connectivity_state.dart';
 import 'forgot_password/models/forgot_password_state.dart';
 import 'log_in/models/log_in_state.dart';
@@ -19,6 +20,7 @@ abstract class AppState with _$AppState {
     required ForgotPasswordState forgotPassword,
     required ResetPasswordState resetPassword,
     required SessionState session,
+    required ConfirmVerificationState confirmVerification,
     required Wait wait,
   }) = _AppState;
 
@@ -29,6 +31,7 @@ abstract class AppState with _$AppState {
     forgotPassword: ForgotPasswordState(),
     resetPassword: ResetPasswordState(),
     session: SessionState(),
+    confirmVerification: ConfirmVerificationState(),
     wait: Wait.empty,
   );
 }

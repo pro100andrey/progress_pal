@@ -368,6 +368,16 @@ class S {
       args: [email],
     );
   }
+
+  /// `Verification successful!`
+  String get verificationSuccessful {
+    return Intl.message(
+      'Verification successful!',
+      name: 'verificationSuccessful',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
