@@ -318,6 +318,36 @@ class S {
       args: [],
     );
   }
+
+  /// `Rotate clockwise`
+  String get rotateCw {
+    return Intl.message(
+      'Rotate clockwise',
+      name: 'rotateCw',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Rotate counterclockwise`
+  String get rotateCcw {
+    return Intl.message(
+      'Rotate counterclockwise',
+      name: 'rotateCcw',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Reset`
+  String get reset {
+    return Intl.message('Reset', name: 'reset', desc: '', args: []);
+  }
+
+  /// `Done`
+  String get done {
+    return Intl.message('Done', name: 'done', desc: '', args: []);
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

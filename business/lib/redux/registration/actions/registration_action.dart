@@ -1,4 +1,5 @@
 import 'package:async_redux/async_redux.dart';
+import 'package:http/http.dart' as http;
 import 'package:pocketbase/pocketbase.dart';
 
 import '../../../service_locator.dart';
@@ -18,6 +19,15 @@ class RegistrationAction extends ReduxAction<AppState> {
     final fullName = selectRegistrationFullName(state)!;
     final email = selectRegistrationEmail(state)!;
     final password = selectRegistrationPassword(state)!;
+    final avatar = selectRegistrationAvatar(state);
+
+    final file = avatar == null
+        ? null
+        : http.MultipartFile.fromBytes(
+            'avatar',
+            avatar.bytes,
+            filename: avatar.name,
+          );
 
     try {
       await getPocketBase
@@ -30,6 +40,7 @@ class RegistrationAction extends ReduxAction<AppState> {
               'password': password,
               'passwordConfirm': password,
             },
+            files: [?file],
           );
     } on ClientException catch (e) {
       throw UserException('Error', reason: e.response['message']);

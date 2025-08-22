@@ -32,6 +32,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Couldn\'t connect to internet.",
     ),
     "delete": MessageLookupByLibrary.simpleMessage("Delete"),
+    "done": MessageLookupByLibrary.simpleMessage("Done"),
     "dontHaveAccountYet": MessageLookupByLibrary.simpleMessage(
       "Don\'t have an account yet?",
     ),
@@ -66,7 +67,12 @@ class MessageLookup extends MessageLookupByLibrary {
     "registrationInstructions": MessageLookupByLibrary.simpleMessage(
       "Please fill out the form below to create your account.",
     ),
+    "reset": MessageLookupByLibrary.simpleMessage("Reset"),
     "resetPassword": MessageLookupByLibrary.simpleMessage("Reset password"),
+    "rotateCcw": MessageLookupByLibrary.simpleMessage(
+      "Rotate counterclockwise",
+    ),
+    "rotateCw": MessageLookupByLibrary.simpleMessage("Rotate clockwise"),
     "selectAnotherImage": MessageLookupByLibrary.simpleMessage(
       "Select another image",
     ),

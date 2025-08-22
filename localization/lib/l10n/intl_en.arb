@@ -30,5 +30,9 @@
   "sendResetLink": "Send Reset Link",
   "signUp": "Sign up",
   "delete": "Delete",
-  "selectAnotherImage": "Select another image"
+  "selectAnotherImage": "Select another image",
+  "rotateCw": "Rotate clockwise",
+  "rotateCcw": "Rotate counterclockwise",
+  "reset": "Reset",
+  "done": "Done"
 }

@@ -7,6 +7,8 @@ import 'package:localization/generated/l10n.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
 
 import 'avatar.dart';
+import 'editor/circle_editor_crop_layer_painter.dart';
+import 'editor/image_editor.dart';
 
 class AvatarSelectorVm extends Equatable {
   const AvatarSelectorVm({
@@ -92,10 +94,35 @@ class _AvatarSelectorState extends State<AvatarSelector> {
         final bytes = await pickedFile.readAsBytes();
         final name = pickedFile.name;
 
-        widget.vm.onImageSelect((
-          bytes: bytes,
-          name: name,
-        ));
+        if (!context.mounted) {
+          return;
+        }
+
+        final resultImage = await showShadDialog<Uint8List?>(
+          context: context,
+          barrierDismissible: false,
+          builder: (context) => ShadDialog(
+            padding: const EdgeInsets.all(32),
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(
+                maxWidth: 600,
+                maxHeight: 500,
+              ),
+              child: ImageEditor(
+                bytes: bytes,
+                cropLayerPainter: const CircleEditorCropLayerPainter(),
+                maxSize: const Size(128, 128),
+              ),
+            ),
+          ),
+        );
+
+        if (resultImage != null) {
+          widget.vm.onImageSelect((
+            bytes: resultImage,
+            name: name,
+          ));
+        }
       }
     }
   }

@@ -54,8 +54,9 @@ class LogInPage extends StatelessWidget {
               thickness: 1,
               margin: EdgeInsets.symmetric(horizontal: 20),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+            Wrap(
+              crossAxisAlignment: WrapCrossAlignment.center,
+              alignment: WrapAlignment.center,
               children: [
                 Text(
                   S.current.dontHaveAccountYet,
