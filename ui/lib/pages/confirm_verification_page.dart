@@ -23,6 +23,7 @@ class ConfirmVerificationPage extends StatelessWidget {
         } else if (success) {
           return Center(
             child: Column(
+              mainAxisSize: MainAxisSize.min,
               spacing: 16,
               children: [
                 Text(
