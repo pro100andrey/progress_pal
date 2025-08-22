@@ -41,7 +41,4 @@ Future<void> initLocator(Store<AppState> store, Environment env) async {
   );
 
   _locator.registerSingleton(pb);
-
-  // ...
-  // Other services
 }

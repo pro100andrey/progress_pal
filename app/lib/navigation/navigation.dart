@@ -79,6 +79,10 @@ class Navigation {
     },
   );
 
+  void goToHome() {
+    router.go('/home');
+  }
+
   void goToForgotPassword() {
     router.go('/auth/forgot-password');
   }

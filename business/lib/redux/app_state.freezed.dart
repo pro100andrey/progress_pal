@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$AppState {
 
- ConnectivityState get connectivity; LogInState get logIn; RegistrationState get registration; ForgotPasswordState get forgotPassword; ResetPasswordState get resetPassword; SessionState get session; ConfirmVerificationState get confirmVerification; Wait get wait;
+ ConnectivityState get connectivity; LogInState get logIn; RegistrationState get registration; ForgotPasswordState get forgotPassword; ResetPasswordState get resetPassword; ConfirmVerificationState get confirmVerification; Wait get wait;
 /// Create a copy of AppState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,16 +25,16 @@ $AppStateCopyWith<AppState> get copyWith => _$AppStateCopyWithImpl<AppState>(thi
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is AppState&&(identical(other.connectivity, connectivity) || other.connectivity == connectivity)&&(identical(other.logIn, logIn) || other.logIn == logIn)&&(identical(other.registration, registration) || other.registration == registration)&&(identical(other.forgotPassword, forgotPassword) || other.forgotPassword == forgotPassword)&&(identical(other.resetPassword, resetPassword) || other.resetPassword == resetPassword)&&(identical(other.session, session) || other.session == session)&&(identical(other.confirmVerification, confirmVerification) || other.confirmVerification == confirmVerification)&&(identical(other.wait, wait) || other.wait == wait));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is AppState&&(identical(other.connectivity, connectivity) || other.connectivity == connectivity)&&(identical(other.logIn, logIn) || other.logIn == logIn)&&(identical(other.registration, registration) || other.registration == registration)&&(identical(other.forgotPassword, forgotPassword) || other.forgotPassword == forgotPassword)&&(identical(other.resetPassword, resetPassword) || other.resetPassword == resetPassword)&&(identical(other.confirmVerification, confirmVerification) || other.confirmVerification == confirmVerification)&&(identical(other.wait, wait) || other.wait == wait));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,connectivity,logIn,registration,forgotPassword,resetPassword,session,confirmVerification,wait);
+int get hashCode => Object.hash(runtimeType,connectivity,logIn,registration,forgotPassword,resetPassword,confirmVerification,wait);
 
 @override
 String toString() {
-  return 'AppState(connectivity: $connectivity, logIn: $logIn, registration: $registration, forgotPassword: $forgotPassword, resetPassword: $resetPassword, session: $session, confirmVerification: $confirmVerification, wait: $wait)';
+  return 'AppState(connectivity: $connectivity, logIn: $logIn, registration: $registration, forgotPassword: $forgotPassword, resetPassword: $resetPassword, confirmVerification: $confirmVerification, wait: $wait)';
 }
 
 
@@ -45,11 +45,11 @@ abstract mixin class $AppStateCopyWith<$Res>  {
   factory $AppStateCopyWith(AppState value, $Res Function(AppState) _then) = _$AppStateCopyWithImpl;
 @useResult
 $Res call({
- ConnectivityState connectivity, LogInState logIn, RegistrationState registration, ForgotPasswordState forgotPassword, ResetPasswordState resetPassword, SessionState session, ConfirmVerificationState confirmVerification, Wait wait
+ ConnectivityState connectivity, LogInState logIn, RegistrationState registration, ForgotPasswordState forgotPassword, ResetPasswordState resetPassword, ConfirmVerificationState confirmVerification, Wait wait
 });
 
 
-$ConnectivityStateCopyWith<$Res> get connectivity;$LogInStateCopyWith<$Res> get logIn;$RegistrationStateCopyWith<$Res> get registration;$ForgotPasswordStateCopyWith<$Res> get forgotPassword;$ResetPasswordStateCopyWith<$Res> get resetPassword;$SessionStateCopyWith<$Res> get session;$ConfirmVerificationStateCopyWith<$Res> get confirmVerification;
+$ConnectivityStateCopyWith<$Res> get connectivity;$LogInStateCopyWith<$Res> get logIn;$RegistrationStateCopyWith<$Res> get registration;$ForgotPasswordStateCopyWith<$Res> get forgotPassword;$ResetPasswordStateCopyWith<$Res> get resetPassword;$ConfirmVerificationStateCopyWith<$Res> get confirmVerification;
 
 }
 /// @nodoc
@@ -62,15 +62,14 @@ class _$AppStateCopyWithImpl<$Res>
 
 /// Create a copy of AppState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? connectivity = null,Object? logIn = null,Object? registration = null,Object? forgotPassword = null,Object? resetPassword = null,Object? session = null,Object? confirmVerification = null,Object? wait = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? connectivity = null,Object? logIn = null,Object? registration = null,Object? forgotPassword = null,Object? resetPassword = null,Object? confirmVerification = null,Object? wait = null,}) {
   return _then(_self.copyWith(
 connectivity: null == connectivity ? _self.connectivity : connectivity // ignore: cast_nullable_to_non_nullable
 as ConnectivityState,logIn: null == logIn ? _self.logIn : logIn // ignore: cast_nullable_to_non_nullable
 as LogInState,registration: null == registration ? _self.registration : registration // ignore: cast_nullable_to_non_nullable
 as RegistrationState,forgotPassword: null == forgotPassword ? _self.forgotPassword : forgotPassword // ignore: cast_nullable_to_non_nullable
 as ForgotPasswordState,resetPassword: null == resetPassword ? _self.resetPassword : resetPassword // ignore: cast_nullable_to_non_nullable
-as ResetPasswordState,session: null == session ? _self.session : session // ignore: cast_nullable_to_non_nullable
-as SessionState,confirmVerification: null == confirmVerification ? _self.confirmVerification : confirmVerification // ignore: cast_nullable_to_non_nullable
+as ResetPasswordState,confirmVerification: null == confirmVerification ? _self.confirmVerification : confirmVerification // ignore: cast_nullable_to_non_nullable
 as ConfirmVerificationState,wait: null == wait ? _self.wait : wait // ignore: cast_nullable_to_non_nullable
 as Wait,
   ));
@@ -119,15 +118,6 @@ $ResetPasswordStateCopyWith<$Res> get resetPassword {
   
   return $ResetPasswordStateCopyWith<$Res>(_self.resetPassword, (value) {
     return _then(_self.copyWith(resetPassword: value));
-  });
-}/// Create a copy of AppState
-/// with the given fields replaced by the non-null parameter values.
-@override
-@pragma('vm:prefer-inline')
-$SessionStateCopyWith<$Res> get session {
-  
-  return $SessionStateCopyWith<$Res>(_self.session, (value) {
-    return _then(_self.copyWith(session: value));
   });
 }/// Create a copy of AppState
 /// with the given fields replaced by the non-null parameter values.
@@ -147,7 +137,7 @@ $ConfirmVerificationStateCopyWith<$Res> get confirmVerification {
 
 
 class _AppState implements AppState {
-  const _AppState({required this.connectivity, required this.logIn, required this.registration, required this.forgotPassword, required this.resetPassword, required this.session, required this.confirmVerification, required this.wait});
+  const _AppState({required this.connectivity, required this.logIn, required this.registration, required this.forgotPassword, required this.resetPassword, required this.confirmVerification, required this.wait});
   
 
 @override final  ConnectivityState connectivity;
@@ -155,7 +145,6 @@ class _AppState implements AppState {
 @override final  RegistrationState registration;
 @override final  ForgotPasswordState forgotPassword;
 @override final  ResetPasswordState resetPassword;
-@override final  SessionState session;
 @override final  ConfirmVerificationState confirmVerification;
 @override final  Wait wait;
 
@@ -169,16 +158,16 @@ _$AppStateCopyWith<_AppState> get copyWith => __$AppStateCopyWithImpl<_AppState>
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _AppState&&(identical(other.connectivity, connectivity) || other.connectivity == connectivity)&&(identical(other.logIn, logIn) || other.logIn == logIn)&&(identical(other.registration, registration) || other.registration == registration)&&(identical(other.forgotPassword, forgotPassword) || other.forgotPassword == forgotPassword)&&(identical(other.resetPassword, resetPassword) || other.resetPassword == resetPassword)&&(identical(other.session, session) || other.session == session)&&(identical(other.confirmVerification, confirmVerification) || other.confirmVerification == confirmVerification)&&(identical(other.wait, wait) || other.wait == wait));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _AppState&&(identical(other.connectivity, connectivity) || other.connectivity == connectivity)&&(identical(other.logIn, logIn) || other.logIn == logIn)&&(identical(other.registration, registration) || other.registration == registration)&&(identical(other.forgotPassword, forgotPassword) || other.forgotPassword == forgotPassword)&&(identical(other.resetPassword, resetPassword) || other.resetPassword == resetPassword)&&(identical(other.confirmVerification, confirmVerification) || other.confirmVerification == confirmVerification)&&(identical(other.wait, wait) || other.wait == wait));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,connectivity,logIn,registration,forgotPassword,resetPassword,session,confirmVerification,wait);
+int get hashCode => Object.hash(runtimeType,connectivity,logIn,registration,forgotPassword,resetPassword,confirmVerification,wait);
 
 @override
 String toString() {
-  return 'AppState(connectivity: $connectivity, logIn: $logIn, registration: $registration, forgotPassword: $forgotPassword, resetPassword: $resetPassword, session: $session, confirmVerification: $confirmVerification, wait: $wait)';
+  return 'AppState(connectivity: $connectivity, logIn: $logIn, registration: $registration, forgotPassword: $forgotPassword, resetPassword: $resetPassword, confirmVerification: $confirmVerification, wait: $wait)';
 }
 
 
@@ -189,11 +178,11 @@ abstract mixin class _$AppStateCopyWith<$Res> implements $AppStateCopyWith<$Res>
   factory _$AppStateCopyWith(_AppState value, $Res Function(_AppState) _then) = __$AppStateCopyWithImpl;
 @override @useResult
 $Res call({
- ConnectivityState connectivity, LogInState logIn, RegistrationState registration, ForgotPasswordState forgotPassword, ResetPasswordState resetPassword, SessionState session, ConfirmVerificationState confirmVerification, Wait wait
+ ConnectivityState connectivity, LogInState logIn, RegistrationState registration, ForgotPasswordState forgotPassword, ResetPasswordState resetPassword, ConfirmVerificationState confirmVerification, Wait wait
 });
 
 
-@override $ConnectivityStateCopyWith<$Res> get connectivity;@override $LogInStateCopyWith<$Res> get logIn;@override $RegistrationStateCopyWith<$Res> get registration;@override $ForgotPasswordStateCopyWith<$Res> get forgotPassword;@override $ResetPasswordStateCopyWith<$Res> get resetPassword;@override $SessionStateCopyWith<$Res> get session;@override $ConfirmVerificationStateCopyWith<$Res> get confirmVerification;
+@override $ConnectivityStateCopyWith<$Res> get connectivity;@override $LogInStateCopyWith<$Res> get logIn;@override $RegistrationStateCopyWith<$Res> get registration;@override $ForgotPasswordStateCopyWith<$Res> get forgotPassword;@override $ResetPasswordStateCopyWith<$Res> get resetPassword;@override $ConfirmVerificationStateCopyWith<$Res> get confirmVerification;
 
 }
 /// @nodoc
@@ -206,15 +195,14 @@ class __$AppStateCopyWithImpl<$Res>
 
 /// Create a copy of AppState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? connectivity = null,Object? logIn = null,Object? registration = null,Object? forgotPassword = null,Object? resetPassword = null,Object? session = null,Object? confirmVerification = null,Object? wait = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? connectivity = null,Object? logIn = null,Object? registration = null,Object? forgotPassword = null,Object? resetPassword = null,Object? confirmVerification = null,Object? wait = null,}) {
   return _then(_AppState(
 connectivity: null == connectivity ? _self.connectivity : connectivity // ignore: cast_nullable_to_non_nullable
 as ConnectivityState,logIn: null == logIn ? _self.logIn : logIn // ignore: cast_nullable_to_non_nullable
 as LogInState,registration: null == registration ? _self.registration : registration // ignore: cast_nullable_to_non_nullable
 as RegistrationState,forgotPassword: null == forgotPassword ? _self.forgotPassword : forgotPassword // ignore: cast_nullable_to_non_nullable
 as ForgotPasswordState,resetPassword: null == resetPassword ? _self.resetPassword : resetPassword // ignore: cast_nullable_to_non_nullable
-as ResetPasswordState,session: null == session ? _self.session : session // ignore: cast_nullable_to_non_nullable
-as SessionState,confirmVerification: null == confirmVerification ? _self.confirmVerification : confirmVerification // ignore: cast_nullable_to_non_nullable
+as ResetPasswordState,confirmVerification: null == confirmVerification ? _self.confirmVerification : confirmVerification // ignore: cast_nullable_to_non_nullable
 as ConfirmVerificationState,wait: null == wait ? _self.wait : wait // ignore: cast_nullable_to_non_nullable
 as Wait,
   ));
@@ -264,15 +252,6 @@ $ResetPasswordStateCopyWith<$Res> get resetPassword {
   
   return $ResetPasswordStateCopyWith<$Res>(_self.resetPassword, (value) {
     return _then(_self.copyWith(resetPassword: value));
-  });
-}/// Create a copy of AppState
-/// with the given fields replaced by the non-null parameter values.
-@override
-@pragma('vm:prefer-inline')
-$SessionStateCopyWith<$Res> get session {
-  
-  return $SessionStateCopyWith<$Res>(_self.session, (value) {
-    return _then(_self.copyWith(session: value));
   });
 }/// Create a copy of AppState
 /// with the given fields replaced by the non-null parameter values.

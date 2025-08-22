@@ -49,7 +49,12 @@ class _Factory extends VmFactory<AppState, LogInPageConnector, _Vm> {
         validator: passwordValidator.call,
         onChanged: (value) => dispatchSync(SetPasswordAction(password: value!)),
       ),
-      onPressedLogIn: () async => dispatchAndWait(LogInWithEmailAction()),
+      onPressedLogIn: () async {
+        final result = await dispatchAndWait(LogInWithEmailAction());
+        if (result.isCompletedOk) {
+          navigation.goToHome();
+        }
+      },
       onPressedForgotPassword: navigation.goToForgotPassword,
       onPressedRegister: navigation.goToRegistration,
     );

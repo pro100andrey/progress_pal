@@ -7,7 +7,6 @@ import 'forgot_password/models/forgot_password_state.dart';
 import 'log_in/models/log_in_state.dart';
 import 'registration/models/registration_state.dart';
 import 'reset_password/models/reset_password_state.dart';
-import 'session/models/session_state.dart';
 
 part 'app_state.freezed.dart';
 
@@ -19,7 +18,6 @@ abstract class AppState with _$AppState {
     required RegistrationState registration,
     required ForgotPasswordState forgotPassword,
     required ResetPasswordState resetPassword,
-    required SessionState session,
     required ConfirmVerificationState confirmVerification,
     required Wait wait,
   }) = _AppState;
@@ -30,7 +28,6 @@ abstract class AppState with _$AppState {
     registration: RegistrationState(),
     forgotPassword: ForgotPasswordState(),
     resetPassword: ResetPasswordState(),
-    session: SessionState(),
     confirmVerification: ConfirmVerificationState(),
     wait: Wait.empty,
   );

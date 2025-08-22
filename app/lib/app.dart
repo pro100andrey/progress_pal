@@ -1,6 +1,6 @@
 import 'package:async_redux/async_redux.dart';
+import 'package:business/pocketbase/session.dart';
 import 'package:business/redux/app_state.dart';
-import 'package:business/redux/session/session_selectors.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -59,7 +59,7 @@ class _AppConnectorState extends State<AppConnector>
   );
 
   @override
-  bool get isLoggedIn => selectIsSessionAvailable(widget.store.state);
+  bool get isLoggedIn => sessionIsValid();
 }
 
 /// Factory that creates a view-model for the StoreConnector.
