@@ -1,6 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
 
+import '../connectors/confirm_verification_page_connector.dart';
 import '../connectors/forgot_password_page_connector.dart';
 import '../connectors/home_page_connector.dart';
 import '../connectors/log_in_page_connector.dart';
@@ -25,6 +26,8 @@ class Navigation {
 
   GoRouter get router => _router;
 
+  BuildContext get context => _navigatorKey.currentContext!;
+
   late final _router = GoRouter(
     navigatorKey: _navigatorKey,
     debugLogDiagnostics: true,
@@ -45,6 +48,14 @@ class Navigation {
       GoRoute(
         path: '/auth/forgot-password',
         builder: (context, state) => const ForgotPasswordPageConnector(),
+      ),
+      GoRoute(
+        path: '/auth/confirm-verification/:token',
+        builder: (context, state) {
+          final token = state.pathParameters['token']!;
+
+          return ConfirmVerificationPageConnector(token: token);
+        },
       ),
       GoRoute(
         path: '/auth/reset-password',

@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:localization/localization.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
 
-import '../image/avatar_selector.dart';
 import '../forms/auth_form.dart';
 import '../forms/base_form.dart';
+import '../image/avatar_selector.dart';
 import '../inputs/confirm_password_input.dart';
 import '../inputs/email_input.dart';
 import '../inputs/full_name.dart';
@@ -29,8 +29,8 @@ class RegistrationPage extends StatelessWidget {
   final ValueChangedVm<String?> email;
   final ValueChangedVm<String?> password;
   final ValueChangedVm<String?> confirmPassword;
-  final VoidCallback? onPressedRegister;
-  final VoidCallback? onPressedBackToLogin;
+  final Future<bool> Function() onPressedRegister;
+  final VoidCallback onPressedBackToLogin;
 
   @override
   Widget build(BuildContext context) => Scaffold(
@@ -50,7 +50,7 @@ class RegistrationPage extends StatelessWidget {
             ConfirmPasswordInput(vm: confirmPassword),
             ShadButton(
               width: 120,
-              onPressed: () => _validateForm(formKey),
+              onPressed: () async => _validateForm(formKey, context),
               child: Text(S.current.signUp),
             ),
             const ShadSeparator.horizontal(
@@ -67,9 +67,23 @@ class RegistrationPage extends StatelessWidget {
     ),
   );
 
-  void _validateForm(GlobalKey<ShadFormState> formKey) {
+  Future<void> _validateForm(
+    GlobalKey<ShadFormState> formKey,
+    BuildContext context,
+  ) async {
     if (formKey.currentState!.saveAndValidate()) {
-      onPressedRegister?.call();
+      final result = await onPressedRegister();
+
+      if (context.mounted && result) {
+        ShadToaster.of(context).show(
+          ShadToast(
+            title: Text(S.current.registrationComplete),
+            description: Text(
+              S.current.registrationEmailSent(email.value!),
+            ),
+          ),
+        );
+      }
     }
   }
 }

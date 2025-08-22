@@ -348,6 +348,26 @@ class S {
   String get done {
     return Intl.message('Done', name: 'done', desc: '', args: []);
   }
+
+  /// `Registration complete`
+  String get registrationComplete {
+    return Intl.message(
+      'Registration complete',
+      name: 'registrationComplete',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `A confirmation link has been sent to {email}. Please check your inbox.`
+  String registrationEmailSent(Object email) {
+    return Intl.message(
+      'A confirmation link has been sent to $email. Please check your inbox.',
+      name: 'registrationEmailSent',
+      desc: '',
+      args: [email],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

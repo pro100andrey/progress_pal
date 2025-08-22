@@ -35,18 +35,14 @@ class _Factory extends VmFactory<AppState, ResetPasswordPageConnector, _Vm> {
   @override
   _Vm fromStore() {
     final password = selectResetPasswordPassword(state);
-    final passwordError = passwordValidator(password);
+    // final passwordError = passwordValidator(password);
     final confirmPassword = selectResetPasswordConfirmPassword(state);
-    final confirmPasswordError = passwordValidator(confirmPassword);
-    final passwordsMatchError = passwordsMatchValidator(
-      password,
-      confirmPassword,
-    );
-    final formIsValid =
-        selectResetPasswordDataIsSet(state) &&
-        passwordError == null &&
-        confirmPasswordError == null &&
-        passwordsMatchError == null;
+    // final confirmPasswordError = passwordValidator(confirmPassword);
+    // final passwordsMatchError = passwordsMatchValidator(
+    //   password,
+    //   confirmPassword,
+    // );
+
 
     return _Vm(
       password: ValueChangedVm(
@@ -64,9 +60,7 @@ class _Factory extends VmFactory<AppState, ResetPasswordPageConnector, _Vm> {
         },
         onChanged: (value) => dispatchSync(SetConfirmPasswordAction(value!)),
       ),
-      onPressedResetPassword: formIsValid
-          ? () => dispatchSync(ResetPasswordAction())
-          : null,
+      onPressedResetPassword: () => dispatchSync(ResetPasswordAction()),
       onPressedBackToLogin: navigation.goToLogIn,
     );
   }
@@ -83,8 +77,8 @@ class _Vm extends Vm with EquatableMixin {
 
   final ValueChangedVm<String?> password;
   final ValueChangedVm<String?> confirmPassword;
-  final VoidCallback? onPressedResetPassword;
-  final VoidCallback? onPressedBackToLogin;
+  final VoidCallback onPressedResetPassword;
+  final VoidCallback onPressedBackToLogin;
 
   @override
   List<Object?> get props => [password, confirmPassword];

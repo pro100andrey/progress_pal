@@ -1,9 +1,14 @@
 import 'dart:typed_data';
 
 import '../app_state.dart';
+import 'actions/confirm_verification_action.dart';
 import 'actions/registration_action.dart';
 
-/// returns waiting value
+/// Returns waiting true if registration confirm verification is in progress
+bool selectRegistrationConfirmVerificationIsWaiting(AppState state) =>
+    state.wait.isWaitingForType<ConfirmVerificationAction>();
+
+/// Returns waiting true if registration is in progress
 bool selectRegistrationIsWaiting(AppState state) =>
     state.wait.isWaitingForType<RegistrationAction>();
 

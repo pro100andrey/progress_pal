@@ -79,8 +79,9 @@ class _Factory extends VmFactory<AppState, RegistrationPageConnector, _Vm> {
         onChanged: (value) => dispatchSync(SetConfirmPasswordAction(value!)),
       ),
       onPressedRegister: () async {
-        await dispatchAndWait(RegistrationAction());
-        navigation.pop();
+        final status = await dispatchAndWait(RegistrationAction());
+        navigation.goToLogIn();
+        return status.isCompletedOk;
       },
       onPressedBackToLogin: navigation.goToLogIn,
     );
@@ -104,7 +105,7 @@ class _Vm extends Vm with EquatableMixin {
   final ValueChangedVm<String?> email;
   final ValueChangedVm<String?> password;
   final ValueChangedVm<String?> confirmPassword;
-  final VoidCallback onPressedRegister;
+  final Future<bool> Function() onPressedRegister;
   final VoidCallback onPressedBackToLogin;
 
   @override

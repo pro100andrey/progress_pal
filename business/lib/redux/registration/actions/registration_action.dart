@@ -12,7 +12,15 @@ class RegistrationAction extends ReduxAction<AppState> {
   void before() => dispatchSync(WaitAction.add(this));
 
   @override
-  void after() => dispatchSync(WaitAction.remove(this));
+  void after() {
+    dispatchSync(WaitAction.remove(this));
+
+    dispatchSync(
+      UpdateStateAction.withReducer(
+        (st) => state.copyWith(registration: const RegistrationState()),
+      ),
+    );
+  }
 
   @override
   Future<AppState?> reduce() async {
@@ -20,14 +28,6 @@ class RegistrationAction extends ReduxAction<AppState> {
     final email = selectRegistrationEmail(state)!;
     final password = selectRegistrationPassword(state)!;
     final avatar = selectRegistrationAvatar(state);
-
-    final file = avatar == null
-        ? null
-        : http.MultipartFile.fromBytes(
-            'avatar',
-            avatar.bytes,
-            filename: avatar.name,
-          );
 
     try {
       await getPocketBase
@@ -40,7 +40,14 @@ class RegistrationAction extends ReduxAction<AppState> {
               'password': password,
               'passwordConfirm': password,
             },
-            files: [?file],
+            files: [
+              if (avatar != null)
+                http.MultipartFile.fromBytes(
+                  'avatar',
+                  avatar.bytes,
+                  filename: avatar.name,
+                ),
+            ],
           );
     } on ClientException catch (e) {
       throw UserException('Error', reason: e.response['message']);
@@ -48,6 +55,6 @@ class RegistrationAction extends ReduxAction<AppState> {
 
     await getPocketBase.collection('users').requestVerification(email);
 
-    return state.copyWith(registration: const RegistrationState());
+    return null;
   }
 }

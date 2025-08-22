@@ -34,5 +34,7 @@
   "rotateCw": "Rotate clockwise",
   "rotateCcw": "Rotate counterclockwise",
   "reset": "Reset",
-  "done": "Done"
+  "done": "Done",
+  "registrationComplete": "Registration complete",
+  "registrationEmailSent": "A confirmation link has been sent to {email}. Please check your inbox."
 }

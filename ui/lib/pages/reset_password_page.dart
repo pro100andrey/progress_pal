@@ -17,8 +17,8 @@ class ResetPasswordPage extends StatelessWidget {
 
   final ValueChangedVm<String?> password;
   final ValueChangedVm<String?> confirmPassword;
-  final VoidCallback? onPressedResetPassword;
-  final VoidCallback? onPressedBackToLogin;
+  final VoidCallback onPressedResetPassword;
+  final VoidCallback onPressedBackToLogin;
 
   @override
   Widget build(BuildContext context) => Scaffold(

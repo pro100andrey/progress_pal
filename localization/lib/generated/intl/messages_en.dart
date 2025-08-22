@@ -22,6 +22,9 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m0(value) => "Minimum length ${value} symbols";
 
+  static String m1(email) =>
+      "A confirmation link has been sent to ${email}. Please check your inbox.";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
     "_locale": MessageLookupByLibrary.simpleMessage("en"),
@@ -64,6 +67,10 @@ class MessageLookup extends MessageLookupByLibrary {
       "Please check yor network settings.",
     ),
     "registration": MessageLookupByLibrary.simpleMessage("Registration"),
+    "registrationComplete": MessageLookupByLibrary.simpleMessage(
+      "Registration complete",
+    ),
+    "registrationEmailSent": m1,
     "registrationInstructions": MessageLookupByLibrary.simpleMessage(
       "Please fill out the form below to create your account.",
     ),
