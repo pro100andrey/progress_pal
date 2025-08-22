@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:localization/localization.dart';
+import 'package:shadcn_ui/shadcn_ui.dart';
 
-import '../buttons/primary_button.dart';
 import '../inputs/confirm_password_input.dart';
 import '../inputs/password_input.dart';
 import '../models/value_changed.dart';
@@ -32,9 +32,10 @@ class ResetPasswordPage extends StatelessWidget {
             const SizedBox(height: 16),
             ConfirmPasswordInput(vm: confirmPassword),
             const SizedBox(height: 16),
-            PrimaryButton(
-              title: S.current.resetPassword,
-              onPressed: onPressedResetPassword,
+
+            ShadButton(
+              onPressed: () => onPressedResetPassword,
+              child: Text(S.current.resetPassword),
             ),
             const SizedBox(height: 16),
             TextButton(

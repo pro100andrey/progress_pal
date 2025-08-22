@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:localization/localization.dart';
+import 'package:shadcn_ui/shadcn_ui.dart';
 
-import '../avatar/avatar.dart';
 import '../avatar/avatar_selector.dart';
-import '../buttons/primary_button.dart';
 import '../forms/auth_form.dart';
 import '../forms/base_form.dart';
 import '../inputs/confirm_password_input.dart';
@@ -15,6 +14,7 @@ import '../tiles/auth_header.dart';
 
 class RegistrationPage extends StatelessWidget {
   const RegistrationPage({
+    required this.avatar,
     required this.fullName,
     required this.email,
     required this.password,
@@ -24,6 +24,7 @@ class RegistrationPage extends StatelessWidget {
     super.key,
   });
 
+  final AvatarSelectorVm avatar;
   final ValueChangedVm<String?> fullName;
   final ValueChangedVm<String?> email;
   final ValueChangedVm<String?> password;
@@ -42,21 +43,19 @@ class RegistrationPage extends StatelessWidget {
               title: S.current.registration,
               description: S.current.registrationInstructions,
             ),
-            AvatarSelector(
-              source: const AvatarSource.network(''),
-              onTap: () {},
-            ),
+            AvatarSelector(vm: avatar),
             FullName(vm: fullName),
             EmailInput(vm: email),
             PasswordInput(vm: password),
             ConfirmPasswordInput(vm: confirmPassword),
-            PrimaryButton(
-              title: S.current.signUp,
-              onPressed: () {
-                if (formKey.currentState!.saveAndValidate()) {
-                  onPressedRegister?.call();
-                }
-              },
+            ShadButton(
+              width: 120,
+              onPressed: () => _validateForm(formKey),
+              child: Text(S.current.signUp),
+            ),
+            const ShadSeparator.horizontal(
+              thickness: 1,
+              margin: EdgeInsets.symmetric(horizontal: 20),
             ),
             TextButton(
               onPressed: onPressedBackToLogin,
@@ -67,4 +66,10 @@ class RegistrationPage extends StatelessWidget {
       ),
     ),
   );
+
+  void _validateForm(GlobalKey<ShadFormState> formKey) {
+    if (formKey.currentState!.saveAndValidate()) {
+      onPressedRegister?.call();
+    }
+  }
 }

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:localization/localization.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
 
-import '../buttons/primary_button.dart';
 import '../forms/auth_form.dart';
 import '../forms/base_form.dart';
 import '../inputs/email_input.dart';
@@ -35,9 +34,10 @@ class ForgotPasswordPage extends StatelessWidget {
               description: S.current.forgotPasswordInstructions,
             ),
             EmailInput(vm: email),
-            PrimaryButton(
-              title: S.current.sendResetLink,
-              onPressed: onPressedResetPassword,
+            ShadButton(
+              onPressed: () => onPressedResetPassword,
+              leading: const Icon(LucideIcons.mail),
+              child: Text(S.current.sendResetLink),
             ),
             const ShadSeparator.horizontal(
               thickness: 1,

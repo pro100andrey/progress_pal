@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:localization/localization.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
 
-import '../buttons/primary_button.dart';
 import '../forms/auth_form.dart';
 import '../forms/base_form.dart';
 import '../inputs/email_input.dart';
@@ -46,13 +45,10 @@ class LogInPage extends StatelessWidget {
                 child: Text(S.current.forgotPassword),
               ),
             ),
-            PrimaryButton(
-              title: S.current.signIn,
-              onPressed: () {
-                if (formKey.currentState!.saveAndValidate()) {
-                  onPressedLogIn?.call();
-                }
-              },
+            ShadButton(
+              width: 120,
+              onPressed: () => _validateForm(formKey),
+              child: Text(S.current.signIn),
             ),
             const ShadSeparator.horizontal(
               thickness: 1,
@@ -78,4 +74,10 @@ class LogInPage extends StatelessWidget {
       ),
     ),
   );
+
+  void _validateForm(GlobalKey<ShadFormState> formKey) {
+    if (formKey.currentState!.saveAndValidate()) {
+      onPressedLogIn?.call();
+    }
+  }
 }

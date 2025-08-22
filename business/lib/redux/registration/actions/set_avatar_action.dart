@@ -6,7 +6,7 @@ import '../../app_state.dart';
 class SetAvatarAction extends ReduxAction<AppState> {
   SetAvatarAction({required this.avatar});
 
-  final XFile avatar;
+  final XFile? avatar;
 
   @override
   AppState reduce() => state.copyWith.registration(avatar: avatar);

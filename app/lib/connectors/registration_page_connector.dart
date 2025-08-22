@@ -1,6 +1,7 @@
 import 'package:async_redux/async_redux.dart';
 import 'package:business/redux/app_state.dart';
 import 'package:business/redux/registration/actions/registration_action.dart';
+import 'package:business/redux/registration/actions/set_avatar_action.dart';
 import 'package:business/redux/registration/actions/set_confirm_password_action.dart';
 import 'package:business/redux/registration/actions/set_email_action.dart';
 import 'package:business/redux/registration/actions/set_full_name_action.dart';
@@ -8,6 +9,8 @@ import 'package:business/redux/registration/actions/set_password_action.dart';
 import 'package:business/redux/registration/registration_selectors.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
+import 'package:ui/avatar/avatar.dart';
+import 'package:ui/avatar/avatar_selector.dart';
 import 'package:ui/models/value_changed.dart';
 import 'package:ui/pages/registration_page.dart';
 
@@ -22,6 +25,7 @@ class RegistrationPageConnector extends StatelessWidget {
     debug: this,
     vm: () => _Factory(this),
     builder: (context, vm) => RegistrationPage(
+      avatar: vm.avatar,
       fullName: vm.fullName,
       email: vm.email,
       password: vm.password,
@@ -42,8 +46,13 @@ class _Factory extends VmFactory<AppState, RegistrationPageConnector, _Vm> {
     final email = selectRegistrationEmail(state);
     final password = selectRegistrationPassword(state);
     final confirmPassword = selectRegistrationConfirmPassword(state);
+    final avatar = selectRegistrationAvatar(state);
 
     return _Vm(
+      avatar: AvatarSelectorVm(
+        src: AvatarSource.xfile(avatar),
+        onImageSelect: (xfile) => dispatchSync(SetAvatarAction(avatar: xfile)),
+      ),
       fullName: ValueChangedVm(
         value: fullName,
         onChanged: (value) => dispatchSync(SetFullNameAction(fullName: value!)),
@@ -81,6 +90,7 @@ class _Factory extends VmFactory<AppState, RegistrationPageConnector, _Vm> {
 /// The view-model holds the part of the Store state the dumb-widget needs.
 class _Vm extends Vm with EquatableMixin {
   _Vm({
+    required this.avatar,
     required this.fullName,
     required this.email,
     required this.password,
@@ -89,15 +99,17 @@ class _Vm extends Vm with EquatableMixin {
     required this.onPressedBackToLogin,
   });
 
+  final AvatarSelectorVm avatar;
   final ValueChangedVm<String?> fullName;
   final ValueChangedVm<String?> email;
   final ValueChangedVm<String?> password;
   final ValueChangedVm<String?> confirmPassword;
-  final VoidCallback? onPressedRegister;
-  final VoidCallback? onPressedBackToLogin;
+  final VoidCallback onPressedRegister;
+  final VoidCallback onPressedBackToLogin;
 
   @override
   List<Object?> get props => [
+    avatar,
     fullName,
     email,
     password,

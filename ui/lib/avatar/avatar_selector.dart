@@ -1,57 +1,92 @@
+import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
 
 import 'avatar.dart';
 
-class AvatarSelector extends StatefulWidget {
-  const AvatarSelector({required this.source, required this.onTap, super.key});
+class AvatarSelectorVm extends Equatable {
+  const AvatarSelectorVm({
+    required this.src,
 
-  final AvatarSource source;
-  final VoidCallback onTap;
+    required this.onImageSelect,
+  });
+
+  final AvatarSource src;
+  final ValueChanged<XFile?> onImageSelect;
+
+  @override
+  List<Object?> get props => [src, onImageSelect];
+}
+
+class AvatarSelector extends StatefulWidget {
+  const AvatarSelector({required this.vm, super.key});
+
+  final AvatarSelectorVm vm;
 
   @override
   State<AvatarSelector> createState() => _AvatarSelectorState();
 }
 
 class _AvatarSelectorState extends State<AvatarSelector> {
+  final popoverController = ShadPopoverController();
+
   @override
-  Widget build(BuildContext context) => Avatar(
-    source: widget.source,
-    onTap: () async {
-      await _pickImage(context);
-    },
-    size: const Size.fromRadius(32),
+  void dispose() {
+    popoverController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) => ShadPopover(
+    controller: popoverController,
+    child: Avatar(
+      source: widget.vm.src,
+      onTap: () async => _handleTap(context),
+      size: const Size.fromRadius(42),
+    ),
+    popover: (context) => SizedBox(
+      width: 200,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        spacing: 16,
+        children: [
+          ShadButton.destructive(
+            onPressed: () {
+              popoverController.hide();
+              widget.vm.onImageSelect(null);
+            },
+            child: const Text('Delete'),
+          ),
+          ShadButton.secondary(
+            onPressed: () async {
+              popoverController.hide();
+              await _pickImage(context);
+            },
+            child: const Text('Select another image'),
+          ),
+        ],
+      ),
+    ),
   );
 
-  final picker = ImagePicker();
+  final _picker = ImagePicker();
+
+  Future<void> _handleTap(BuildContext context) async {
+    if (widget.vm.src.isEmpty) {
+      await _pickImage(context);
+    } else {
+      popoverController.toggle();
+    }
+  }
 
   Future<void> _pickImage(BuildContext context) async {
-    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
+    final pickedFile = await _picker.pickImage(source: ImageSource.gallery);
 
     if (context.mounted) {
       if (pickedFile != null) {
-        ShadToaster.of(context).show(
-          ShadToast(
-            title: const Text('Image Selected'),
-            description: Text('File name: ${pickedFile.name}'),
-            action: ShadButton.outline(
-              child: const Text('Undo'),
-              onPressed: () => ShadToaster.of(context).hide(),
-            ),
-          ),
-        );
-      } else {
-        ShadToaster.of(context).show(
-          ShadToast(
-            title: const Text('No Image Selected'),
-            description: const Text('Please select an image.  '),
-            action: ShadButton.outline(
-              child: const Text('Undo'),
-              onPressed: () => ShadToaster.of(context).hide(),
-            ),
-          ),
-        );
+        widget.vm.onImageSelect(pickedFile);
       }
     }
   }
