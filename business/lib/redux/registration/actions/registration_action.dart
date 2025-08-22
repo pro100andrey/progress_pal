@@ -19,6 +19,7 @@ class RegistrationAction extends ReduxAction<AppState> {
       UpdateStateAction.withReducer(
         (st) => state.copyWith(registration: const RegistrationState()),
       ),
+      notify: false,
     );
   }
 

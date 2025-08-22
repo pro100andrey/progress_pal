@@ -14,12 +14,13 @@ class LogInWithEmailAction extends ReduxAction<AppState> {
 
   @override
   void after() {
-    dispatchSync(WaitAction.remove(this), notify: false);
+    dispatchSync(WaitAction.remove(this));
 
     dispatchSync(
       UpdateStateAction.withReducer(
         (st) => state.copyWith(logIn: const LogInState()),
       ),
+      notify: false,
     );
   }
 
