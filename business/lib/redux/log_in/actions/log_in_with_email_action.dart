@@ -13,8 +13,7 @@ class LogInWithEmailAction extends ReduxAction<AppState> {
   void before() => dispatchSync(WaitAction.add(this));
 
   @override
-  void after() =>
-      dispatchSync(WaitAction.remove(this), notify: false);
+  void after() => dispatchSync(WaitAction.remove(this), notify: false);
 
   @override
   Future<AppState> reduce() async {

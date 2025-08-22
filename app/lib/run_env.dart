@@ -38,7 +38,6 @@ Future<void> runEnv(Environment env) async {
     const windowOptions = WindowOptions(
       minimumSize: Size(320, 640),
       skipTaskbar: false,
-      
     );
 
     unawaited(
