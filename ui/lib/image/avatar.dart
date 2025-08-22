@@ -2,29 +2,32 @@ import 'package:equatable/equatable.dart';
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
+
+typedef AvatarMemoryData = ({Uint8List bytes, String name});
+typedef AvatarNetworkData = ({String url, String name});
 
 sealed class AvatarSource extends Equatable {
   const AvatarSource._();
 
-  const factory AvatarSource.network(String? url) = _NetworkAvatarSrc;
-  const factory AvatarSource.xfile(XFile? file) = _XFileAvatarSrc;
+  const factory AvatarSource.network(AvatarNetworkData? data) =
+      _NetworkAvatarSrc;
+  const factory AvatarSource.memory(AvatarMemoryData? data) = _MemoryAvatarSrc;
 
   bool get isEmpty => switch (this) {
-    _NetworkAvatarSrc(url: final url) => url == null || url.isEmpty,
-    _XFileAvatarSrc(file: final file) => file == null,
+    _NetworkAvatarSrc(data: final data) => data == null,
+    _MemoryAvatarSrc(data: final data) => data == null,
   };
 
   T? when<T>({
     required T Function(String url) network,
-    required T Function(XFile file) xfile,
+    required T Function(AvatarMemoryData data) memory,
   }) {
     switch (this) {
-      case _NetworkAvatarSrc(url: final url) when url != null:
-        return network(url);
-      case _XFileAvatarSrc(file: final file) when file != null:
-        return xfile(file);
+      case _NetworkAvatarSrc(data: final data) when data != null:
+        return network(data.url);
+      case _MemoryAvatarSrc(data: final data) when data != null:
+        return memory(data);
       case _:
         return null;
     }
@@ -32,21 +35,21 @@ sealed class AvatarSource extends Equatable {
 }
 
 class _NetworkAvatarSrc extends AvatarSource {
-  const _NetworkAvatarSrc(this.url) : super._();
+  const _NetworkAvatarSrc(this.data) : super._();
 
-  final String? url;
+  final AvatarNetworkData? data;
 
   @override
-  List<Object?> get props => [url];
+  List<Object?> get props => [data?.name];
 }
 
-class _XFileAvatarSrc extends AvatarSource {
-  const _XFileAvatarSrc(this.file) : super._();
+class _MemoryAvatarSrc extends AvatarSource {
+  const _MemoryAvatarSrc(this.data) : super._();
 
-  final XFile? file;
+  final ({Uint8List bytes, String name})? data;
 
   @override
-  List<Object?> get props => [file?.path, file?.name, file?.mimeType];
+  List<Object?> get props => [data?.name];
 }
 
 class Avatar extends StatelessWidget {
@@ -77,7 +80,7 @@ class Avatar extends StatelessWidget {
     final effectivePlaceholder =
         placeholder ?? const Icon(LucideIcons.circleUser100, size: 32);
     final effectiveBorder =
-        border ?? Border.all(color: const Color.fromARGB(255, 59, 59, 59));
+        border ?? Border.all(color: const Color(0xFF3B3B3B));
 
     Widget? loadStateChanged(
       ExtendedImageState state,
@@ -102,28 +105,11 @@ class Avatar extends StatelessWidget {
         border: effectiveBorder,
         loadStateChanged: loadStateChanged,
       ),
-      xfile: (file) => Builder(
-        builder: (context) {
-          if (kIsWeb) {
-            return FutureBuilder(
-              future: file.readAsBytes(),
-              builder: (context, snapshot) {
-                if (snapshot.hasData) {
-                  return ExtendedImage.memory(
-                    snapshot.data!,
-                    shape: effectiveShape,
-                    border: effectiveBorder,
-                    loadStateChanged: loadStateChanged,
-                  );
-                }
-
-                return const Center(child: CircularProgressIndicator());
-              },
-            );
-          } else {
-            return const SizedBox();
-          }
-        },
+      memory: (data) => ExtendedImage.memory(
+        data.bytes,
+        shape: effectiveShape,
+        border: effectiveBorder,
+        loadStateChanged: loadStateChanged,
       ),
     );
 

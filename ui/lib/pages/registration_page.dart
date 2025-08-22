@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:localization/localization.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
 
-import '../avatar/avatar_selector.dart';
+import '../image/avatar_selector.dart';
 import '../forms/auth_form.dart';
 import '../forms/base_form.dart';
 import '../inputs/confirm_password_input.dart';

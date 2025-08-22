@@ -9,7 +9,6 @@ environment:
 dependencies:
   async_redux: ^25.4.0
   connectivity_plus: ^6.1.5
-  cross_file: ^0.3.4+2
   fast_immutable_collections: ^11.0.4
   flutter:
     sdk: flutter

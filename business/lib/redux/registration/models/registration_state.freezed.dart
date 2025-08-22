@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$RegistrationState {
 
- String? get fullName; String? get email; String? get password; String? get confirmPassword; XFile? get avatar;
+ String? get fullName; String? get email; String? get password; String? get confirmPassword; ({Uint8List bytes, String name})? get avatar;
 /// Create a copy of RegistrationState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -45,7 +45,7 @@ abstract mixin class $RegistrationStateCopyWith<$Res>  {
   factory $RegistrationStateCopyWith(RegistrationState value, $Res Function(RegistrationState) _then) = _$RegistrationStateCopyWithImpl;
 @useResult
 $Res call({
- String? fullName, String? email, String? password, String? confirmPassword, XFile? avatar
+ String? fullName, String? email, String? password, String? confirmPassword, ({Uint8List bytes, String name})? avatar
 });
 
 
@@ -69,7 +69,7 @@ as String?,email: freezed == email ? _self.email : email // ignore: cast_nullabl
 as String?,password: freezed == password ? _self.password : password // ignore: cast_nullable_to_non_nullable
 as String?,confirmPassword: freezed == confirmPassword ? _self.confirmPassword : confirmPassword // ignore: cast_nullable_to_non_nullable
 as String?,avatar: freezed == avatar ? _self.avatar : avatar // ignore: cast_nullable_to_non_nullable
-as XFile?,
+as ({Uint8List bytes, String name})?,
   ));
 }
 
@@ -88,7 +88,7 @@ class _RegistrationState implements RegistrationState {
 @override final  String? email;
 @override final  String? password;
 @override final  String? confirmPassword;
-@override final  XFile? avatar;
+@override final  ({Uint8List bytes, String name})? avatar;
 
 /// Create a copy of RegistrationState
 /// with the given fields replaced by the non-null parameter values.
@@ -120,7 +120,7 @@ abstract mixin class _$RegistrationStateCopyWith<$Res> implements $RegistrationS
   factory _$RegistrationStateCopyWith(_RegistrationState value, $Res Function(_RegistrationState) _then) = __$RegistrationStateCopyWithImpl;
 @override @useResult
 $Res call({
- String? fullName, String? email, String? password, String? confirmPassword, XFile? avatar
+ String? fullName, String? email, String? password, String? confirmPassword, ({Uint8List bytes, String name})? avatar
 });
 
 
@@ -144,7 +144,7 @@ as String?,email: freezed == email ? _self.email : email // ignore: cast_nullabl
 as String?,password: freezed == password ? _self.password : password // ignore: cast_nullable_to_non_nullable
 as String?,confirmPassword: freezed == confirmPassword ? _self.confirmPassword : confirmPassword // ignore: cast_nullable_to_non_nullable
 as String?,avatar: freezed == avatar ? _self.avatar : avatar // ignore: cast_nullable_to_non_nullable
-as XFile?,
+as ({Uint8List bytes, String name})?,
   ));
 }
 

@@ -9,8 +9,8 @@ import 'package:business/redux/registration/actions/set_password_action.dart';
 import 'package:business/redux/registration/registration_selectors.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
-import 'package:ui/avatar/avatar.dart';
-import 'package:ui/avatar/avatar_selector.dart';
+import 'package:ui/image/avatar.dart';
+import 'package:ui/image/avatar_selector.dart';
 import 'package:ui/models/value_changed.dart';
 import 'package:ui/pages/registration_page.dart';
 
@@ -50,7 +50,7 @@ class _Factory extends VmFactory<AppState, RegistrationPageConnector, _Vm> {
 
     return _Vm(
       avatar: AvatarSelectorVm(
-        src: AvatarSource.xfile(avatar),
+        src: AvatarSource.memory(avatar),
         onImageSelect: (xfile) => dispatchSync(SetAvatarAction(avatar: xfile)),
       ),
       fullName: ValueChangedVm(

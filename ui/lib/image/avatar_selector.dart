@@ -1,6 +1,9 @@
+import 'dart:typed_data';
+
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:localization/generated/l10n.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
 
 import 'avatar.dart';
@@ -13,7 +16,7 @@ class AvatarSelectorVm extends Equatable {
   });
 
   final AvatarSource src;
-  final ValueChanged<XFile?> onImageSelect;
+  final ValueChanged<({Uint8List bytes, String name})?> onImageSelect;
 
   @override
   List<Object?> get props => [src, onImageSelect];
@@ -57,14 +60,14 @@ class _AvatarSelectorState extends State<AvatarSelector> {
               popoverController.hide();
               widget.vm.onImageSelect(null);
             },
-            child: const Text('Delete'),
+            child: Text(S.current.delete),
           ),
           ShadButton.secondary(
             onPressed: () async {
               popoverController.hide();
               await _pickImage(context);
             },
-            child: const Text('Select another image'),
+            child: Text(S.current.selectAnotherImage),
           ),
         ],
       ),
@@ -86,7 +89,13 @@ class _AvatarSelectorState extends State<AvatarSelector> {
 
     if (context.mounted) {
       if (pickedFile != null) {
-        widget.vm.onImageSelect(pickedFile);
+        final bytes = await pickedFile.readAsBytes();
+        final name = pickedFile.name;
+
+        widget.vm.onImageSelect((
+          bytes: bytes,
+          name: name,
+        ));
       }
     }
   }

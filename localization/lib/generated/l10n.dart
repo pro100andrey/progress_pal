@@ -303,6 +303,21 @@ class S {
   String get signUp {
     return Intl.message('Sign up', name: 'signUp', desc: '', args: []);
   }
+
+  /// `Delete`
+  String get delete {
+    return Intl.message('Delete', name: 'delete', desc: '', args: []);
+  }
+
+  /// `Select another image`
+  String get selectAnotherImage {
+    return Intl.message(
+      'Select another image',
+      name: 'selectAnotherImage',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

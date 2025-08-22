@@ -28,5 +28,7 @@
   "forgotPassword": "Forgot password?",
   "forgotPasswordInstructions": "Enter your email address to receive a password reset link.",
   "sendResetLink": "Send Reset Link",
-  "signUp": "Sign up"
+  "signUp": "Sign up",
+  "delete": "Delete",
+  "selectAnotherImage": "Select another image"
 }

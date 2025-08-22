@@ -1,4 +1,4 @@
-import 'package:cross_file/cross_file.dart';
+import 'dart:typed_data';
 
 import '../app_state.dart';
 import 'actions/registration_action.dart';
@@ -23,4 +23,5 @@ String? selectRegistrationConfirmPassword(AppState state) =>
     state.registration.confirmPassword;
 
 /// Returns avatar value
-XFile? selectRegistrationAvatar(AppState state) => state.registration.avatar;
+({Uint8List bytes, String name})? selectRegistrationAvatar(AppState state) =>
+    state.registration.avatar;
