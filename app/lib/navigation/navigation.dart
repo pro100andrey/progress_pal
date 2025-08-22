@@ -94,10 +94,6 @@ class Navigation {
   void goToLogIn() {
     router.go('/auth/login');
   }
-
-  void pop() {
-    router.pop();
-  }
 }
 
 extension type CurrentRoute(GoRouterState state) {

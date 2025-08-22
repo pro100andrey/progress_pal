@@ -13,10 +13,18 @@ class LogInWithEmailAction extends ReduxAction<AppState> {
   void before() => dispatchSync(WaitAction.add(this));
 
   @override
-  void after() => dispatchSync(WaitAction.remove(this), notify: false);
+  void after() {
+    dispatchSync(WaitAction.remove(this), notify: false);
+
+    dispatchSync(
+      UpdateStateAction.withReducer(
+        (st) => state.copyWith(logIn: const LogInState()),
+      ),
+    );
+  }
 
   @override
-  Future<AppState> reduce() async {
+  Future<AppState?> reduce() async {
     final email = selectLogInEmail(state)!;
     final password = selectLogInPassword(state)!;
 
@@ -26,6 +34,6 @@ class LogInWithEmailAction extends ReduxAction<AppState> {
       throw UserException('Error', reason: e.response['message']);
     }
 
-    return state.copyWith(logIn: const LogInState());
+    return null;
   }
 }
