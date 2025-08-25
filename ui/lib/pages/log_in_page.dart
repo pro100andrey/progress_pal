@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:localization/localization.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
 
+import '../dev/text_version.dart';
 import '../forms/auth_form.dart';
 import '../forms/base_form.dart';
 import '../inputs/email_input.dart';
@@ -27,52 +28,61 @@ class LogInPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-    body: AuthForm(
-      child: BaseForm(
-        builder: (formKey) => Column(
-          spacing: 16,
-          children: [
-            AuthHeader(
-              title: S.current.welcomeBack,
-              description: S.current.loginInstructions,
-            ),
-            EmailInput(vm: email),
-            PasswordInput(vm: password),
-            Align(
-              alignment: Alignment.centerRight,
-              child: ShadButton.link(
-                onPressed: onPressedForgotPassword,
-                child: Text(S.current.forgotPassword),
-              ),
-            ),
-            ShadButton(
-              width: 120,
-              onPressed: () => _validateForm(formKey),
-              child: Text(S.current.signIn),
-            ),
-            const ShadSeparator.horizontal(
-              thickness: 1,
-              margin: EdgeInsets.symmetric(horizontal: 20),
-            ),
-            Wrap(
-              crossAxisAlignment: WrapCrossAlignment.center,
-              alignment: WrapAlignment.center,
+    body: Stack(
+      children: [
+        AuthForm(
+          child: BaseForm(
+            builder: (formKey) => Column(
+              spacing: 16,
               children: [
-                Text(
-                  S.current.dontHaveAccountYet,
-                  style: ShadTheme.of(
-                    context,
-                  ).textTheme.muted,
+                AuthHeader(
+                  title: S.current.welcomeBack,
+                  description: S.current.loginInstructions,
                 ),
-                ShadButton.link(
-                  onPressed: onPressedRegister,
-                  child: Text(S.current.signUp),
+                EmailInput(vm: email),
+                PasswordInput(vm: password),
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: ShadButton.link(
+                    onPressed: onPressedForgotPassword,
+                    child: Text(S.current.forgotPassword),
+                  ),
+                ),
+                ShadButton(
+                  width: 120,
+                  onPressed: () => _validateForm(formKey),
+                  child: Text(S.current.signIn),
+                ),
+                const ShadSeparator.horizontal(
+                  thickness: 1,
+                  margin: EdgeInsets.symmetric(horizontal: 20),
+                ),
+                Wrap(
+                  crossAxisAlignment: WrapCrossAlignment.center,
+                  alignment: WrapAlignment.center,
+                  children: [
+                    Text(
+                      S.current.dontHaveAccountYet,
+                      style: ShadTheme.of(
+                        context,
+                      ).textTheme.muted,
+                    ),
+                    ShadButton.link(
+                      onPressed: onPressedRegister,
+                      child: Text(S.current.signUp),
+                    ),
+                  ],
                 ),
               ],
             ),
-          ],
+          ),
         ),
-      ),
+        const Positioned(
+          bottom: 16,
+          right: 16,
+          child: TextVersion(),
+        ),
+      ],
     ),
   );
 
