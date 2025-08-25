@@ -196,10 +196,10 @@ packages:
     dependency: transitive
     description:
       name: file_picker
-      sha256: ef7d2a085c1b1d69d17b6842d0734aad90156de08df6bd3c12496d0bd6ddf8e2
+      sha256: e7e16c9d15c36330b94ca0e2ad8cb61f93cd5282d0158c09805aed13b5452f22
       url: "https://pub.dev"
     source: hosted
-    version: "10.3.1"
+    version: "10.3.2"
   file_selector_linux:
     dependency: transitive
     description:
@@ -315,10 +315,10 @@ packages:
     dependency: "direct main"
     description:
       name: go_router
-      sha256: "8b1f37dfaf6e958c6b872322db06f946509433bec3de753c3491a42ae9ec2b48"
+      sha256: ced3fdc143c1437234ac3b8e985f3286cf138968bb83ca9a6f94d22f2951c6b9
       url: "https://pub.dev"
     source: hosted
-    version: "16.1.0"
+    version: "16.2.0"
   http:
     dependency: transitive
     description:
@@ -609,10 +609,10 @@ packages:
     dependency: transitive
     description:
       name: pocketbase
-      sha256: "98572a1b3da2e2e4021bef5e3c72d98b072734cc290b2e89a5d8180c86855277"
+      sha256: "85282448be07e1920742a3272737b08778e5548ada8cd5ada82d0a0228347d0c"
       url: "https://pub.dev"
     source: hosted
-    version: "0.23.0"
+    version: "0.23.0+1"
   pointycastle:
     dependency: transitive
     description:
@@ -633,10 +633,10 @@ packages:
     dependency: "direct dev"
     description:
       name: pro_lints
-      sha256: "6867b4e032f883f0cd760d7ad1e3cef1bfa115d1ec9f8f17835aee214f86ca07"
+      sha256: d36b5b490f74eae5f66d03ba75650885aae213927e24b7aacdf7a238cb6ef073
       url: "https://pub.dev"
     source: hosted
-    version: "4.0.0"
+    version: "5.0.0"
   pro_pretty_logging:
     dependency: "direct main"
     description:
@@ -721,10 +721,10 @@ packages:
     dependency: "direct main"
     description:
       name: shadcn_ui
-      sha256: "8f79e25efeb82a0653ef4643e47483bf6d32878f09503a50ee5201f32e036973"
+      sha256: "8a31b3c78a97ad33942b9dcb55f1d77271d0605b9814dad7b81e3589bd8ab456"
       url: "https://pub.dev"
     source: hosted
-    version: "0.28.5"
+    version: "0.28.7"
   sky_engine:
     dependency: transitive
     description: flutter
@@ -781,10 +781,10 @@ packages:
     dependency: transitive
     description:
       name: theme_extensions_builder_annotation
-      sha256: "8a049896b5be465798aa63282a55d4f9568ac18b7ef90ee68107fbaf751485cb"
+      sha256: "37d1efd05502e7aab0bbb40b8fc7ab7593765f460221fb6e2c18e6a9c0e98489"
       url: "https://pub.dev"
     source: hosted
-    version: "5.0.0"
+    version: "5.1.0"
   two_dimensional_scrollables:
     dependency: transitive
     description:

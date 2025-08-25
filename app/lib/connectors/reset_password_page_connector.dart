@@ -43,7 +43,6 @@ class _Factory extends VmFactory<AppState, ResetPasswordPageConnector, _Vm> {
     //   confirmPassword,
     // );
 
-
     return _Vm(
       password: ValueChangedVm(
         value: password,

@@ -9,7 +9,7 @@ part of 'colors.dart';
 // ThemeExtensionsGenerator
 // **************************************************************************
 
-mixin _$ThemeExtensionMixin on ThemeExtension<ColorsThemeExtension> {
+mixin _$ColorsThemeExtensionMixin on ThemeExtension<ColorsThemeExtension> {
   @override
   ThemeExtension<ColorsThemeExtension> copyWith({
     Color? primary,
@@ -19,7 +19,7 @@ mixin _$ThemeExtensionMixin on ThemeExtension<ColorsThemeExtension> {
     Color? shade,
     Color? border,
   }) {
-    final object = this as ColorsThemeExtension;
+    final object = (this as ColorsThemeExtension);
 
     return ColorsThemeExtension(
       primary: primary ?? object.primary,
@@ -37,12 +37,11 @@ mixin _$ThemeExtensionMixin on ThemeExtension<ColorsThemeExtension> {
     double t,
   ) {
     final otherValue = other;
-
     if (otherValue is! ColorsThemeExtension) {
       return this;
     }
 
-    final value = this as ColorsThemeExtension;
+    final value = (this as ColorsThemeExtension);
 
     return ColorsThemeExtension(
       primary: Color.lerp(value.primary, otherValue.primary, t)!,
@@ -56,22 +55,24 @@ mixin _$ThemeExtensionMixin on ThemeExtension<ColorsThemeExtension> {
 
   @override
   bool operator ==(Object other) {
-    final value = this as ColorsThemeExtension;
+    if (identical(this, other)) {
+      return true;
+    }
 
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is ColorsThemeExtension &&
-            identical(value.primary, other.primary) &&
-            identical(value.secondary, other.secondary) &&
-            identical(value.background, other.background) &&
-            identical(value.error, other.error) &&
-            identical(value.shade, other.shade) &&
-            identical(value.border, other.border));
+    final value = (this as ColorsThemeExtension);
+    return other.runtimeType == runtimeType &&
+        other is ColorsThemeExtension &&
+        identical(value.primary, other.primary) &&
+        identical(value.secondary, other.secondary) &&
+        identical(value.background, other.background) &&
+        identical(value.error, other.error) &&
+        identical(value.shade, other.shade) &&
+        identical(value.border, other.border);
   }
 
   @override
   int get hashCode {
-    final value = this as ColorsThemeExtension;
+    final value = (this as ColorsThemeExtension);
 
     return Object.hash(
       runtimeType,
