@@ -2,22 +2,21 @@ import 'package:async_redux/async_redux.dart';
 import 'package:business/redux/app_state.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
-import 'package:ui/pages/user_profile_page.dart';
+import 'package:ui/sheets/user_profile_sheet.dart';
 
-class UserProfilePageConnector extends StatelessWidget {
-  const UserProfilePageConnector({super.key});
+class UserProfileSheetConnector extends StatelessWidget {
+  const UserProfileSheetConnector({super.key});
 
   @override
   Widget build(BuildContext context) => StoreConnector<AppState, _Vm>(
     debug: this,
     vm: () => _Factory(this),
-    builder: (context, vm) => const UserProfilePage(),
+    builder: (context, vm) => const UserProfileSheet(),
   );
 }
 
 /// Factory that creates a view-model for the StoreConnector.
-class _Factory
-    extends VmFactory<AppState, UserProfilePageConnector, _Vm> {
+class _Factory extends VmFactory<AppState, UserProfileSheetConnector, _Vm> {
   _Factory(super._connector);
 
   @override

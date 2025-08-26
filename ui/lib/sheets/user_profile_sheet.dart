@@ -6,8 +6,8 @@ final profile = [
   (title: 'Username', value: 'nank1ro'),
 ];
 
-class EditProfileSheet extends StatelessWidget {
-  const EditProfileSheet({required this.side, super.key});
+class UserProfileSheet extends StatelessWidget {
+  const UserProfileSheet({this.side = ShadSheetSide.right, super.key});
 
   final ShadSheetSide side;
 

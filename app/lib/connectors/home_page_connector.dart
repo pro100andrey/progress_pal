@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:ui/image/avatar.dart';
 import 'package:ui/pages/home_page.dart';
 
-import '../navigation/navigation.dart';
+import 'sheets/user_profile_sheet_connector.dart';
 
 class HomePageConnector extends StatelessWidget {
   const HomePageConnector({super.key});
@@ -17,7 +17,7 @@ class HomePageConnector extends StatelessWidget {
     builder: (context, vm) => HomePage(
       isWaiting: vm.isWaiting,
       avatar: vm.avatar,
-      onPressedUserProfile: vm.onPressedUserProfile,
+      userProfile: const UserProfileSheetConnector(),
     ),
   );
 }
@@ -30,10 +30,9 @@ class _Factory extends VmFactory<AppState, HomePageConnector, _Vm> {
   _Vm fromStore() => _Vm(
     isWaiting: false,
     avatar: const AvatarSource.network((
-      name: 'Koma',
+      name: null,
       url: 'https://avatars.githubusercontent.com/u/2468119?v=4',
     )),
-    onPressedUserProfile: () async => navigation.pushUserProfile(),
   );
 }
 
@@ -42,12 +41,10 @@ class _Vm extends Vm with EquatableMixin {
   _Vm({
     required this.isWaiting,
     required this.avatar,
-    required this.onPressedUserProfile,
   });
 
   final bool isWaiting;
   final AvatarSource avatar;
-  final VoidCallback onPressedUserProfile;
 
   @override
   List<Object?> get props => [isWaiting, avatar];

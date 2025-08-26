@@ -5,20 +5,18 @@ import 'package:shadcn_ui/shadcn_ui.dart';
 
 import '../charts/weight_chart.dart';
 import '../image/avatar.dart';
-import '../sheets/edit_profile_sheet.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({
     required this.isWaiting,
     required this.avatar,
-    required this.onPressedUserProfile,
+    required this.userProfile,
     super.key,
   });
 
   final bool isWaiting;
-
   final AvatarSource avatar;
-  final VoidCallback onPressedUserProfile;
+  final Widget userProfile;
 
   @override
   Widget build(BuildContext context) => Scaffold(
@@ -31,10 +29,8 @@ class HomePage extends StatelessWidget {
           size: const Size.fromRadius(16),
           onTap: () => showShadSheet(
             side: ShadSheetSide.right,
-            
             context: context,
-            builder: (context) =>
-                const EditProfileSheet(side: ShadSheetSide.right),
+            builder: (context) => userProfile,
           ),
         ),
         const SizedBox(width: 16),
