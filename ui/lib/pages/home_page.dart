@@ -47,16 +47,46 @@ class HomePage extends StatelessWidget {
             // Handle the selected date.
           },
         ),
-        SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
+        const SingleChildScrollView(
+          padding: EdgeInsets.symmetric(horizontal: 16),
           child: Column(
+            spacing: 16,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              const SizedBox(height: 24),
-              Text(
-                'Weight',
-                style: Theme.of(context).textTheme.titleLarge,
+              Center(
+                child: ShadAlert(
+                  iconData: LucideIcons.terminal,
+                  title: Text('Heads up!'),
+                  description: Text(
+                    'You are having one not completed challenge.',
+                  ),
+                ),
               ),
-              const WeightChart(),
+
+              ShadTabs<String>(
+                value: 'account',
+                tabBarConstraints: BoxConstraints(maxWidth: 400),
+
+                tabs: [
+                  ShadTab(
+                    value: 'Statistics',
+                    content: Wrap(
+                      runSpacing: 16,
+                      alignment: WrapAlignment.spaceAround,
+                      children: [
+                        WeightChart(title: 'Weight'),
+                        WeightChart(title: 'Height'),
+                      ],
+                    ),
+                    child: Text('Statistics'),
+                  ),
+                  ShadTab(
+                    value: 'account',
+                    content: Text('Account'),
+                    child: Text('Account'),
+                  ),
+                ],
+              ),
             ],
           ),
         ),
