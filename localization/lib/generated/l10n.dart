@@ -59,6 +59,11 @@ class S {
     return Intl.message('en', name: '_locale', desc: '', args: []);
   }
 
+  /// `Progress Pal`
+  String get appName {
+    return Intl.message('Progress Pal', name: 'appName', desc: '', args: []);
+  }
+
   /// `title`
   String get title {
     return Intl.message('title', name: 'title', desc: '', args: []);
