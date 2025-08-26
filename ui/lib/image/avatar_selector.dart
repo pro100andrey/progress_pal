@@ -25,9 +25,14 @@ class AvatarSelectorVm extends Equatable {
 }
 
 class AvatarSelector extends StatefulWidget {
-  const AvatarSelector({required this.vm, super.key});
+  const AvatarSelector({
+    required this.vm,
+    this.size = const Size.fromRadius(42),
+    super.key,
+  });
 
   final AvatarSelectorVm vm;
+  final Size size;
 
   @override
   State<AvatarSelector> createState() => _AvatarSelectorState();
@@ -48,7 +53,7 @@ class _AvatarSelectorState extends State<AvatarSelector> {
     child: Avatar(
       source: widget.vm.src,
       onTap: () async => _handleTap(context),
-      size: const Size.fromRadius(42),
+      size: widget.size,
     ),
     popover: (context) => SizedBox(
       width: 200,

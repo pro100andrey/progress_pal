@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:localization/localization.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
 
-import '../forms/auth_form.dart';
 import '../forms/base_form.dart';
+import '../forms/form_container.dart';
 import '../inputs/email_input.dart';
 import '../models/value_changed.dart';
 import '../tiles/auth_header.dart';
@@ -24,7 +24,8 @@ class ForgotPasswordPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-    body: AuthForm(
+    body: FormContainer(
+      centered: true,
       child: BaseForm(
         builder: (formKey) => Column(
           spacing: 16,

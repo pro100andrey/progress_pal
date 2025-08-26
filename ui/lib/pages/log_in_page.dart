@@ -3,8 +3,8 @@ import 'package:localization/localization.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
 
 import '../dev/text_version.dart';
-import '../forms/auth_form.dart';
 import '../forms/base_form.dart';
+import '../forms/form_container.dart';
 import '../inputs/email_input.dart';
 import '../inputs/password_input.dart';
 import '../models/value_changed.dart';
@@ -30,7 +30,8 @@ class LogInPage extends StatelessWidget {
   Widget build(BuildContext context) => Scaffold(
     body: Stack(
       children: [
-        AuthForm(
+        FormContainer(
+          centered: true,
           child: BaseForm(
             builder: (formKey) => Column(
               spacing: 16,

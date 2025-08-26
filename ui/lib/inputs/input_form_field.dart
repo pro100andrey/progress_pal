@@ -70,6 +70,7 @@ class InputFormFieldState extends State<InputFormField> {
     id: widget.id,
     controller: _controller,
     label: widget.label,
+    enabled: widget.vm.enabled,
     placeholder: widget.placeholder,
     description: widget.description,
     trailing: widget.trailingBuilder?.call(this),

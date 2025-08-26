@@ -29,7 +29,9 @@ class MessageLookup extends MessageLookupByLibrary {
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
     "_locale": MessageLookupByLibrary.simpleMessage("en"),
     "appName": MessageLookupByLibrary.simpleMessage("Progress Pal"),
+    "areYouSure": MessageLookupByLibrary.simpleMessage("Are you sure?"),
     "backToLogIn": MessageLookupByLibrary.simpleMessage("Back to logIn"),
+    "birthdate": MessageLookupByLibrary.simpleMessage("Birthdate"),
     "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
     "confirmPassword": MessageLookupByLibrary.simpleMessage("Confirm password"),
     "couldNotConnectToInternet": MessageLookupByLibrary.simpleMessage(
@@ -39,6 +41,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "done": MessageLookupByLibrary.simpleMessage("Done"),
     "dontHaveAccountYet": MessageLookupByLibrary.simpleMessage(
       "Don\'t have an account yet?",
+    ),
+    "editProfile": MessageLookupByLibrary.simpleMessage("Edit Profile"),
+    "editProfileInstructions": MessageLookupByLibrary.simpleMessage(
+      "Make changes to your profile here. Click save when you\'re done.",
     ),
     "email": MessageLookupByLibrary.simpleMessage("Email"),
     "emailInvalid": MessageLookupByLibrary.simpleMessage("Email is invalid"),
@@ -51,6 +57,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "logIn": MessageLookupByLibrary.simpleMessage("Log in"),
     "loginInstructions": MessageLookupByLibrary.simpleMessage(
       "Log in to continue your journey.",
+    ),
+    "logout": MessageLookupByLibrary.simpleMessage("Logout"),
+    "logoutConfirmation": MessageLookupByLibrary.simpleMessage(
+      "Are you sure you want to log out?",
     ),
     "minimumLengthSymbols": m0,
     "mustContainAtLeastOneLowercase": MessageLookupByLibrary.simpleMessage(
@@ -81,6 +91,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Rotate counterclockwise",
     ),
     "rotateCw": MessageLookupByLibrary.simpleMessage("Rotate clockwise"),
+    "save": MessageLookupByLibrary.simpleMessage("Save"),
     "selectAnotherImage": MessageLookupByLibrary.simpleMessage(
       "Select another image",
     ),

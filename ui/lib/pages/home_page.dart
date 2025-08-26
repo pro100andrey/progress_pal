@@ -47,14 +47,18 @@ class HomePage extends StatelessWidget {
             // Handle the selected date.
           },
         ),
-        Column(
-          children: [
-            Text(
-              'Weight',
-              style: Theme.of(context).textTheme.titleLarge,
-            ),
-            const WeightChart(),
-          ],
+        SingleChildScrollView(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: Column(
+            children: [
+              const SizedBox(height: 24),
+              Text(
+                'Weight',
+                style: Theme.of(context).textTheme.titleLarge,
+              ),
+              const WeightChart(),
+            ],
+          ),
         ),
       ],
     ),

@@ -6,17 +6,35 @@ class WeightChart extends StatelessWidget {
     super.key,
   });
 
+  List<FlSpot> get _spots => const [
+    FlSpot(1, 120),
+    FlSpot(3, 119),
+    FlSpot(7, 115),
+    FlSpot(10, 116),
+    FlSpot(12, 115),
+    FlSpot(13, 105),
+    FlSpot(14, 107),
+  ];
+
+  double get _minY =>
+      _spots.map((e) => e.y).reduce((a, b) => a < b ? a : b) - 5;
+  double get _maxY =>
+      _spots.map((e) => e.y).reduce((a, b) => a > b ? a : b) + 5;
+
   @override
   Widget build(BuildContext context) => SizedBox(
     width: double.infinity,
     height: 360,
     child: LineChart(
       LineChartData(
+        minY: _minY,
+        maxY: _maxY,
         titlesData: FlTitlesData(
           bottomTitles: AxisTitles(
             sideTitles: SideTitles(
               showTitles: true,
               reservedSize: 38,
+
               getTitlesWidget: (value, meta) {
                 if (value % 1 == 0) {
                   return Text(
@@ -36,7 +54,7 @@ class WeightChart extends StatelessWidget {
         lineBarsData: [
           LineChartBarData(
             isCurved: true,
-            color: Colors.blueAccent,
+            color: Colors.pink,
             barWidth: 4,
             isStrokeCapRound: true,
             dotData: const FlDotData(show: false),

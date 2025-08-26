@@ -57,7 +57,7 @@ class ValueChangedVm<T> extends BaseValueChangedVm<T> {
   });
 
   final T value;
-  final String? Function(String)? validator;
+  final String? Function(T)? validator;
 
   @override
   List<Object?> get props => [value, enabled];

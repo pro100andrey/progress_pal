@@ -38,5 +38,12 @@
   "done": "Done",
   "registrationComplete": "Registration complete",
   "registrationEmailSent": "A confirmation link has been sent to {email}. Please check your inbox.",
-  "verificationSuccessful": "Verification successful!"
+  "verificationSuccessful": "Verification successful!",
+  "birthdate": "Birthdate",
+  "logout": "Logout",
+  "save": "Save",
+  "editProfile": "Edit Profile",
+  "editProfileInstructions": "Make changes to your profile here. Click save when you're done.",
+  "areYouSure": "Are you sure?",
+  "logoutConfirmation": "Are you sure you want to log out?"
 }
