@@ -7,6 +7,7 @@ import '../connectors/home_page_connector.dart';
 import '../connectors/log_in_page_connector.dart';
 import '../connectors/registration_page_connector.dart';
 import '../connectors/reset_password_page_connector.dart';
+import '../connectors/user_profile_page_connector.dart';
 
 mixin NavigationServiceDelegate {
   bool get isLoggedIn;
@@ -36,6 +37,12 @@ class Navigation {
       GoRoute(
         path: '/home',
         builder: (context, state) => const HomePageConnector(),
+        routes: [
+          GoRoute(
+            path: 'user_profile',
+            builder: (context, state) => const UserProfilePageConnector(),
+          ),
+        ],
       ),
       GoRoute(
         path: '/auth/login',
@@ -79,21 +86,15 @@ class Navigation {
     },
   );
 
-  void goToHome() {
-    router.go('/home');
-  }
+  void goToForgotPassword() => router.go('/auth/forgot-password');
 
-  void goToForgotPassword() {
-    router.go('/auth/forgot-password');
-  }
+  void goToRegistration() => router.go('/auth/registration');
 
-  void goToRegistration() {
-    router.go('/auth/registration');
-  }
+  void goToLogIn() => router.go('/auth/login');
 
-  void goToLogIn() {
-    router.go('/auth/login');
-  }
+  void goToHome() => router.go('/home');
+
+  Future<T?> pushUserProfile<T>() async => router.push<T>('/home/user_profile');
 }
 
 extension type CurrentRoute(GoRouterState state) {

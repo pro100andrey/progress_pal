@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
 
 typedef AvatarMemoryData = ({Uint8List bytes, String name});
-typedef AvatarNetworkData = ({String url, String name});
+typedef AvatarNetworkData = ({String url, String? name});
 
 sealed class AvatarSource extends Equatable {
   const AvatarSource._();

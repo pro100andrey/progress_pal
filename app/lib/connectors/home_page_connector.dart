@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:ui/image/avatar.dart';
 import 'package:ui/pages/home_page.dart';
 
+import '../navigation/navigation.dart';
+
 class HomePageConnector extends StatelessWidget {
   const HomePageConnector({super.key});
 
@@ -15,6 +17,7 @@ class HomePageConnector extends StatelessWidget {
     builder: (context, vm) => HomePage(
       isWaiting: vm.isWaiting,
       avatar: vm.avatar,
+      onPressedUserProfile: vm.onPressedUserProfile,
     ),
   );
 }
@@ -30,15 +33,21 @@ class _Factory extends VmFactory<AppState, HomePageConnector, _Vm> {
       name: 'Koma',
       url: 'https://avatars.githubusercontent.com/u/2468119?v=4',
     )),
+    onPressedUserProfile: () async => navigation.pushUserProfile(),
   );
 }
 
 /// The view-model holds the part of the Store state the dumb-widget needs.
 class _Vm extends Vm with EquatableMixin {
-  _Vm({required this.isWaiting, required this.avatar});
+  _Vm({
+    required this.isWaiting,
+    required this.avatar,
+    required this.onPressedUserProfile,
+  });
 
   final bool isWaiting;
   final AvatarSource avatar;
+  final VoidCallback onPressedUserProfile;
 
   @override
   List<Object?> get props => [isWaiting, avatar];
