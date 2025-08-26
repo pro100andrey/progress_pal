@@ -47,47 +47,52 @@ class HomePage extends StatelessWidget {
             // Handle the selected date.
           },
         ),
-        const SingleChildScrollView(
-          padding: EdgeInsets.symmetric(horizontal: 16),
-          child: Column(
-            spacing: 16,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Center(
-                child: ShadAlert(
-                  iconData: LucideIcons.terminal,
-                  title: Text('Heads up!'),
-                  description: Text(
-                    'You are having one not completed challenge.',
+        const Expanded(
+          child: SingleChildScrollView(
+            padding: EdgeInsets.all(16),
+            child: Column(
+              spacing: 16,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Center(
+                  child: ShadAlert(
+                    iconData: LucideIcons.terminal,
+                    title: Text('Heads up!'),
+                    description: Text(
+                      'You are having one not completed challenge.',
+                    ),
                   ),
                 ),
-              ),
-
-              ShadTabs<String>(
-                value: 'account',
-                tabBarConstraints: BoxConstraints(maxWidth: 400),
-
-                tabs: [
-                  ShadTab(
-                    value: 'Statistics',
-                    content: Wrap(
-                      runSpacing: 16,
-                      alignment: WrapAlignment.spaceAround,
-                      children: [
-                        WeightChart(title: 'Weight'),
-                        WeightChart(title: 'Height'),
-                      ],
+                ShadTabs<String>(
+                  value: 'Statistics',
+                  scrollable: true,
+                  tabs: [
+                    ShadTab(
+                      value: 'Statistics',
+                      content: Wrap(
+                        runSpacing: 16,
+                        alignment: WrapAlignment.spaceAround,
+                        children: [
+                          WeightChart(title: 'Weight'),
+                          WeightChart(title: 'Height'),
+                        ],
+                      ),
+                      child: Text('Statistics'),
                     ),
-                    child: Text('Statistics'),
-                  ),
-                  ShadTab(
-                    value: 'account',
-                    content: Text('Account'),
-                    child: Text('Account'),
-                  ),
-                ],
-              ),
-            ],
+                    ShadTab(
+                      value: 'Trackers',
+                      content: Text('Trackers'),
+                      child: Text('Trackers'),
+                    ),
+                    ShadTab(
+                      value: 'Trainings',
+                      content: Text('Trainings'),
+                      child: Text('Trainings'),
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ],
