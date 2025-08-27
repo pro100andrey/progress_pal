@@ -9,7 +9,6 @@ COPY . .
 WORKDIR /app/app
 RUN flutter pub get
 
-RUN echo "PB_URL is set to: $PB_URL"
 RUN flutter build web --release --no-wasm-dry-run --dart-define=PB_URL=$PB_URL
 
 FROM nginx:1.27-alpine AS runtime
