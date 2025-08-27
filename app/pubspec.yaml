@@ -1,7 +1,7 @@
 name: app
 description: The App project.
 publish_to: "none" # Remove this line if you wish to publish to pub.dev
-version: 1.0.0+13
+version: 1.0.0+14
 
 environment:
   sdk: ^3.9.0
@@ -20,7 +20,7 @@ dependencies:
     path: ../localization
   pro_pretty_logging: ^2.0.0
   pro_validator: ^2.0.1
-  shadcn_ui: ^0.28.7
+  shadcn_ui: ^0.29.0
   ui:
     path: ../ui
   window_manager: ^0.5.1

@@ -2,7 +2,6 @@ import 'package:async_redux/async_redux.dart';
 import 'package:http/http.dart' as http;
 import 'package:pocketbase/pocketbase.dart';
 
-import '../../../service_locator.dart';
 import '../../app_state.dart';
 import '../models/registration_state.dart';
 import '../registration_selectors.dart';

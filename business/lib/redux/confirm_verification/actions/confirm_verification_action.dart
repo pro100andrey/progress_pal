@@ -1,6 +1,5 @@
 import 'package:async_redux/async_redux.dart';
 
-import '../../../service_locator.dart';
 import '../../app_state.dart';
 
 class ConfirmVerificationAction extends ReduxAction<AppState> {
