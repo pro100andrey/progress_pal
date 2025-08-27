@@ -28,4 +28,6 @@ jobs:
         run: docker compose build
 
       - name: Run server
+        env:
+          PB_URL: ${{ vars.PB_URL }}
         run: docker compose up -d
