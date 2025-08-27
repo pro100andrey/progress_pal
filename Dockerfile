@@ -1,5 +1,9 @@
 FROM ghcr.io/cirruslabs/flutter:3.35.2 AS build
 
+
+ARG PB_URL
+ENV PB_URL=${PB_URL}
+
 WORKDIR /app
 COPY . .
 WORKDIR /app/app
