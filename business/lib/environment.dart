@@ -1,6 +1,3 @@
-import 'package:flutter/foundation.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
-
 enum EnvironmentType {
   development,
   production;
@@ -24,7 +21,7 @@ final class Environment {
     EnvironmentType type, {
     required String fallbackUrl,
   }) async {
-    final env = _fromEnvironment(type) ?? await _fromDotEnv(type);
+    final env = _fromEnvironment(type);
 
     return env ?? Environment._(pbUrl: fallbackUrl, type: type);
   }
@@ -35,22 +32,6 @@ final class Environment {
       // ignore: do_not_use_environment
       const pbUrl = String.fromEnvironment(_pbUrlKey);
       return Environment._(pbUrl: pbUrl, type: type);
-    }
-
-    return null;
-  }
-
-  static Future<Environment?> _fromDotEnv(EnvironmentType type) async {
-    try {
-      await dotenv.load(isOptional: true);
-
-      if (dotenv.env.containsKey(_pbUrlKey)) {
-        final pbUrl = dotenv.env[_pbUrlKey]!;
-        debugPrint('Loaded PB_URL from .env: $pbUrl');
-        return Environment._(pbUrl: pbUrl, type: type);
-      }
-    } on Exception catch (e) {
-      debugPrint('Failed to load .env file: $e');
     }
 
     return null;
