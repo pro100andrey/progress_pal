@@ -25,9 +25,9 @@ jobs:
       - name: Build Docker image
         env:
           PB_URL: ${{ vars.PB_URL }}
-        run: docker compose build
+        run: |
+          echo "PB_URL is set to: ${{ vars.PB_URL }}"
+          docker compose build
 
       - name: Run server
-        env:
-          PB_URL: ${{ vars.PB_URL }}
         run: docker compose up -d
