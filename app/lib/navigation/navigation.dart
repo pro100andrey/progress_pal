@@ -1,3 +1,4 @@
+import 'package:async_redux/async_redux.dart';
 import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
 
@@ -15,6 +16,10 @@ mixin NavigationServiceDelegate {
 final navigation = Navigation();
 
 class Navigation {
+  Navigation() {
+    NavigateAction.setNavigatorKey(_navigatorKey);
+  }
+
   final _navigatorKey = GlobalKey<NavigatorState>();
 
   late final NavigationServiceDelegate _delegate;
@@ -86,6 +91,8 @@ class Navigation {
   void goToLogIn() => router.go('/auth/login');
 
   void goToHome() => router.go('/home');
+
+  void refresh() => router.refresh();
 }
 
 extension type CurrentRoute(GoRouterState state) {

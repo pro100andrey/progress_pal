@@ -23,6 +23,8 @@ jobs:
           fi
 
       - name: Build Docker image
+        env:
+          PB_URL: ${{ secrets.PB_URL }}
         run: docker compose build
 
       - name: Run server

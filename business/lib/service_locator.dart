@@ -7,6 +7,9 @@ import 'environment.dart';
 import 'redux/app_state.dart';
 import 'redux/services/connectivity/connectivity.dart';
 import 'redux/services/connectivity/connectivity_driver.dart';
+import 'redux/session/actions/load_session_action.dart';
+import 'redux/session/actions/save_session_action.dart';
+import 'redux/session/session_selectors.dart';
 
 // ambient variable to access the service locator
 final _locator = GetIt.instance;
@@ -15,13 +18,15 @@ ConnectivityService get getConnectivity => _locator.get<ConnectivityService>();
 KeyValueStorage get getSettingsStorage => _locator.get<KeyValueStorage>();
 PocketBase get getPocketBase => _locator.get<PocketBase>();
 
-void configure(Store<AppState> store) {}
-
-Future<void> initLocator(Store<AppState> store, Environment env) async {
+Future<void> initSettingsStorage(Store<AppState> store) async {
   final settingsStorage = KeyValueStorage();
   await settingsStorage.setupStorage(dbFile: 'pp.db');
   _locator.registerSingleton(settingsStorage);
 
+  await store.dispatchAndWait(LoadSessionAction());
+}
+
+Future<void> initLocator(Store<AppState> store, Environment env) async {
   // Connectivity Service
   final connectivity = ConnectivityService(
     driver: ConnectivityDriver(store: store),
@@ -31,14 +36,11 @@ Future<void> initLocator(Store<AppState> store, Environment env) async {
   _locator.registerSingleton(connectivity);
 
   final authStore = AsyncAuthStore(
-    save: (data) async => settingsStorage.put('pb_auth', data),
-    initial: settingsStorage.getSync('pb_auth'),
+    save: (pbAuth) async =>
+        store.dispatchAndWait(SaveSessionAction(pbAuth: pbAuth)),
+    initial: selectSessionPBAuth(store.state),
   );
 
-  final pb = PocketBase(
-    'https://progress-pal.pockethost.io/',
-    authStore: authStore,
-  );
-
+  final pb = PocketBase(env.pbUrl, authStore: authStore);
   _locator.registerSingleton(pb);
 }

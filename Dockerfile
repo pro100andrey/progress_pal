@@ -4,7 +4,7 @@ WORKDIR /app
 COPY . .
 WORKDIR /app/app
 RUN flutter pub get
-RUN flutter build web --release
+RUN flutter build web --release --dart-define=PB_URL=$PB_URL
 
 FROM nginx:1.27-alpine AS runtime
 

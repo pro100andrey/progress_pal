@@ -1,5 +1,8 @@
 import '../app_state.dart';
 
-/// Returns value
-String? selectSessionValue(AppState state) =>
-    state.session.value;
+/// Returns the session's pbAuth value.
+String? selectSessionPBAuth(AppState state) => state.session.pbAuth;
+
+/// Returns true if the session is valid.
+bool selectSessionIsValid(AppState state) =>
+    selectSessionPBAuth(state) != null && getPocketBase.authStore.isValid;

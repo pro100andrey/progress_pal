@@ -38,6 +38,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Couldn\'t connect to internet.",
     ),
     "delete": MessageLookupByLibrary.simpleMessage("Delete"),
+    "dismiss": MessageLookupByLibrary.simpleMessage("Dismiss"),
     "done": MessageLookupByLibrary.simpleMessage("Done"),
     "dontHaveAccountYet": MessageLookupByLibrary.simpleMessage(
       "Don\'t have an account yet?",
@@ -102,6 +103,9 @@ class MessageLookup extends MessageLookupByLibrary {
       "This field is required",
     ),
     "title": MessageLookupByLibrary.simpleMessage("title"),
+    "unknownError": MessageLookupByLibrary.simpleMessage(
+      "Uh oh! Something went wrong.",
+    ),
     "verificationSuccessful": MessageLookupByLibrary.simpleMessage(
       "Verification successful!",
     ),

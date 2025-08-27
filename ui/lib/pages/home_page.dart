@@ -36,66 +36,74 @@ class HomePage extends StatelessWidget {
         const SizedBox(width: 16),
       ],
     ),
-    body: Column(
-      spacing: 16,
-      children: [
-        EasyDateTimeLinePicker(
-          focusedDate: DateTime.now(),
-          firstDate: DateTime(2024, 3, 18),
-          lastDate: DateTime(2030, 3, 18),
-          onDateChange: (date) {
-            // Handle the selected date.
-          },
-        ),
-        const Expanded(
-          child: SingleChildScrollView(
-            padding: EdgeInsets.all(16),
-            child: Column(
-              spacing: 16,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Center(
-                  child: ShadAlert(
-                    iconData: LucideIcons.terminal,
-                    title: Text('Heads up!'),
-                    description: Text(
-                      'You are having one not completed challenge.',
-                    ),
+    body: const Center(child: Text('Home')),
+  );
+}
+
+// ignore: unused_element
+class _HomeWidget extends StatelessWidget {
+  const _HomeWidget();
+
+  @override
+  Widget build(BuildContext context) => Column(
+    spacing: 16,
+    children: [
+      EasyDateTimeLinePicker(
+        focusedDate: DateTime.now(),
+        firstDate: DateTime(2024, 3, 18),
+        lastDate: DateTime(2030, 3, 18),
+        onDateChange: (date) {
+          // Handle the selected date.
+        },
+      ),
+      const Expanded(
+        child: SingleChildScrollView(
+          padding: EdgeInsets.all(16),
+          child: Column(
+            spacing: 16,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Center(
+                child: ShadAlert(
+                  iconData: LucideIcons.terminal,
+                  title: Text('Heads up!'),
+                  description: Text(
+                    'You are having one not completed challenge.',
                   ),
                 ),
-                ShadTabs<String>(
-                  value: 'Statistics',
-                  scrollable: true,
-                  tabs: [
-                    ShadTab(
-                      value: 'Statistics',
-                      content: Wrap(
-                        runSpacing: 16,
-                        alignment: WrapAlignment.spaceAround,
-                        children: [
-                          WeightChart(title: 'Weight'),
-                          WeightChart(title: 'Height'),
-                        ],
-                      ),
-                      child: Text('Statistics'),
+              ),
+              ShadTabs<String>(
+                value: 'Statistics',
+                scrollable: true,
+                tabs: [
+                  ShadTab(
+                    value: 'Statistics',
+                    content: Wrap(
+                      runSpacing: 16,
+                      alignment: WrapAlignment.spaceAround,
+                      children: [
+                        WeightChart(title: 'Weight'),
+                        WeightChart(title: 'Height'),
+                      ],
                     ),
-                    ShadTab(
-                      value: 'Trackers',
-                      content: Text('Trackers'),
-                      child: Text('Trackers'),
-                    ),
-                    ShadTab(
-                      value: 'Trainings',
-                      content: Text('Trainings'),
-                      child: Text('Trainings'),
-                    ),
-                  ],
-                ),
-              ],
-            ),
+                    child: Text('Statistics'),
+                  ),
+                  ShadTab(
+                    value: 'Trackers',
+                    content: Text('Trackers'),
+                    child: Text('Trackers'),
+                  ),
+                  ShadTab(
+                    value: 'Trainings',
+                    content: Text('Trainings'),
+                    child: Text('Trainings'),
+                  ),
+                ],
+              ),
+            ],
           ),
         ),
-      ],
-    ),
+      ),
+    ],
   );
 }

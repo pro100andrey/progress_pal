@@ -45,5 +45,7 @@
   "editProfile": "Edit Profile",
   "editProfileInstructions": "Make changes to your profile here. Click save when you're done.",
   "areYouSure": "Are you sure?",
-  "logoutConfirmation": "Are you sure you want to log out?"
+  "logoutConfirmation": "Are you sure you want to log out?",
+  "unknownError": "Uh oh! Something went wrong.",
+  "dismiss": "Dismiss"
 }

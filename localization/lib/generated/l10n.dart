@@ -438,6 +438,21 @@ class S {
       args: [],
     );
   }
+
+  /// `Uh oh! Something went wrong.`
+  String get unknownError {
+    return Intl.message(
+      'Uh oh! Something went wrong.',
+      name: 'unknownError',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Dismiss`
+  String get dismiss {
+    return Intl.message('Dismiss', name: 'dismiss', desc: '', args: []);
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

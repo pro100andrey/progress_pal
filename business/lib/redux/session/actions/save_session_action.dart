@@ -1,12 +1,19 @@
 import 'package:async_redux/async_redux.dart';
+import 'package:storage/storage.dart';
 
 import '../../app_state.dart';
 
 class SaveSessionAction extends ReduxAction<AppState> {
-  SaveSessionAction({required this.value});
+  SaveSessionAction({required this.pbAuth});
 
-  final String value;
+  final String? pbAuth;
 
   @override
-  AppState reduce() => state.copyWith();
+  Future<AppState> reduce() async {
+    pbAuth != null
+        ? await getSettingsStorage.setPBAuth(pbAuth)
+        : await getSettingsStorage.deletePBAuth();
+
+    return state.copyWith.session(pbAuth: pbAuth);
+  }
 }

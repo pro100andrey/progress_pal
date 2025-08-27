@@ -1,3 +1,6 @@
+import 'package:flutter/foundation.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+
 enum EnvironmentType {
   development,
   production;
@@ -7,27 +10,52 @@ enum EnvironmentType {
 }
 
 final class Environment {
-  const Environment._({required this.baseUrl, required this.type});
-  static Future<Environment> prod() async {
-    const baseUrl = 'https://prod.com';
-    const type = EnvironmentType.production;
+  const Environment._({required this.pbUrl, required this.type});
 
-    return const Environment._(baseUrl: baseUrl, type: type);
+  static const _pbUrlKey = 'PB_URL';
+
+  static Future<Environment> prod() =>
+      _load(EnvironmentType.production, fallbackUrl: 'https://prod.com');
+
+  static Future<Environment> dev() =>
+      _load(EnvironmentType.development, fallbackUrl: 'https://dev.com');
+
+  static Future<Environment> _load(
+    EnvironmentType type, {
+    required String fallbackUrl,
+  }) async {
+    final env = _fromEnvironment(type) ?? await _fromDotEnv(type);
+
+    return env ?? Environment._(pbUrl: fallbackUrl, type: type);
   }
 
-  static Future<Environment> dev() async {
-    const baseUrl = 'https://dev.com';
-    const type = EnvironmentType.development;
+  static Environment? _fromEnvironment(EnvironmentType type) {
+    // ignore: do_not_use_environment
+    if (const bool.hasEnvironment(_pbUrlKey)) {
+      // ignore: do_not_use_environment
+      const pbUrl = String.fromEnvironment(_pbUrlKey);
+      return Environment._(pbUrl: pbUrl, type: type);
+    }
 
-    // try {
-    //   await dotenv.load(isOptional: true);
-    // } on Exception catch (e) {
-    //   debugPrint('Failed to load .env file: $e');
-    // }
-
-    return const Environment._(baseUrl: baseUrl, type: type);
+    return null;
   }
 
-  final String baseUrl;
+  static Future<Environment?> _fromDotEnv(EnvironmentType type) async {
+    try {
+      await dotenv.load(isOptional: true);
+
+      if (dotenv.env.containsKey(_pbUrlKey)) {
+        final pbUrl = dotenv.env[_pbUrlKey]!;
+        debugPrint('Loaded PB_URL from .env: $pbUrl');
+        return Environment._(pbUrl: pbUrl, type: type);
+      }
+    } on Exception catch (e) {
+      debugPrint('Failed to load .env file: $e');
+    }
+
+    return null;
+  }
+
+  final String pbUrl;
   final EnvironmentType type;
 }

@@ -1,5 +1,6 @@
 import 'package:async_redux/async_redux.dart';
 import 'package:business/redux/app_state.dart';
+import 'package:business/redux/session/actions/clean_session_action.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:ui/image/avatar.dart';
@@ -8,6 +9,7 @@ import 'package:ui/models/value_changed.dart';
 import 'package:ui/sheets/user_profile_sheet.dart';
 
 import '../../common/validators.dart';
+import '../../navigation/navigation.dart';
 
 class UserProfileSheetConnector extends StatelessWidget {
   const UserProfileSheetConnector({super.key});
@@ -57,7 +59,10 @@ class _Factory extends VmFactory<AppState, UserProfileSheetConnector, _Vm> {
       },
     ),
     onPressedSave: null,
-    onPressedLogout: () {},
+    onPressedLogout: () async {
+      await dispatchAndWait(CleanSessionAction());
+      navigation.refresh();
+    },
   );
 }
 

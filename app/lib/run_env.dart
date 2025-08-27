@@ -49,6 +49,7 @@ Future<void> runEnv(Environment env) async {
   }
 
   final store = newStore();
+  await initSettingsStorage(store);
   await initLocator(store, env);
 
   runApp(

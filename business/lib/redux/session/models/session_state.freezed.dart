@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$SessionState {
 
- String? get value;
+ String? get pbAuth;
 /// Create a copy of SessionState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,16 +25,16 @@ $SessionStateCopyWith<SessionState> get copyWith => _$SessionStateCopyWithImpl<S
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is SessionState&&(identical(other.value, value) || other.value == value));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is SessionState&&(identical(other.pbAuth, pbAuth) || other.pbAuth == pbAuth));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,value);
+int get hashCode => Object.hash(runtimeType,pbAuth);
 
 @override
 String toString() {
-  return 'SessionState(value: $value)';
+  return 'SessionState(pbAuth: $pbAuth)';
 }
 
 
@@ -45,7 +45,7 @@ abstract mixin class $SessionStateCopyWith<$Res>  {
   factory $SessionStateCopyWith(SessionState value, $Res Function(SessionState) _then) = _$SessionStateCopyWithImpl;
 @useResult
 $Res call({
- String? value
+ String? pbAuth
 });
 
 
@@ -62,9 +62,9 @@ class _$SessionStateCopyWithImpl<$Res>
 
 /// Create a copy of SessionState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? value = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? pbAuth = freezed,}) {
   return _then(_self.copyWith(
-value: freezed == value ? _self.value : value // ignore: cast_nullable_to_non_nullable
+pbAuth: freezed == pbAuth ? _self.pbAuth : pbAuth // ignore: cast_nullable_to_non_nullable
 as String?,
   ));
 }
@@ -77,10 +77,10 @@ as String?,
 
 
 class _SessionState implements SessionState {
-  const _SessionState({this.value});
+  const _SessionState({this.pbAuth});
   
 
-@override final  String? value;
+@override final  String? pbAuth;
 
 /// Create a copy of SessionState
 /// with the given fields replaced by the non-null parameter values.
@@ -92,16 +92,16 @@ _$SessionStateCopyWith<_SessionState> get copyWith => __$SessionStateCopyWithImp
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SessionState&&(identical(other.value, value) || other.value == value));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SessionState&&(identical(other.pbAuth, pbAuth) || other.pbAuth == pbAuth));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,value);
+int get hashCode => Object.hash(runtimeType,pbAuth);
 
 @override
 String toString() {
-  return 'SessionState(value: $value)';
+  return 'SessionState(pbAuth: $pbAuth)';
 }
 
 
@@ -112,7 +112,7 @@ abstract mixin class _$SessionStateCopyWith<$Res> implements $SessionStateCopyWi
   factory _$SessionStateCopyWith(_SessionState value, $Res Function(_SessionState) _then) = __$SessionStateCopyWithImpl;
 @override @useResult
 $Res call({
- String? value
+ String? pbAuth
 });
 
 
@@ -129,9 +129,9 @@ class __$SessionStateCopyWithImpl<$Res>
 
 /// Create a copy of SessionState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? value = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? pbAuth = freezed,}) {
   return _then(_SessionState(
-value: freezed == value ? _self.value : value // ignore: cast_nullable_to_non_nullable
+pbAuth: freezed == pbAuth ? _self.pbAuth : pbAuth // ignore: cast_nullable_to_non_nullable
 as String?,
   ));
 }

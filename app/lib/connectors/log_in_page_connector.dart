@@ -52,7 +52,7 @@ class _Factory extends VmFactory<AppState, LogInPageConnector, _Vm> {
       onPressedLogIn: () async {
         final result = await dispatchAndWait(LogInWithEmailAction());
         if (result.isCompletedOk) {
-          navigation.goToHome();
+          navigation.refresh();
         }
       },
       onPressedForgotPassword: navigation.goToForgotPassword,

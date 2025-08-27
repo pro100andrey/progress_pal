@@ -1,6 +1,6 @@
 import 'package:async_redux/async_redux.dart';
-import 'package:business/pocketbase/session.dart';
 import 'package:business/redux/app_state.dart';
+import 'package:business/redux/session/session_selectors.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -34,8 +34,6 @@ class _AppConnectorState extends State<AppConnector>
     vm: () => _Factory(widget),
     builder: (context, vm) => ShadApp.router(
       routerConfig: navigation.router,
-      // routerDelegate: _router,
-      // routeInformationProvider: router.routeInformationProvider,
       themeMode: ThemeMode.dark,
       darkTheme: ShadThemeData(
         brightness: Brightness.dark,
@@ -44,7 +42,6 @@ class _AppConnectorState extends State<AppConnector>
           brightness: Brightness.dark,
         ),
       ),
-      // routeInformationParser: router.routeInformationParser,
       localizationsDelegates: const [
         S.delegate,
         GlobalMaterialLocalizations.delegate,
@@ -53,13 +50,18 @@ class _AppConnectorState extends State<AppConnector>
       ],
       supportedLocales: S.delegate.supportedLocales,
       builder: (context, child) => ShadAppBuilder(
-        child: TopLevelPageConnector(child: child),
+        child: TopLevelPageConnector(
+          child: UserExceptionDialog<AppState>(
+            onShowUserExceptionDialog: _showUserError,
+            child: child!,
+          ),
+        ),
       ),
     ),
   );
 
   @override
-  bool get isLoggedIn => sessionIsValid();
+  bool get isLoggedIn => selectSessionIsValid(widget.store.state);
 }
 
 /// Factory that creates a view-model for the StoreConnector.
@@ -78,4 +80,32 @@ class _Vm extends Vm with EquatableMixin {
 
   @override
   List<Object?> get props => [language];
+}
+
+void _showUserError(
+  BuildContext context,
+  UserException userException,
+  bool useLocalContext,
+) {
+  final theme = ShadTheme.of(context);
+  final message = userException.message ?? S.current.unknownError;
+
+  ShadToaster.of(context).show(
+    ShadToast.destructive(
+      title: Text(message),
+      description: userException.reason == null
+          ? null
+          : Text(userException.reason!),
+      action: ShadButton.destructive(
+        decoration: ShadDecoration(
+          border: ShadBorder.all(
+            color: theme.colorScheme.destructiveForeground,
+            width: 1,
+          ),
+        ),
+        onPressed: () => ShadToaster.of(context).hide(),
+        child: Text(S.current.dismiss),
+      ),
+    ),
+  );
 }

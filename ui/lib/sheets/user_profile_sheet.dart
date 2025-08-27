@@ -41,13 +41,7 @@ class UserProfileSheet extends StatelessWidget {
     actionsVerticalDirection: VerticalDirection.up,
     enterDuration: const Duration(milliseconds: 150),
     exitDuration: const Duration(milliseconds: 100),
-    actions: [
-      ShadButton.destructive(
-        width: 150,
-        child: Text(S.current.logout),
-        onPressed: () => _onPressedLogout(context),
-      ),
-    ],
+
     child: FormContainer(
       maxWidth: double.infinity,
       child: BaseForm(
@@ -67,6 +61,11 @@ class UserProfileSheet extends StatelessWidget {
               enabled: onPressedSave != null,
               onPressed: onPressedSave,
               child: Text(S.current.save),
+            ),
+            ShadButton.destructive(
+              width: 150,
+              child: Text(S.current.logout),
+              onPressed: () => _onPressedLogout(context),
             ),
           ],
         ),

@@ -4,5 +4,5 @@ part 'session_state.freezed.dart';
 
 @freezed
 abstract class SessionState with _$SessionState {
-  const factory SessionState({String? value}) = _SessionState;
+  const factory SessionState({String? pbAuth}) = _SessionState;
 }
