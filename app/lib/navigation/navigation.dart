@@ -11,6 +11,7 @@ import '../connectors/reset_password_page_connector.dart';
 
 mixin NavigationServiceDelegate {
   bool get isLoggedIn;
+  void needLogout();
 }
 
 final navigation = Navigation();
@@ -67,12 +68,13 @@ class Navigation {
         builder: (context, state) => const ResetPasswordPageConnector(),
       ),
     ],
-    redirect: (context, state) {
+    redirect: (context, state)  {
       final isLoggedIn = _delegate.isLoggedIn;
       final cr = CurrentRoute(state);
 
       switch ((isLoggedIn, cr)) {
         case (true, CurrentRoute(isConfirmVerification: true)):
+           _delegate.needLogout();
           return null;
         case (true, CurrentRoute(isAuth: true)):
           return '/home';

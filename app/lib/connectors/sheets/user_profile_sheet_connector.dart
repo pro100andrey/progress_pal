@@ -64,8 +64,8 @@ class _Factory extends VmFactory<AppState, UserProfileSheetConnector, _Vm> {
         },
       ),
       onPressedSave: null,
-      onPressedLogout: () async {
-        await dispatchAndWait(CleanSessionAction());
+      onPressedLogout: ()  {
+         dispatchSync(CleanSessionAction());
         navigation.refresh();
       },
     );

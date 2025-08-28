@@ -1,5 +1,6 @@
 import 'package:async_redux/async_redux.dart';
 import 'package:business/redux/app_state.dart';
+import 'package:business/redux/session/actions/clean_session_action.dart';
 import 'package:business/redux/session/session_selectors.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
@@ -62,6 +63,9 @@ class _AppConnectorState extends State<AppConnector>
 
   @override
   bool get isLoggedIn => selectSessionIsValid(widget.store.state);
+
+  @override
+  void needLogout() => widget.store.dispatchSync(CleanSessionAction());
 }
 
 /// Factory that creates a view-model for the StoreConnector.

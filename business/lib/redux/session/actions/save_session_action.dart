@@ -2,7 +2,6 @@ import 'package:async_redux/async_redux.dart';
 import 'package:storage/storage.dart';
 
 import '../../app_state.dart';
-import '../../pb/models/current_user.dart';
 
 class SaveSessionAction extends ReduxAction<AppState> {
   SaveSessionAction({required this.pbAuth});
