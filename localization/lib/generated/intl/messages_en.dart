@@ -99,12 +99,18 @@ class MessageLookup extends MessageLookupByLibrary {
     "sendResetLink": MessageLookupByLibrary.simpleMessage("Send Reset Link"),
     "signIn": MessageLookupByLibrary.simpleMessage("Sign in"),
     "signUp": MessageLookupByLibrary.simpleMessage("Sign up"),
+    "supportedImageFormats": MessageLookupByLibrary.simpleMessage(
+      "Supported: jpg, jpeg, png",
+    ),
     "thisFieldIsRequired": MessageLookupByLibrary.simpleMessage(
       "This field is required",
     ),
     "title": MessageLookupByLibrary.simpleMessage("title"),
     "unknownError": MessageLookupByLibrary.simpleMessage(
       "Uh oh! Something went wrong.",
+    ),
+    "unsupportedImageFormat": MessageLookupByLibrary.simpleMessage(
+      "Unsupported image format",
     ),
     "verificationSuccessful": MessageLookupByLibrary.simpleMessage(
       "Verification successful!",

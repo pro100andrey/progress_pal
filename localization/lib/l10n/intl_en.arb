@@ -47,5 +47,7 @@
   "areYouSure": "Are you sure?",
   "logoutConfirmation": "Are you sure you want to log out?",
   "unknownError": "Uh oh! Something went wrong.",
-  "dismiss": "Dismiss"
+  "dismiss": "Dismiss",
+  "unsupportedImageFormat": "Unsupported image format",
+  "supportedImageFormats": "Supported: jpg, jpeg, png"
 }

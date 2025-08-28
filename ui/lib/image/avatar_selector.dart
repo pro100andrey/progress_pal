@@ -91,13 +91,28 @@ class _AvatarSelectorState extends State<AvatarSelector> {
     }
   }
 
-  Future<void> _pickImage(BuildContext context) async {
+  Future<void> _pickImage(
+    BuildContext context, [
+    Set<String> allowedExtension = const {'jpg', 'jpeg', 'png'},
+  ]) async {
     final pickedFile = await _picker.pickImage(source: ImageSource.gallery);
 
     if (context.mounted) {
       if (pickedFile != null) {
-        final bytes = await pickedFile.readAsBytes();
         final name = pickedFile.name;
+        final ext = name.split('.').last.toLowerCase();
+        if (!allowedExtension.contains(ext) && context.mounted) {
+          ShadToaster.of(context).show(
+            ShadToast(
+              title: Text(S.current.unsupportedImageFormat),
+              description: Text(S.current.supportedImageFormats),
+            ),
+          );
+          
+          return;
+        }
+
+        final bytes = await pickedFile.readAsBytes();
 
         if (!context.mounted) {
           return;

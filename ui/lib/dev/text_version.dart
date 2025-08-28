@@ -8,7 +8,6 @@ class TextVersion extends StatelessWidget {
   @override
   Widget build(BuildContext context) => FutureBuilder(
     future: PackageInfo.fromPlatform(),
-
     builder: (context, asyncSnapshot) {
       if (asyncSnapshot.hasData) {
         final packageInfo = asyncSnapshot.data!;

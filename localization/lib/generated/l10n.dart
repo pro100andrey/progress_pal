@@ -453,6 +453,26 @@ class S {
   String get dismiss {
     return Intl.message('Dismiss', name: 'dismiss', desc: '', args: []);
   }
+
+  /// `Unsupported image format`
+  String get unsupportedImageFormat {
+    return Intl.message(
+      'Unsupported image format',
+      name: 'unsupportedImageFormat',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Supported: jpg, jpeg, png`
+  String get supportedImageFormats {
+    return Intl.message(
+      'Supported: jpg, jpeg, png',
+      name: 'supportedImageFormats',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
