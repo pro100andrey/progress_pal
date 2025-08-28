@@ -72,6 +72,8 @@ class Navigation {
       final cr = CurrentRoute(state);
 
       switch ((isLoggedIn, cr)) {
+        case (true, CurrentRoute(isConfirmVerification: true)):
+          return null;
         case (true, CurrentRoute(isAuth: true)):
           return '/home';
         case (false, CurrentRoute(isAuth: false)):
@@ -99,6 +101,9 @@ extension type CurrentRoute(GoRouterState state) {
   String get fullPath => state.uri.path;
 
   bool get isAuth => fullPath.startsWith('/auth/');
+
+  bool get isConfirmVerification =>
+      fullPath.startsWith('/auth/confirm-verification/');
 
   bool get isIndex => fullPath == '/';
 }

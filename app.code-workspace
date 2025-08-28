@@ -54,6 +54,7 @@
         },
         "cSpell.words": [
             "dotenv",
+            "pocketbase",
             "unawaited"
         ],
         "explorer.fileNesting.patterns": {

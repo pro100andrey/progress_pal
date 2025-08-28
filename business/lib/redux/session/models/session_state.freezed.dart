@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$SessionState {
 
- String? get pbAuth;
+ String? get pbAuth; CurrentUser? get currentUser;
 /// Create a copy of SessionState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,16 +25,16 @@ $SessionStateCopyWith<SessionState> get copyWith => _$SessionStateCopyWithImpl<S
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is SessionState&&(identical(other.pbAuth, pbAuth) || other.pbAuth == pbAuth));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is SessionState&&(identical(other.pbAuth, pbAuth) || other.pbAuth == pbAuth)&&(identical(other.currentUser, currentUser) || other.currentUser == currentUser));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,pbAuth);
+int get hashCode => Object.hash(runtimeType,pbAuth,currentUser);
 
 @override
 String toString() {
-  return 'SessionState(pbAuth: $pbAuth)';
+  return 'SessionState(pbAuth: $pbAuth, currentUser: $currentUser)';
 }
 
 
@@ -45,7 +45,7 @@ abstract mixin class $SessionStateCopyWith<$Res>  {
   factory $SessionStateCopyWith(SessionState value, $Res Function(SessionState) _then) = _$SessionStateCopyWithImpl;
 @useResult
 $Res call({
- String? pbAuth
+ String? pbAuth, CurrentUser? currentUser
 });
 
 
@@ -62,10 +62,11 @@ class _$SessionStateCopyWithImpl<$Res>
 
 /// Create a copy of SessionState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? pbAuth = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? pbAuth = freezed,Object? currentUser = freezed,}) {
   return _then(_self.copyWith(
 pbAuth: freezed == pbAuth ? _self.pbAuth : pbAuth // ignore: cast_nullable_to_non_nullable
-as String?,
+as String?,currentUser: freezed == currentUser ? _self.currentUser : currentUser // ignore: cast_nullable_to_non_nullable
+as CurrentUser?,
   ));
 }
 
@@ -77,10 +78,11 @@ as String?,
 
 
 class _SessionState implements SessionState {
-  const _SessionState({this.pbAuth});
+  const _SessionState({this.pbAuth, this.currentUser});
   
 
 @override final  String? pbAuth;
+@override final  CurrentUser? currentUser;
 
 /// Create a copy of SessionState
 /// with the given fields replaced by the non-null parameter values.
@@ -92,16 +94,16 @@ _$SessionStateCopyWith<_SessionState> get copyWith => __$SessionStateCopyWithImp
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SessionState&&(identical(other.pbAuth, pbAuth) || other.pbAuth == pbAuth));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SessionState&&(identical(other.pbAuth, pbAuth) || other.pbAuth == pbAuth)&&(identical(other.currentUser, currentUser) || other.currentUser == currentUser));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,pbAuth);
+int get hashCode => Object.hash(runtimeType,pbAuth,currentUser);
 
 @override
 String toString() {
-  return 'SessionState(pbAuth: $pbAuth)';
+  return 'SessionState(pbAuth: $pbAuth, currentUser: $currentUser)';
 }
 
 
@@ -112,7 +114,7 @@ abstract mixin class _$SessionStateCopyWith<$Res> implements $SessionStateCopyWi
   factory _$SessionStateCopyWith(_SessionState value, $Res Function(_SessionState) _then) = __$SessionStateCopyWithImpl;
 @override @useResult
 $Res call({
- String? pbAuth
+ String? pbAuth, CurrentUser? currentUser
 });
 
 
@@ -129,10 +131,11 @@ class __$SessionStateCopyWithImpl<$Res>
 
 /// Create a copy of SessionState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? pbAuth = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? pbAuth = freezed,Object? currentUser = freezed,}) {
   return _then(_SessionState(
 pbAuth: freezed == pbAuth ? _self.pbAuth : pbAuth // ignore: cast_nullable_to_non_nullable
-as String?,
+as String?,currentUser: freezed == currentUser ? _self.currentUser : currentUser // ignore: cast_nullable_to_non_nullable
+as CurrentUser?,
   ));
 }
 

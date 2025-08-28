@@ -1,6 +1,7 @@
 import 'package:async_redux/async_redux.dart';
 import 'package:business/redux/app_state.dart';
 import 'package:business/redux/session/actions/clean_session_action.dart';
+import 'package:business/redux/session/session_selectors.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:ui/image/avatar.dart';
@@ -18,6 +19,7 @@ class UserProfileSheetConnector extends StatelessWidget {
   Widget build(BuildContext context) => StoreConnector<AppState, _Vm>(
     debug: this,
     vm: () => _Factory(this),
+    shouldUpdateModel: selectSessionIsLoggedIn,
     builder: (context, vm) => UserProfileSheet(
       avatarSelector: vm.avatarSelector,
       fullName: vm.fullName,
@@ -34,36 +36,40 @@ class _Factory extends VmFactory<AppState, UserProfileSheetConnector, _Vm> {
   _Factory(super._connector);
 
   @override
-  _Vm fromStore() => _Vm(
-    avatarSelector: AvatarSelectorVm(
-      src: const AvatarSource.memory(null),
-      onImageSelect: (xfile) => {},
-    ),
-    fullName: ValueChangedVm(
-      value: 'John Doe',
-      onChanged: (value) {},
-      validator: nameValidator.call,
-    ),
-    email: const ValueChangedVm(
-      value: 'john.doe@example.com',
-      enabled: false,
-    ),
-    birthdate: ValueChangedVm(
-      value: DateTime.now(),
-      onChanged: (value) {},
-      validator: (value) {
-        if (value == null) {
-          return 'A date of birth is required.';
-        }
-        return null;
+  _Vm fromStore() {
+    final currentUser = selectSessionCurrentUser(state)!;
+
+    return _Vm(
+      avatarSelector: AvatarSelectorVm(
+        src: const AvatarSource.memory(null),
+        onImageSelect: (xfile) => {},
+      ),
+      fullName: ValueChangedVm(
+        value: currentUser.name,
+        onChanged: (value) {},
+        validator: nameValidator.call,
+      ),
+      email: ValueChangedVm(
+        value: currentUser.email,
+        enabled: false,
+      ),
+      birthdate: ValueChangedVm(
+        value: DateTime.now(),
+        onChanged: (value) {},
+        validator: (value) {
+          if (value == null) {
+            return 'A date of birth is required.';
+          }
+          return null;
+        },
+      ),
+      onPressedSave: null,
+      onPressedLogout: () async {
+        await dispatchAndWait(CleanSessionAction());
+        navigation.refresh();
       },
-    ),
-    onPressedSave: null,
-    onPressedLogout: () async {
-      await dispatchAndWait(CleanSessionAction());
-      navigation.refresh();
-    },
-  );
+    );
+  }
 }
 
 /// The view-model holds the part of the Store state the dumb-widget needs.
