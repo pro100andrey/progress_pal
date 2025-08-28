@@ -354,14 +354,9 @@ class S {
     return Intl.message('Done', name: 'done', desc: '', args: []);
   }
 
-  /// `Registration complete`
-  String get registrationComplete {
-    return Intl.message(
-      'Registration complete',
-      name: 'registrationComplete',
-      desc: '',
-      args: [],
-    );
+  /// `Successful!`
+  String get successful {
+    return Intl.message('Successful!', name: 'successful', desc: '', args: []);
   }
 
   /// `A confirmation link has been sent to {email}. Please check your inbox.`
@@ -369,6 +364,16 @@ class S {
     return Intl.message(
       'A confirmation link has been sent to $email. Please check your inbox.',
       name: 'registrationEmailSent',
+      desc: '',
+      args: [email],
+    );
+  }
+
+  /// `A password reset link has been sent to {email}. Please check your inbox.`
+  String forgotPasswordEmailSent(Object email) {
+    return Intl.message(
+      'A password reset link has been sent to $email. Please check your inbox.',
+      name: 'forgotPasswordEmailSent',
       desc: '',
       args: [email],
     );

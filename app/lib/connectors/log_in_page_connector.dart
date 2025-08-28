@@ -73,7 +73,7 @@ class _Vm extends Vm with EquatableMixin {
 
   final ValueChangedVm<String?> email;
   final ValueChangedVm<String?> password;
-  final VoidCallback? onPressedLogIn;
+  final VoidCallback onPressedLogIn;
   final VoidCallback onPressedForgotPassword;
   final VoidCallback onPressedRegister;
 

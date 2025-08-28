@@ -13,7 +13,9 @@ import '../common/validators.dart';
 import '../navigation/navigation.dart';
 
 class ResetPasswordPageConnector extends StatelessWidget {
-  const ResetPasswordPageConnector({super.key});
+  const ResetPasswordPageConnector({required this.token, super.key});
+
+  final String token;
 
   @override
   Widget build(BuildContext context) => StoreConnector<AppState, _Vm>(

@@ -78,7 +78,7 @@ class RegistrationPage extends StatelessWidget {
       if (context.mounted && result) {
         ShadToaster.of(context).show(
           ShadToast(
-            title: Text(S.current.registrationComplete),
+            title: Text(S.current.successful),
             description: Text(
               S.current.registrationEmailSent(email.value!),
             ),

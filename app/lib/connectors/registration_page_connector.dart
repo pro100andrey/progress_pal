@@ -80,7 +80,11 @@ class _Factory extends VmFactory<AppState, RegistrationPageConnector, _Vm> {
       ),
       onPressedRegister: () async {
         final status = await dispatchAndWait(RegistrationAction());
-        navigation.goToLogIn();
+
+        if (status.isCompletedOk) {
+          navigation.goToLogIn();
+        }
+
         return status.isCompletedOk;
       },
       onPressedBackToLogin: navigation.goToLogIn,

@@ -20,9 +20,12 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'en';
 
-  static String m0(value) => "Minimum length ${value} symbols";
+  static String m0(email) =>
+      "A password reset link has been sent to ${email}. Please check your inbox.";
 
-  static String m1(email) =>
+  static String m1(value) => "Minimum length ${value} symbols";
+
+  static String m2(email) =>
       "A confirmation link has been sent to ${email}. Please check your inbox.";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
@@ -50,6 +53,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "email": MessageLookupByLibrary.simpleMessage("Email"),
     "emailInvalid": MessageLookupByLibrary.simpleMessage("Email is invalid"),
     "forgotPassword": MessageLookupByLibrary.simpleMessage("Forgot password?"),
+    "forgotPasswordEmailSent": m0,
     "forgotPasswordInstructions": MessageLookupByLibrary.simpleMessage(
       "Enter your email address to receive a password reset link.",
     ),
@@ -63,7 +67,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "logoutConfirmation": MessageLookupByLibrary.simpleMessage(
       "Are you sure you want to log out?",
     ),
-    "minimumLengthSymbols": m0,
+    "minimumLengthSymbols": m1,
     "mustContainAtLeastOneLowercase": MessageLookupByLibrary.simpleMessage(
       "Must contain at least one lowercase",
     ),
@@ -79,10 +83,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Please check yor network settings.",
     ),
     "registration": MessageLookupByLibrary.simpleMessage("Registration"),
-    "registrationComplete": MessageLookupByLibrary.simpleMessage(
-      "Registration complete",
-    ),
-    "registrationEmailSent": m1,
+    "registrationEmailSent": m2,
     "registrationInstructions": MessageLookupByLibrary.simpleMessage(
       "Please fill out the form below to create your account.",
     ),
@@ -99,6 +100,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "sendResetLink": MessageLookupByLibrary.simpleMessage("Send Reset Link"),
     "signIn": MessageLookupByLibrary.simpleMessage("Sign in"),
     "signUp": MessageLookupByLibrary.simpleMessage("Sign up"),
+    "successful": MessageLookupByLibrary.simpleMessage("Successful!"),
     "supportedImageFormats": MessageLookupByLibrary.simpleMessage(
       "Supported: jpg, jpeg, png",
     ),

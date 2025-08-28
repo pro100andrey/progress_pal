@@ -19,7 +19,7 @@ class ForgotPasswordPage extends StatelessWidget {
 
   final bool isWaiting;
   final ValueChangedVm<String?> email;
-  final VoidCallback? onPressedResetPassword;
+  final Future<bool> Function() onPressedResetPassword;
   final VoidCallback onPressedBackToLogin;
 
   @override
@@ -36,7 +36,7 @@ class ForgotPasswordPage extends StatelessWidget {
             ),
             EmailInput(vm: email),
             ShadButton(
-              onPressed: () => onPressedResetPassword,
+              onPressed: () => _validateForm(formKey, context),
               leading: const Icon(LucideIcons.mail),
               child: Text(S.current.sendResetLink),
             ),
@@ -53,4 +53,24 @@ class ForgotPasswordPage extends StatelessWidget {
       ),
     ),
   );
+
+  Future<void> _validateForm(
+    GlobalKey<ShadFormState> formKey,
+    BuildContext context,
+  ) async {
+    if (formKey.currentState!.saveAndValidate()) {
+      final result = await onPressedResetPassword();
+
+      if (context.mounted && result) {
+        ShadToaster.of(context).show(
+          ShadToast(
+            title: Text(S.current.successful),
+            description: Text(
+              S.current.forgotPasswordEmailSent(email.value!),
+            ),
+          ),
+        );
+      }
+    }
+  }
 }

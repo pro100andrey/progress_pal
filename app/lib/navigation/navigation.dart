@@ -63,18 +63,23 @@ class Navigation {
           return ConfirmVerificationPageConnector(token: token);
         },
       ),
+
       GoRoute(
-        path: '/auth/reset-password',
-        builder: (context, state) => const ResetPasswordPageConnector(),
+        path: '/auth/auth/confirm-password-reset/:token',
+        builder: (context, state) {
+          final token = state.pathParameters['token']!;
+
+          return ResetPasswordPageConnector(token: token);
+        },
       ),
     ],
-    redirect: (context, state)  {
+    redirect: (context, state) {
       final isLoggedIn = _delegate.isLoggedIn;
       final cr = CurrentRoute(state);
 
       switch ((isLoggedIn, cr)) {
-        case (true, CurrentRoute(isConfirmVerification: true)):
-           _delegate.needLogout();
+        case (true, CurrentRoute(isNeedLogout: true)):
+          _delegate.needLogout();
           return null;
         case (true, CurrentRoute(isAuth: true)):
           return '/home';
@@ -104,8 +109,9 @@ extension type CurrentRoute(GoRouterState state) {
 
   bool get isAuth => fullPath.startsWith('/auth/');
 
-  bool get isConfirmVerification =>
-      fullPath.startsWith('/auth/confirm-verification/');
+  bool get isNeedLogout =>
+      fullPath.startsWith('/auth/confirm-verification/') ||
+      fullPath.startsWith('/auth/confirm-password-reset/');
 
   bool get isIndex => fullPath == '/';
 }

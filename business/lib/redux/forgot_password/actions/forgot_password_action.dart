@@ -1,4 +1,5 @@
 import 'package:async_redux/async_redux.dart';
+import 'package:pocketbase/pocketbase.dart';
 
 import '../../app_state.dart';
 import '../forgot_password_selectors.dart';
@@ -15,14 +16,12 @@ class ForgotPasswordAction extends ReduxAction<AppState> {
   Future<AppState> reduce() async {
     final email = selectForgotPasswordEmail(state)!;
 
-    await _forgotPasswordRequest(email: email);
+    try {
+      await getPocketBase.collection('users').requestPasswordReset(email);
+    } on ClientException catch (e) {
+      throw UserException(null, reason: e.response['message']);
+    }
 
     return state.copyWith(forgotPassword: const ForgotPasswordState());
   }
-}
-
-Future<void> _forgotPasswordRequest({required String email}) async {
-  await Future<dynamic>.delayed(const Duration(seconds: 2));
-
-  throw const UserException('Not implemented yet.');
 }

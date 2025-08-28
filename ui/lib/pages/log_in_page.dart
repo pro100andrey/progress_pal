@@ -22,7 +22,7 @@ class LogInPage extends StatelessWidget {
 
   final ValueChangedVm<String?> email;
   final ValueChangedVm<String?> password;
-  final VoidCallback? onPressedLogIn;
+  final VoidCallback onPressedLogIn;
   final VoidCallback onPressedForgotPassword;
   final VoidCallback onPressedRegister;
 
@@ -81,7 +81,7 @@ class LogInPage extends StatelessWidget {
 
   void _validateForm(GlobalKey<ShadFormState> formKey) {
     if (formKey.currentState!.saveAndValidate()) {
-      onPressedLogIn?.call();
+      onPressedLogIn();
     }
   }
 }

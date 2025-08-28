@@ -1,6 +1,7 @@
 import 'package:async_redux/async_redux.dart';
 import 'package:business/redux/app_state.dart';
 import 'package:business/redux/connectivity/connectivity_selectors.dart';
+import 'package:business/redux/forgot_password/forgot_password_selectors.dart';
 import 'package:business/redux/log_in/log_in_selectors.dart';
 import 'package:business/redux/registration/registration_selectors.dart';
 import 'package:equatable/equatable.dart';
@@ -41,7 +42,9 @@ class _Factory extends VmFactory<AppState, TopLevelPageConnector, _Vm> {
       overlay = _Overlay.noInternetConnection;
     }
 
-    if (selectLogInWaiting(state) || selectRegistrationIsWaiting(state)) {
+    if (selectLogInWaiting(state) ||
+        selectRegistrationIsWaiting(state) ||
+        selectForgotPasswordIsWaiting(state)) {
       overlay = _Overlay.barrier;
     }
     return _Vm(overlay: overlay);
