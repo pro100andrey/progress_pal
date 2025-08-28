@@ -16,15 +16,14 @@ mixin NavigationServiceDelegate {
 
 final navigation = Navigation();
 
+final _navigatorKey = GlobalKey<NavigatorState>();
+
 class Navigation {
   Navigation() {
     NavigateAction.setNavigatorKey(_navigatorKey);
   }
 
-  final _navigatorKey = GlobalKey<NavigatorState>();
-
   late final NavigationServiceDelegate _delegate;
-
   // ignore: avoid_setters_without_getters
   set delegate(NavigationServiceDelegate delegate) {
     _delegate = delegate;
@@ -63,9 +62,8 @@ class Navigation {
           return ConfirmVerificationPageConnector(token: token);
         },
       ),
-
       GoRoute(
-        path: '/auth/auth/confirm-password-reset/:token',
+        path: '/auth/confirm-password-reset/:token',
         builder: (context, state) {
           final token = state.pathParameters['token']!;
 
@@ -73,6 +71,7 @@ class Navigation {
         },
       ),
     ],
+
     redirect: (context, state) {
       final isLoggedIn = _delegate.isLoggedIn;
       final cr = CurrentRoute(state);
