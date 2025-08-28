@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
 
 typedef AvatarMemoryData = ({Uint8List bytes, String name});
-typedef AvatarNetworkData = ({String url, String? name});
+typedef AvatarNetworkData = String?;
 
 sealed class AvatarSource extends Equatable {
   const AvatarSource._();
@@ -25,7 +25,7 @@ sealed class AvatarSource extends Equatable {
   }) {
     switch (this) {
       case _NetworkAvatarSrc(data: final data) when data != null:
-        return network(data.url);
+        return network(data);
       case _MemoryAvatarSrc(data: final data) when data != null:
         return memory(data);
       case _:
@@ -40,7 +40,7 @@ class _NetworkAvatarSrc extends AvatarSource {
   final AvatarNetworkData? data;
 
   @override
-  List<Object?> get props => [data?.name];
+  List<Object?> get props => [data];
 }
 
 class _MemoryAvatarSrc extends AvatarSource {

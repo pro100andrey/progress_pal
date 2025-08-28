@@ -10,5 +10,18 @@ bool selectSessionIsValid(AppState state) =>
 CurrentUser? selectSessionCurrentUser(AppState state) =>
     state.session.currentUser;
 
+String? selectSessionCurrentUserAvatarUrl(AppState state) {
+  final currentUser = selectSessionCurrentUser(state);
+  final hasAvatar = currentUser?.hasAvatar ?? false;
+
+  if (!hasAvatar) {
+    return null;
+  }
+
+  final resultUrl = getPocketBase.baseURL + currentUser!.avatarUrlPath;
+
+  return resultUrl;
+}
+
 bool selectSessionIsLoggedIn(AppState state) =>
     selectSessionCurrentUser(state) != null;

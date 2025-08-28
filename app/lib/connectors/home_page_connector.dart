@@ -1,5 +1,6 @@
 import 'package:async_redux/async_redux.dart';
 import 'package:business/redux/app_state.dart';
+import 'package:business/redux/session/session_selectors.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:ui/image/avatar.dart';
@@ -27,13 +28,13 @@ class _Factory extends VmFactory<AppState, HomePageConnector, _Vm> {
   _Factory(super._connector);
 
   @override
-  _Vm fromStore() => _Vm(
-    isWaiting: false,
-    avatar: const AvatarSource.network((
-      name: null,
-      url: 'https://avatars.githubusercontent.com/u/2468119?v=4',
-    )),
-  );
+  _Vm fromStore() {
+    final avatarUrl = selectSessionCurrentUserAvatarUrl(state);
+    return _Vm(
+      isWaiting: false,
+      avatar: AvatarSource.network(avatarUrl),
+    );
+  }
 }
 
 /// The view-model holds the part of the Store state the dumb-widget needs.

@@ -38,10 +38,11 @@ class _Factory extends VmFactory<AppState, UserProfileSheetConnector, _Vm> {
   @override
   _Vm fromStore() {
     final currentUser = selectSessionCurrentUser(state)!;
+    final avatarUrl = selectSessionCurrentUserAvatarUrl(state);
 
     return _Vm(
       avatarSelector: AvatarSelectorVm(
-        src: const AvatarSource.memory(null),
+        src: AvatarSource.network(avatarUrl),
         onImageSelect: (xfile) => {},
       ),
       fullName: ValueChangedVm(
@@ -64,8 +65,8 @@ class _Factory extends VmFactory<AppState, UserProfileSheetConnector, _Vm> {
         },
       ),
       onPressedSave: null,
-      onPressedLogout: ()  {
-         dispatchSync(CleanSessionAction());
+      onPressedLogout: () {
+        dispatchSync(CleanSessionAction());
         navigation.refresh();
       },
     );

@@ -50,7 +50,7 @@ class RegistrationAction extends ReduxAction<AppState> {
             ],
           );
     } on ClientException catch (e) {
-      throw UserException('Error', reason: e.response['message']);
+      throw UserException(null, reason: e.response['message']);
     }
 
     await getPocketBase.collection('users').requestVerification(email);
