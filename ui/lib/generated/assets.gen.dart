@@ -17,9 +17,25 @@ import 'package:vector_graphics/vector_graphics.dart' as _vg;
 class $AssetsSvgGen {
   const $AssetsSvgGen();
 
+  /// Directory path: assets/svg/logo
+  $AssetsSvgLogoGen get logo => const $AssetsSvgLogoGen();
+
   /// Directory path: assets/svg/placeholders
   $AssetsSvgPlaceholdersGen get placeholders =>
       const $AssetsSvgPlaceholdersGen();
+}
+
+class $AssetsSvgLogoGen {
+  const $AssetsSvgLogoGen();
+
+  /// File path: assets/svg/logo/no_bg.svg
+  SvgGenImage get noBg => const SvgGenImage('assets/svg/logo/no_bg.svg');
+
+  /// File path: assets/svg/logo/with_bg.svg
+  SvgGenImage get withBg => const SvgGenImage('assets/svg/logo/with_bg.svg');
+
+  /// List of all assets
+  List<SvgGenImage> get values => [noBg, withBg];
 }
 
 class $AssetsSvgPlaceholdersGen {

@@ -43,3 +43,4 @@ flutter_gen:
 flutter:
   assets:
     - assets/svg/placeholders/
+    - assets/svg/logo/

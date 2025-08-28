@@ -4,6 +4,7 @@ import 'package:localization/generated/l10n.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
 
 import '../charts/weight_chart.dart';
+import '../generated/assets.gen.dart';
 import '../image/avatar.dart';
 
 class HomePage extends StatelessWidget {
@@ -22,7 +23,13 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) => Scaffold(
     appBar: AppBar(
       centerTitle: false,
-      title: Text(S.current.appName),
+      title: Row(
+        spacing: 8,
+        children: [
+          Assets.svg.logo.noBg.svg(width: 24, height: 24),
+          Text(S.current.appName),
+        ],
+      ),
       actions: [
         Avatar(
           source: avatar,
