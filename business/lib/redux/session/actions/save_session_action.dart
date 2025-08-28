@@ -18,7 +18,7 @@ class SaveSessionAction extends ReduxAction<AppState> {
 
     return state.copyWith.session(
       pbAuth: pbAuth,
-      currentUser: pbAuth != null ? CurrentUser(currentUser!) : null,
+      currentUser: currentUser != null ? CurrentUser(currentUser) : null,
     );
   }
 }
