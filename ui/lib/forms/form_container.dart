@@ -6,20 +6,28 @@ class FormContainer extends StatelessWidget {
     required this.child,
     this.centered = false,
     this.maxWidth = 320,
+    this.footer,
     super.key,
   });
 
   final Widget child;
   final bool centered;
+  final Widget? footer;
   final double maxWidth;
 
   @override
   Widget build(BuildContext context) => Align(
     alignment: centered ? Alignment.center : Alignment.topCenter,
     child: SingleChildScrollView(
-      child: ShadCard(
-        width: maxWidth,
-        child: child,
+      child: Column(
+        spacing: 16,
+        children: [
+          ShadCard(
+            width: maxWidth,
+            child: child,
+          ),
+          ?footer,
+        ],
       ),
     ),
   );

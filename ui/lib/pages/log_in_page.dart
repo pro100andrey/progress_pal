@@ -28,62 +28,54 @@ class LogInPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-    body: Stack(
-      children: [
-        FormContainer(
-          centered: true,
-          child: BaseForm(
-            builder: (formKey) => Column(
-              spacing: 16,
+    body: FormContainer(
+      centered: true,
+      footer: const TextVersion(),
+      child: BaseForm(
+        builder: (formKey) => Column(
+          spacing: 16,
+          children: [
+            AuthHeader(
+              title: S.current.welcomeBack,
+              description: S.current.loginInstructions,
+            ),
+            EmailInput(vm: email),
+            PasswordInput(vm: password),
+            Align(
+              alignment: Alignment.centerRight,
+              child: ShadButton.link(
+                onPressed: onPressedForgotPassword,
+                child: Text(S.current.forgotPassword),
+              ),
+            ),
+            ShadButton(
+              width: 120,
+              onPressed: () => _validateForm(formKey),
+              child: Text(S.current.signIn),
+            ),
+            const ShadSeparator.horizontal(
+              thickness: 1,
+              margin: EdgeInsets.symmetric(horizontal: 20),
+            ),
+            Wrap(
+              crossAxisAlignment: WrapCrossAlignment.center,
+              alignment: WrapAlignment.center,
               children: [
-                AuthHeader(
-                  title: S.current.welcomeBack,
-                  description: S.current.loginInstructions,
+                Text(
+                  S.current.dontHaveAccountYet,
+                  style: ShadTheme.of(
+                    context,
+                  ).textTheme.muted,
                 ),
-                EmailInput(vm: email),
-                PasswordInput(vm: password),
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: ShadButton.link(
-                    onPressed: onPressedForgotPassword,
-                    child: Text(S.current.forgotPassword),
-                  ),
-                ),
-                ShadButton(
-                  width: 120,
-                  onPressed: () => _validateForm(formKey),
-                  child: Text(S.current.signIn),
-                ),
-                const ShadSeparator.horizontal(
-                  thickness: 1,
-                  margin: EdgeInsets.symmetric(horizontal: 20),
-                ),
-                Wrap(
-                  crossAxisAlignment: WrapCrossAlignment.center,
-                  alignment: WrapAlignment.center,
-                  children: [
-                    Text(
-                      S.current.dontHaveAccountYet,
-                      style: ShadTheme.of(
-                        context,
-                      ).textTheme.muted,
-                    ),
-                    ShadButton.link(
-                      onPressed: onPressedRegister,
-                      child: Text(S.current.signUp),
-                    ),
-                  ],
+                ShadButton.link(
+                  onPressed: onPressedRegister,
+                  child: Text(S.current.signUp),
                 ),
               ],
             ),
-          ),
+          ],
         ),
-        const Positioned(
-          bottom: 16,
-          right: 16,
-          child: TextVersion(),
-        ),
-      ],
+      ),
     ),
   );
 

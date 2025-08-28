@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:localization/generated/l10n.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
 
+import '../dev/text_version.dart';
 import '../forms/base_form.dart';
 import '../forms/form_container.dart';
 import '../image/avatar_selector.dart';
@@ -43,6 +44,7 @@ class UserProfileSheet extends StatelessWidget {
     exitDuration: const Duration(milliseconds: 100),
 
     child: FormContainer(
+      footer: const TextVersion(),
       maxWidth: double.infinity,
       child: BaseForm(
         builder: (state) => Column(
