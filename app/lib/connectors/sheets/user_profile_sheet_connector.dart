@@ -1,6 +1,5 @@
 import 'package:async_redux/async_redux.dart';
 import 'package:business/redux/app_state.dart';
-import 'package:business/redux/session/actions/clean_session_action.dart';
 import 'package:business/redux/session/session_selectors.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
@@ -10,7 +9,6 @@ import 'package:ui/models/value_changed.dart';
 import 'package:ui/sheets/user_profile_sheet.dart';
 
 import '../../common/validators.dart';
-import '../../navigation/navigation.dart';
 
 class UserProfileSheetConnector extends StatelessWidget {
   const UserProfileSheetConnector({super.key});
@@ -26,7 +24,6 @@ class UserProfileSheetConnector extends StatelessWidget {
       email: vm.email,
       birthdate: vm.birthdate,
       onPressedSave: vm.onPressedSave,
-      onPressedLogout: vm.onPressedLogout,
     ),
   );
 }
@@ -65,10 +62,6 @@ class _Factory extends VmFactory<AppState, UserProfileSheetConnector, _Vm> {
         },
       ),
       onPressedSave: null,
-      onPressedLogout: () {
-        dispatchSync(CleanSessionAction());
-        navigation.refresh();
-      },
     );
   }
 }
@@ -81,7 +74,6 @@ class _Vm extends Vm with EquatableMixin {
     required this.email,
     required this.birthdate,
     required this.onPressedSave,
-    required this.onPressedLogout,
   });
 
   final AvatarSelectorVm avatarSelector;
@@ -89,7 +81,6 @@ class _Vm extends Vm with EquatableMixin {
   final ValueChangedVm<String?> email;
   final ValueChangedVm<DateTime?> birthdate;
   final VoidCallback? onPressedSave;
-  final VoidCallback onPressedLogout;
 
   @override
   List<Object?> get props => [

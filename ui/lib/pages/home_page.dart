@@ -1,46 +1,25 @@
 import 'package:easy_date_timeline/easy_date_timeline.dart';
 import 'package:flutter/material.dart';
-import 'package:localization/generated/l10n.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
 
 import '../charts/weight_chart.dart';
-import '../generated/assets.gen.dart';
-import '../image/avatar.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({
     required this.isWaiting,
-    required this.avatar,
-    required this.userProfile,
+
+    required this.profileMenu,
     super.key,
   });
 
   final bool isWaiting;
-  final AvatarSource avatar;
-  final Widget userProfile;
+  final Widget profileMenu;
 
   @override
   Widget build(BuildContext context) => Scaffold(
     appBar: AppBar(
-      centerTitle: false,
-      title: Row(
-        spacing: 8,
-        children: [
-          Assets.svg.logo.noBg.svg(width: 24, height: 24),
-          Text(S.current.appName),
-        ],
-      ),
       actions: [
-        Avatar(
-          source: avatar,
-          size: const Size.fromRadius(16),
-          onTap: () => showShadSheet(
-            side: ShadSheetSide.right,
-            context: context,
-            builder: (context) => userProfile,
-          ),
-        ),
-        const SizedBox(width: 16),
+        if (!isWaiting) profileMenu,
       ],
     ),
     body: const Center(child: Text('Home')),

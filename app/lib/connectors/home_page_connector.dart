@@ -3,10 +3,9 @@ import 'package:business/redux/app_state.dart';
 import 'package:business/redux/session/session_selectors.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
-import 'package:ui/image/avatar.dart';
 import 'package:ui/pages/home_page.dart';
 
-import 'sheets/user_profile_sheet_connector.dart';
+import 'menu/profile_menu_connector.dart';
 
 class HomePageConnector extends StatelessWidget {
   const HomePageConnector({super.key});
@@ -17,8 +16,7 @@ class HomePageConnector extends StatelessWidget {
     vm: () => _Factory(this),
     builder: (context, vm) => HomePage(
       isWaiting: vm.isWaiting,
-      avatar: vm.avatar,
-      userProfile: const UserProfileSheetConnector(),
+      profileMenu: const ProfileMenuConnector(),
     ),
   );
 }
@@ -29,10 +27,10 @@ class _Factory extends VmFactory<AppState, HomePageConnector, _Vm> {
 
   @override
   _Vm fromStore() {
-    final avatarUrl = selectSessionCurrentUserAvatarUrl(state);
+    final currentUser = selectSessionCurrentUser(state);
+
     return _Vm(
-      isWaiting: false,
-      avatar: AvatarSource.network(avatarUrl),
+      isWaiting: currentUser == null,
     );
   }
 }
@@ -41,12 +39,10 @@ class _Factory extends VmFactory<AppState, HomePageConnector, _Vm> {
 class _Vm extends Vm with EquatableMixin {
   _Vm({
     required this.isWaiting,
-    required this.avatar,
   });
 
   final bool isWaiting;
-  final AvatarSource avatar;
 
   @override
-  List<Object?> get props => [isWaiting, avatar];
+  List<Object?> get props => [isWaiting];
 }

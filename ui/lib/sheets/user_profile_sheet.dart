@@ -18,7 +18,6 @@ class UserProfileSheet extends StatelessWidget {
     required this.email,
     required this.birthdate,
     required this.onPressedSave,
-    required this.onPressedLogout,
     super.key,
     this.side = ShadSheetSide.right,
   });
@@ -29,7 +28,7 @@ class UserProfileSheet extends StatelessWidget {
   final ValueChangedVm<String?> email;
   final ValueChangedVm<DateTime?> birthdate;
   final VoidCallback? onPressedSave;
-  final VoidCallback onPressedLogout;
+
 
   @override
   Widget build(BuildContext context) => ShadSheet(
@@ -64,45 +63,12 @@ class UserProfileSheet extends StatelessWidget {
               onPressed: onPressedSave,
               child: Text(S.current.save),
             ),
-            ShadButton.destructive(
-              width: 150,
-              child: Text(S.current.logout),
-              onPressed: () => _onPressedLogout(context),
-            ),
+       
           ],
         ),
       ),
     ),
   );
 
-  Future<void> _onPressedLogout(BuildContext context) async {
-    final result = await showShadDialog<bool>(
-      context: context,
-      builder: (context) => ShadDialog.alert(
-        title: Text(S.current.areYouSure),
-        description: Padding(
-          padding: const EdgeInsets.only(bottom: 8),
-          child: Text(S.current.logoutConfirmation),
-        ),
-        actions: [
-          ShadButton.outline(
-            child: Text(S.current.cancel),
-            onPressed: () => Navigator.of(context).pop(false),
-          ),
-          ShadButton.destructive(
-            child: Text(S.current.logout),
-            onPressed: () => Navigator.of(context).pop(true),
-          ),
-        ],
-      ),
-    );
 
-    if ((result ?? false) && context.mounted) {
-      if (Navigator.canPop(context)) {
-        Navigator.of(context).pop();
-      }
-
-      onPressedLogout();
-    }
-  }
 }
