@@ -20,8 +20,7 @@ class AppConnector extends StatefulWidget {
   State<AppConnector> createState() => _AppConnectorState();
 }
 
-class _AppConnectorState extends State<AppConnector>
-    with NavigationServiceDelegate {
+class _AppConnectorState extends State<AppConnector> with NavigationDelegate {
   @override
   void initState() {
     super.initState();

@@ -13,5 +13,5 @@ String? selectResetPasswordPassword(AppState state) =>
 String? selectResetPasswordConfirmPassword(AppState state) =>
     state.resetPassword.confirmPassword;
 
-String? selectResetPasswordToken(AppState state) =>
-    state.resetPassword.token;
+/// Returns token value
+String? selectResetPasswordToken(AppState state) => state.resetPassword.token;

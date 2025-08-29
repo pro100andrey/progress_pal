@@ -9,23 +9,30 @@ import '../connectors/log_in_page_connector.dart';
 import '../connectors/registration_page_connector.dart';
 import '../connectors/reset_password_page_connector.dart';
 
-mixin NavigationServiceDelegate {
+/// A delegate for handling navigation events.
+mixin NavigationDelegate {
+  /// Whether the user is logged in.
   bool get isLoggedIn;
+
+  /// Called when the user needs to log out.
   void needLogout();
 }
 
+/// The global navigation object.
 final navigation = Navigation();
 
 final _navigatorKey = GlobalKey<NavigatorState>();
 
 class Navigation {
   Navigation() {
+    // Need for showing error messages in a dialog
+    // See https://asyncredux.com/flutter/basics/failed-actions#showing-error-messages-in-a-dialog
     NavigateAction.setNavigatorKey(_navigatorKey);
   }
 
-  late final NavigationServiceDelegate _delegate;
+  late final NavigationDelegate _delegate;
   // ignore: avoid_setters_without_getters
-  set delegate(NavigationServiceDelegate delegate) {
+  set delegate(NavigationDelegate delegate) {
     _delegate = delegate;
   }
 
@@ -71,20 +78,19 @@ class Navigation {
         },
       ),
     ],
-
     redirect: (context, state) {
       final isLoggedIn = _delegate.isLoggedIn;
-      final cr = CurrentRoute(state);
+      final cr = _CurrentRoute(state);
 
       switch ((isLoggedIn, cr)) {
-        case (true, CurrentRoute(isNeedLogout: true)):
+        case (true, _CurrentRoute(isNeedLogout: true)):
           _delegate.needLogout();
           return null;
-        case (true, CurrentRoute(isAuth: true)):
+        case (true, _CurrentRoute(isAuth: true)):
           return '/home';
-        case (false, CurrentRoute(isAuth: false)):
+        case (false, _CurrentRoute(isAuth: false)):
           return '/auth/login';
-        case (true, CurrentRoute(isIndex: true)):
+        case (true, _CurrentRoute(isIndex: true)):
           return '/home';
       }
 
@@ -92,25 +98,28 @@ class Navigation {
     },
   );
 
+  /// Navigate to the forgot password page.
   void goToForgotPassword() => router.go('/auth/forgot-password');
 
+  /// Navigate to the registration page.
   void goToRegistration() => router.go('/auth/registration');
 
+  /// Navigate to the log in page.
   void goToLogIn() => router.go('/auth/login');
 
-  void goToHome() => router.go('/home');
-
+  /// Refresh the route. Needs to be called for redirection to take effect.
   void refresh() => router.refresh();
 }
 
-extension type CurrentRoute(GoRouterState state) {
-  String get fullPath => state.uri.path;
+/// Helper extension for extracting information from the current route.
+extension type _CurrentRoute(GoRouterState state) {
+  String get _fullPath => state.uri.path;
 
-  bool get isAuth => fullPath.startsWith('/auth/');
+  bool get isAuth => _fullPath.startsWith('/auth/');
 
   bool get isNeedLogout =>
-      fullPath.startsWith('/auth/confirm-verification/') ||
-      fullPath.startsWith('/auth/confirm-password-reset/');
+      _fullPath.startsWith('/auth/confirm-verification/') ||
+      _fullPath.startsWith('/auth/confirm-password-reset/');
 
-  bool get isIndex => fullPath == '/';
+  bool get isIndex => _fullPath == '/';
 }
