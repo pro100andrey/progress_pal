@@ -108,7 +108,7 @@ class _AvatarSelectorState extends State<AvatarSelector> {
               description: Text(S.current.supportedImageFormats),
             ),
           );
-          
+
           return;
         }
 

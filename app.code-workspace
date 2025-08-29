@@ -17,10 +17,6 @@
             "path": "business"
         },
         {
-            "name": "models",
-            "path": "models"
-        },
-        {
             "name": "storage",
             "path": "storage"
         },
