@@ -4,6 +4,7 @@ import 'package:business/redux/connectivity/connectivity_selectors.dart';
 import 'package:business/redux/forgot_password/forgot_password_selectors.dart';
 import 'package:business/redux/log_in/log_in_selectors.dart';
 import 'package:business/redux/registration/registration_selectors.dart';
+import 'package:business/redux/reset_password/reset_password_selectors.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:ui/overlays/barrier_overlay.dart';
@@ -44,7 +45,8 @@ class _Factory extends VmFactory<AppState, TopLevelPageConnector, _Vm> {
 
     if (selectLogInWaiting(state) ||
         selectRegistrationIsWaiting(state) ||
-        selectForgotPasswordIsWaiting(state)) {
+        selectForgotPasswordIsWaiting(state) ||
+        selectResetPasswordIsWaiting(state)) {
       overlay = _Overlay.barrier;
     }
     return _Vm(overlay: overlay);

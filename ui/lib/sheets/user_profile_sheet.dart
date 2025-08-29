@@ -47,7 +47,7 @@ class UserProfileSheet extends StatelessWidget {
       footer: const TextVersion(),
       maxWidth: double.infinity,
       child: BaseForm(
-        builder: (state) => Column(
+        builder: (context, state) => Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           spacing: 16,

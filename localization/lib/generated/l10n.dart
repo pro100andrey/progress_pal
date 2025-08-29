@@ -129,6 +129,16 @@ class S {
     );
   }
 
+  /// `Please enter your new password below.`
+  String get resetPasswordInstructions {
+    return Intl.message(
+      'Please enter your new password below.',
+      name: 'resetPasswordInstructions',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Email`
   String get email {
     return Intl.message('Email', name: 'email', desc: '', args: []);
@@ -384,6 +394,16 @@ class S {
     return Intl.message(
       'Verification successful!',
       name: 'verificationSuccessful',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Try logging in with your new password.`
+  String get resetPasswordSuccess {
+    return Intl.message(
+      'Try logging in with your new password.',
+      name: 'resetPasswordSuccess',
       desc: '',
       args: [],
     );

@@ -7,7 +7,6 @@ abstract class ResetPasswordState with _$ResetPasswordState {
   const factory ResetPasswordState({
     String? password,
     String? confirmPassword,
+    String? token,
   }) = _ResetPasswordState;
 }
-
-enum ResetPasswordWaiting { wait }

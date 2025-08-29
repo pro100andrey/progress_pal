@@ -32,7 +32,7 @@ class LogInPage extends StatelessWidget {
       centered: true,
       footer: const TextVersion(),
       child: BaseForm(
-        builder: (formKey) => Column(
+        builder: (context, formKey) => Column(
           spacing: 16,
           children: [
             AuthHeader(

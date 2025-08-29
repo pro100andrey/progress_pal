@@ -89,6 +89,12 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "reset": MessageLookupByLibrary.simpleMessage("Reset"),
     "resetPassword": MessageLookupByLibrary.simpleMessage("Reset password"),
+    "resetPasswordInstructions": MessageLookupByLibrary.simpleMessage(
+      "Please enter your new password below.",
+    ),
+    "resetPasswordSuccess": MessageLookupByLibrary.simpleMessage(
+      "Try logging in with your new password.",
+    ),
     "rotateCcw": MessageLookupByLibrary.simpleMessage(
       "Rotate counterclockwise",
     ),

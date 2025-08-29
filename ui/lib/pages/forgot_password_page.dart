@@ -27,7 +27,7 @@ class ForgotPasswordPage extends StatelessWidget {
     body: FormContainer(
       centered: true,
       child: BaseForm(
-        builder: (formKey) => Column(
+        builder: (context, formKey) => Column(
           spacing: 16,
           children: [
             AuthHeader(

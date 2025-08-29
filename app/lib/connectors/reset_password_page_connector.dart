@@ -3,6 +3,7 @@ import 'package:business/redux/app_state.dart';
 import 'package:business/redux/reset_password/actions/reset_password_action.dart';
 import 'package:business/redux/reset_password/actions/set_confirm_password_action.dart';
 import 'package:business/redux/reset_password/actions/set_password_action.dart';
+import 'package:business/redux/reset_password/actions/set_reset_password_token_action.dart';
 import 'package:business/redux/reset_password/reset_password_selectors.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
@@ -21,6 +22,8 @@ class ResetPasswordPageConnector extends StatelessWidget {
   Widget build(BuildContext context) => StoreConnector<AppState, _Vm>(
     debug: this,
     vm: () => _Factory(this),
+    onInit: (store) =>
+        store.dispatch(SetResetPasswordTokenAction(token: token)),
     builder: (context, vm) => ResetPasswordPage(
       password: vm.password,
       confirmPassword: vm.confirmPassword,
@@ -37,13 +40,7 @@ class _Factory extends VmFactory<AppState, ResetPasswordPageConnector, _Vm> {
   @override
   _Vm fromStore() {
     final password = selectResetPasswordPassword(state);
-    // final passwordError = passwordValidator(password);
     final confirmPassword = selectResetPasswordConfirmPassword(state);
-    // final confirmPasswordError = passwordValidator(confirmPassword);
-    // final passwordsMatchError = passwordsMatchValidator(
-    //   password,
-    //   confirmPassword,
-    // );
 
     return _Vm(
       password: ValueChangedVm(
@@ -61,7 +58,15 @@ class _Factory extends VmFactory<AppState, ResetPasswordPageConnector, _Vm> {
         },
         onChanged: (value) => dispatchSync(SetConfirmPasswordAction(value!)),
       ),
-      onPressedResetPassword: () => dispatchSync(ResetPasswordAction()),
+      onPressedResetPassword: () async {
+        final status = await dispatchAndWait(ResetPasswordAction());
+
+        if (status.isCompletedOk) {
+          navigation.goToLogIn();
+        }
+
+        return status.isCompletedOk;
+      },
       onPressedBackToLogin: navigation.goToLogIn,
     );
   }
@@ -78,7 +83,7 @@ class _Vm extends Vm with EquatableMixin {
 
   final ValueChangedVm<String?> password;
   final ValueChangedVm<String?> confirmPassword;
-  final VoidCallback onPressedResetPassword;
+  final Future<bool> Function() onPressedResetPassword;
   final VoidCallback onPressedBackToLogin;
 
   @override

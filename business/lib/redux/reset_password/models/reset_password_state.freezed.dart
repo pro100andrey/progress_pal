@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$ResetPasswordState {
 
- String? get password; String? get confirmPassword;
+ String? get password; String? get confirmPassword; String? get token;
 /// Create a copy of ResetPasswordState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,16 +25,16 @@ $ResetPasswordStateCopyWith<ResetPasswordState> get copyWith => _$ResetPasswordS
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ResetPasswordState&&(identical(other.password, password) || other.password == password)&&(identical(other.confirmPassword, confirmPassword) || other.confirmPassword == confirmPassword));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ResetPasswordState&&(identical(other.password, password) || other.password == password)&&(identical(other.confirmPassword, confirmPassword) || other.confirmPassword == confirmPassword)&&(identical(other.token, token) || other.token == token));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,password,confirmPassword);
+int get hashCode => Object.hash(runtimeType,password,confirmPassword,token);
 
 @override
 String toString() {
-  return 'ResetPasswordState(password: $password, confirmPassword: $confirmPassword)';
+  return 'ResetPasswordState(password: $password, confirmPassword: $confirmPassword, token: $token)';
 }
 
 
@@ -45,7 +45,7 @@ abstract mixin class $ResetPasswordStateCopyWith<$Res>  {
   factory $ResetPasswordStateCopyWith(ResetPasswordState value, $Res Function(ResetPasswordState) _then) = _$ResetPasswordStateCopyWithImpl;
 @useResult
 $Res call({
- String? password, String? confirmPassword
+ String? password, String? confirmPassword, String? token
 });
 
 
@@ -62,10 +62,11 @@ class _$ResetPasswordStateCopyWithImpl<$Res>
 
 /// Create a copy of ResetPasswordState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? password = freezed,Object? confirmPassword = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? password = freezed,Object? confirmPassword = freezed,Object? token = freezed,}) {
   return _then(_self.copyWith(
 password: freezed == password ? _self.password : password // ignore: cast_nullable_to_non_nullable
 as String?,confirmPassword: freezed == confirmPassword ? _self.confirmPassword : confirmPassword // ignore: cast_nullable_to_non_nullable
+as String?,token: freezed == token ? _self.token : token // ignore: cast_nullable_to_non_nullable
 as String?,
   ));
 }
@@ -78,11 +79,12 @@ as String?,
 
 
 class _ResetPasswordState implements ResetPasswordState {
-  const _ResetPasswordState({this.password, this.confirmPassword});
+  const _ResetPasswordState({this.password, this.confirmPassword, this.token});
   
 
 @override final  String? password;
 @override final  String? confirmPassword;
+@override final  String? token;
 
 /// Create a copy of ResetPasswordState
 /// with the given fields replaced by the non-null parameter values.
@@ -94,16 +96,16 @@ _$ResetPasswordStateCopyWith<_ResetPasswordState> get copyWith => __$ResetPasswo
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ResetPasswordState&&(identical(other.password, password) || other.password == password)&&(identical(other.confirmPassword, confirmPassword) || other.confirmPassword == confirmPassword));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ResetPasswordState&&(identical(other.password, password) || other.password == password)&&(identical(other.confirmPassword, confirmPassword) || other.confirmPassword == confirmPassword)&&(identical(other.token, token) || other.token == token));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,password,confirmPassword);
+int get hashCode => Object.hash(runtimeType,password,confirmPassword,token);
 
 @override
 String toString() {
-  return 'ResetPasswordState(password: $password, confirmPassword: $confirmPassword)';
+  return 'ResetPasswordState(password: $password, confirmPassword: $confirmPassword, token: $token)';
 }
 
 
@@ -114,7 +116,7 @@ abstract mixin class _$ResetPasswordStateCopyWith<$Res> implements $ResetPasswor
   factory _$ResetPasswordStateCopyWith(_ResetPasswordState value, $Res Function(_ResetPasswordState) _then) = __$ResetPasswordStateCopyWithImpl;
 @override @useResult
 $Res call({
- String? password, String? confirmPassword
+ String? password, String? confirmPassword, String? token
 });
 
 
@@ -131,10 +133,11 @@ class __$ResetPasswordStateCopyWithImpl<$Res>
 
 /// Create a copy of ResetPasswordState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? password = freezed,Object? confirmPassword = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? password = freezed,Object? confirmPassword = freezed,Object? token = freezed,}) {
   return _then(_ResetPasswordState(
 password: freezed == password ? _self.password : password // ignore: cast_nullable_to_non_nullable
 as String?,confirmPassword: freezed == confirmPassword ? _self.confirmPassword : confirmPassword // ignore: cast_nullable_to_non_nullable
+as String?,token: freezed == token ? _self.token : token // ignore: cast_nullable_to_non_nullable
 as String?,
   ));
 }

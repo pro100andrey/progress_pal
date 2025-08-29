@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:localization/localization.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
 
+import '../forms/base_form.dart';
+import '../forms/form_container.dart';
 import '../inputs/confirm_password_input.dart';
 import '../inputs/password_input.dart';
 import '../models/value_changed.dart';
+import '../tiles/auth_header.dart';
 
 class ResetPasswordPage extends StatelessWidget {
   const ResetPasswordPage({
@@ -17,34 +20,56 @@ class ResetPasswordPage extends StatelessWidget {
 
   final ValueChangedVm<String?> password;
   final ValueChangedVm<String?> confirmPassword;
-  final VoidCallback onPressedResetPassword;
+  final Future<bool> Function() onPressedResetPassword;
   final VoidCallback onPressedBackToLogin;
 
   @override
   Widget build(BuildContext context) => Scaffold(
-    body: Stack(
-      fit: StackFit.expand,
-      children: [
-        Column(
+    body: FormContainer(
+      centered: true,
+      child: BaseForm(
+        builder: (context, formKey) => Column(
+          spacing: 16,
           children: [
-            const SizedBox(height: 24),
+            AuthHeader(
+              title: S.current.resetPassword,
+              description: S.current.resetPasswordInstructions,
+            ),
             PasswordInput(vm: password),
-            const SizedBox(height: 16),
             ConfirmPasswordInput(vm: confirmPassword),
-            const SizedBox(height: 16),
-
             ShadButton(
-              onPressed: () => onPressedResetPassword,
+              onPressed: () async => _validateForm(formKey, context),
               child: Text(S.current.resetPassword),
             ),
-            const SizedBox(height: 16),
+            const ShadSeparator.horizontal(
+              thickness: 1,
+              margin: EdgeInsets.symmetric(horizontal: 20),
+            ),
             TextButton(
               onPressed: onPressedBackToLogin,
               child: Text(S.current.backToLogIn),
             ),
           ],
         ),
-      ],
+      ),
     ),
   );
+
+  Future<void> _validateForm(
+    GlobalKey<ShadFormState> formKey,
+    BuildContext context,
+  ) async {
+    if (formKey.currentState!.saveAndValidate()) {
+      final result = await onPressedResetPassword();
+
+      if (context.mounted && result) {
+        ShadToaster.of(context).show(
+          ShadToast(
+            title: Text(S.current.successful),
+            description: Text(S.current.resetPasswordSuccess),
+          ),
+        );
+      }
+    }
+  }
 }
