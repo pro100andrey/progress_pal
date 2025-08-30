@@ -1,0 +1,39 @@
+Exercise title
+Muscle Group:
+    Abs
+    Back
+    Biceps
+    Cardio
+    Chest
+    Forearms
+    Glutes
+    Shoulders
+    Triceps
+    Upper Legs
+    Lower Legs
+    Other/Misc
+
+Equipment:
+    Body weight
+    Bands
+    Barbell
+    Bench
+    Dumbbell
+    Exercise ball
+    Ez curl bar
+    Foam roll
+    Kettlebell
+    Machine Cardio
+    Machine Strength
+    Other
+    Pullup Bar
+    Weight plate
+
+Record type:
+    Weight and Reps
+    Reps
+    Cardio
+    Duration
+    Reps and Duration
+
+Exercise Instruction

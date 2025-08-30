@@ -498,6 +498,21 @@ class S {
       args: [],
     );
   }
+
+  /// `Progress`
+  String get progress {
+    return Intl.message('Progress', name: 'progress', desc: '', args: []);
+  }
+
+  /// `Workouts`
+  String get workouts {
+    return Intl.message('Workouts', name: 'workouts', desc: '', args: []);
+  }
+
+  /// `Exercises`
+  String get exercises {
+    return Intl.message('Exercises', name: 'exercises', desc: '', args: []);
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

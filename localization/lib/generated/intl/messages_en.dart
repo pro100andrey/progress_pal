@@ -52,6 +52,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "email": MessageLookupByLibrary.simpleMessage("Email"),
     "emailInvalid": MessageLookupByLibrary.simpleMessage("Email is invalid"),
+    "exercises": MessageLookupByLibrary.simpleMessage("Exercises"),
     "forgotPassword": MessageLookupByLibrary.simpleMessage("Forgot password?"),
     "forgotPasswordEmailSent": m0,
     "forgotPasswordInstructions": MessageLookupByLibrary.simpleMessage(
@@ -82,6 +83,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "pleaseCheckYorNetworkSettings": MessageLookupByLibrary.simpleMessage(
       "Please check yor network settings.",
     ),
+    "progress": MessageLookupByLibrary.simpleMessage("Progress"),
     "registration": MessageLookupByLibrary.simpleMessage("Registration"),
     "registrationEmailSent": m2,
     "registrationInstructions": MessageLookupByLibrary.simpleMessage(
@@ -124,5 +126,6 @@ class MessageLookup extends MessageLookupByLibrary {
       "Verification successful!",
     ),
     "welcomeBack": MessageLookupByLibrary.simpleMessage("Welcome back!"),
+    "workouts": MessageLookupByLibrary.simpleMessage("Workouts"),
   };
 }

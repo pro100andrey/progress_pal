@@ -52,5 +52,8 @@
   "unknownError": "Uh oh! Something went wrong.",
   "dismiss": "Dismiss",
   "unsupportedImageFormat": "Unsupported image format",
-  "supportedImageFormats": "Supported: jpg, jpeg, png"
+  "supportedImageFormats": "Supported: jpg, jpeg, png",
+  "progress": "Progress",
+  "workouts": "Workouts",
+  "exercises": "Exercises"
 }
