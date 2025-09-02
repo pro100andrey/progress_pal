@@ -6,6 +6,8 @@ version: 0.1.0+41
 environment:
   sdk: ^3.9.0
 
+resolution: workspace
+
 dependencies:
   async_redux: ^25.4.0
   business:
