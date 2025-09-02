@@ -1,0 +1,57 @@
+import 'package:async_redux/async_redux.dart';
+import 'package:business/redux/app_state.dart';
+import 'package:business/redux/progress_view/actions/init_progress_view_action.dart';
+import 'package:business/redux/progress_view/actions/set_selected_date_action.dart';
+import 'package:business/redux/progress_view/progress_view_selectors.dart';
+import 'package:business/redux/session/session_selectors.dart';
+import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
+import 'package:ui/models/value_changed.dart';
+import 'package:ui/pages/progress_page.dart';
+
+class ProgressPageConnector extends StatelessWidget {
+  const ProgressPageConnector({super.key});
+
+  @override
+  Widget build(BuildContext context) => StoreConnector<AppState, _Vm>(
+    debug: this,
+    shouldUpdateModel: selectSessionIsLoggedIn,
+    onInit: (store) => store.dispatchAndWait(InitProgressViewAction()),
+    vm: () => _Factory(this),
+    builder: (context, vm) => ProgressPage(dateSelector: vm.dateSelector),
+  );
+}
+
+/// Factory that creates a view-model for the StoreConnector.
+class _Factory extends VmFactory<AppState, ProgressPageConnector, _Vm> {
+  _Factory(super._connector);
+
+  @override
+  _Vm fromStore() {
+    final selectedDate = selectProgressViewSelectedDate(state);
+    final currentUser = selectSessionCurrentUser(state)!;
+
+    return _Vm(
+      dateSelector: DateTimeLineSelectorVm(
+        firstDate: currentUser.createdAt,
+        focusedDate: ValueChangedVm(
+          value: selectedDate,
+          onChanged: (date) =>
+              dispatchAndWait(SetSelectedDateAction(date: date)),
+        ),
+      ),
+    );
+  }
+}
+
+/// The view-model holds the part of the Store state the dumb-widget needs.
+class _Vm extends Vm with EquatableMixin {
+  _Vm({
+    required this.dateSelector,
+  });
+
+  final DateTimeLineSelectorVm dateSelector;
+
+  @override
+  List<Object?> get props => [dateSelector];
+}

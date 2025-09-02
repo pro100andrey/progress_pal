@@ -1,0 +1,12 @@
+Weight
+Body Fat
+Waist
+Chest
+Arms
+forearms
+Shoulders
+Hips
+Thighs
+Calves
+Neck
+Height

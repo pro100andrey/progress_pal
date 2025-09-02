@@ -1,0 +1,33 @@
+name: Build and Deploy Flutter Web
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-run:
+    runs-on: self-hosted
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Stop old containers if any
+        run: |
+          if [ -f "docker-compose.yml" ]; then
+            docker compose down || true
+          else
+            echo "No docker-compose.yml found, skipping docker-compose down"
+          fi
+
+      - name: Build Docker image
+        env:
+          PB_URL: ${{ vars.PB_URL }}
+        run: |
+          docker compose build
+
+      - name: Run server
+        run: |
+          docker compose up -d
