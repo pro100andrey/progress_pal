@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$LanguageState {
 
- String? get value;
+ SupportedLanguage get language;
 /// Create a copy of LanguageState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,16 +25,16 @@ $LanguageStateCopyWith<LanguageState> get copyWith => _$LanguageStateCopyWithImp
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is LanguageState&&(identical(other.value, value) || other.value == value));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is LanguageState&&(identical(other.language, language) || other.language == language));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,value);
+int get hashCode => Object.hash(runtimeType,language);
 
 @override
 String toString() {
-  return 'LanguageState(value: $value)';
+  return 'LanguageState(language: $language)';
 }
 
 
@@ -45,7 +45,7 @@ abstract mixin class $LanguageStateCopyWith<$Res>  {
   factory $LanguageStateCopyWith(LanguageState value, $Res Function(LanguageState) _then) = _$LanguageStateCopyWithImpl;
 @useResult
 $Res call({
- String? value
+ SupportedLanguage language
 });
 
 
@@ -62,10 +62,10 @@ class _$LanguageStateCopyWithImpl<$Res>
 
 /// Create a copy of LanguageState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? value = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? language = null,}) {
   return _then(_self.copyWith(
-value: freezed == value ? _self.value : value // ignore: cast_nullable_to_non_nullable
-as String?,
+language: null == language ? _self.language : language // ignore: cast_nullable_to_non_nullable
+as SupportedLanguage,
   ));
 }
 
@@ -77,10 +77,10 @@ as String?,
 
 
 class _LanguageState implements LanguageState {
-  const _LanguageState({this.value});
+  const _LanguageState({this.language = SupportedLanguage.en});
   
 
-@override final  String? value;
+@override@JsonKey() final  SupportedLanguage language;
 
 /// Create a copy of LanguageState
 /// with the given fields replaced by the non-null parameter values.
@@ -92,16 +92,16 @@ _$LanguageStateCopyWith<_LanguageState> get copyWith => __$LanguageStateCopyWith
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _LanguageState&&(identical(other.value, value) || other.value == value));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _LanguageState&&(identical(other.language, language) || other.language == language));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,value);
+int get hashCode => Object.hash(runtimeType,language);
 
 @override
 String toString() {
-  return 'LanguageState(value: $value)';
+  return 'LanguageState(language: $language)';
 }
 
 
@@ -112,7 +112,7 @@ abstract mixin class _$LanguageStateCopyWith<$Res> implements $LanguageStateCopy
   factory _$LanguageStateCopyWith(_LanguageState value, $Res Function(_LanguageState) _then) = __$LanguageStateCopyWithImpl;
 @override @useResult
 $Res call({
- String? value
+ SupportedLanguage language
 });
 
 
@@ -129,10 +129,10 @@ class __$LanguageStateCopyWithImpl<$Res>
 
 /// Create a copy of LanguageState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? value = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? language = null,}) {
   return _then(_LanguageState(
-value: freezed == value ? _self.value : value // ignore: cast_nullable_to_non_nullable
-as String?,
+language: null == language ? _self.language : language // ignore: cast_nullable_to_non_nullable
+as SupportedLanguage,
   ));
 }
 

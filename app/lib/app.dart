@@ -1,5 +1,7 @@
 import 'package:async_redux/async_redux.dart';
 import 'package:business/redux/app_state.dart';
+import 'package:business/redux/language/language_selectors.dart';
+import 'package:business/redux/language/models/language_state.dart';
 import 'package:business/redux/session/actions/clean_session_action.dart';
 import 'package:business/redux/session/session_selectors.dart';
 import 'package:equatable/equatable.dart';
@@ -57,6 +59,7 @@ class _AppConnectorState extends State<AppConnector> with NavigationDelegate {
           GlobalCupertinoLocalizations.delegate,
         ],
         supportedLocales: S.delegate.supportedLocales,
+        locale: Locale(vm.language.code),
         builder: (context, child) => ShadAppBuilder(
           child: TopLevelPageConnector(
             child: UserExceptionDialog<AppState>(
@@ -81,14 +84,18 @@ class _Factory extends VmFactory<AppState, AppConnector, _Vm> {
   _Factory(super._connector);
 
   @override
-  _Vm fromStore() => _Vm(language: 0);
+  _Vm fromStore() {
+    final language = selectLanguage(state);
+
+    return _Vm(language: language);
+  }
 }
 
 /// The view-model holds the part of the Store state the dumb-widget needs.
 class _Vm extends Vm with EquatableMixin {
   _Vm({required this.language});
 
-  final int language;
+  final SupportedLanguage language;
 
   @override
   List<Object?> get props => [language];

@@ -6,6 +6,8 @@ version: 1.0.0
 environment:
   sdk: ^3.9.0
 
+resolution: workspace
+
 dependencies:
   easy_date_timeline: ^2.0.9
   equatable: ^2.0.7
