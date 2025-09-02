@@ -3,12 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:localization/generated/l10n.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
 
-import '../generated/assets.gen.dart';
-
 enum DrawerItem {
   progress,
   workouts,
   exercises;
+
+  bool get isProgress => this == progress;
+  bool get isWorkouts => this == workouts;
+  bool get isExercises => this == exercises;
 
   String get title {
     switch (this) {
@@ -40,9 +42,14 @@ class AppDrawerVm extends Equatable {
 }
 
 class AppDrawer extends StatelessWidget {
-  const AppDrawer({required this.vm, super.key});
+  const AppDrawer({
+    required this.vm,
+    required this.profileMenu,
+    super.key,
+  });
 
   final AppDrawerVm vm;
+  final Widget? profileMenu;
 
   @override
   Widget build(BuildContext context) => Drawer(
@@ -62,47 +69,77 @@ class AppDrawer extends StatelessWidget {
         children: [
           SizedBox(
             height: kToolbarHeight,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              spacing: 8,
-              children: [
-                Assets.svg.logo.noBg.svg(width: 28, height: 28),
-                Text(
-                  S.current.appName,
-                  style: ShadTheme.of(context).textTheme.h4,
-                ),
-              ],
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  ShadButton.ghost(
+                    onPressed: () {},
+                    child: const Icon(LucideIcons.settings),
+                  ),
+                ],
+              ),
             ),
           ),
-          const ShadSeparator.horizontal(thickness: 1, margin: EdgeInsets.zero),
           Expanded(
-            child: ListView(
-              padding: const EdgeInsets.only(bottom: 16, top: 16),
-              children: [
-                ListTile(
-                  selected: vm.selectedItem == DrawerItem.progress,
-                  selectedColor: ShadTheme.of(context).colorScheme.selection,
-                  leading: const Icon(LucideIcons.trendingUp),
-                  title: Text(S.current.progress),
-                  onTap: vm.onPressedProgress,
-                ),
-                ListTile(
-                  selected: vm.selectedItem == DrawerItem.workouts,
-                  selectedColor: ShadTheme.of(context).colorScheme.selection,
-                  leading: const Icon(LucideIcons.bicepsFlexed),
-                  title: Text(S.current.workouts),
-                  onTap: vm.onPressedWorkouts,
-                ),
-                ListTile(
-                  selected: vm.selectedItem == DrawerItem.exercises,
-                  selectedColor: ShadTheme.of(context).colorScheme.selection,
-                  leading: const Icon(LucideIcons.dumbbell),
-                  title: Text(S.current.exercises),
-                  onTap: vm.onPressedExercises,
-                ),
-              ],
+            child: Builder(
+              builder: (context) {
+                final selectionColor = ShadTheme.of(
+                  context,
+                ).colorScheme.selection;
+
+                final selectedTileColor = selectionColor.withAlpha(10);
+
+                final shape = RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                );
+
+                return ListView(
+                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                  children: [
+                    ListTile(
+                      minTileHeight: 40,
+                      selected: vm.selectedItem.isProgress,
+                      selectedColor: selectionColor,
+                      leading: const Icon(LucideIcons.trendingUp),
+                      title: Text(S.current.progress),
+                      onTap: vm.onPressedProgress,
+                      selectedTileColor: selectedTileColor,
+                      shape: shape,
+                    ),
+                    const SizedBox(height: 2),
+                    ListTile(
+                      minTileHeight: 40,
+                      selected: vm.selectedItem.isWorkouts,
+                      selectedColor: selectionColor,
+                      leading: const Icon(LucideIcons.bicepsFlexed),
+                      title: Text(S.current.workouts),
+                      onTap: vm.onPressedWorkouts,
+                      selectedTileColor: selectedTileColor,
+                      shape: shape,
+                    ),
+                    const SizedBox(height: 2),
+                    ListTile(
+                      minTileHeight: 40,
+                      selected: vm.selectedItem.isExercises,
+                      selectedColor: selectionColor,
+                      leading: const Icon(LucideIcons.dumbbell),
+                      title: Text(S.current.exercises),
+                      onTap: vm.onPressedExercises,
+                      selectedTileColor: selectedTileColor,
+                      shape: shape,
+                    ),
+                  ],
+                );
+              },
             ),
           ),
+          if (profileMenu != null)
+            Padding(
+              padding: const EdgeInsets.all(8),
+              child: profileMenu,
+            ),
         ],
       ),
     ),

@@ -27,17 +27,20 @@ class HomePage extends StatelessWidget {
         Row(
           children: [
             if (Device.screenType != ScreenType.mobile)
-              AppDrawer(vm: appDrawer),
+              AppDrawer(
+                vm: appDrawer,
+                profileMenu: !userIsWaiting ? profileMenu : null,
+              ),
             Expanded(
               child: Scaffold(
                 drawer: Device.screenType == ScreenType.mobile
-                    ? AppDrawer(vm: appDrawer)
+                    ? AppDrawer(
+                        vm: appDrawer,
+                        profileMenu: !userIsWaiting ? profileMenu : null,
+                      )
                     : null,
                 appBar: AppBar(
                   title: Text(appDrawer.selectedItem.title),
-                  actions: [
-                    if (!userIsWaiting) profileMenu,
-                  ],
                 ),
                 body: child,
               ),

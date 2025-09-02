@@ -32,11 +32,8 @@ class ProfileMenu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => MenuAnchor(
-    style: MenuStyle(
-      alignment: Alignment.bottomLeft,
-      backgroundColor: WidgetStateColor.resolveWith(
-        (states) => const Color(0xFF0F1013),
-      ),
+    style: const MenuStyle(
+      alignment: Alignment.center,
     ),
     menuChildren: [
       MenuItemButton(
@@ -62,13 +59,14 @@ class ProfileMenu extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(8),
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
           spacing: 8,
           children: [
-            Text(vm.userName),
             Avatar(
               source: vm.avatar,
               size: const Size.fromRadius(16),
             ),
+            Text(vm.userName),
           ],
         ),
       ),

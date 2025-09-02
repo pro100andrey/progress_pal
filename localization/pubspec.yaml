@@ -15,5 +15,8 @@ dependencies:
   flutter_localizations:
     sdk: flutter
 
+flutter:
+  generate: true
+
 flutter_intl:
   enabled: true
