@@ -33,7 +33,7 @@ class _Factory extends VmFactory<AppState, ProgressPageConnector, _Vm> {
 
     return _Vm(
       dateSelector: DateTimeLineSelectorVm(
-        firstDate: currentUser.created,
+        firstDate: currentUser.createdDate,
         focusedDate: ValueChangedVm(
           value: selectedDate,
           onChanged: (date) =>

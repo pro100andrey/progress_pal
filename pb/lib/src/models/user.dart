@@ -1,9 +1,6 @@
 import 'package:pocketbase/pocketbase.dart';
 
-extension type User(RecordModel record) {
-  /// Returns the ID of the user.
-  String get id => record.id;
-
+extension type User(RecordModel record) implements RecordModel {
   /// Returns the email of the user.
   String get email => record.getStringValue('email');
 
@@ -13,9 +10,6 @@ extension type User(RecordModel record) {
   /// Returns the avatar file name of the user.
   String get avatarFileName => record.getStringValue('avatar');
 
-  /// Returns the collection name of the user.
-  String get collectionName => record.getStringValue('collectionName');
-
   /// Returns the avatar URL path of the user.
   String get avatarUrlPath =>
       '/api/files/$collectionName/${record.id}/$avatarFileName';
@@ -24,8 +18,8 @@ extension type User(RecordModel record) {
   bool get hasAvatar => avatarFileName.isNotEmpty;
 
   /// Returns whether the user is a writer.
-  bool get isWriter => record.getStringValue('role') == 'writer';
+  bool get isWriter => record.get<String>('role') == 'writer';
 
   /// Returns the creation date of the user.
-  DateTime get created => DateTime.parse(record.getStringValue('created'));
+  DateTime get createdDate => DateTime.parse(get<String>('created'));
 }

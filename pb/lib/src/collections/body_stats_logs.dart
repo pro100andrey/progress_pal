@@ -1,10 +1,10 @@
 import '../../models.dart';
 import 'base_pb.dart';
 
-class RecordingTypesCollection extends PBCollection<RecordingType>
+class BodyStatsLogsCollection extends PBCollection<BodyStatsLog>
     with PBListMixin {
-  const RecordingTypesCollection(super.pocketBase);
+  const BodyStatsLogsCollection(super.pocketBase);
 
   @override
-  String get collectionName => 'recording_types';
+  String get collectionName => 'body_stats_logs';
 }
