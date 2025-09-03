@@ -40,6 +40,7 @@ class SelectInput extends StatelessWidget {
     this.label,
     this.description,
     this.minWidth = 446,
+    this.maxHeight = 200,
     super.key,
   });
 
@@ -49,12 +50,14 @@ class SelectInput extends StatelessWidget {
   final String? description;
   final String? id;
   final double minWidth;
+  final double maxHeight;
 
   @override
   Widget build(BuildContext context) => ShadSelectFormField<SelectInputItem>(
     id: id,
     minWidth: minWidth,
-    shrinkWrap: true,
+    maxHeight: maxHeight,
+    itemCount: vm.items.length,
     label: label == null ? null : Text(label!),
     description: description == null ? null : Text(description!),
     options: vm.items.map(
@@ -65,5 +68,6 @@ class SelectInput extends StatelessWidget {
     placeholder: Text(placeholder),
     validator: vm.validator,
     onChanged: (value) => value!.onSelect(),
+    trailing: const Icon(LucideIcons.chevronsUpDown200),
   );
 }

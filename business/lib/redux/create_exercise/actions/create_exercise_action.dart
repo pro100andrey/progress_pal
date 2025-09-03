@@ -19,14 +19,9 @@ class CreateExerciseAction extends ReduxAction<AppState> with WaitingFor {
     final equipmentId = selectCreateExerciseEquipmentId(state)!;
     final recordingTypeId = selectCreateExerciseRecordingTypeId(state)!;
 
-    final titleLanguageString = LanguageString({
-      'user': title,
-    });
-
+    final titleLanguageString = LanguageString({r'$': title});
     final instructionsLanguageString = instructions != null
-        ? LanguageString({
-            'user': instructions,
-          })
+        ? LanguageString({r'$': instructions})
         : null;
 
     final collection = ExercisesCollection(getPocketBase);

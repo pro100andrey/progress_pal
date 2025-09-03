@@ -5,13 +5,18 @@ import 'package:pb/collections.dart';
 import '../../action_mixins/waiting_for.dart';
 import '../../app_state.dart';
 import '../../exercises/actions/add_exercises_action.dart';
+import '../../session/session_selectors.dart';
 
 class RetrieveMyExercisesAction extends ReduxAction<AppState> with WaitingFor {
   @override
   Future<AppState> reduce() async {
     final collection = ExercisesCollection(getPocketBase);
+    final currentUser = selectSessionCurrentUser(state)!;
+    final items = await collection.getFullList(
+      filter: 'created_by.id="${currentUser.id}"',
+      sort: '-created',
+    );
 
-    final items = await collection.getFullList();
     dispatchSync(AddExercisesAction(items: items.lock), notify: false);
 
     final view = items.map((item) => item.id).toIList();

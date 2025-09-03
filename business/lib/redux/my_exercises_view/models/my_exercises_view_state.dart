@@ -6,6 +6,6 @@ part 'my_exercises_view_state.freezed.dart';
 @freezed
 abstract class MyExercisesViewState with _$MyExercisesViewState {
   const factory MyExercisesViewState({
-   @Default(IListConst<String>([])) IList<String> view,
+    @Default(IListConst<String>([])) IList<String> view,
   }) = _MyExercisesViewState;
 }

@@ -40,8 +40,8 @@ class _Factory extends VmFactory<AppState, MyExercisesConnector, _Vm> {
           final exercise = selectExerciseById(state, id: id);
 
           return MyExerciseCardVm(
-            title: exercise.title.user,
-            instructions: exercise.instructions?.user,
+            title: exercise.title.$,
+            instructions: exercise.instructions?.$,
             actions: MyExerciseActionsVm(
               isDeleting: selectMyExercisesIsDeleting(
                 state,

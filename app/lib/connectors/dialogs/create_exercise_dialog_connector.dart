@@ -119,7 +119,7 @@ class _Factory extends VmFactory<AppState, CreateExerciseDialogConnector, _Vm> {
       ),
       onCreatePressed: () async {
         final status = await dispatchAndWait(CreateExerciseAction());
-        
+
         return status.isCompletedOk;
       },
     );

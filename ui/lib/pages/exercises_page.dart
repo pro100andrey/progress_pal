@@ -16,7 +16,6 @@ class ExercisesPage extends StatelessWidget {
   final Widget myExercisesContent;
   final Widget createExerciseDialog;
 
-
   @override
   Widget build(BuildContext context) => Scaffold(
     floatingActionButton: FloatingActionButton.small(
