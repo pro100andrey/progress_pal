@@ -10,6 +10,7 @@ class RecordingTypeInput extends SelectInput {
   }) : super(
          id: 'record_type',
          label: S.current.recordingType,
+         
          placeholder: 'Select a record type',
        );
 }

@@ -2,7 +2,11 @@ import 'package:pocketbase/pocketbase.dart';
 
 import 'language_string.dart';
 
-extension type Equipment(RecordModel equipment) implements RecordModel {
-  LanguageString get name => equipment.get<LanguageString>('name');
-  String get slug => equipment.get<String>('slug');
+/// Represents equipment in the system.
+extension type Equipment(RecordModel record) implements RecordModel {
+  /// Returns the name of the equipment.
+  LanguageString get name => record.get<LanguageString>('name');
+
+  /// Returns the slug of the equipment.
+  String get slug => record.get<String>('slug');
 }
