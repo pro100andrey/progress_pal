@@ -86,6 +86,5 @@ class RegistrationPage extends StatelessWidget {
         );
       }
     }
-    
   }
 }

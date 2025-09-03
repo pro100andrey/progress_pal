@@ -51,7 +51,7 @@ class _Factory extends VmFactory<AppState, TopLevelPageConnector, _Vm> {
         selectCreateExerciseIsWaiting(state)) {
       overlay = _Overlay.barrier;
     }
-    
+
     return _Vm(overlay: overlay);
   }
 }
