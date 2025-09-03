@@ -1,5 +1,6 @@
 import 'package:pocketbase/pocketbase.dart';
 
+/// Represents a user in the system.
 extension type User(RecordModel record) implements RecordModel {
   /// Returns the email of the user.
   String get email => record.getStringValue('email');

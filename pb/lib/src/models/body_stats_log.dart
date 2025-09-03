@@ -1,5 +1,6 @@
 import 'package:pocketbase/pocketbase.dart';
 
+/// Represents a body stats log entry.
 extension type BodyStatsLog(RecordModel log) implements RecordModel {
   /// Returns the user ID associated with the log.
   String get userId => log.getStringValue('user');
