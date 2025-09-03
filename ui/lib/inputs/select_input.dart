@@ -57,7 +57,6 @@ class SelectInput extends StatelessWidget {
     id: id,
     minWidth: minWidth,
     maxHeight: maxHeight,
-
     itemCount: vm.items.length,
     label: label == null ? null : Text(label!),
     description: description == null ? null : Text(description!),

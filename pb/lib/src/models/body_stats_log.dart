@@ -45,5 +45,6 @@ extension type BodyStatsLog(RecordModel log) implements RecordModel {
   double get height => log.get<double>('height', 0);
 
   /// Calculate the Body Mass Index (BMI) using the weight and height.
-  double get bmi => weight / ((height / 100) * (height / 100));
+  double get bmi =>
+      height == 0 ? 0 : weight / ((height / 100) * (height / 100));
 }
