@@ -70,29 +70,16 @@ class CreateExerciseDialog extends StatelessWidget {
             child: Text(S.current.create),
           ),
         ],
-        child: LayoutBuilder(
-          builder: (context, constraints) => SingleChildScrollView(
-            child: Column(
-              spacing: 16,
-              children: [
-                ExerciseTitleInput(
-                  vm: title,
-                ),
-                MuscleGroupInput(
-                  vm: muscleGroup,
-                  minWidth: constraints.maxWidth,
-                ),
-                EquipmentInput(
-                  vm: equipment,
-                  minWidth: constraints.maxWidth,
-                ),
-                RecordingTypeInput(
-                  vm: recordingType,
-                  minWidth: constraints.maxWidth,
-                ),
-                InstructionsInput(vm: instructions),
-              ],
-            ),
+        child: SingleChildScrollView(
+          child: Column(
+            spacing: 16,
+            children: [
+              ExerciseTitleInput(vm: title),
+              MuscleGroupInput(vm: muscleGroup),
+              EquipmentInput(vm: equipment),
+              RecordingTypeInput(vm: recordingType),
+              InstructionsInput(vm: instructions),
+            ],
           ),
         ),
       ),

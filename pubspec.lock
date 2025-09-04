@@ -964,10 +964,10 @@ packages:
     dependency: transitive
     description:
       name: shadcn_ui
-      sha256: "17903cd47ec87ccd31bcc3bdba74d7584c882c3734614bea45831732ae645a74"
+      sha256: "9edc8e3011826b5674737bc7fe4f9a95a54f475f0bdec05787d37813225f5793"
       url: "https://pub.dev"
     source: hosted
-    version: "0.30.3"
+    version: "0.30.4"
   shelf:
     dependency: transitive
     description:
