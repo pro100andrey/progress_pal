@@ -65,6 +65,9 @@ class MessageLookup extends MessageLookupByLibrary {
       "Некоректна адреса електронної пошти",
     ),
     "equipment": MessageLookupByLibrary.simpleMessage("Обладнання"),
+    "exerciseCreatedSuccessfully": MessageLookupByLibrary.simpleMessage(
+      "Вправа успішно створена.",
+    ),
     "exerciseTitle": MessageLookupByLibrary.simpleMessage("Назва вправи"),
     "exercises": MessageLookupByLibrary.simpleMessage("Вправи"),
     "forgotPassword": MessageLookupByLibrary.simpleMessage("Забули пароль?"),

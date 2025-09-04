@@ -72,5 +72,6 @@
   "noWorkouts": "Немає тренувань",
   "createAWorkoutToGetStarted": "Створіть тренування, щоб почати.",
   "noExercises": "Немає вправ",
-  "youHaveNotCreatedAnyExercisesYet": "Ви ще не створили жодної вправи."
+  "youHaveNotCreatedAnyExercisesYet": "Ви ще не створили жодної вправи.",
+  "exerciseCreatedSuccessfully": "Вправа успішно створена."
 }

@@ -60,9 +60,7 @@ class CreateExerciseDialog extends StatelessWidget {
     child: BaseForm(
       builder: (_, state) => ShadDialog(
         gap: 24,
-        constraints: const BoxConstraints(
-          maxWidth: 450,
-        ),
+        constraints: const BoxConstraints(maxWidth: 450),
         title: Text(S.current.createExercise),
         actions: [
           ShadButton(
@@ -96,8 +94,11 @@ class CreateExerciseDialog extends StatelessWidget {
       if (context.mounted && result) {
         ShadToaster.of(context).show(
           ShadToast(
+            alignment: Alignment.bottomCenter,
+            closeIcon: const Icon(LucideIcons.x),
+            showCloseIconOnlyWhenHovered: false,
             title: Text(S.current.successful),
-            description: const Text('Exercise created successfully'),
+            description: Text(S.current.exerciseCreatedSuccessfully),
           ),
         );
 

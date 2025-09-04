@@ -72,5 +72,6 @@
   "noWorkouts": "No Workouts",
   "createAWorkoutToGetStarted": "Create a workout to get started.",
   "noExercises": "No Exercises",
-  "youHaveNotCreatedAnyExercisesYet": "You have not created any exercises yet."
+  "youHaveNotCreatedAnyExercisesYet": "You have not created any exercises yet.",
+  "exerciseCreatedSuccessfully": "Exercise created successfully"
 }
