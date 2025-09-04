@@ -2,15 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:localization/generated/l10n.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
 
-enum ExerciseType {
+import '../models/value_changed.dart';
+
+enum ExerciseTab {
   my,
   database;
 
   String get title {
     switch (this) {
-      case ExerciseType.my:
+      case ExerciseTab.my:
         return S.current.my;
-      case ExerciseType.database:
+      case ExerciseTab.database:
         return S.current.database;
     }
   }
@@ -18,30 +20,24 @@ enum ExerciseType {
 
 class ExercisesTabs extends StatelessWidget {
   const ExercisesTabs({
-    required this.myExercisesContent,
-    required this.databaseExercisesContent,
-
+    required this.vm,
     super.key,
   });
 
-  final Widget myExercisesContent;
-  final Widget databaseExercisesContent;
+  final ValueChangedVm<ExerciseTab> vm;
 
   @override
-  Widget build(BuildContext context) => ShadTabs<ExerciseType>(
-    value: ExerciseType.my,
-    expandContent: true,
+  Widget build(BuildContext context) => ShadTabs<ExerciseTab>(
+    value: vm.value,
     scrollable: true,
-    onChanged: (value) => debugPrint('Selected exercise type: $value'),
+    onChanged: vm.onChangedSync,
     tabs: [
       ShadTab(
-        value: ExerciseType.my,
-        content: myExercisesContent,
+        value: ExerciseTab.my,
         child: Text(S.current.my),
       ),
       ShadTab(
-        value: ExerciseType.database,
-        content: databaseExercisesContent,
+        value: ExerciseTab.database,
         child: Text(S.current.database),
       ),
     ],

@@ -1,39 +1,29 @@
 import 'package:flutter/material.dart';
-import 'package:localization/generated/l10n.dart';
-import 'package:shadcn_ui/shadcn_ui.dart';
 
+import '../models/value_changed.dart';
 import '../tabs/exercises_tabs.dart';
 
 class ExercisesPage extends StatelessWidget {
   const ExercisesPage({
-    required this.databaseExercisesContent,
-    required this.myExercisesContent,
-    required this.createExerciseDialog,
+    required this.child,
+    required this.tabs,
     super.key,
   });
 
-  final Widget databaseExercisesContent;
-  final Widget myExercisesContent;
-  final Widget createExerciseDialog;
+  final Widget child;
+  final ValueChangedVm<ExerciseTab> tabs;
 
   @override
   Widget build(BuildContext context) => Scaffold(
-    floatingActionButton: FloatingActionButton.small(
-      tooltip: S.current.createExercise,
-      onPressed: () => _onTapAddExercise(context),
-      child: const Icon(LucideIcons.plus),
-    ),
-    body: ExercisesTabs(
-      databaseExercisesContent: databaseExercisesContent,
-      myExercisesContent: myExercisesContent,
+    body: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(16),
+          child: ExercisesTabs(vm: tabs),
+        ),
+        Expanded(child: child),
+      ],
     ),
   );
-
-  Future<void> _onTapAddExercise(BuildContext context) async {
-    await showDialog(
-      barrierDismissible: false,
-      context: context,
-      builder: (context) => createExerciseDialog,
-    );
-  }
 }

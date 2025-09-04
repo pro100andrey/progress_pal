@@ -64,7 +64,7 @@ class ValueChangedVm<T> extends BaseValueChangedVm<T> {
   final T value;
 
   @override
-  List<Object?> get props => [value, enabled];
+  List<Object?> get props => [value, enabled, validator == null];
 }
 
 class ValueChangedWithItemsVm<T> extends BaseValueChangedVm<T> {
@@ -80,5 +80,5 @@ class ValueChangedWithItemsVm<T> extends BaseValueChangedVm<T> {
   final List<T> items;
 
   @override
-  List<Object?> get props => super.props + items + [value];
+  List<Object?> get props => super.props + items + [value, validator == null];
 }

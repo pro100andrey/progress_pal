@@ -2,23 +2,22 @@ import 'package:async_redux/async_redux.dart';
 import 'package:business/redux/app_state.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
-import 'package:ui/views/database_exercises.dart';
+import 'package:ui/pages/database_exercises_page.dart';
 
-class DatabaseExercisesConnector extends StatelessWidget {
-  const DatabaseExercisesConnector({super.key});
+class DatabaseExercisesPageConnector extends StatelessWidget {
+  const DatabaseExercisesPageConnector({super.key});
 
   @override
   Widget build(BuildContext context) => StoreConnector<AppState, _Vm>(
     debug: this,
-    onInit: (store) => debugPrint('DatabaseExercisesConnector initialized'),
-    onDispose: (store) => debugPrint('DatabaseExercisesConnector disposed'),
     vm: () => _Factory(this),
-    builder: (context, vm) => const DatabaseExercises(),
+    builder: (context, vm) => const DatabaseExercisesPage(),
   );
 }
 
 /// Factory that creates a view-model for the StoreConnector.
-class _Factory extends VmFactory<AppState, DatabaseExercisesConnector, _Vm> {
+class _Factory
+    extends VmFactory<AppState, DatabaseExercisesPageConnector, _Vm> {
   _Factory(super._connector);
 
   @override
