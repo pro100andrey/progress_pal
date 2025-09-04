@@ -8,7 +8,9 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:ui/actions/my_exercise_actions.dart';
 import 'package:ui/cards/my_exercise_card.dart';
-import 'package:ui/views/my_exercises.dart';
+import 'package:ui/pages/my_exercises_page.dart';
+
+import 'dialogs/create_exercise_dialog_connector.dart';
 
 class MyExercisesConnector extends StatelessWidget {
   const MyExercisesConnector({super.key});
@@ -19,7 +21,8 @@ class MyExercisesConnector extends StatelessWidget {
     onInit: (store) => store.dispatchAndWait(RetrieveMyExercisesAction()),
     onDispose: (store) => debugPrint('MyExercisesConnector disposed'),
     vm: () => _Factory(this),
-    builder: (context, vm) => MyExercises(
+    builder: (context, vm) => MyExercisesPage(
+      createExerciseDialog: const CreateExerciseDialogConnector(),
       isWaiting: vm.isWaiting,
       exercises: vm.exercises,
     ),

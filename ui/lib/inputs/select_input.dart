@@ -32,42 +32,31 @@ class SelectInputVm extends Equatable {
   List<Object?> get props => [items, validator != null];
 }
 
-class SelectInput extends StatelessWidget {
-  const SelectInput({
+class SelectInput extends ShadSelectFormField<SelectInputItem> {
+  SelectInput({
     required this.vm,
-    required this.placeholder,
-    this.id,
-    this.label,
-    this.description,
-    this.minWidth = 446,
-    this.maxHeight = 200,
+    super.id,
+    super.minWidth = 400,
+    super.maxHeight = 300,
+    String? placeholder,
+    String? label,
+    String? description,
     super.key,
-  });
+  }) : super(
+         anchor: ShadAnchor.center,
+         label: label != null ? Text(label) : null,
+         description: description != null ? Text(description) : null,
+         placeholder: placeholder != null ? Text(placeholder) : null,
+         validator: vm.validator,
+         itemCount: vm.items.length,
+         selectedOptionBuilder: (context, value) => Text(value.label),
+         trailing: const Icon(LucideIcons.chevronsUpDown200),
+         initialValue: vm.initialValue,
+         onChanged: (value) => value!.onSelect(),
+         options: vm.items.map(
+           (item) => ShadOption(value: item, child: Text(item.label)),
+         ),
+       );
 
   final SelectInputVm vm;
-  final String placeholder;
-  final String? label;
-  final String? description;
-  final String? id;
-  final double minWidth;
-  final double maxHeight;
-
-  @override
-  Widget build(BuildContext context) => ShadSelectFormField<SelectInputItem>(
-    id: id,
-    minWidth: minWidth,
-    maxHeight: maxHeight,
-    itemCount: vm.items.length,
-    label: label == null ? null : Text(label!),
-    description: description == null ? null : Text(description!),
-    options: vm.items.map(
-      (item) => ShadOption(value: item, child: Text(item.label)),
-    ),
-    selectedOptionBuilder: (context, value) => Text(value.label),
-    initialValue: vm.initialValue,
-    placeholder: Text(placeholder),
-    validator: vm.validator,
-    onChanged: (value) => value!.onSelect(),
-    trailing: const Icon(LucideIcons.chevronsUpDown200),
-  );
 }

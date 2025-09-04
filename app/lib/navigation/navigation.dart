@@ -3,10 +3,12 @@ import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
 
 import '../connectors/confirm_verification_page_connector.dart';
+import '../connectors/database_exercises_page_connector.dart';
 import '../connectors/exercises_page_connector.dart';
 import '../connectors/forgot_password_page_connector.dart';
 import '../connectors/home_page_connector.dart';
 import '../connectors/log_in_page_connector.dart';
+import '../connectors/my_exercises_page_connector.dart';
 import '../connectors/progress_page_connector.dart';
 import '../connectors/registration_page_connector.dart';
 import '../connectors/reset_password_page_connector.dart';
@@ -66,26 +68,21 @@ class Navigation {
       ),
       GoRoute(
         path: '/auth/confirm-verification/:token',
-        builder: (context, state) {
-          final token = state.pathParameters['token']!;
-
-          return ConfirmVerificationPageConnector(token: token);
-        },
+        builder: (context, state) => ConfirmVerificationPageConnector(
+          token: state.pathParameters['token']!,
+        ),
       ),
       GoRoute(
         path: '/auth/confirm-password-reset/:token',
-        builder: (context, state) {
-          final token = state.pathParameters['token']!;
-
-          return ResetPasswordPageConnector(token: token);
-        },
+        builder: (context, state) => ResetPasswordPageConnector(
+          token: state.pathParameters['token']!,
+        ),
       ),
       ShellRoute(
-        builder: (context, state, child) {
-          final cr = _CurrentRoute(state);
-
-          return HomePageConnector(tab: cr.homeShellTab, child: child);
-        },
+        builder: (context, state, child) => HomePageConnector(
+          tab: HomeShellTab.fromPath(state.uri.path),
+          child: child,
+        ),
         routes: [
           GoRoute(
             path: '/home/progress',
@@ -95,9 +92,22 @@ class Navigation {
             path: '/home/workouts',
             builder: (context, state) => const WorkoutsPageConnector(),
           ),
-          GoRoute(
-            path: '/home/exercises',
-            builder: (context, state) => const ExercisesPageConnector(),
+          ShellRoute(
+            builder: (context, state, child) => ExercisesPageConnector(
+              tab: ExercisesShellTab.fromPath(state.uri.path),
+              child: child,
+            ),
+            routes: [
+              GoRoute(
+                path: '/home/exercises/my',
+                builder: (context, state) => const MyExercisesConnector(),
+              ),
+              GoRoute(
+                path: '/home/exercises/database',
+                builder: (context, state) =>
+                    const DatabaseExercisesPageConnector(),
+              ),
+            ],
           ),
         ],
       ),
@@ -107,9 +117,10 @@ class Navigation {
       final cr = _CurrentRoute(state);
 
       const defaultHomeTab = '/home/progress';
+      const defaultExercisesTab = '/home/exercises/my';
 
       switch ((isLoggedIn, cr)) {
-        case (true, _CurrentRoute(isNeedLogout: true)):
+        case (true, _CurrentRoute(isNeedLogOut: true)):
           _delegate.needLogout();
           return null;
         case (false, _CurrentRoute(isAuth: false)):
@@ -117,6 +128,8 @@ class Navigation {
         case (true, _CurrentRoute(isAuth: true)):
         case (true, _CurrentRoute(isIndex: true)):
           return defaultHomeTab;
+        case (true, _CurrentRoute(isExercises: true)):
+          return defaultExercisesTab;
       }
 
       return null;
@@ -141,38 +154,63 @@ class Navigation {
   /// Navigate to the exercises page.
   void goToExercises() => router.go('/home/exercises');
 
+  /// Navigate to the my exercises tab.
+  void goToMyExercises() => router.go('/home/exercises/my');
+
+  /// Navigate to the database exercises tab.
+  void goToDatabaseExercises() => router.go('/home/exercises/database');
+
   /// Refresh the route. Needs to be called for redirection to take effect.
   void refresh() => router.refresh();
 }
 
 /// Helper extension for extracting information from the current route.
 extension type _CurrentRoute(GoRouterState state) {
+  /// The full path of the current route.
   String get _fullPath => state.uri.path;
 
+  /// Whether the current route is an authentication route.
   bool get isAuth => _fullPath.startsWith('/auth/');
 
-  bool get isNeedLogout =>
+  /// Whether the current route requires the user to log out.
+  bool get isNeedLogOut =>
       _fullPath.startsWith('/auth/confirm-verification/') ||
       _fullPath.startsWith('/auth/confirm-password-reset/');
 
-  HomeShellTab get homeShellTab {
-    if (_fullPath.startsWith('/home/progress')) {
-      return HomeShellTab.progress;
-    }
-    if (_fullPath.startsWith('/home/workouts')) {
-      return HomeShellTab.workouts;
-    }
-    if (_fullPath.startsWith('/home/exercises')) {
-      return HomeShellTab.exercises;
-    }
-    throw Exception('Unknown home shell tab');
-  }
+  /// Whether the current route is an exercises route.
+  bool get isExercises => _fullPath == '/home/exercises';
 
+  /// Whether the current route is the index route.
   bool get isIndex => _fullPath == '/';
 }
 
 enum HomeShellTab {
-  progress,
-  workouts,
-  exercises,
+  progress('/home/progress'),
+  workouts('/home/workouts'),
+  exercises('/home/exercises');
+
+  const HomeShellTab(this.value);
+
+  factory HomeShellTab.fromPath(String path) => HomeShellTab.values.firstWhere(
+    (tab) => path.startsWith(tab.value),
+    orElse: () => throw Exception('Unknown home shell tab value: $path'),
+  );
+
+  final String value;
+}
+
+enum ExercisesShellTab {
+  my('/home/exercises/my'),
+  database('/home/exercises/database');
+
+  const ExercisesShellTab(this.value);
+
+  factory ExercisesShellTab.fromPath(String path) =>
+      ExercisesShellTab.values.firstWhere(
+        (tab) => path.startsWith(tab.value),
+        orElse: () =>
+            throw Exception('Unknown exercises shell tab value: $path'),
+      );
+
+  final String value;
 }

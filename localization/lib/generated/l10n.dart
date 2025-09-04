@@ -648,6 +648,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Exercise created successfully`
+  String get exerciseCreatedSuccessfully {
+    return Intl.message(
+      'Exercise created successfully',
+      name: 'exerciseCreatedSuccessfully',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

@@ -60,9 +60,7 @@ class CreateExerciseDialog extends StatelessWidget {
     child: BaseForm(
       builder: (_, state) => ShadDialog(
         gap: 24,
-        constraints: const BoxConstraints(
-          maxWidth: 450,
-        ),
+        constraints: const BoxConstraints(maxWidth: 450),
         title: Text(S.current.createExercise),
         actions: [
           ShadButton(
@@ -70,29 +68,16 @@ class CreateExerciseDialog extends StatelessWidget {
             child: Text(S.current.create),
           ),
         ],
-        child: LayoutBuilder(
-          builder: (context, constraints) => SingleChildScrollView(
-            child: Column(
-              spacing: 16,
-              children: [
-                ExerciseTitleInput(
-                  vm: title,
-                ),
-                MuscleGroupInput(
-                  vm: muscleGroup,
-                  minWidth: constraints.maxWidth,
-                ),
-                EquipmentInput(
-                  vm: equipment,
-                  minWidth: constraints.maxWidth,
-                ),
-                RecordingTypeInput(
-                  vm: recordingType,
-                  minWidth: constraints.maxWidth,
-                ),
-                InstructionsInput(vm: instructions),
-              ],
-            ),
+        child: SingleChildScrollView(
+          child: Column(
+            spacing: 16,
+            children: [
+              ExerciseTitleInput(vm: title),
+              MuscleGroupInput(vm: muscleGroup),
+              EquipmentInput(vm: equipment),
+              RecordingTypeInput(vm: recordingType),
+              InstructionsInput(vm: instructions),
+            ],
           ),
         ),
       ),
@@ -109,8 +94,11 @@ class CreateExerciseDialog extends StatelessWidget {
       if (context.mounted && result) {
         ShadToaster.of(context).show(
           ShadToast(
+            alignment: Alignment.bottomCenter,
+            closeIcon: const Icon(LucideIcons.x),
+            showCloseIconOnlyWhenHovered: false,
             title: Text(S.current.successful),
-            description: const Text('Exercise created successfully'),
+            description: Text(S.current.exerciseCreatedSuccessfully),
           ),
         );
 

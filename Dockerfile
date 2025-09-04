@@ -1,4 +1,4 @@
-FROM ghcr.io/cirruslabs/flutter:3.35.2 AS build
+FROM ghcr.io/cirruslabs/flutter:3.35.3 AS build
 
 
 ARG PB_URL
