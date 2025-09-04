@@ -44,7 +44,7 @@ class SelectInput extends ShadSelectFormField<SelectInputItem> {
     super.key,
   }) : super(
          anchor: ShadAnchor.center,
-         label: label == null ? null : Text(label),
+         label: label != null ? Text(label) : null,
          description: description != null ? Text(description) : null,
          placeholder: placeholder != null ? Text(placeholder) : null,
          validator: vm.validator,
