@@ -13,6 +13,7 @@ class ExerciseTitleInput extends ShadInputFormField {
         keyboardType: TextInputType.text,
         initialValue: vm.value,
         onChanged: vm.onChanged,
+        validator: vm.validator,
       );
 
   final ValueChangedVm<String?> vm;

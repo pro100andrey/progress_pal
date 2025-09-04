@@ -14,6 +14,7 @@ class FullNameInput extends ShadInputFormField {
         autofillHints: const [AutofillHints.name],
         initialValue: vm.value,
         onChanged: vm.onChanged,
+        validator: vm.validator,
       );
 
   final ValueChangedVm<String?> vm;

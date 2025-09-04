@@ -14,6 +14,7 @@ class EmailInput extends ShadInputFormField {
         autofillHints: const [AutofillHints.email],
         initialValue: vm.value,
         onChanged: vm.onChanged,
+        validator: vm.validator,
       );
 
   final ValueChangedVm<String?> vm;

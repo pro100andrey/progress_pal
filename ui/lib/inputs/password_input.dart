@@ -18,6 +18,7 @@ class PasswordInput extends ShadInputFormField {
          trailing: Builder(
            builder: (context) {
              var obscure = true;
+             
              return StatefulBuilder(
                builder: (context, setState) => ShadButton(
                  width: 24,
@@ -40,6 +41,7 @@ class PasswordInput extends ShadInputFormField {
          autofillHints: const [AutofillHints.password],
          initialValue: vm.value,
          onChanged: vm.onChanged,
+         validator: vm.validator,
        );
 
   final ValueChangedVm<String?> vm;
