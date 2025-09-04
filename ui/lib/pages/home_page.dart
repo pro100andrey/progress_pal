@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:shadcn_ui/shadcn_ui.dart';
 
 import '../drawers/app_drawer.dart';
+import '../indicators/base_circle_indicator.dart';
 import '../sizer/sizer.dart';
 
 class HomePage extends StatelessWidget {
@@ -22,38 +22,43 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => LayoutBuilder(
-    builder: (context, constraints) => Stack(
-      children: [
-        Row(
-          children: [
-            if (Device.screenType != ScreenType.mobile)
-              AppDrawer(
-                vm: appDrawer,
-                profileMenu: !userIsWaiting ? profileMenu : null,
-              ),
-            Expanded(
-              child: Scaffold(
-                drawer: Device.screenType == ScreenType.mobile
-                    ? AppDrawer(
-                        vm: appDrawer,
-                        profileMenu: !userIsWaiting ? profileMenu : null,
-                      )
-                    : null,
-                appBar: AppBar(
-                  title: Text(appDrawer.selectedItem.title),
+    builder: (context, constraints) {
+      final drawer = AppDrawer(
+        vm: appDrawer,
+        profileMenu: !userIsWaiting ? profileMenu : null,
+      );
+
+      return Stack(
+        children: [
+          Row(
+            children: [
+              if (Device.screenType != ScreenType.mobile) drawer,
+              Expanded(
+                child: Scaffold(
+                  drawer: Device.screenType == ScreenType.mobile
+                      ? drawer
+                      : null,
+                  appBar: AppBar(
+                    title: Text(appDrawer.selectedItem.title),
+                    centerTitle: false,
+                    actions: [
+                      if (dataIsWaiting)
+                        const Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            BaseCircleIndicator(),
+                            SizedBox(width: 16),
+                          ],
+                        ),
+                    ],
+                  ),
+                  body: child,
                 ),
-                body: child,
               ),
-            ),
-          ],
-        ),
-        if (dataIsWaiting)
-          ShadProgress(
-            minHeight: 2,
-            color: ShadTheme.of(context).colorScheme.selection,
-            backgroundColor: Colors.transparent,
+            ],
           ),
-      ],
-    ),
+        ],
+      );
+    },
   );
 }

@@ -30,7 +30,7 @@ class MyExercisesPage extends StatelessWidget {
       builder: (context, constraints) {
         if (isWaiting && exercises.isEmpty) {
           return const Center(
-            child: CircularProgressIndicator(),
+            child: Icon(LucideIcons.ellipsis100),
           );
         }
 

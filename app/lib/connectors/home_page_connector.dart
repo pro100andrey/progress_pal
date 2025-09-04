@@ -4,6 +4,7 @@ import 'package:business/redux/equipment/actions/retrieve_equipments_action.dart
 import 'package:business/redux/equipment/equipments_selectors.dart';
 import 'package:business/redux/muscle_groups/actions/retrieve_muscle_groups_action.dart';
 import 'package:business/redux/muscle_groups/muscle_groups_selectors.dart';
+import 'package:business/redux/my_exercises_view/my_exercises_view_selectors.dart';
 import 'package:business/redux/recording_types/actions/retrieve_recording_types_action.dart';
 import 'package:business/redux/recording_types/recording_types_selectors.dart';
 import 'package:business/redux/session/session_selectors.dart';
@@ -50,11 +51,15 @@ class _Factory extends VmFactory<AppState, HomePageConnector, _Vm> {
   _Vm fromStore() {
     final currentUser = selectSessionCurrentUser(state);
     final muscleGroupIsWaiting = selectMuscleGroupsIsWaiting(state);
+    final myExercisesIsWaiting = selectMyExercisesIsWaiting(state);
     final equipmentIsWaiting = selectEquipmentIsWaiting(state);
     final recordingTypeIsWaiting = selectRecordingTypesIsWaiting(state);
 
     final dataIsWaiting =
-        muscleGroupIsWaiting || equipmentIsWaiting || recordingTypeIsWaiting;
+        muscleGroupIsWaiting ||
+        equipmentIsWaiting ||
+        recordingTypeIsWaiting ||
+        myExercisesIsWaiting;
 
     return _Vm(
       userIsWaiting: currentUser == null,

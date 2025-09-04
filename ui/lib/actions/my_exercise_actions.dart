@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:localization/generated/l10n.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
 
+import '../indicators/base_circle_indicator.dart';
+
 class MyExerciseActionsVm extends Equatable {
   const MyExerciseActionsVm({
     required this.onEditPressed,
@@ -31,11 +33,7 @@ class MyExerciseActions extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => vm.isDeleting
-      ? const SizedBox(
-          height: 16,
-          width: 16,
-          child: CircularProgressIndicator(strokeWidth: 3),
-        )
+      ? const BaseCircleIndicator()
       : MenuAnchor(
           alignmentOffset: const Offset(-36, 4),
           style: const MenuStyle(

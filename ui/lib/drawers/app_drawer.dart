@@ -55,8 +55,7 @@ class AppDrawer extends StatelessWidget {
   Widget build(BuildContext context) => Drawer(
     clipBehavior: Clip.none,
     shape: const RoundedRectangleBorder(),
-    elevation: 0,
-    width: 200,
+    width: 280,
     child: DecoratedBox(
       decoration: BoxDecoration(
         border: Border(
@@ -67,19 +66,19 @@ class AppDrawer extends StatelessWidget {
       ),
       child: Column(
         children: [
-          SizedBox(
-            height: kToolbarHeight,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  ShadButton.ghost(
-                    onPressed: () {},
-                    child: const Icon(LucideIcons.settings),
-                  ),
-                ],
-              ),
+          Padding(
+            padding: const EdgeInsets.all(8),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                ShadButton.ghost(
+                  padding: EdgeInsets.zero,
+                  width: 26,
+                  height: 26,
+                  onPressed: () {},
+                  child: const Icon(LucideIcons.panelLeftClose200, size: 20),
+                ),
+              ],
             ),
           ),
           Expanded(

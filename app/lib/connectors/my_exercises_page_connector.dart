@@ -19,7 +19,6 @@ class MyExercisesConnector extends StatelessWidget {
   Widget build(BuildContext context) => StoreConnector<AppState, _Vm>(
     debug: this,
     onInit: (store) => store.dispatchAndWait(RetrieveMyExercisesAction()),
-    onDispose: (store) => debugPrint('MyExercisesConnector disposed'),
     vm: () => _Factory(this),
     builder: (context, vm) => MyExercisesPage(
       createExerciseDialog: const CreateExerciseDialogConnector(),
