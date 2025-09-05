@@ -84,7 +84,6 @@ class MessageLookup extends MessageLookupByLibrary {
     "loginInstructions": MessageLookupByLibrary.simpleMessage(
       "Увійдіть, щоб продовжити свій шлях.",
     ),
-    "logout": MessageLookupByLibrary.simpleMessage("Вийти"),
     "logoutConfirmation": MessageLookupByLibrary.simpleMessage(
       "Ви впевнені, що хочете вийти?",
     ),

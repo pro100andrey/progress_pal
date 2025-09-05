@@ -55,7 +55,7 @@ class AppDrawer extends StatelessWidget {
   Widget build(BuildContext context) => Drawer(
     clipBehavior: Clip.none,
     shape: const RoundedRectangleBorder(),
-    width: 280,
+    width: 240,
     child: DecoratedBox(
       decoration: BoxDecoration(
         border: Border(
@@ -84,11 +84,11 @@ class AppDrawer extends StatelessWidget {
           Expanded(
             child: Builder(
               builder: (context) {
-                final selectionColor = ShadTheme.of(
-                  context,
-                ).colorScheme.selection;
+                final theme = ShadTheme.of(context);
 
-                final selectedTileColor = selectionColor.withAlpha(10);
+                final selectedTileColor = theme.colorScheme.selection.withAlpha(
+                  10,
+                );
 
                 final shape = RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12),
@@ -100,7 +100,7 @@ class AppDrawer extends StatelessWidget {
                     ListTile(
                       minTileHeight: 40,
                       selected: vm.selectedItem.isProgress,
-                      selectedColor: selectionColor,
+                      selectedColor: theme.colorScheme.selection,
                       leading: const Icon(LucideIcons.trendingUp),
                       title: Text(S.current.progress),
                       onTap: vm.onPressedProgress,
@@ -111,7 +111,7 @@ class AppDrawer extends StatelessWidget {
                     ListTile(
                       minTileHeight: 40,
                       selected: vm.selectedItem.isWorkouts,
-                      selectedColor: selectionColor,
+                      selectedColor: theme.colorScheme.selection,
                       leading: const Icon(LucideIcons.bicepsFlexed),
                       title: Text(S.current.workouts),
                       onTap: vm.onPressedWorkouts,
@@ -122,7 +122,7 @@ class AppDrawer extends StatelessWidget {
                     ListTile(
                       minTileHeight: 40,
                       selected: vm.selectedItem.isExercises,
-                      selectedColor: selectionColor,
+                      selectedColor: theme.colorScheme.selection,
                       leading: const Icon(LucideIcons.dumbbell),
                       title: Text(S.current.exercises),
                       onTap: vm.onPressedExercises,

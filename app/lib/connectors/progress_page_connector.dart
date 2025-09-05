@@ -8,6 +8,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:ui/models/value_changed.dart';
 import 'package:ui/pages/progress_page.dart';
+import 'package:ui/selectors/date_tiime_line_selector.dart';
 
 class ProgressPageConnector extends StatelessWidget {
   const ProgressPageConnector({super.key});

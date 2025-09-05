@@ -419,9 +419,9 @@ class S {
     return Intl.message('Birthdate', name: 'birthdate', desc: '', args: []);
   }
 
-  /// `Logout`
-  String get logout {
-    return Intl.message('Logout', name: 'logout', desc: '', args: []);
+  /// `Log Out`
+  String get logOut {
+    return Intl.message('Log Out', name: 'logOut', desc: '', args: []);
   }
 
   /// `Save`

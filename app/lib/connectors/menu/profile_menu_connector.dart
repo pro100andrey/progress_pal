@@ -8,7 +8,6 @@ import 'package:ui/image/avatar.dart';
 import 'package:ui/menus/profile_menu.dart';
 
 import '../../navigation/navigation.dart';
-import '../sheets/user_profile_sheet_connector.dart';
 
 class ProfileMenuConnector extends StatelessWidget {
   const ProfileMenuConnector({super.key});
@@ -18,9 +17,9 @@ class ProfileMenuConnector extends StatelessWidget {
     debug: this,
     vm: () => _Factory(this),
     shouldUpdateModel: selectSessionIsLoggedIn,
-    builder: (context, vm) => ProfileMenu(
-      vm: vm.profileMenu,
-      userProfile: const UserProfileSheetConnector(),
+    builder: (context, vm) => ProfileActions(
+      vm: vm.profileActions,
+      // userProfile: const UserProfileSheetConnector(),
     ),
   );
 }
@@ -35,10 +34,11 @@ class _Factory extends VmFactory<AppState, ProfileMenuConnector, _Vm> {
     final currentUser = selectSessionCurrentUser(state)!;
 
     return _Vm(
-      profileMenu: ProfileMenuVm(
+      profileActions: ProfileActionsVm(
         userName: currentUser.name,
         avatar: AvatarSource.network(avatarUrl),
-        onPressedLogout: () {
+        onEditProfilePressed: () {},
+        onLogOutPressed: () {
           dispatchSync(CleanSessionAction());
           navigation.refresh();
         },
@@ -50,11 +50,11 @@ class _Factory extends VmFactory<AppState, ProfileMenuConnector, _Vm> {
 /// The view-model holds the part of the Store state the dumb-widget needs.
 class _Vm extends Vm with EquatableMixin {
   _Vm({
-    required this.profileMenu,
+    required this.profileActions,
   });
 
-  final ProfileMenuVm profileMenu;
+  final ProfileActionsVm profileActions;
 
   @override
-  List<Object?> get props => [profileMenu];
+  List<Object?> get props => [profileActions];
 }

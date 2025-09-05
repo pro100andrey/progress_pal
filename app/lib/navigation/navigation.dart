@@ -12,7 +12,7 @@ import '../connectors/my_exercises_page_connector.dart';
 import '../connectors/progress_page_connector.dart';
 import '../connectors/registration_page_connector.dart';
 import '../connectors/reset_password_page_connector.dart';
-import '../connectors/sheets/workouts_page_connector.dart';
+import '../connectors/workouts_page_connector.dart';
 
 /// A delegate for handling navigation events.
 mixin NavigationDelegate {

@@ -50,6 +50,7 @@ class _AppConnectorState extends State<AppConnector> with NavigationDelegate {
                 background: const Color(0xFF131316),
                 card: const Color(0xFF161618),
                 selection: const Color(0xFFE25D5D),
+                popover: const Color(0xff161618),
               ),
         ),
         localizationsDelegates: const [

@@ -75,10 +75,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "instructions": MessageLookupByLibrary.simpleMessage("Instructions"),
     "invalidEmail": MessageLookupByLibrary.simpleMessage("Invalid email"),
     "logIn": MessageLookupByLibrary.simpleMessage("Log in"),
+    "logOut": MessageLookupByLibrary.simpleMessage("Log Out"),
     "loginInstructions": MessageLookupByLibrary.simpleMessage(
       "Log in to continue your journey.",
     ),
-    "logout": MessageLookupByLibrary.simpleMessage("Logout"),
     "logoutConfirmation": MessageLookupByLibrary.simpleMessage(
       "Are you sure you want to log out?",
     ),
