@@ -69,14 +69,15 @@ class ValueChangedVm<T> extends BaseValueChangedVm<T> {
 
 class ValueChangedWithItemsVm<T> extends BaseValueChangedVm<T> {
   const ValueChangedWithItemsVm({
+    required this.value,
     super.onChanged,
     super.validator,
     super.enabled,
-    this.value,
+    
     this.items = const [],
   });
 
-  final T? value;
+  final T value;
   final List<T> items;
 
   @override

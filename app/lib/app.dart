@@ -60,7 +60,7 @@ class _AppConnectorState extends State<AppConnector> with NavigationDelegate {
           GlobalCupertinoLocalizations.delegate,
         ],
         supportedLocales: S.delegate.supportedLocales,
-        locale: Locale(vm.language.code),
+        locale: Locale(vm.language.locale),
         builder: (context, child) => ShadAppBuilder(
           child: TopLevelPageConnector(
             child: UserExceptionDialog<AppState>(

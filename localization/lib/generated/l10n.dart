@@ -54,11 +54,6 @@ class S {
     return Localizations.of<S>(context, S);
   }
 
-  /// `en`
-  String get _locale {
-    return Intl.message('en', name: '_locale', desc: '', args: []);
-  }
-
   /// `Progress Pal`
   String get appName {
     return Intl.message('Progress Pal', name: 'appName', desc: '', args: []);

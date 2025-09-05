@@ -1,5 +1,6 @@
 import 'package:async_redux/async_redux.dart';
 import 'package:business/redux/app_state.dart';
+import 'package:business/redux/language/language_selectors.dart';
 import 'package:business/redux/progress_view/actions/init_progress_view_action.dart';
 import 'package:business/redux/progress_view/actions/set_selected_date_action.dart';
 import 'package:business/redux/progress_view/progress_view_selectors.dart';
@@ -31,9 +32,11 @@ class _Factory extends VmFactory<AppState, ProgressPageConnector, _Vm> {
   _Vm fromStore() {
     final selectedDate = selectProgressViewSelectedDate(state);
     final currentUser = selectSessionCurrentUser(state)!;
+    final language = selectLanguage(state);
 
     return _Vm(
       dateSelector: DateTimeLineSelectorVm(
+        locale: language.locale,
         firstDate: currentUser.createdDate,
         focusedDate: ValueChangedVm(
           value: selectedDate,

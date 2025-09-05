@@ -5,6 +5,7 @@ import 'package:storage/storage.dart';
 
 import 'environment.dart';
 import 'redux/app_state.dart';
+import 'redux/language/actions/load_language_action.dart';
 import 'redux/services/connectivity/connectivity.dart';
 import 'redux/services/connectivity/connectivity_driver.dart';
 import 'redux/session/actions/load_session_action.dart';
@@ -24,6 +25,7 @@ Future<void> initSettingsStorage(Store<AppState> store) async {
   _locator.registerSingleton(settingsStorage);
 
   await store.dispatchAndWait(LoadSessionAction());
+  await store.dispatchAndWait(LoadLanguageAction());
 }
 
 Future<void> initLocator(Store<AppState> store, Environment env) async {

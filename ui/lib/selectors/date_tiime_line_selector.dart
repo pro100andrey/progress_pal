@@ -6,10 +6,12 @@ import '../models/value_changed.dart';
 
 class DateTimeLineSelectorVm extends Equatable {
   const DateTimeLineSelectorVm({
+    required this.locale,
     required this.firstDate,
     required this.focusedDate,
   });
 
+  final String locale;
   final DateTime firstDate;
   final ValueChangedVm<DateTime> focusedDate;
 
@@ -32,7 +34,7 @@ class DateTimeLineSelector extends StatelessWidget {
     lastDate: DateTime.now(),
     timelineOptions: const TimelineOptions(height: 86),
     selectionMode: const SelectionMode.autoCenter(),
-    locale: const Locale('uk'),
+    locale: Locale(vm.locale),
 
     onDateChange: (date) {
       if (date != vm.focusedDate.value) {

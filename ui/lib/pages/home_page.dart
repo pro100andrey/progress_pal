@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../drawers/app_drawer.dart';
 import '../indicators/base_circle_indicator.dart';
+import '../models/value_changed.dart';
+import '../selectors/language_selector.dart';
 import '../sizer/sizer.dart';
 
 class HomePage extends StatelessWidget {
@@ -11,6 +13,7 @@ class HomePage extends StatelessWidget {
     required this.profileMenu,
     required this.child,
     required this.appDrawer,
+    required this.language,
     super.key,
   });
 
@@ -19,6 +22,7 @@ class HomePage extends StatelessWidget {
   final bool dataIsWaiting;
   final Widget profileMenu;
   final AppDrawerVm appDrawer;
+  final ValueChangedWithItemsVm<LanguagePair> language;
 
   @override
   Widget build(BuildContext context) => LayoutBuilder(
@@ -42,14 +46,15 @@ class HomePage extends StatelessWidget {
                     title: Text(appDrawer.selectedItem.title),
                     centerTitle: false,
                     actions: [
-                      if (dataIsWaiting)
-                        const Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            BaseCircleIndicator(),
-                            SizedBox(width: 16),
-                          ],
-                        ),
+                      Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          if (dataIsWaiting) const BaseCircleIndicator(),
+                          const SizedBox(width: 16),
+                          LanguageSelector(vm: language),
+                          const SizedBox(width: 16),
+                        ],
+                      ),
                     ],
                   ),
                   body: child,
