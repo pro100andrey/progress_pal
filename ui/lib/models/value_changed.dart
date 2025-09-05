@@ -73,7 +73,7 @@ class ValueChangedWithItemsVm<T> extends BaseValueChangedVm<T> {
     super.onChanged,
     super.validator,
     super.enabled,
-    
+
     this.items = const [],
   });
 

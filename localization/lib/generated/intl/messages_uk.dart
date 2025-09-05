@@ -80,6 +80,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Некоректна електронна пошта",
     ),
     "logIn": MessageLookupByLibrary.simpleMessage("Увійти"),
+    "logOut": MessageLookupByLibrary.simpleMessage("Вийти"),
     "loginInstructions": MessageLookupByLibrary.simpleMessage(
       "Увійдіть, щоб продовжити свій шлях.",
     ),

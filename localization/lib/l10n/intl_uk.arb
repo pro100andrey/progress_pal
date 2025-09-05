@@ -43,7 +43,7 @@
   "verificationSuccessful": "Підтвердження успішне!",
   "resetPasswordSuccess": "Спробуйте увійти з новим паролем.",
   "birthdate": "Дата народження",
-  "logout": "Вийти",
+  "logOut": "Вийти",
   "save": "Зберегти",
   "editProfile": "Редагувати профіль",
   "editProfileInstructions": "Внесіть зміни у свій профіль тут. Натисніть «Зберегти», коли закінчите.",

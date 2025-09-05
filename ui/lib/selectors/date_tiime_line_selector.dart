@@ -16,7 +16,7 @@ class DateTimeLineSelectorVm extends Equatable {
   final ValueChangedVm<DateTime> focusedDate;
 
   @override
-  List<Object?> get props => [focusedDate];
+  List<Object?> get props => [locale, firstDate, focusedDate];
 }
 
 class DateTimeLineSelector extends StatelessWidget {
