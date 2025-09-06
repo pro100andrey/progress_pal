@@ -30,10 +30,12 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+    "addSession": MessageLookupByLibrary.simpleMessage("Додати сесію"),
     "appName": MessageLookupByLibrary.simpleMessage("Progress Pal"),
     "areYouSure": MessageLookupByLibrary.simpleMessage("Ви впевнені?"),
     "backToLogIn": MessageLookupByLibrary.simpleMessage("Назад до входу"),
     "birthdate": MessageLookupByLibrary.simpleMessage("Дата народження"),
+    "bodyStats": MessageLookupByLibrary.simpleMessage("Статистика тіла"),
     "cancel": MessageLookupByLibrary.simpleMessage("Скасувати"),
     "confirmPassword": MessageLookupByLibrary.simpleMessage(
       "Підтвердьте пароль",
@@ -87,6 +89,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "logoutConfirmation": MessageLookupByLibrary.simpleMessage(
       "Ви впевнені, що хочете вийти?",
     ),
+    "logs": MessageLookupByLibrary.simpleMessage("Журнали"),
     "minimumLengthSymbols": m1,
     "muscleGroup": MessageLookupByLibrary.simpleMessage("М’язова група"),
     "mustContainAtLeastOneLowercase": MessageLookupByLibrary.simpleMessage(
@@ -98,7 +101,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "my": MessageLookupByLibrary.simpleMessage("Мої"),
     "newExercise": MessageLookupByLibrary.simpleMessage("Нова вправа"),
     "noExercises": MessageLookupByLibrary.simpleMessage("Немає вправ"),
+    "noLogs": MessageLookupByLibrary.simpleMessage("Немає журналів"),
     "noWorkouts": MessageLookupByLibrary.simpleMessage("Немає тренувань"),
+    "notes": MessageLookupByLibrary.simpleMessage("Нотатки"),
     "ok": MessageLookupByLibrary.simpleMessage("OK"),
     "password": MessageLookupByLibrary.simpleMessage("Пароль"),
     "passwordsDoNotMatch": MessageLookupByLibrary.simpleMessage(
@@ -159,6 +164,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "welcomeBack": MessageLookupByLibrary.simpleMessage("З поверненням!"),
     "workouts": MessageLookupByLibrary.simpleMessage("Тренування"),
+    "youDontHaveAnyLogsForThisDay": MessageLookupByLibrary.simpleMessage(
+      "Ви не маєте жодних журналів за цей день.",
+    ),
     "youHaveNotCreatedAnyExercisesYet": MessageLookupByLibrary.simpleMessage(
       "Ви ще не створили жодної вправи.",
     ),

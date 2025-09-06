@@ -22,7 +22,7 @@ class HomePage extends StatelessWidget {
   final bool dataIsWaiting;
   final Widget profileMenu;
   final AppDrawerVm appDrawer;
-  final ValueChangedWithItemsVm<LanguagePair> language;
+  final ValueChangedWithItemsVm<LanguageVm> language;
 
   @override
   Widget build(BuildContext context) => LayoutBuilder(

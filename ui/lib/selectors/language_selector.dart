@@ -1,19 +1,35 @@
+import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
 
+import '../generated/assets.gen.dart';
 import '../models/value_changed.dart';
 
-class LanguagePair {
-  const LanguagePair(this.locale, this.name);
+class LanguageVm extends Equatable {
+  const LanguageVm({
+    required this.locale,
+    required this.short,
+    required this.title,
+  });
 
   final String locale;
-  final String name;
+  final String short;
+  final String title;
+
+  SvgGenImage get flag => switch (locale) {
+    'uk' => Assets.flags.ua,
+    'en' => Assets.flags.gb,
+    _ => throw Exception('Unsupported language locale: $locale'),
+  };
+
+  @override
+  List<Object?> get props => [locale, short, title];
 }
 
 class LanguageSelector extends StatelessWidget {
   const LanguageSelector({required this.vm, super.key});
 
-  final ValueChangedWithItemsVm<LanguagePair> vm;
+  final ValueChangedWithItemsVm<LanguageVm> vm;
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +49,7 @@ class LanguageSelector extends StatelessWidget {
             vm.onChangedSync(lang);
           }
         },
-        child: Text(lang.name),
+        child: Text(lang.title),
       );
 
       children.add(menuItem);
@@ -54,7 +70,14 @@ class LanguageSelector extends StatelessWidget {
       builder: (context, controller, child) => TextButton(
         onPressed: () =>
             controller.isOpen ? controller.close() : controller.open(),
-        child: Text(vm.value.locale.toUpperCase()),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          spacing: 8,
+          children: [
+            vm.value.flag.svg(width: 12, height: 12),
+            Text(vm.value.short),
+          ],
+        ),
       ),
     );
   }

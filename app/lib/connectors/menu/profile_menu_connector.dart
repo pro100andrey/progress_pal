@@ -4,8 +4,8 @@ import 'package:business/redux/session/actions/clean_session_action.dart';
 import 'package:business/redux/session/session_selectors.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
+import 'package:ui/actions/profile_actions.dart';
 import 'package:ui/image/avatar.dart';
-import 'package:ui/menus/profile_menu.dart';
 
 import '../../navigation/navigation.dart';
 

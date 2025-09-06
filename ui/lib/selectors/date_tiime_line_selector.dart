@@ -32,10 +32,14 @@ class DateTimeLineSelector extends StatelessWidget {
     focusedDate: vm.focusedDate.value,
     firstDate: vm.firstDate,
     lastDate: DateTime.now(),
-    timelineOptions: const TimelineOptions(height: 86),
+    timelineOptions: const TimelineOptions(
+      height: 80,
+    ),
+    headerOptions: const HeaderOptions(
+      headerType: HeaderType.viewOnly,
+    ),
     selectionMode: const SelectionMode.autoCenter(),
     locale: Locale(vm.locale),
-
     onDateChange: (date) {
       if (date != vm.focusedDate.value) {
         vm.focusedDate.onChangedSync(date);

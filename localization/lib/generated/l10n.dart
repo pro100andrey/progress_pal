@@ -653,6 +653,41 @@ class S {
       args: [],
     );
   }
+
+  /// `Logs`
+  String get logs {
+    return Intl.message('Logs', name: 'logs', desc: '', args: []);
+  }
+
+  /// `Body Stats`
+  String get bodyStats {
+    return Intl.message('Body Stats', name: 'bodyStats', desc: '', args: []);
+  }
+
+  /// `Notes`
+  String get notes {
+    return Intl.message('Notes', name: 'notes', desc: '', args: []);
+  }
+
+  /// `No Logs`
+  String get noLogs {
+    return Intl.message('No Logs', name: 'noLogs', desc: '', args: []);
+  }
+
+  /// `You don't have any logs for this day.`
+  String get youDontHaveAnyLogsForThisDay {
+    return Intl.message(
+      'You don\'t have any logs for this day.',
+      name: 'youDontHaveAnyLogsForThisDay',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add Session`
+  String get addSession {
+    return Intl.message('Add Session', name: 'addSession', desc: '', args: []);
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

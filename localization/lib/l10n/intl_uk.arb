@@ -72,5 +72,11 @@
   "createAWorkoutToGetStarted": "Створіть тренування, щоб почати.",
   "noExercises": "Немає вправ",
   "youHaveNotCreatedAnyExercisesYet": "Ви ще не створили жодної вправи.",
-  "exerciseCreatedSuccessfully": "Вправа успішно створена."
+  "exerciseCreatedSuccessfully": "Вправа успішно створена.",
+  "logs": "Журнали",
+  "bodyStats": "Статистика тіла",
+  "notes": "Нотатки",
+  "noLogs": "Немає журналів",
+  "youDontHaveAnyLogsForThisDay": "Ви не маєте жодних журналів за цей день.",
+  "addSession": "Додати сесію"
 }

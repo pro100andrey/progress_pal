@@ -72,5 +72,11 @@
   "createAWorkoutToGetStarted": "Create a workout to get started.",
   "noExercises": "No Exercises",
   "youHaveNotCreatedAnyExercisesYet": "You have not created any exercises yet.",
-  "exerciseCreatedSuccessfully": "Exercise created successfully"
+  "exerciseCreatedSuccessfully": "Exercise created successfully",
+  "logs": "Logs",
+  "bodyStats": "Body Stats",
+  "notes": "Notes",
+  "noLogs": "No Logs",
+  "youDontHaveAnyLogsForThisDay": "You don't have any logs for this day.",
+  "addSession": "Add Session"
 }

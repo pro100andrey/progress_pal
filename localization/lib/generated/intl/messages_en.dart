@@ -30,10 +30,12 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+    "addSession": MessageLookupByLibrary.simpleMessage("Add Session"),
     "appName": MessageLookupByLibrary.simpleMessage("Progress Pal"),
     "areYouSure": MessageLookupByLibrary.simpleMessage("Are you sure?"),
     "backToLogIn": MessageLookupByLibrary.simpleMessage("Back to logIn"),
     "birthdate": MessageLookupByLibrary.simpleMessage("Birthdate"),
+    "bodyStats": MessageLookupByLibrary.simpleMessage("Body Stats"),
     "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
     "confirmPassword": MessageLookupByLibrary.simpleMessage("Confirm password"),
     "couldNotConnectToInternet": MessageLookupByLibrary.simpleMessage(
@@ -81,6 +83,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "logoutConfirmation": MessageLookupByLibrary.simpleMessage(
       "Are you sure you want to log out?",
     ),
+    "logs": MessageLookupByLibrary.simpleMessage("Logs"),
     "minimumLengthSymbols": m1,
     "muscleGroup": MessageLookupByLibrary.simpleMessage("Muscle Group"),
     "mustContainAtLeastOneLowercase": MessageLookupByLibrary.simpleMessage(
@@ -92,7 +95,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "my": MessageLookupByLibrary.simpleMessage("My"),
     "newExercise": MessageLookupByLibrary.simpleMessage("New Exercise"),
     "noExercises": MessageLookupByLibrary.simpleMessage("No Exercises"),
+    "noLogs": MessageLookupByLibrary.simpleMessage("No Logs"),
     "noWorkouts": MessageLookupByLibrary.simpleMessage("No Workouts"),
+    "notes": MessageLookupByLibrary.simpleMessage("Notes"),
     "ok": MessageLookupByLibrary.simpleMessage("OK"),
     "password": MessageLookupByLibrary.simpleMessage("Password"),
     "passwordsDoNotMatch": MessageLookupByLibrary.simpleMessage(
@@ -149,6 +154,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "welcomeBack": MessageLookupByLibrary.simpleMessage("Welcome back!"),
     "workouts": MessageLookupByLibrary.simpleMessage("Workouts"),
+    "youDontHaveAnyLogsForThisDay": MessageLookupByLibrary.simpleMessage(
+      "You don\'t have any logs for this day.",
+    ),
     "youHaveNotCreatedAnyExercisesYet": MessageLookupByLibrary.simpleMessage(
       "You have not created any exercises yet.",
     ),

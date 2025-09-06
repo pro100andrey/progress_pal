@@ -30,6 +30,9 @@ dev_dependencies:
   pro_lints: ^5.0.0
   theme_extensions_builder: ^5.1.0
 
+dependency_overrides: 
+  analyzer: ^8.0.0
+
 flutter_gen:
   output: lib/generated/
   colors:
@@ -44,5 +47,6 @@ flutter_gen:
 
 flutter:
   assets:
-    - assets/svg/placeholders/
-    - assets/svg/logo/
+    - assets/logo/
+    - assets/flags/
+

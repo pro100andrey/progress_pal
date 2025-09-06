@@ -15,7 +15,16 @@ enum SupportedLanguage {
     }
   }
 
-  String get name {
+  String get short {
+    switch (this) {
+      case uk:
+        return 'UA';
+      case en:
+        return 'EN';
+    }
+  }
+
+  String get title {
     switch (this) {
       case uk:
         return 'Українська';

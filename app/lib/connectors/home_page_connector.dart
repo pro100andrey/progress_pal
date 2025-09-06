@@ -62,6 +62,15 @@ class _Factory extends VmFactory<AppState, HomePageConnector, _Vm> {
     final recordingTypeIsWaiting = selectRecordingTypesIsWaiting(state);
     final language = selectLanguage(state);
 
+    final supportedLanguages = SupportedLanguage.values
+        .map(
+          (e) => LanguageVm(locale: e.locale, short: e.short, title: e.title),
+        )
+        .toList(growable: false);
+    final currentLanguage = supportedLanguages.firstWhere(
+      (element) => element.locale == language.locale,
+    );
+
     final dataIsWaiting =
         muscleGroupIsWaiting ||
         equipmentIsWaiting ||
@@ -78,10 +87,8 @@ class _Factory extends VmFactory<AppState, HomePageConnector, _Vm> {
         onPressedExercises: navigation.goToExercises,
       ),
       language: ValueChangedWithItemsVm(
-        value: LanguagePair(language.locale, language.name),
-        items: SupportedLanguage.values
-            .map((e) => LanguagePair(e.locale, e.name))
-            .toList(),
+        value: currentLanguage,
+        items: supportedLanguages,
         onChanged: (pair) => dispatch(SaveLanguageAction(locale: pair.locale)),
       ),
     );
@@ -100,7 +107,7 @@ class _Vm extends Vm with EquatableMixin {
   final bool userIsWaiting;
   final bool dataIsWaiting;
   final AppDrawerVm appDrawer;
-  final ValueChangedWithItemsVm<LanguagePair> language;
+  final ValueChangedWithItemsVm<LanguageVm> language;
 
   @override
   List<Object?> get props => [

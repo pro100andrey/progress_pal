@@ -4,23 +4,25 @@ import 'package:business/redux/language/language_selectors.dart';
 import 'package:business/redux/language/models/language_state.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
-import 'package:ui/pages/workouts_page.dart';
+import 'package:ui/pages/body_stats_page.dart';
 
-class WorkoutsPageConnector extends StatelessWidget {
-  const WorkoutsPageConnector({super.key});
+class BodyStatsPageConnector extends StatelessWidget {
+  const BodyStatsPageConnector({super.key});
 
   @override
   Widget build(BuildContext context) => StoreConnector<AppState, _Vm>(
     debug: this,
     vm: () => _Factory(this),
-    builder: (context, vm) => WorkoutsPage(
+    builder: (context, vm) => BodyStatsPage(
       key: ValueKey(vm.language),
+  
     ),
   );
 }
 
 /// Factory that creates a view-model for the StoreConnector.
-class _Factory extends VmFactory<AppState, WorkoutsPageConnector, _Vm> {
+class _Factory
+    extends VmFactory<AppState, BodyStatsPageConnector, _Vm> {
   _Factory(super._connector);
 
   @override
