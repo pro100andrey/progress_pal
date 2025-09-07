@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:localization/generated/l10n.dart';
 
+import '../dialogs/create_session_dialog.dart';
 import '../placeholders/no_logs.dart';
 
 class LogsPage extends StatelessWidget {
@@ -10,7 +11,10 @@ class LogsPage extends StatelessWidget {
   Widget build(BuildContext context) => Scaffold(
     floatingActionButton: FloatingActionButton.small(
       tooltip: S.current.addSession,
-      onPressed: () {},
+      onPressed: () => showDialog(
+        context: context,
+        builder: (context) => const CreateSessionDialog(),
+      ),
       child: const Icon(Icons.add),
     ),
     body: Stack(

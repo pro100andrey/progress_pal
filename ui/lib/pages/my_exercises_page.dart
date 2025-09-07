@@ -59,7 +59,7 @@ class MyExercisesPage extends StatelessWidget {
   );
 
   Future<void> _onTapAddExercise(BuildContext context) async {
-    await showShadDialog(
+    await showDialog(
       barrierDismissible: false,
       context: context,
       builder: (context) => createExerciseDialog,
