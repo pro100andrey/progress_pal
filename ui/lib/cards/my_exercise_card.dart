@@ -2,7 +2,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
 
-import '../actions/my_exercise_actions.dart';
+import '../popovers/my_exercise_actions.dart';
 
 class MyExerciseCardVm extends Equatable {
   const MyExerciseCardVm({

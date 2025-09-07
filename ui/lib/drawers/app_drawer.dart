@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:localization/generated/l10n.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
 
+import '../popovers/profile_actions.dart';
+import '../tiles/profile_tile.dart';
+
 enum DrawerItem {
   progress,
   workouts,
@@ -27,29 +30,33 @@ enum DrawerItem {
 class AppDrawerVm extends Equatable {
   const AppDrawerVm({
     required this.selectedItem,
-    required this.onPressedProgress,
-    required this.onPressedWorkouts,
-    required this.onPressedExercises,
+    required this.profile,
+    required this.onProgressPressed,
+    required this.onWorkoutsPressed,
+    required this.onExercisesPressed,
+    required this.onLogOutPressed,
   });
 
   final DrawerItem selectedItem;
-  final VoidCallback onPressedProgress;
-  final VoidCallback onPressedWorkouts;
-  final VoidCallback onPressedExercises;
+  final ProfileTileVm profile;
+  final VoidCallback onProgressPressed;
+  final VoidCallback onWorkoutsPressed;
+  final VoidCallback onExercisesPressed;
+  final VoidCallback onLogOutPressed;
 
   @override
-  List<Object?> get props => [selectedItem];
+  List<Object?> get props => [selectedItem, profile];
 }
 
 class AppDrawer extends StatelessWidget {
   const AppDrawer({
     required this.vm,
-    required this.profileMenu,
+    required this.editProfile,
     super.key,
   });
 
   final AppDrawerVm vm;
-  final Widget? profileMenu;
+  final Widget editProfile;
 
   @override
   Widget build(BuildContext context) => Drawer(
@@ -103,7 +110,7 @@ class AppDrawer extends StatelessWidget {
                       selectedColor: theme.colorScheme.selection,
                       leading: const Icon(LucideIcons.trendingUp),
                       title: Text(S.current.progress),
-                      onTap: vm.onPressedProgress,
+                      onTap: vm.onProgressPressed,
                       selectedTileColor: selectedTileColor,
                       shape: shape,
                     ),
@@ -114,7 +121,7 @@ class AppDrawer extends StatelessWidget {
                       selectedColor: theme.colorScheme.selection,
                       leading: const Icon(LucideIcons.bicepsFlexed),
                       title: Text(S.current.workouts),
-                      onTap: vm.onPressedWorkouts,
+                      onTap: vm.onWorkoutsPressed,
                       selectedTileColor: selectedTileColor,
                       shape: shape,
                     ),
@@ -125,7 +132,7 @@ class AppDrawer extends StatelessWidget {
                       selectedColor: theme.colorScheme.selection,
                       leading: const Icon(LucideIcons.dumbbell),
                       title: Text(S.current.exercises),
-                      onTap: vm.onPressedExercises,
+                      onTap: vm.onExercisesPressed,
                       selectedTileColor: selectedTileColor,
                       shape: shape,
                     ),
@@ -134,13 +141,53 @@ class AppDrawer extends StatelessWidget {
               },
             ),
           ),
-          if (profileMenu != null)
-            Padding(
-              padding: const EdgeInsets.all(8),
-              child: profileMenu,
+          Padding(
+            padding: const EdgeInsets.all(8),
+            child: ProfileActions(
+              vm: ProfileActionsVm(
+                profile: vm.profile,
+                onLogOutPressed: () => _onLogOutPressed(context),
+                onEditProfilePressed: () => showShadSheet(
+                  context: context,
+                  side: ShadSheetSide.right,
+                  builder: (context) => editProfile,
+                ),
+              ),
             ),
+          ),
         ],
       ),
     ),
   );
+
+  Future<void> _onLogOutPressed(BuildContext context) async {
+    final result = await showDialog<bool>(
+      context: context,
+      builder: (context) => ShadDialog.alert(
+        title: Text(S.current.areYouSure),
+        description: Padding(
+          padding: const EdgeInsets.only(bottom: 8),
+          child: Text(S.current.logoutConfirmation),
+        ),
+        actions: [
+          ShadButton.outline(
+            child: Text(S.current.cancel),
+            onPressed: () => Navigator.of(context).pop(false),
+          ),
+          ShadButton.destructive(
+            child: Text(S.current.logOut),
+            onPressed: () => Navigator.of(context).pop(true),
+          ),
+        ],
+      ),
+    );
+
+    if ((result ?? false) && context.mounted) {
+      if (Navigator.canPop(context)) {
+        Navigator.of(context).pop();
+      }
+
+      vm.onLogOutPressed();
+    }
+  }
 }

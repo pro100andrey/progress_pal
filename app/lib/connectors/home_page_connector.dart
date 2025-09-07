@@ -2,9 +2,6 @@ import 'package:async_redux/async_redux.dart';
 import 'package:business/redux/app_state.dart';
 import 'package:business/redux/equipment/actions/retrieve_equipments_action.dart';
 import 'package:business/redux/equipment/equipments_selectors.dart';
-import 'package:business/redux/language/actions/save_language_action.dart';
-import 'package:business/redux/language/language_selectors.dart';
-import 'package:business/redux/language/models/language_state.dart';
 import 'package:business/redux/muscle_groups/actions/retrieve_muscle_groups_action.dart';
 import 'package:business/redux/muscle_groups/muscle_groups_selectors.dart';
 import 'package:business/redux/my_exercises_view/my_exercises_view_selectors.dart';
@@ -14,12 +11,11 @@ import 'package:business/redux/session/session_selectors.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:ui/drawers/app_drawer.dart';
-import 'package:ui/models/value_changed.dart';
 import 'package:ui/pages/home_page.dart';
-import 'package:ui/selectors/language_selector.dart';
 
 import '../navigation/navigation.dart';
-import 'menu/profile_menu_connector.dart';
+import 'drawers/app_drawer_connector.dart';
+import 'selectors/language_selector_connector.dart';
 
 class HomePageConnector extends StatelessWidget {
   const HomePageConnector({required this.child, required this.tab, super.key});
@@ -31,6 +27,7 @@ class HomePageConnector extends StatelessWidget {
   Widget build(BuildContext context) => StoreConnector<AppState, _Vm>(
     debug: this,
     vm: () => _Factory(this),
+    shouldUpdateModel: selectSessionIsLoggedIn,
     onInit: (store) async {
       await store.dispatchAndWaitAll([
         RetrieveMuscleGroupsAction(),
@@ -39,11 +36,10 @@ class HomePageConnector extends StatelessWidget {
       ]);
     },
     builder: (context, vm) => HomePage(
-      userIsWaiting: vm.userIsWaiting,
+      tabTitle: vm.tabTitle,
       dataIsWaiting: vm.dataIsWaiting,
-      profileMenu: const ProfileMenuConnector(),
-      appDrawer: vm.appDrawer,
-      language: vm.language,
+      drawer: AppDrawerConnector(tab: tab),
+      languageSelector: const LanguageSelectorConnector(),
       child: child,
     ),
   );
@@ -55,21 +51,10 @@ class _Factory extends VmFactory<AppState, HomePageConnector, _Vm> {
 
   @override
   _Vm fromStore() {
-    final currentUser = selectSessionCurrentUser(state);
     final muscleGroupIsWaiting = selectMuscleGroupsIsWaiting(state);
     final myExercisesIsWaiting = selectMyExercisesIsWaiting(state);
     final equipmentIsWaiting = selectEquipmentIsWaiting(state);
     final recordingTypeIsWaiting = selectRecordingTypesIsWaiting(state);
-    final language = selectLanguage(state);
-
-    final supportedLanguages = SupportedLanguage.values
-        .map(
-          (e) => LanguageVm(locale: e.locale, short: e.short, title: e.title),
-        )
-        .toList(growable: false);
-    final currentLanguage = supportedLanguages.firstWhere(
-      (element) => element.locale == language.locale,
-    );
 
     final dataIsWaiting =
         muscleGroupIsWaiting ||
@@ -78,19 +63,8 @@ class _Factory extends VmFactory<AppState, HomePageConnector, _Vm> {
         myExercisesIsWaiting;
 
     return _Vm(
-      userIsWaiting: currentUser == null,
       dataIsWaiting: dataIsWaiting,
-      appDrawer: AppDrawerVm(
-        selectedItem: DrawerItem.values[connector.tab.index],
-        onPressedProgress: navigation.goToProgress,
-        onPressedWorkouts: navigation.goToWorkouts,
-        onPressedExercises: navigation.goToExercises,
-      ),
-      language: ValueChangedWithItemsVm(
-        value: currentLanguage,
-        items: supportedLanguages,
-        onChanged: (pair) => dispatch(SaveLanguageAction(locale: pair.locale)),
-      ),
+      tabTitle: DrawerItem.values[connector.tab.index].title,
     );
   }
 }
@@ -98,22 +72,16 @@ class _Factory extends VmFactory<AppState, HomePageConnector, _Vm> {
 /// The view-model holds the part of the Store state the dumb-widget needs.
 class _Vm extends Vm with EquatableMixin {
   _Vm({
-    required this.userIsWaiting,
     required this.dataIsWaiting,
-    required this.appDrawer,
-    required this.language,
+    required this.tabTitle,
   });
 
-  final bool userIsWaiting;
   final bool dataIsWaiting;
-  final AppDrawerVm appDrawer;
-  final ValueChangedWithItemsVm<LanguageVm> language;
+  final String tabTitle;
 
   @override
   List<Object?> get props => [
-    userIsWaiting,
     dataIsWaiting,
-    appDrawer,
-    language,
+    tabTitle,
   ];
 }

@@ -4,40 +4,48 @@ import 'package:business/redux/session/actions/clean_session_action.dart';
 import 'package:business/redux/session/session_selectors.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
-import 'package:ui/actions/profile_actions.dart';
+import 'package:ui/drawers/app_drawer.dart';
 import 'package:ui/image/avatar.dart';
+import 'package:ui/tiles/profile_tile.dart';
 
 import '../../navigation/navigation.dart';
+import '../sheets/user_profile_sheet_connector.dart';
 
-class ProfileMenuConnector extends StatelessWidget {
-  const ProfileMenuConnector({super.key});
+class AppDrawerConnector extends StatelessWidget {
+  const AppDrawerConnector({required this.tab, super.key});
+
+  final HomeShellTab tab;
 
   @override
   Widget build(BuildContext context) => StoreConnector<AppState, _Vm>(
     debug: this,
     vm: () => _Factory(this),
-    shouldUpdateModel: selectSessionIsLoggedIn,
-    builder: (context, vm) => ProfileActions(
-      vm: vm.profileActions,
-      // userProfile: const UserProfileSheetConnector(),
+    builder: (context, vm) => AppDrawer(
+      vm: vm.appDrawer,
+      editProfile: const UserProfileSheetConnector(),
     ),
   );
 }
 
 /// Factory that creates a view-model for the StoreConnector.
-class _Factory extends VmFactory<AppState, ProfileMenuConnector, _Vm> {
+class _Factory extends VmFactory<AppState, AppDrawerConnector, _Vm> {
   _Factory(super._connector);
 
   @override
   _Vm fromStore() {
-    final avatarUrl = selectSessionCurrentUserAvatarUrl(state);
     final currentUser = selectSessionCurrentUser(state)!;
+    final avatarUrl = selectSessionCurrentUserAvatarUrl(state);
 
     return _Vm(
-      profileActions: ProfileActionsVm(
-        userName: currentUser.name,
-        avatar: AvatarSource.network(avatarUrl),
-        onEditProfilePressed: () {},
+      appDrawer: AppDrawerVm(
+        profile: ProfileTileVm(
+          userName: currentUser.name,
+          avatar: AvatarSource.network(avatarUrl),
+        ),
+        selectedItem: DrawerItem.values[connector.tab.index],
+        onProgressPressed: navigation.goToProgress,
+        onWorkoutsPressed: navigation.goToWorkouts,
+        onExercisesPressed: navigation.goToExercises,
         onLogOutPressed: () {
           dispatchSync(CleanSessionAction());
           navigation.refresh();
@@ -49,12 +57,10 @@ class _Factory extends VmFactory<AppState, ProfileMenuConnector, _Vm> {
 
 /// The view-model holds the part of the Store state the dumb-widget needs.
 class _Vm extends Vm with EquatableMixin {
-  _Vm({
-    required this.profileActions,
-  });
+  _Vm({required this.appDrawer});
 
-  final ProfileActionsVm profileActions;
+  final AppDrawerVm appDrawer;
 
   @override
-  List<Object?> get props => [profileActions];
+  List<Object?> get props => [appDrawer];
 }
