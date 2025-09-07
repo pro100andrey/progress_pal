@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 class BaseCircleIndicator extends StatelessWidget {
   const BaseCircleIndicator({
-    this.size = 30,
-    this.color,
+    this.size = 16,
+    this.color = Colors.greenAccent,
     this.strokeWidth,
     this.value,
     super.key,
@@ -19,15 +19,13 @@ class BaseCircleIndicator extends StatelessWidget {
     final width = size;
     final height = size;
 
-    return Center(
-      child: SizedBox(
-        width: width,
-        height: height,
-        child: CircularProgressIndicator(
-          value: value,
-          color: color,
-          strokeWidth: strokeWidth ?? 3,
-        ),
+    return SizedBox(
+      width: width,
+      height: height,
+      child: CircularProgressIndicator(
+        value: value,
+        color: color,
+        strokeWidth: strokeWidth ?? 3,
       ),
     );
   }

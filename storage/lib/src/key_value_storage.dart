@@ -4,8 +4,6 @@ import 'base_key_value_storage.dart';
 import 'sembast/sembast_setup_mixin.dart';
 
 final class KeyValueStorage extends BaseKeyValueStorage with SembastSetupMixin {
-  static const String _kPBAuthKey = 'pb_auth';
-
   @override
   Future<void> clear() async => mainStore.delete(db);
 
@@ -25,11 +23,18 @@ final class KeyValueStorage extends BaseKeyValueStorage with SembastSetupMixin {
       mainStore.record(key).put(db, value);
 }
 
-extension KeyValueStorageX on KeyValueStorage {
-  Future<void> setPBAuth(String? value) async =>
-      put(KeyValueStorage._kPBAuthKey, value);
+extension KeyValueStoragePB on KeyValueStorage {
+  static const String kPBAuthKey = 'pb_auth';
 
-  Future<String?> getPBAuth() async => get<String>(KeyValueStorage._kPBAuthKey);
+  Future<void> setPBAuth(String? value) async => put(kPBAuthKey, value);
+  Future<String?> getPBAuth() async => get<String>(kPBAuthKey);
+  Future<void> deletePBAuth() async => delete(kPBAuthKey);
+}
 
-  Future<void> deletePBAuth() async => delete(KeyValueStorage._kPBAuthKey);
+extension KeyValueStorageLocale on KeyValueStorage {
+  static const String kLocaleKey = 'locale';
+
+  Future<void> setLocale(String value) async => put(kLocaleKey, value);
+  Future<String?> getLocale() async => get<String>(kLocaleKey);
+  Future<void> deleteLocale() async => delete(kLocaleKey);
 }

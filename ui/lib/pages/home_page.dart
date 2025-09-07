@@ -1,24 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:shadcn_ui/shadcn_ui.dart';
 
-import '../drawers/app_drawer.dart';
+import '../indicators/base_circle_indicator.dart';
 import '../sizer/sizer.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({
-    required this.userIsWaiting,
+    required this.tabTitle,
     required this.dataIsWaiting,
-    required this.profileMenu,
     required this.child,
-    required this.appDrawer,
+    required this.drawer,
+    required this.languageSelector,
     super.key,
   });
 
-  final Widget child;
-  final bool userIsWaiting;
+  final String tabTitle;
   final bool dataIsWaiting;
-  final Widget profileMenu;
-  final AppDrawerVm appDrawer;
+  final Widget child;
+  final Widget drawer;
+  final Widget languageSelector;
 
   @override
   Widget build(BuildContext context) => LayoutBuilder(
@@ -26,33 +25,30 @@ class HomePage extends StatelessWidget {
       children: [
         Row(
           children: [
-            if (Device.screenType != ScreenType.mobile)
-              AppDrawer(
-                vm: appDrawer,
-                profileMenu: !userIsWaiting ? profileMenu : null,
-              ),
+            if (Device.screenType != ScreenType.mobile) drawer,
             Expanded(
               child: Scaffold(
-                drawer: Device.screenType == ScreenType.mobile
-                    ? AppDrawer(
-                        vm: appDrawer,
-                        profileMenu: !userIsWaiting ? profileMenu : null,
-                      )
-                    : null,
+                drawer: Device.screenType == ScreenType.mobile ? drawer : null,
                 appBar: AppBar(
-                  title: Text(appDrawer.selectedItem.title),
+                  title: Text(tabTitle),
+                  centerTitle: false,
+                  actions: [
+                    Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        if (dataIsWaiting) const BaseCircleIndicator(),
+                        const SizedBox(width: 16),
+                        languageSelector,
+                        const SizedBox(width: 16),
+                      ],
+                    ),
+                  ],
                 ),
                 body: child,
               ),
             ),
           ],
         ),
-        if (dataIsWaiting)
-          ShadProgress(
-            minHeight: 2,
-            color: ShadTheme.of(context).colorScheme.selection,
-            backgroundColor: Colors.transparent,
-          ),
       ],
     ),
   );

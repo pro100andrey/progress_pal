@@ -14,17 +14,17 @@ class LogInPage extends StatelessWidget {
   const LogInPage({
     required this.email,
     required this.password,
-    required this.onPressedLogIn,
-    required this.onPressedForgotPassword,
-    required this.onPressedRegister,
+    required this.onLogInPressed,
+    required this.onForgotPasswordPressed,
+    required this.onRegisterPressed,
     super.key,
   });
 
   final ValueChangedVm<String?> email;
   final ValueChangedVm<String?> password;
-  final VoidCallback onPressedLogIn;
-  final VoidCallback onPressedForgotPassword;
-  final VoidCallback onPressedRegister;
+  final VoidCallback onLogInPressed;
+  final VoidCallback onForgotPasswordPressed;
+  final VoidCallback onRegisterPressed;
 
   @override
   Widget build(BuildContext context) => Scaffold(
@@ -44,7 +44,7 @@ class LogInPage extends StatelessWidget {
             Align(
               alignment: Alignment.centerRight,
               child: ShadButton.link(
-                onPressed: onPressedForgotPassword,
+                onPressed: onForgotPasswordPressed,
                 child: Text(S.current.forgotPassword),
               ),
             ),
@@ -68,7 +68,7 @@ class LogInPage extends StatelessWidget {
                   ).textTheme.muted,
                 ),
                 ShadButton.link(
-                  onPressed: onPressedRegister,
+                  onPressed: onRegisterPressed,
                   child: Text(S.current.signUp),
                 ),
               ],
@@ -81,7 +81,7 @@ class LogInPage extends StatelessWidget {
 
   void _validateForm(GlobalKey<ShadFormState> formKey) {
     if (formKey.currentState!.saveAndValidate()) {
-      onPressedLogIn();
+      onLogInPressed();
     }
   }
 }

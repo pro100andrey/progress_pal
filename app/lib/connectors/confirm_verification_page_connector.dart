@@ -20,7 +20,7 @@ class ConfirmVerificationPageConnector extends StatelessWidget {
     builder: (context, vm) => ConfirmVerificationPage(
       isWaiting: vm.isWaiting,
       success: vm.success,
-      onPressedBackToLogin: vm.onPressedBackToLogin,
+      onBackToLoginPressed: vm.onBackToLoginPressed,
     ),
     onInit: (store) => store.dispatch(
       ConfirmVerificationAction(token: token),
@@ -41,7 +41,7 @@ class _Factory
     return _Vm(
       isWaiting: isWaiting,
       success: success,
-      onPressedBackToLogin: navigation.goToLogIn,
+      onBackToLoginPressed: navigation.goToLogIn,
     );
   }
 }
@@ -51,12 +51,12 @@ class _Vm extends Vm with EquatableMixin {
   _Vm({
     required this.isWaiting,
     required this.success,
-    required this.onPressedBackToLogin,
+    required this.onBackToLoginPressed,
   });
 
   final bool isWaiting;
   final bool success;
-  final VoidCallback onPressedBackToLogin;
+  final VoidCallback onBackToLoginPressed;
 
   @override
   List<Object?> get props => [isWaiting, success];

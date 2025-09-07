@@ -2,17 +2,20 @@ import 'package:async_redux/async_redux.dart';
 import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
 
+import '../connectors/body_stats_page_connector.dart';
 import '../connectors/confirm_verification_page_connector.dart';
 import '../connectors/database_exercises_page_connector.dart';
 import '../connectors/exercises_page_connector.dart';
 import '../connectors/forgot_password_page_connector.dart';
 import '../connectors/home_page_connector.dart';
 import '../connectors/log_in_page_connector.dart';
+import '../connectors/logs_page_connector.dart';
 import '../connectors/my_exercises_page_connector.dart';
+import '../connectors/notes_page_connector.dart';
 import '../connectors/progress_page_connector.dart';
 import '../connectors/registration_page_connector.dart';
 import '../connectors/reset_password_page_connector.dart';
-import '../connectors/sheets/workouts_page_connector.dart';
+import '../connectors/workouts_page_connector.dart';
 
 /// A delegate for handling navigation events.
 mixin NavigationDelegate {
@@ -84,9 +87,25 @@ class Navigation {
           child: child,
         ),
         routes: [
-          GoRoute(
-            path: '/home/progress',
-            builder: (context, state) => const ProgressPageConnector(),
+          ShellRoute(
+            builder: (context, state, child) => ProgressPageConnector(
+              tab: ProgressShellTab.fromPath(state.uri.path),
+              child: child,
+            ),
+            routes: [
+              GoRoute(
+                path: '/home/progress/logs',
+                builder: (context, state) => const LogsPageConnector(),
+              ),
+              GoRoute(
+                path: '/home/progress/body-stats',
+                builder: (context, state) => const BodyStatsPageConnector(),
+              ),
+              GoRoute(
+                path: '/home/progress/notes',
+                builder: (context, state) => const NotesPageConnector(),
+              ),
+            ],
           ),
           GoRoute(
             path: '/home/workouts',
@@ -116,8 +135,8 @@ class Navigation {
       final isLoggedIn = _delegate.isLoggedIn;
       final cr = _CurrentRoute(state);
 
-      const defaultHomeTab = '/home/progress';
       const defaultExercisesTab = '/home/exercises/my';
+      const defaultLogsTab = '/home/progress/logs';
 
       switch ((isLoggedIn, cr)) {
         case (true, _CurrentRoute(isNeedLogOut: true)):
@@ -127,9 +146,11 @@ class Navigation {
           return '/auth/login';
         case (true, _CurrentRoute(isAuth: true)):
         case (true, _CurrentRoute(isIndex: true)):
-          return defaultHomeTab;
+          return defaultLogsTab;
         case (true, _CurrentRoute(isExercises: true)):
           return defaultExercisesTab;
+        case (true, _CurrentRoute(isProgress: true)):
+          return defaultLogsTab;
       }
 
       return null;
@@ -160,6 +181,15 @@ class Navigation {
   /// Navigate to the database exercises tab.
   void goToDatabaseExercises() => router.go('/home/exercises/database');
 
+  /// Navigate to the logs tab.
+  void goToLogs() => router.go('/home/progress/logs');
+
+  /// Navigate to the body stats tab.
+  void goToBodyStats() => router.go('/home/progress/body-stats');
+
+  /// Navigate to the notes tab.
+  void goToNotes() => router.go('/home/progress/notes');
+
   /// Refresh the route. Needs to be called for redirection to take effect.
   void refresh() => router.refresh();
 }
@@ -179,6 +209,9 @@ extension type _CurrentRoute(GoRouterState state) {
 
   /// Whether the current route is an exercises route.
   bool get isExercises => _fullPath == '/home/exercises';
+
+  /// Whether the current route is a progress route.
+  bool get isProgress => _fullPath == '/home/progress';
 
   /// Whether the current route is the index route.
   bool get isIndex => _fullPath == '/';
@@ -210,6 +243,23 @@ enum ExercisesShellTab {
         (tab) => path.startsWith(tab.value),
         orElse: () =>
             throw Exception('Unknown exercises shell tab value: $path'),
+      );
+
+  final String value;
+}
+
+enum ProgressShellTab {
+  logs('/home/progress/logs'),
+  bodyStats('/home/progress/body-stats'),
+  notes('/home/progress/notes');
+
+  const ProgressShellTab(this.value);
+
+  factory ProgressShellTab.fromPath(String path) =>
+      ProgressShellTab.values.firstWhere(
+        (tab) => path.startsWith(tab.value),
+        orElse: () =>
+            throw Exception('Unknown progress shell tab value: $path'),
       );
 
   final String value;

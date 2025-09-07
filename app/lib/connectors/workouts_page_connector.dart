@@ -1,5 +1,7 @@
 import 'package:async_redux/async_redux.dart';
 import 'package:business/redux/app_state.dart';
+import 'package:business/redux/language/language_selectors.dart';
+import 'package:business/redux/language/models/language_state.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:ui/pages/workouts_page.dart';
@@ -11,7 +13,9 @@ class WorkoutsPageConnector extends StatelessWidget {
   Widget build(BuildContext context) => StoreConnector<AppState, _Vm>(
     debug: this,
     vm: () => _Factory(this),
-    builder: (context, vm) => const WorkoutsPage(),
+    builder: (context, vm) => WorkoutsPage(
+      key: ValueKey(vm.language),
+    ),
   );
 }
 
@@ -20,13 +24,22 @@ class _Factory extends VmFactory<AppState, WorkoutsPageConnector, _Vm> {
   _Factory(super._connector);
 
   @override
-  _Vm fromStore() => _Vm();
+  _Vm fromStore() {
+    final language = selectLanguage(state);
+    return _Vm(language: language);
+  }
 }
 
 /// The view-model holds the part of the Store state the dumb-widget needs.
 class _Vm extends Vm with EquatableMixin {
-  _Vm();
+  _Vm({
+    required this.language,
+  });
+
+  final SupportedLanguage language;
 
   @override
-  List<Object?> get props => [];
+  List<Object?> get props => [
+    language,
+  ];
 }

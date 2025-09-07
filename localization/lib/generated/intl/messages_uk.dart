@@ -30,11 +30,16 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
-    "_locale": MessageLookupByLibrary.simpleMessage("uk"),
+    "addBodyStat": MessageLookupByLibrary.simpleMessage(
+      "Додати показники тіла",
+    ),
+    "addNote": MessageLookupByLibrary.simpleMessage("Додати нотатку"),
+    "addSession": MessageLookupByLibrary.simpleMessage("Додати сесію"),
     "appName": MessageLookupByLibrary.simpleMessage("Progress Pal"),
     "areYouSure": MessageLookupByLibrary.simpleMessage("Ви впевнені?"),
     "backToLogIn": MessageLookupByLibrary.simpleMessage("Назад до входу"),
     "birthdate": MessageLookupByLibrary.simpleMessage("Дата народження"),
+    "bodyStats": MessageLookupByLibrary.simpleMessage("Показники тіла"),
     "cancel": MessageLookupByLibrary.simpleMessage("Скасувати"),
     "confirmPassword": MessageLookupByLibrary.simpleMessage(
       "Підтвердьте пароль",
@@ -81,13 +86,14 @@ class MessageLookup extends MessageLookupByLibrary {
       "Некоректна електронна пошта",
     ),
     "logIn": MessageLookupByLibrary.simpleMessage("Увійти"),
+    "logOut": MessageLookupByLibrary.simpleMessage("Вийти"),
     "loginInstructions": MessageLookupByLibrary.simpleMessage(
       "Увійдіть, щоб продовжити свій шлях.",
     ),
-    "logout": MessageLookupByLibrary.simpleMessage("Вийти"),
     "logoutConfirmation": MessageLookupByLibrary.simpleMessage(
       "Ви впевнені, що хочете вийти?",
     ),
+    "logs": MessageLookupByLibrary.simpleMessage("Журнали"),
     "minimumLengthSymbols": m1,
     "muscleGroup": MessageLookupByLibrary.simpleMessage("М’язова група"),
     "mustContainAtLeastOneLowercase": MessageLookupByLibrary.simpleMessage(
@@ -98,8 +104,14 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "my": MessageLookupByLibrary.simpleMessage("Мої"),
     "newExercise": MessageLookupByLibrary.simpleMessage("Нова вправа"),
+    "noBodyStats": MessageLookupByLibrary.simpleMessage(
+      "Немає показників тіла",
+    ),
     "noExercises": MessageLookupByLibrary.simpleMessage("Немає вправ"),
+    "noLogs": MessageLookupByLibrary.simpleMessage("Немає журналів"),
+    "noNotes": MessageLookupByLibrary.simpleMessage("Немає нотаток"),
     "noWorkouts": MessageLookupByLibrary.simpleMessage("Немає тренувань"),
+    "notes": MessageLookupByLibrary.simpleMessage("Нотатки"),
     "ok": MessageLookupByLibrary.simpleMessage("OK"),
     "password": MessageLookupByLibrary.simpleMessage("Пароль"),
     "passwordsDoNotMatch": MessageLookupByLibrary.simpleMessage(
@@ -160,6 +172,15 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "welcomeBack": MessageLookupByLibrary.simpleMessage("З поверненням!"),
     "workouts": MessageLookupByLibrary.simpleMessage("Тренування"),
+    "youDontHaveAnyBodyStatsForThisDay": MessageLookupByLibrary.simpleMessage(
+      "У вас немає показників тіла за цей день.",
+    ),
+    "youDontHaveAnyLogsForThisDay": MessageLookupByLibrary.simpleMessage(
+      "Ви не маєте жодних журналів за цей день.",
+    ),
+    "youDontHaveAnyNotesForThisDay": MessageLookupByLibrary.simpleMessage(
+      "У вас немає жодних нотаток за цей день.",
+    ),
     "youHaveNotCreatedAnyExercisesYet": MessageLookupByLibrary.simpleMessage(
       "Ви ще не створили жодної вправи.",
     ),

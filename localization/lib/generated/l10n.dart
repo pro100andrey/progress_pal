@@ -54,11 +54,6 @@ class S {
     return Localizations.of<S>(context, S);
   }
 
-  /// `en`
-  String get _locale {
-    return Intl.message('en', name: '_locale', desc: '', args: []);
-  }
-
   /// `Progress Pal`
   String get appName {
     return Intl.message('Progress Pal', name: 'appName', desc: '', args: []);
@@ -419,9 +414,9 @@ class S {
     return Intl.message('Birthdate', name: 'birthdate', desc: '', args: []);
   }
 
-  /// `Logout`
-  String get logout {
-    return Intl.message('Logout', name: 'logout', desc: '', args: []);
+  /// `Log Out`
+  String get logOut {
+    return Intl.message('Log Out', name: 'logOut', desc: '', args: []);
   }
 
   /// `Save`
@@ -657,6 +652,91 @@ class S {
       desc: '',
       args: [],
     );
+  }
+
+  /// `Logs`
+  String get logs {
+    return Intl.message('Logs', name: 'logs', desc: '', args: []);
+  }
+
+  /// `Body Stats`
+  String get bodyStats {
+    return Intl.message('Body Stats', name: 'bodyStats', desc: '', args: []);
+  }
+
+  /// `Notes`
+  String get notes {
+    return Intl.message('Notes', name: 'notes', desc: '', args: []);
+  }
+
+  /// `No Logs`
+  String get noLogs {
+    return Intl.message('No Logs', name: 'noLogs', desc: '', args: []);
+  }
+
+  /// `You don't have any logs for this day.`
+  String get youDontHaveAnyLogsForThisDay {
+    return Intl.message(
+      'You don\'t have any logs for this day.',
+      name: 'youDontHaveAnyLogsForThisDay',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add Session`
+  String get addSession {
+    return Intl.message('Add Session', name: 'addSession', desc: '', args: []);
+  }
+
+  /// `No Body Stats`
+  String get noBodyStats {
+    return Intl.message(
+      'No Body Stats',
+      name: 'noBodyStats',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You don't have any body stats for this day.`
+  String get youDontHaveAnyBodyStatsForThisDay {
+    return Intl.message(
+      'You don\'t have any body stats for this day.',
+      name: 'youDontHaveAnyBodyStatsForThisDay',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add Body Stat`
+  String get addBodyStat {
+    return Intl.message(
+      'Add Body Stat',
+      name: 'addBodyStat',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No Notes`
+  String get noNotes {
+    return Intl.message('No Notes', name: 'noNotes', desc: '', args: []);
+  }
+
+  /// `You don't have any notes for this day.`
+  String get youDontHaveAnyNotesForThisDay {
+    return Intl.message(
+      'You don\'t have any notes for this day.',
+      name: 'youDontHaveAnyNotesForThisDay',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add Note`
+  String get addNote {
+    return Intl.message('Add Note', name: 'addNote', desc: '', args: []);
   }
 }
 

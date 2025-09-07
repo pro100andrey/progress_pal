@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:localization/localization.dart';
+import 'package:localization/generated/l10n.dart';
 
 class ___PageName___Page extends StatelessWidget {
   const ___PageName___Page({super.key});

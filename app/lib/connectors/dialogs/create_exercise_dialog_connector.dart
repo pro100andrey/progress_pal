@@ -10,6 +10,7 @@ import 'package:business/redux/create_exercise/actions/set_recording_type_action
 import 'package:business/redux/create_exercise/actions/set_title_action.dart';
 import 'package:business/redux/create_exercise/create_exercise_selectors.dart';
 import 'package:business/redux/equipment/equipments_selectors.dart';
+import 'package:business/redux/language/language_selectors.dart';
 import 'package:business/redux/muscle_groups/muscle_groups_selectors.dart';
 import 'package:business/redux/recording_types/recording_types_selectors.dart';
 import 'package:equatable/equatable.dart';
@@ -48,25 +49,25 @@ class _Factory extends VmFactory<AppState, CreateExerciseDialogConnector, _Vm> {
   _Vm fromStore() {
     final title = selectCreateExerciseTitle(state);
     final instructions = selectCreateExerciseInstructions(state);
-
     final muscleGroupId = selectCreateExerciseMuscleGroupId(state)!;
     final muscleGroupIdx = selectMuscleGroupIndexById(state, id: muscleGroupId);
-
     final equipmentId = selectCreateExerciseEquipmentId(state)!;
     final equipmentIdx = selectEquipmentIndexById(state, id: equipmentId);
-
     final recordingTypeId = selectCreateExerciseRecordingTypeId(state)!;
     final recordingTypeIdx = selectRecordingTypeIndexById(
       state,
       id: recordingTypeId,
     );
 
+    final language = selectLanguage(state);
+
     final muscleGroupItems = selectMuscleGroups(state)
         .map(
           (item) => SelectInputItem(
-            label: item.name.en,
-            onSelect: () =>
-                dispatchSync(SetMuscleGroupAction(muscleGroupId: item.id)),
+            label: item.name.get(language.locale)!,
+            onSelect: () => dispatchSync(
+              SetMuscleGroupAction(muscleGroupId: item.id),
+            ),
           ),
         )
         .toList(growable: false);
@@ -74,7 +75,7 @@ class _Factory extends VmFactory<AppState, CreateExerciseDialogConnector, _Vm> {
     final equipmentsItems = selectEquipments(state)
         .map(
           (item) => SelectInputItem(
-            label: item.name.en,
+            label: item.name.get(language.locale)!,
             onSelect: () =>
                 dispatchSync(SetEquipmentAction(equipmentId: item.id)),
           ),
@@ -84,7 +85,7 @@ class _Factory extends VmFactory<AppState, CreateExerciseDialogConnector, _Vm> {
     final recordTypesItems = selectRecordingTypes(state)
         .map(
           (item) => SelectInputItem(
-            label: item.name.en,
+            label: item.name.get(language.locale)!,
             onSelect: () =>
                 dispatchSync(SetRecordingTypeAction(recordingTypeId: item.id)),
           ),

@@ -1,5 +1,4 @@
 {
-  "_locale": "en",
   "appName": "Progress Pal",
   "title": "title",
   "ok": "OK",
@@ -44,7 +43,7 @@
   "verificationSuccessful": "Verification successful!",
   "resetPasswordSuccess": "Try logging in with your new password.",
   "birthdate": "Birthdate",
-  "logout": "Logout",
+  "logOut": "Log Out",
   "save": "Save",
   "editProfile": "Edit Profile",
   "editProfileInstructions": "Make changes to your profile here. Click save when you're done.",
@@ -73,5 +72,17 @@
   "createAWorkoutToGetStarted": "Create a workout to get started.",
   "noExercises": "No Exercises",
   "youHaveNotCreatedAnyExercisesYet": "You have not created any exercises yet.",
-  "exerciseCreatedSuccessfully": "Exercise created successfully"
+  "exerciseCreatedSuccessfully": "Exercise created successfully",
+  "logs": "Logs",
+  "bodyStats": "Body Stats",
+  "notes": "Notes",
+  "noLogs": "No Logs",
+  "youDontHaveAnyLogsForThisDay": "You don't have any logs for this day.",
+  "addSession": "Add Session",
+  "noBodyStats": "No Body Stats",
+  "youDontHaveAnyBodyStatsForThisDay": "You don't have any body stats for this day.",
+  "addBodyStat": "Add Body Stat",
+  "noNotes": "No Notes",
+  "youDontHaveAnyNotesForThisDay": "You don't have any notes for this day.",
+  "addNote": "Add Note"
 }

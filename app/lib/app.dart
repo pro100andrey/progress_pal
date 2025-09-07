@@ -50,6 +50,7 @@ class _AppConnectorState extends State<AppConnector> with NavigationDelegate {
                 background: const Color(0xFF131316),
                 card: const Color(0xFF161618),
                 selection: const Color(0xFFE25D5D),
+                popover: const Color(0xff161618),
               ),
         ),
         localizationsDelegates: const [
@@ -59,7 +60,7 @@ class _AppConnectorState extends State<AppConnector> with NavigationDelegate {
           GlobalCupertinoLocalizations.delegate,
         ],
         supportedLocales: S.delegate.supportedLocales,
-        locale: Locale(vm.language.code),
+        locale: Locale(vm.language.locale),
         builder: (context, child) => ShadAppBuilder(
           child: TopLevelPageConnector(
             child: UserExceptionDialog<AppState>(

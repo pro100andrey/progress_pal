@@ -1,5 +1,4 @@
 {
-  "_locale": "uk",
   "appName": "Progress Pal",
   "title": "Заголовок",
   "ok": "OK",
@@ -44,7 +43,7 @@
   "verificationSuccessful": "Підтвердження успішне!",
   "resetPasswordSuccess": "Спробуйте увійти з новим паролем.",
   "birthdate": "Дата народження",
-  "logout": "Вийти",
+  "logOut": "Вийти",
   "save": "Зберегти",
   "editProfile": "Редагувати профіль",
   "editProfileInstructions": "Внесіть зміни у свій профіль тут. Натисніть «Зберегти», коли закінчите.",
@@ -73,5 +72,17 @@
   "createAWorkoutToGetStarted": "Створіть тренування, щоб почати.",
   "noExercises": "Немає вправ",
   "youHaveNotCreatedAnyExercisesYet": "Ви ще не створили жодної вправи.",
-  "exerciseCreatedSuccessfully": "Вправа успішно створена."
+  "exerciseCreatedSuccessfully": "Вправа успішно створена.",
+  "logs": "Журнали",
+  "bodyStats": "Показники тіла",
+  "notes": "Нотатки",
+  "noLogs": "Немає журналів",
+  "youDontHaveAnyLogsForThisDay": "Ви не маєте жодних журналів за цей день.",
+  "addSession": "Додати сесію",
+  "noBodyStats": "Немає показників тіла",
+  "youDontHaveAnyBodyStatsForThisDay": "У вас немає показників тіла за цей день.",
+  "addBodyStat": "Додати показники тіла",
+  "noNotes": "Немає нотаток",
+  "youDontHaveAnyNotesForThisDay": "У вас немає жодних нотаток за цей день.",
+  "addNote": "Додати нотатку"
 }

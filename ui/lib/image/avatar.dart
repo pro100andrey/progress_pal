@@ -78,7 +78,7 @@ class Avatar extends StatelessWidget {
     final effectiveShape = shape ?? BoxShape.circle;
     final effectiveFit = fit ?? BoxFit.fill;
     final effectivePlaceholder =
-        placeholder ?? const Icon(LucideIcons.circleUser100, size: 32);
+        placeholder ?? const Icon(LucideIcons.user100, size: 24);
     final effectiveBorder =
         border ?? Border.all(color: const Color(0xFF3B3B3B));
 

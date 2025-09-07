@@ -6,7 +6,7 @@ import 'base_placeholder.dart';
 class NoMyExercisesPlaceholder extends BasePlaceholder {
   NoMyExercisesPlaceholder({super.key})
     : super(
-        icon: LucideIcons.scroll100,
+        icon: LucideIcons.scroll200,
         title: S.current.noExercises,
         subtitle: S.current.youHaveNotCreatedAnyExercisesYet,
       );

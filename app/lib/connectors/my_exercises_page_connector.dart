@@ -6,9 +6,9 @@ import 'package:business/redux/my_exercises_view/actions/retrieve_my_exercises_a
 import 'package:business/redux/my_exercises_view/my_exercises_view_selectors.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
-import 'package:ui/actions/my_exercise_actions.dart';
 import 'package:ui/cards/my_exercise_card.dart';
 import 'package:ui/pages/my_exercises_page.dart';
+import 'package:ui/popovers/my_exercise_actions.dart';
 
 import 'dialogs/create_exercise_dialog_connector.dart';
 
@@ -19,7 +19,6 @@ class MyExercisesConnector extends StatelessWidget {
   Widget build(BuildContext context) => StoreConnector<AppState, _Vm>(
     debug: this,
     onInit: (store) => store.dispatchAndWait(RetrieveMyExercisesAction()),
-    onDispose: (store) => debugPrint('MyExercisesConnector disposed'),
     vm: () => _Factory(this),
     builder: (context, vm) => MyExercisesPage(
       createExerciseDialog: const CreateExerciseDialogConnector(),

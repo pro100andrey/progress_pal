@@ -2,24 +2,26 @@ import 'package:flutter/material.dart';
 import 'package:localization/generated/l10n.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
 
+import '../indicators/base_circle_indicator.dart';
+
 class ConfirmVerificationPage extends StatelessWidget {
   const ConfirmVerificationPage({
     required this.isWaiting,
     required this.success,
-    required this.onPressedBackToLogin,
+    required this.onBackToLoginPressed,
     super.key,
   });
 
   final bool isWaiting;
   final bool success;
-  final VoidCallback onPressedBackToLogin;
+  final VoidCallback onBackToLoginPressed;
 
   @override
   Widget build(BuildContext context) => Scaffold(
     body: Builder(
       builder: (context) {
         if (isWaiting) {
-          return const Center(child: CircularProgressIndicator());
+          return const Center(child: BaseCircleIndicator());
         } else if (success) {
           return Center(
             child: Column(
@@ -31,7 +33,7 @@ class ConfirmVerificationPage extends StatelessWidget {
                   style: ShadTheme.of(context).textTheme.h2,
                 ),
                 TextButton(
-                  onPressed: onPressedBackToLogin,
+                  onPressed: onBackToLoginPressed,
                   child: Text(S.current.backToLogIn),
                 ),
               ],
