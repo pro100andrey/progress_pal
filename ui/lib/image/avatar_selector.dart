@@ -51,6 +51,7 @@ class _AvatarSelectorState extends State<AvatarSelector> {
   Widget build(BuildContext context) => ShadPopover(
     controller: popoverController,
     child: Avatar(
+      placeholder: const Icon(LucideIcons.user100, size: 54),
       source: widget.vm.src,
       onTap: () async => _handleTap(context),
       size: widget.size,
