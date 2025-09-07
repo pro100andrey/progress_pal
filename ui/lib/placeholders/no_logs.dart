@@ -6,7 +6,7 @@ import 'base_placeholder.dart';
 class NoLogsPlaceholder extends BasePlaceholder {
   NoLogsPlaceholder({super.key})
     : super(
-        icon: LucideIcons.list100,
+        icon: LucideIcons.logs200,
         title: S.current.noLogs,
         subtitle: S.current.youDontHaveAnyLogsForThisDay,
       );

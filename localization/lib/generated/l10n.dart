@@ -688,6 +688,56 @@ class S {
   String get addSession {
     return Intl.message('Add Session', name: 'addSession', desc: '', args: []);
   }
+
+  /// `No Body Stats`
+  String get noBodyStats {
+    return Intl.message(
+      'No Body Stats',
+      name: 'noBodyStats',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You don't have any body stats for this day.`
+  String get youDontHaveAnyBodyStatsForThisDay {
+    return Intl.message(
+      'You don\'t have any body stats for this day.',
+      name: 'youDontHaveAnyBodyStatsForThisDay',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add Body Stat`
+  String get addBodyStat {
+    return Intl.message(
+      'Add Body Stat',
+      name: 'addBodyStat',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No Notes`
+  String get noNotes {
+    return Intl.message('No Notes', name: 'noNotes', desc: '', args: []);
+  }
+
+  /// `You don't have any notes for this day.`
+  String get youDontHaveAnyNotesForThisDay {
+    return Intl.message(
+      'You don\'t have any notes for this day.',
+      name: 'youDontHaveAnyNotesForThisDay',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add Note`
+  String get addNote {
+    return Intl.message('Add Note', name: 'addNote', desc: '', args: []);
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

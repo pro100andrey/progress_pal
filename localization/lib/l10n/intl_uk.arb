@@ -74,9 +74,15 @@
   "youHaveNotCreatedAnyExercisesYet": "Ви ще не створили жодної вправи.",
   "exerciseCreatedSuccessfully": "Вправа успішно створена.",
   "logs": "Журнали",
-  "bodyStats": "Статистика тіла",
+  "bodyStats": "Показники тіла",
   "notes": "Нотатки",
   "noLogs": "Немає журналів",
   "youDontHaveAnyLogsForThisDay": "Ви не маєте жодних журналів за цей день.",
-  "addSession": "Додати сесію"
+  "addSession": "Додати сесію",
+  "noBodyStats": "Немає показників тіла",
+  "youDontHaveAnyBodyStatsForThisDay": "У вас немає показників тіла за цей день.",
+  "addBodyStat": "Додати показники тіла",
+  "noNotes": "Немає нотаток",
+  "youDontHaveAnyNotesForThisDay": "У вас немає жодних нотаток за цей день.",
+  "addNote": "Додати нотатку"
 }

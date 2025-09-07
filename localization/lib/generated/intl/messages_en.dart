@@ -30,6 +30,8 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+    "addBodyStat": MessageLookupByLibrary.simpleMessage("Add Body Stat"),
+    "addNote": MessageLookupByLibrary.simpleMessage("Add Note"),
     "addSession": MessageLookupByLibrary.simpleMessage("Add Session"),
     "appName": MessageLookupByLibrary.simpleMessage("Progress Pal"),
     "areYouSure": MessageLookupByLibrary.simpleMessage("Are you sure?"),
@@ -94,8 +96,10 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "my": MessageLookupByLibrary.simpleMessage("My"),
     "newExercise": MessageLookupByLibrary.simpleMessage("New Exercise"),
+    "noBodyStats": MessageLookupByLibrary.simpleMessage("No Body Stats"),
     "noExercises": MessageLookupByLibrary.simpleMessage("No Exercises"),
     "noLogs": MessageLookupByLibrary.simpleMessage("No Logs"),
+    "noNotes": MessageLookupByLibrary.simpleMessage("No Notes"),
     "noWorkouts": MessageLookupByLibrary.simpleMessage("No Workouts"),
     "notes": MessageLookupByLibrary.simpleMessage("Notes"),
     "ok": MessageLookupByLibrary.simpleMessage("OK"),
@@ -154,8 +158,14 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "welcomeBack": MessageLookupByLibrary.simpleMessage("Welcome back!"),
     "workouts": MessageLookupByLibrary.simpleMessage("Workouts"),
+    "youDontHaveAnyBodyStatsForThisDay": MessageLookupByLibrary.simpleMessage(
+      "You don\'t have any body stats for this day.",
+    ),
     "youDontHaveAnyLogsForThisDay": MessageLookupByLibrary.simpleMessage(
       "You don\'t have any logs for this day.",
+    ),
+    "youDontHaveAnyNotesForThisDay": MessageLookupByLibrary.simpleMessage(
+      "You don\'t have any notes for this day.",
     ),
     "youHaveNotCreatedAnyExercisesYet": MessageLookupByLibrary.simpleMessage(
       "You have not created any exercises yet.",

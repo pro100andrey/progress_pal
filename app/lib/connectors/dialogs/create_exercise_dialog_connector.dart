@@ -49,13 +49,10 @@ class _Factory extends VmFactory<AppState, CreateExerciseDialogConnector, _Vm> {
   _Vm fromStore() {
     final title = selectCreateExerciseTitle(state);
     final instructions = selectCreateExerciseInstructions(state);
-
     final muscleGroupId = selectCreateExerciseMuscleGroupId(state)!;
     final muscleGroupIdx = selectMuscleGroupIndexById(state, id: muscleGroupId);
-
     final equipmentId = selectCreateExerciseEquipmentId(state)!;
     final equipmentIdx = selectEquipmentIndexById(state, id: equipmentId);
-
     final recordingTypeId = selectCreateExerciseRecordingTypeId(state)!;
     final recordingTypeIdx = selectRecordingTypeIndexById(
       state,
