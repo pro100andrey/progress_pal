@@ -39,7 +39,5 @@ class _Vm extends Vm with EquatableMixin {
   final SupportedLanguage language;
 
   @override
-  List<Object?> get props => [
-    language,
-  ];
+  List<Object?> get props => [language];
 }

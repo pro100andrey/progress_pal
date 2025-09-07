@@ -27,8 +27,8 @@ class ResetPasswordPageConnector extends StatelessWidget {
     builder: (context, vm) => ResetPasswordPage(
       password: vm.password,
       confirmPassword: vm.confirmPassword,
-      onPressedResetPassword: vm.onPressedResetPassword,
-      onPressedBackToLogin: vm.onPressedBackToLogin,
+      onResetPasswordPressed: vm.onResetPasswordPressed,
+      onBackToLogInPressed: vm.onBackToLogInPressed,
     ),
   );
 }
@@ -58,7 +58,7 @@ class _Factory extends VmFactory<AppState, ResetPasswordPageConnector, _Vm> {
         },
         onChanged: (value) => dispatchSync(SetConfirmPasswordAction(value!)),
       ),
-      onPressedResetPassword: () async {
+      onResetPasswordPressed: () async {
         final status = await dispatchAndWait(ResetPasswordAction());
 
         if (status.isCompletedOk) {
@@ -67,7 +67,7 @@ class _Factory extends VmFactory<AppState, ResetPasswordPageConnector, _Vm> {
 
         return status.isCompletedOk;
       },
-      onPressedBackToLogin: navigation.goToLogIn,
+      onBackToLogInPressed: navigation.goToLogIn,
     );
   }
 }
@@ -77,14 +77,14 @@ class _Vm extends Vm with EquatableMixin {
   _Vm({
     required this.password,
     required this.confirmPassword,
-    required this.onPressedResetPassword,
-    required this.onPressedBackToLogin,
+    required this.onResetPasswordPressed,
+    required this.onBackToLogInPressed,
   });
 
   final ValueChangedVm<String?> password;
   final ValueChangedVm<String?> confirmPassword;
-  final Future<bool> Function() onPressedResetPassword;
-  final VoidCallback onPressedBackToLogin;
+  final Future<bool> Function() onResetPasswordPressed;
+  final VoidCallback onBackToLogInPressed;
 
   @override
   List<Object?> get props => [password, confirmPassword];

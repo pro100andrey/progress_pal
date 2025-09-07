@@ -30,8 +30,8 @@ class RegistrationPageConnector extends StatelessWidget {
       email: vm.email,
       password: vm.password,
       confirmPassword: vm.confirmPassword,
-      onPressedRegister: vm.onPressedRegister,
-      onPressedBackToLogin: vm.onPressedBackToLogin,
+      onRegisterPressed: vm.onRegisterPressed,
+      onBackToLogInPressed: vm.onLogInPressed,
     ),
   );
 }
@@ -78,7 +78,7 @@ class _Factory extends VmFactory<AppState, RegistrationPageConnector, _Vm> {
         },
         onChanged: (value) => dispatchSync(SetConfirmPasswordAction(value!)),
       ),
-      onPressedRegister: () async {
+      onRegisterPressed: () async {
         final status = await dispatchAndWait(RegistrationAction());
 
         if (status.isCompletedOk) {
@@ -87,7 +87,7 @@ class _Factory extends VmFactory<AppState, RegistrationPageConnector, _Vm> {
 
         return status.isCompletedOk;
       },
-      onPressedBackToLogin: navigation.goToLogIn,
+      onLogInPressed: navigation.goToLogIn,
     );
   }
 }
@@ -100,8 +100,8 @@ class _Vm extends Vm with EquatableMixin {
     required this.email,
     required this.password,
     required this.confirmPassword,
-    required this.onPressedRegister,
-    required this.onPressedBackToLogin,
+    required this.onRegisterPressed,
+    required this.onLogInPressed,
   });
 
   final AvatarSelectorVm avatar;
@@ -109,8 +109,8 @@ class _Vm extends Vm with EquatableMixin {
   final ValueChangedVm<String?> email;
   final ValueChangedVm<String?> password;
   final ValueChangedVm<String?> confirmPassword;
-  final Future<bool> Function() onPressedRegister;
-  final VoidCallback onPressedBackToLogin;
+  final Future<bool> Function() onRegisterPressed;
+  final VoidCallback onLogInPressed;
 
   @override
   List<Object?> get props => [

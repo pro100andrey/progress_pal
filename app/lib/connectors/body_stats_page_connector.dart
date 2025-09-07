@@ -15,19 +15,18 @@ class BodyStatsPageConnector extends StatelessWidget {
     vm: () => _Factory(this),
     builder: (context, vm) => BodyStatsPage(
       key: ValueKey(vm.language),
-  
     ),
   );
 }
 
 /// Factory that creates a view-model for the StoreConnector.
-class _Factory
-    extends VmFactory<AppState, BodyStatsPageConnector, _Vm> {
+class _Factory extends VmFactory<AppState, BodyStatsPageConnector, _Vm> {
   _Factory(super._connector);
 
   @override
   _Vm fromStore() {
     final language = selectLanguage(state);
+
     return _Vm(language: language);
   }
 }
@@ -41,7 +40,5 @@ class _Vm extends Vm with EquatableMixin {
   final SupportedLanguage language;
 
   @override
-  List<Object?> get props => [
-    language,
-  ];
+  List<Object?> get props => [language];
 }

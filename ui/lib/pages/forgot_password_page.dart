@@ -12,15 +12,15 @@ class ForgotPasswordPage extends StatelessWidget {
   const ForgotPasswordPage({
     required this.isWaiting,
     required this.email,
-    required this.onPressedResetPassword,
-    required this.onPressedBackToLogin,
+    required this.onResetPasswordPressed,
+    required this.onBackToLoginPressed,
     super.key,
   });
 
   final bool isWaiting;
   final ValueChangedVm<String?> email;
-  final Future<bool> Function() onPressedResetPassword;
-  final VoidCallback onPressedBackToLogin;
+  final Future<bool> Function() onResetPasswordPressed;
+  final VoidCallback onBackToLoginPressed;
 
   @override
   Widget build(BuildContext context) => Scaffold(
@@ -45,7 +45,7 @@ class ForgotPasswordPage extends StatelessWidget {
               margin: EdgeInsets.symmetric(horizontal: 20),
             ),
             TextButton(
-              onPressed: onPressedBackToLogin,
+              onPressed: onBackToLoginPressed,
               child: Text(S.current.backToLogIn),
             ),
           ],
@@ -59,7 +59,7 @@ class ForgotPasswordPage extends StatelessWidget {
     BuildContext context,
   ) async {
     if (formKey.currentState!.saveAndValidate()) {
-      final result = await onPressedResetPassword();
+      final result = await onResetPasswordPressed();
 
       if (context.mounted && result) {
         ShadToaster.of(context).show(

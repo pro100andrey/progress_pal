@@ -19,8 +19,8 @@ class RegistrationPage extends StatelessWidget {
     required this.email,
     required this.password,
     required this.confirmPassword,
-    required this.onPressedRegister,
-    required this.onPressedBackToLogin,
+    required this.onRegisterPressed,
+    required this.onBackToLogInPressed,
     super.key,
   });
 
@@ -29,8 +29,8 @@ class RegistrationPage extends StatelessWidget {
   final ValueChangedVm<String?> email;
   final ValueChangedVm<String?> password;
   final ValueChangedVm<String?> confirmPassword;
-  final Future<bool> Function() onPressedRegister;
-  final VoidCallback onPressedBackToLogin;
+  final Future<bool> Function() onRegisterPressed;
+  final VoidCallback onBackToLogInPressed;
 
   @override
   Widget build(BuildContext context) => Scaffold(
@@ -59,7 +59,7 @@ class RegistrationPage extends StatelessWidget {
               margin: EdgeInsets.symmetric(horizontal: 20),
             ),
             TextButton(
-              onPressed: onPressedBackToLogin,
+              onPressed: onBackToLogInPressed,
               child: Text(S.current.backToLogIn),
             ),
           ],
@@ -73,7 +73,7 @@ class RegistrationPage extends StatelessWidget {
     BuildContext context,
   ) async {
     if (formKey.currentState!.saveAndValidate()) {
-      final result = await onPressedRegister();
+      final result = await onRegisterPressed();
 
       if (context.mounted && result) {
         ShadToaster.of(context).show(

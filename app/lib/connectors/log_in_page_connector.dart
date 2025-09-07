@@ -22,9 +22,9 @@ class LogInPageConnector extends StatelessWidget {
     builder: (context, vm) => LogInPage(
       email: vm.email,
       password: vm.password,
-      onPressedForgotPassword: vm.onPressedForgotPassword,
-      onPressedLogIn: vm.onPressedLogIn,
-      onPressedRegister: vm.onPressedRegister,
+      onForgotPasswordPressed: vm.onForgotPasswordPressed,
+      onLogInPressed: vm.onLogInPressed,
+      onRegisterPressed: vm.onRegisterPressed,
     ),
   );
 }
@@ -49,14 +49,14 @@ class _Factory extends VmFactory<AppState, LogInPageConnector, _Vm> {
         validator: passwordValidator.call,
         onChanged: (value) => dispatchSync(SetPasswordAction(password: value!)),
       ),
-      onPressedLogIn: () async {
+      onLogInPressed: () async {
         final result = await dispatchAndWait(LogInWithEmailAction());
         if (result.isCompletedOk) {
           navigation.refresh();
         }
       },
-      onPressedForgotPassword: navigation.goToForgotPassword,
-      onPressedRegister: navigation.goToRegistration,
+      onForgotPasswordPressed: navigation.goToForgotPassword,
+      onRegisterPressed: navigation.goToRegistration,
     );
   }
 }
@@ -66,16 +66,16 @@ class _Vm extends Vm with EquatableMixin {
   _Vm({
     required this.email,
     required this.password,
-    required this.onPressedLogIn,
-    required this.onPressedForgotPassword,
-    required this.onPressedRegister,
+    required this.onLogInPressed,
+    required this.onForgotPasswordPressed,
+    required this.onRegisterPressed,
   });
 
   final ValueChangedVm<String?> email;
   final ValueChangedVm<String?> password;
-  final VoidCallback onPressedLogIn;
-  final VoidCallback onPressedForgotPassword;
-  final VoidCallback onPressedRegister;
+  final VoidCallback onLogInPressed;
+  final VoidCallback onForgotPasswordPressed;
+  final VoidCallback onRegisterPressed;
 
   @override
   List<Object?> get props => [email, password];

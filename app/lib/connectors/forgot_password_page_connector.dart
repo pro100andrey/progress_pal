@@ -21,8 +21,8 @@ class ForgotPasswordPageConnector extends StatelessWidget {
     builder: (context, vm) => ForgotPasswordPage(
       isWaiting: vm.isWaiting,
       email: vm.email,
-      onPressedResetPassword: vm.onPressedResetPassword,
-      onPressedBackToLogin: vm.onPressedBackToLogin,
+      onResetPasswordPressed: vm.onResetPasswordPressed,
+      onBackToLoginPressed: vm.onBackToLoginPressed,
     ),
   );
 }
@@ -42,7 +42,7 @@ class _Factory extends VmFactory<AppState, ForgotPasswordPageConnector, _Vm> {
         validator: emailValidator.call,
         onChanged: (value) => dispatchSync(SetEmailAction(email: value!)),
       ),
-      onPressedResetPassword: () async {
+      onResetPasswordPressed: () async {
         final status = await dispatchAndWait(ForgotPasswordAction());
         if (status.isCompletedOk) {
           navigation.goToLogIn();
@@ -50,7 +50,7 @@ class _Factory extends VmFactory<AppState, ForgotPasswordPageConnector, _Vm> {
 
         return status.isCompletedOk;
       },
-      onPressedBackToLogin: navigation.goToLogIn,
+      onBackToLoginPressed: navigation.goToLogIn,
     );
   }
 }
@@ -60,14 +60,14 @@ class _Vm extends Vm with EquatableMixin {
   _Vm({
     required this.isWaiting,
     required this.email,
-    required this.onPressedResetPassword,
-    required this.onPressedBackToLogin,
+    required this.onResetPasswordPressed,
+    required this.onBackToLoginPressed,
   });
 
   final bool isWaiting;
   final ValueChangedVm<String?> email;
-  final Future<bool> Function() onPressedResetPassword;
-  final VoidCallback onPressedBackToLogin;
+  final Future<bool> Function() onResetPasswordPressed;
+  final VoidCallback onBackToLoginPressed;
 
   @override
   List<Object?> get props => [isWaiting, email];

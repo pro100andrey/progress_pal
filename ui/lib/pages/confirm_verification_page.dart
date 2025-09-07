@@ -8,13 +8,13 @@ class ConfirmVerificationPage extends StatelessWidget {
   const ConfirmVerificationPage({
     required this.isWaiting,
     required this.success,
-    required this.onPressedBackToLogin,
+    required this.onBackToLoginPressed,
     super.key,
   });
 
   final bool isWaiting;
   final bool success;
-  final VoidCallback onPressedBackToLogin;
+  final VoidCallback onBackToLoginPressed;
 
   @override
   Widget build(BuildContext context) => Scaffold(
@@ -33,7 +33,7 @@ class ConfirmVerificationPage extends StatelessWidget {
                   style: ShadTheme.of(context).textTheme.h2,
                 ),
                 TextButton(
-                  onPressed: onPressedBackToLogin,
+                  onPressed: onBackToLoginPressed,
                   child: Text(S.current.backToLogIn),
                 ),
               ],

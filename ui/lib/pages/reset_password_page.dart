@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:localization/generated/l10n.dart';
-
 import 'package:shadcn_ui/shadcn_ui.dart';
 
 import '../forms/base_form.dart';
@@ -14,15 +13,15 @@ class ResetPasswordPage extends StatelessWidget {
   const ResetPasswordPage({
     required this.password,
     required this.confirmPassword,
-    required this.onPressedResetPassword,
-    required this.onPressedBackToLogin,
+    required this.onResetPasswordPressed,
+    required this.onBackToLogInPressed,
     super.key,
   });
 
   final ValueChangedVm<String?> password;
   final ValueChangedVm<String?> confirmPassword;
-  final Future<bool> Function() onPressedResetPassword;
-  final VoidCallback onPressedBackToLogin;
+  final Future<bool> Function() onResetPasswordPressed;
+  final VoidCallback onBackToLogInPressed;
 
   @override
   Widget build(BuildContext context) => Scaffold(
@@ -47,7 +46,7 @@ class ResetPasswordPage extends StatelessWidget {
               margin: EdgeInsets.symmetric(horizontal: 20),
             ),
             TextButton(
-              onPressed: onPressedBackToLogin,
+              onPressed: onBackToLogInPressed,
               child: Text(S.current.backToLogIn),
             ),
           ],
@@ -61,7 +60,7 @@ class ResetPasswordPage extends StatelessWidget {
     BuildContext context,
   ) async {
     if (formKey.currentState!.saveAndValidate()) {
-      final result = await onPressedResetPassword();
+      final result = await onResetPasswordPressed();
 
       if (context.mounted && result) {
         ShadToaster.of(context).show(
