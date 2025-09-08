@@ -5,6 +5,7 @@ import 'package:business/redux/language/models/language_state.dart';
 import 'package:business/redux/session/actions/clean_session_action.dart';
 import 'package:business/redux/session/session_selectors.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:localization/generated/l10n.dart';
@@ -38,6 +39,16 @@ class _AppConnectorState extends State<AppConnector> with NavigationDelegate {
     builder: (context, vm) => Sizer(
       maxTabletWidth: 1023,
       builder: (context, orientation, screenType) => ShadApp.router(
+        scrollBehavior: const ShadScrollBehavior().copyWith(
+          scrollbars: true,
+          physics: const BouncingScrollPhysics(),
+          dragDevices: {
+            PointerDeviceKind.touch,
+            PointerDeviceKind.mouse,
+            PointerDeviceKind.stylus,
+            PointerDeviceKind.unknown,
+          },
+        ),
         routerConfig: navigation.router,
         themeMode: ThemeMode.dark,
         darkTheme: ShadThemeData(
