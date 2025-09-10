@@ -21,18 +21,16 @@ dependencies:
   localization:
     path: ../localization
   package_info_plus: ^8.3.1
-  shadcn_ui: ^0.30.5
+  shadcn_ui: ^0.31.0
   theme_extensions_builder_annotation: ^5.1.0
   wheel_picker: ^0.2.2
 
 dev_dependencies:
-  build_runner: ^2.7.0
+  build_runner: ^2.8.0
   flutter_gen_runner: ^5.11.0
   pro_lints: ^5.0.0
   theme_extensions_builder: ^5.1.0
 
-dependency_overrides: 
-  analyzer: ^8.0.0
 
 flutter_gen:
   output: lib/generated/
