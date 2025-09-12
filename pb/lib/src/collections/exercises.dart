@@ -26,7 +26,7 @@ class ExerciseBody extends PBToJson {
   final LanguageString? title;
   final LanguageString? instructions;
   final String? createdById;
-  final String? muscleGroupId;
+  final List<String>? muscleGroupId;
   final String? equipmentId;
   final String? recordingTypeId;
 
