@@ -29,7 +29,6 @@ class _BasePopoverState extends State<BasePopover> {
 
   @override
   Widget build(BuildContext context) => ShadPopover(
-    
     padding: widget.padding,
     anchor: widget.anchor,
     controller: _controller,

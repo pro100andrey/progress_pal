@@ -4,5 +4,7 @@ part 'forgot_password_state.freezed.dart';
 
 @freezed
 abstract class ForgotPasswordState with _$ForgotPasswordState {
-  const factory ForgotPasswordState({String? email}) = _ForgotPasswordState;
+  const factory ForgotPasswordState({
+    String? email,
+  }) = _ForgotPasswordState;
 }
