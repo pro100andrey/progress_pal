@@ -11,6 +11,7 @@ import 'package:ui/pages/log_in_page.dart';
 
 import '../common/validators.dart';
 import '../navigation/navigation.dart';
+import 'selectors/language_selector_connector.dart';
 
 class LogInPageConnector extends StatelessWidget {
   const LogInPageConnector({super.key});
@@ -20,6 +21,7 @@ class LogInPageConnector extends StatelessWidget {
     debug: this,
     vm: () => _Factory(this),
     builder: (context, vm) => LogInPage(
+      languageSelector: const LanguageSelectorConnector(),
       email: vm.email,
       password: vm.password,
       onForgotPasswordPressed: vm.onForgotPasswordPressed,

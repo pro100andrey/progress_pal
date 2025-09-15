@@ -58,7 +58,6 @@ class _Factory extends VmFactory<AppState, RegistrationPageConnector, _Vm> {
         onChanged: (value) => dispatchSync(SetFullNameAction(fullName: value!)),
         validator: nameValidator.call,
       ),
-
       email: ValueChangedVm(
         value: email,
         validator: emailValidator.call,

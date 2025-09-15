@@ -19,6 +19,7 @@ class FormContainer extends StatelessWidget {
   Widget build(BuildContext context) => Align(
     alignment: centered ? Alignment.center : Alignment.topCenter,
     child: SingleChildScrollView(
+      padding: const EdgeInsets.all(16),
       child: Column(
         spacing: 16,
         children: [

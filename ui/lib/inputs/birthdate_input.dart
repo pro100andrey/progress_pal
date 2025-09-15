@@ -12,9 +12,18 @@ class BirthdateInput extends StatelessWidget {
   @override
   Widget build(BuildContext context) => ShadDatePickerFormField(
     width: double.infinity,
-    anchor: ShadAnchor.center,
+    anchor: const ShadAnchor(
+      childAlignment: Alignment.center,
+      overlayAlignment: Alignment.center,
+    ),
+    captionLayout: ShadCalendarCaptionLayout.dropdown,
     placeholder: Text(S.current.birthdate),
-    onChanged: print,
+    initialValue: vm.value,
+    onChanged: vm.onChanged,
     validator: vm.validator,
+    formatDate: (date) => DateFormat.yMd().format(date),
+    closeOnSelection: true,
+    fromMonth: DateTime(1950),
+    toMonth: DateTime.now(),
   );
 }

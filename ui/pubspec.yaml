@@ -20,8 +20,8 @@ dependencies:
   image_picker: ^1.2.0
   localization:
     path: ../localization
-  package_info_plus: ^8.3.1
-  shadcn_ui: ^0.31.0
+  package_info_plus: ^9.0.0
+  shadcn_ui: ^0.31.2
   theme_extensions_builder_annotation: ^5.1.0
   wheel_picker: ^0.2.2
 

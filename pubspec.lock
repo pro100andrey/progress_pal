@@ -157,10 +157,10 @@ packages:
     dependency: transitive
     description:
       name: code_builder
-      sha256: "0ec10bf4a89e4c613960bf1e8b42c64127021740fb21640c29c909826a5eea3e"
+      sha256: "11654819532ba94c34de52ff5feb52bd81cba1de00ef2ed622fd50295f9d4243"
       url: "https://pub.dev"
     source: hosted
-    version: "4.10.1"
+    version: "4.11.0"
   collection:
     dependency: transitive
     description:
@@ -178,13 +178,13 @@ packages:
     source: hosted
     version: "3.0.0"
   connectivity_plus:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
       name: connectivity_plus
-      sha256: b5e72753cf63becce2c61fd04dfe0f1c430cc5278b53a1342dc5ad839eab29ec
+      sha256: "33bae12a398f841c6cda09d1064212957265869104c478e5ad51e2fb26c3973c"
       url: "https://pub.dev"
     source: hosted
-    version: "6.1.5"
+    version: "7.0.0"
   connectivity_plus_platform_interface:
     dependency: transitive
     description:
@@ -420,10 +420,10 @@ packages:
     dependency: transitive
     description:
       name: freezed
-      sha256: b6445822d9b3961a9d0f3def0b4297bd77314bdbfd1de0b62eaca27c93e9bc0f
+      sha256: "13065f10e135263a4f5a4391b79a8efc5fb8106f8dd555a9e49b750b45393d77"
       url: "https://pub.dev"
     source: hosted
-    version: "3.2.2"
+    version: "3.2.3"
   freezed_annotation:
     dependency: transitive
     description:
@@ -548,10 +548,10 @@ packages:
     dependency: transitive
     description:
       name: image_picker_android
-      sha256: "28f3987ca0ec702d346eae1d90eda59603a2101b52f1e234ded62cff1d5cfa6e"
+      sha256: a45bef33deb24839a51fb85a4d9e504ead2b1ad1c4779d02d09bf6a8857cdd52
       url: "https://pub.dev"
     source: hosted
-    version: "0.8.13+1"
+    version: "0.8.13+2"
   image_picker_for_web:
     dependency: transitive
     description:
@@ -708,10 +708,10 @@ packages:
     dependency: transitive
     description:
       name: package_info_plus
-      sha256: "16eee997588c60225bda0488b6dcfac69280a6b7a3cf02c741895dd370a02968"
+      sha256: f69da0d3189a4b4ceaeb1a3defb0f329b3b352517f52bed4290f83d4f06bc08d
       url: "https://pub.dev"
     source: hosted
-    version: "8.3.1"
+    version: "9.0.0"
   package_info_plus_platform_interface:
     dependency: transitive
     description:
@@ -948,10 +948,10 @@ packages:
     dependency: transitive
     description:
       name: shadcn_ui
-      sha256: "1f71f8b9da11d41052bdc4c9960e8a50bfc3a95633d5d0126d0b69339d4cc418"
+      sha256: e4a3f7a36291f7d81d3d9f0409c3890dd66f5f3c593e621ce918f9044aa7462f
       url: "https://pub.dev"
     source: hosted
-    version: "0.31.0"
+    version: "0.31.2"
   shelf:
     dependency: transitive
     description:
