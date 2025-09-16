@@ -44,12 +44,12 @@ class _Factory extends VmFactory<AppState, LogInPageConnector, _Vm> {
       email: ValueChangedVm(
         value: email,
         validator: emailValidator.call,
-        onChanged: (value) => dispatchSync(SetEmailAction(value!)),
+        onChanged: (v) => dispatchSync(SetEmailAction(email: v!)),
       ),
       password: ValueChangedVm(
         value: password,
         validator: passwordValidator.call,
-        onChanged: (value) => dispatchSync(SetPasswordAction(password: value!)),
+        onChanged: (v) => dispatchSync(SetPasswordAction(password: v!)),
       ),
       onLogInPressed: () async {
         final result = await dispatchAndWait(LogInWithEmailAction());

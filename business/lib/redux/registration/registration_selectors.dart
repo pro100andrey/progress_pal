@@ -10,6 +10,10 @@ bool selectRegistrationIsWaiting(AppState state) =>
 /// Returns email value
 String? selectRegistrationEmail(AppState state) => state.registration.email;
 
+/// Returns birthdate value
+DateTime? selectRegistrationBirthdate(AppState state) =>
+    state.registration.birthdate;
+
 /// Returns password value
 String? selectRegistrationPassword(AppState state) =>
     state.registration.password;

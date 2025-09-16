@@ -40,7 +40,7 @@ class _Factory extends VmFactory<AppState, ForgotPasswordPageConnector, _Vm> {
       email: ValueChangedVm(
         value: email,
         validator: emailValidator.call,
-        onChanged: (value) => dispatchSync(SetEmailAction(email: value!)),
+        onChanged: (v) => dispatchSync(SetEmailAction(email: v!)),
       ),
       onResetPasswordPressed: () async {
         final status = await dispatchAndWait(ForgotPasswordAction());

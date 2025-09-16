@@ -80,8 +80,5 @@ class _Vm extends Vm with EquatableMixin {
   final String tabTitle;
 
   @override
-  List<Object?> get props => [
-    dataIsWaiting,
-    tabTitle,
-  ];
+  List<Object?> get props => [dataIsWaiting, tabTitle];
 }

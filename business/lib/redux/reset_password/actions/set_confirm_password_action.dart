@@ -3,7 +3,7 @@ import 'package:async_redux/async_redux.dart';
 import '../../app_state.dart';
 
 class SetConfirmPasswordAction extends ReduxAction<AppState> {
-  SetConfirmPasswordAction(this.confirmPassword);
+  SetConfirmPasswordAction({required this.confirmPassword});
 
   final String confirmPassword;
 
