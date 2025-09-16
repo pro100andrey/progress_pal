@@ -12,6 +12,7 @@ class RegistrationAction extends ReduxAction<AppState> with WaitingFor {
   Future<AppState?> reduce() async {
     final fullName = selectRegistrationFullName(state)!;
     final email = selectRegistrationEmail(state)!;
+    final birthdate = selectRegistrationBirthdate(state)!;
     final password = selectRegistrationPassword(state)!;
     final avatar = selectRegistrationAvatar(state);
 
@@ -23,6 +24,7 @@ class RegistrationAction extends ReduxAction<AppState> with WaitingFor {
               'email': email,
               'emailVisibility': true,
               'name': fullName,
+              'birthdate': birthdate.toIso8601String(),
               'password': password,
               'passwordConfirm': password,
             },

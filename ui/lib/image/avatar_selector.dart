@@ -49,6 +49,11 @@ class _AvatarSelectorState extends State<AvatarSelector> {
 
   @override
   Widget build(BuildContext context) => ShadPopover(
+    anchor: const ShadAnchor(
+      childAlignment: Alignment.center,
+      overlayAlignment: Alignment.bottomCenter,
+    ),
+    padding: const EdgeInsets.all(8),
     controller: popoverController,
     child: Avatar(
       placeholder: const Icon(LucideIcons.user100, size: 54),
@@ -57,7 +62,7 @@ class _AvatarSelectorState extends State<AvatarSelector> {
       size: widget.size,
     ),
     popover: (context) => SizedBox(
-      width: 200,
+      width: 240,
       child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -102,6 +107,7 @@ class _AvatarSelectorState extends State<AvatarSelector> {
       if (pickedFile != null) {
         final name = pickedFile.name;
         final ext = name.split('.').last.toLowerCase();
+
         if (!allowedExtension.contains(ext) && context.mounted) {
           ShadToaster.of(context).show(
             ShadToast(

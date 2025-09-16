@@ -8,6 +8,8 @@ extension type User(RecordModel record) implements RecordModel {
   /// Returns the name of the user.
   String get name => record.getStringValue('name');
 
+  DateTime get birthdate => DateTime.parse(record.getStringValue('birthdate'));
+
   /// Returns the avatar file name of the user.
   String get avatarFileName => record.getStringValue('avatar');
 
