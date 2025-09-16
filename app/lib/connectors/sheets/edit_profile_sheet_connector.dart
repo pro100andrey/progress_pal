@@ -1,12 +1,17 @@
 import 'package:async_redux/async_redux.dart';
 import 'package:business/redux/app_state.dart';
+import 'package:business/redux/edit_profile/actions/begin_edit_profile_action.dart';
+import 'package:business/redux/edit_profile/actions/save_edit_profile_action.dart';
+import 'package:business/redux/edit_profile/actions/set_birthdate_action.dart';
+import 'package:business/redux/edit_profile/actions/set_full_name_action.dart';
+import 'package:business/redux/edit_profile/edit_profile_selectors.dart';
 import 'package:business/redux/session/session_selectors.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:ui/image/avatar.dart';
 import 'package:ui/image/avatar_selector.dart';
 import 'package:ui/models/value_changed.dart';
-import 'package:ui/sheets/user_profile_sheet.dart';
+import 'package:ui/sheets/edit_profile_sheet.dart';
 
 import '../../common/validators.dart';
 
@@ -18,7 +23,10 @@ class UserProfileSheetConnector extends StatelessWidget {
     debug: this,
     vm: () => _Factory(this),
     shouldUpdateModel: selectSessionIsLoggedIn,
-    builder: (context, vm) => UserProfileSheet(
+    onInit: (store) {
+      store.dispatchSync(BeginEditProfileAction());
+    },
+    builder: (context, vm) => EditProfileSheet(
       avatarSelector: vm.avatarSelector,
       fullName: vm.fullName,
       email: vm.email,
@@ -37,14 +45,18 @@ class _Factory extends VmFactory<AppState, UserProfileSheetConnector, _Vm> {
     final currentUser = selectSessionCurrentUser(state)!;
     final avatarUrl = selectSessionCurrentUserAvatarUrl(state);
 
+    final fullName = selectEditProfileFullName(state);
+    final birthdate = selectEditProfileBirthdate(state);
+    final hasChanges = selectEditProfileHasChanges(state);
+
     return _Vm(
       avatarSelector: AvatarSelectorVm(
         src: AvatarSource.network(avatarUrl),
-        onImageSelect: (xfile) => {},
+        onImageSelect: (v) => {},
       ),
       fullName: ValueChangedVm(
-        value: currentUser.name,
-        onChanged: (value) {},
+        value: fullName,
+        onChanged: (v) => dispatchSync(SetFullNameAction(fullName: v!)),
         validator: nameValidator.call,
       ),
       email: ValueChangedVm(
@@ -52,16 +64,18 @@ class _Factory extends VmFactory<AppState, UserProfileSheetConnector, _Vm> {
         enabled: false,
       ),
       birthdate: ValueChangedVm(
-        value: DateTime.now(),
-        onChanged: (value) {},
-        validator: (value) {
-          if (value == null) {
+        value: birthdate,
+        onChanged: (v) => dispatchSync(SetBirthdateAction(birthdate: v!)),
+        validator: (v) {
+          if (v == null) {
             return 'A date of birth is required.';
           }
           return null;
         },
       ),
-      onPressedSave: null,
+      onPressedSave: hasChanges
+          ? () => dispatch(SaveEditProfileAction())
+          : null,
     );
   }
 }

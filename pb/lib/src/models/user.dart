@@ -8,7 +8,8 @@ extension type User(RecordModel record) implements RecordModel {
   /// Returns the name of the user.
   String get name => record.getStringValue('name');
 
-  DateTime get birthdate => DateTime.parse(record.getStringValue('birthdate'));
+  DateTime get birthdate =>
+      DateTime.parse(record.getStringValue('birthdate')).toLocal();
 
   /// Returns the avatar file name of the user.
   String get avatarFileName => record.getStringValue('avatar');
@@ -24,5 +25,5 @@ extension type User(RecordModel record) implements RecordModel {
   bool get isWriter => record.get<String>('role') == 'writer';
 
   /// Returns the creation date of the user.
-  DateTime get createdDate => DateTime.parse(get<String>('created'));
+  DateTime get createdDate => DateTime.parse(get<String>('created')).toLocal();
 }

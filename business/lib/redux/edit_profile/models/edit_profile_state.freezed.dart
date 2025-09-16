@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$EditProfileState {
 
- String? get value;
+ String? get fullName; DateTime? get birthdate;
 /// Create a copy of EditProfileState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,16 +25,16 @@ $EditProfileStateCopyWith<EditProfileState> get copyWith => _$EditProfileStateCo
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is EditProfileState&&(identical(other.value, value) || other.value == value));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is EditProfileState&&(identical(other.fullName, fullName) || other.fullName == fullName)&&(identical(other.birthdate, birthdate) || other.birthdate == birthdate));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,value);
+int get hashCode => Object.hash(runtimeType,fullName,birthdate);
 
 @override
 String toString() {
-  return 'EditProfileState(value: $value)';
+  return 'EditProfileState(fullName: $fullName, birthdate: $birthdate)';
 }
 
 
@@ -45,7 +45,7 @@ abstract mixin class $EditProfileStateCopyWith<$Res>  {
   factory $EditProfileStateCopyWith(EditProfileState value, $Res Function(EditProfileState) _then) = _$EditProfileStateCopyWithImpl;
 @useResult
 $Res call({
- String? value
+ String? fullName, DateTime? birthdate
 });
 
 
@@ -62,10 +62,11 @@ class _$EditProfileStateCopyWithImpl<$Res>
 
 /// Create a copy of EditProfileState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? value = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? fullName = freezed,Object? birthdate = freezed,}) {
   return _then(_self.copyWith(
-value: freezed == value ? _self.value : value // ignore: cast_nullable_to_non_nullable
-as String?,
+fullName: freezed == fullName ? _self.fullName : fullName // ignore: cast_nullable_to_non_nullable
+as String?,birthdate: freezed == birthdate ? _self.birthdate : birthdate // ignore: cast_nullable_to_non_nullable
+as DateTime?,
   ));
 }
 
@@ -77,10 +78,11 @@ as String?,
 
 
 class _EditProfileState implements EditProfileState {
-  const _EditProfileState({this.value});
+  const _EditProfileState({this.fullName, this.birthdate});
   
 
-@override final  String? value;
+@override final  String? fullName;
+@override final  DateTime? birthdate;
 
 /// Create a copy of EditProfileState
 /// with the given fields replaced by the non-null parameter values.
@@ -92,16 +94,16 @@ _$EditProfileStateCopyWith<_EditProfileState> get copyWith => __$EditProfileStat
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _EditProfileState&&(identical(other.value, value) || other.value == value));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _EditProfileState&&(identical(other.fullName, fullName) || other.fullName == fullName)&&(identical(other.birthdate, birthdate) || other.birthdate == birthdate));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,value);
+int get hashCode => Object.hash(runtimeType,fullName,birthdate);
 
 @override
 String toString() {
-  return 'EditProfileState(value: $value)';
+  return 'EditProfileState(fullName: $fullName, birthdate: $birthdate)';
 }
 
 
@@ -112,7 +114,7 @@ abstract mixin class _$EditProfileStateCopyWith<$Res> implements $EditProfileSta
   factory _$EditProfileStateCopyWith(_EditProfileState value, $Res Function(_EditProfileState) _then) = __$EditProfileStateCopyWithImpl;
 @override @useResult
 $Res call({
- String? value
+ String? fullName, DateTime? birthdate
 });
 
 
@@ -129,10 +131,11 @@ class __$EditProfileStateCopyWithImpl<$Res>
 
 /// Create a copy of EditProfileState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? value = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? fullName = freezed,Object? birthdate = freezed,}) {
   return _then(_EditProfileState(
-value: freezed == value ? _self.value : value // ignore: cast_nullable_to_non_nullable
-as String?,
+fullName: freezed == fullName ? _self.fullName : fullName // ignore: cast_nullable_to_non_nullable
+as String?,birthdate: freezed == birthdate ? _self.birthdate : birthdate // ignore: cast_nullable_to_non_nullable
+as DateTime?,
   ));
 }
 

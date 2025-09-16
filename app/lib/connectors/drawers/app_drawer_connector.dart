@@ -9,7 +9,7 @@ import 'package:ui/image/avatar.dart';
 import 'package:ui/tiles/profile_tile.dart';
 
 import '../../navigation/navigation.dart';
-import '../sheets/user_profile_sheet_connector.dart';
+import '../sheets/edit_profile_sheet_connector.dart';
 
 class AppDrawerConnector extends StatelessWidget {
   const AppDrawerConnector({required this.tab, super.key});

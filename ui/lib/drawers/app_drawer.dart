@@ -148,6 +148,7 @@ class AppDrawer extends StatelessWidget {
                 profile: vm.profile,
                 onLogOutPressed: () => _onLogOutPressed(context),
                 onEditProfilePressed: () => showShadSheet(
+                  isDismissible: false,
                   context: context,
                   side: ShadSheetSide.right,
                   builder: (context) => editProfile,

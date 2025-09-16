@@ -15,6 +15,7 @@ class EmailInput extends ShadInputFormField {
         initialValue: vm.value,
         onChanged: vm.onChanged,
         validator: vm.validator,
+        enabled: vm.enabled,
       );
 
   final ValueChangedVm<String?> vm;

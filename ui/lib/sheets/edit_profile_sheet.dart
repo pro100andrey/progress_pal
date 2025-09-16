@@ -10,8 +10,8 @@ import '../inputs/email_input.dart';
 import '../inputs/full_name_input.dart';
 import '../models/value_changed.dart';
 
-class UserProfileSheet extends StatelessWidget {
-  const UserProfileSheet({
+class EditProfileSheet extends StatelessWidget {
+  const EditProfileSheet({
     required this.avatarSelector,
     required this.fullName,
     required this.email,
