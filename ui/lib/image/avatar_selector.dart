@@ -66,7 +66,7 @@ class _AvatarSelectorState extends State<AvatarSelector> {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.stretch,
-        spacing: 16,
+        spacing: 8,
         children: [
           ShadButton.destructive(
             onPressed: () {

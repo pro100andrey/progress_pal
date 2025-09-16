@@ -4,7 +4,6 @@ import 'package:shadcn_ui/shadcn_ui.dart';
 
 import '../dev/text_version.dart';
 import '../forms/base_form.dart';
-import '../forms/form_container.dart';
 import '../image/avatar_selector.dart';
 import '../inputs/birthdate_input.dart';
 import '../inputs/email_input.dart';
@@ -32,27 +31,25 @@ class UserProfileSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) => ShadSheet(
     constraints: side == ShadSheetSide.left || side == ShadSheetSide.right
-        ? const BoxConstraints(maxWidth: 420)
+        ? const BoxConstraints(maxWidth: 320)
         : null,
     title: Text(S.current.editProfile),
     description: Text(S.current.editProfileInstructions),
     actionsMainAxisSize: MainAxisSize.max,
     actionsVerticalDirection: VerticalDirection.up,
-    enterDuration: const Duration(milliseconds: 150),
-    exitDuration: const Duration(milliseconds: 100),
-
-    child: FormContainer(
-      footer: const TextVersion(),
-      maxWidth: double.infinity,
+    child: SingleChildScrollView(
       child: BaseForm(
         builder: (context, state) => Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           spacing: 16,
           children: [
-            AvatarSelector(
-              vm: avatarSelector,
-              size: const Size.fromRadius(52),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 8),
+              child: AvatarSelector(
+                vm: avatarSelector,
+                size: const Size.fromRadius(50),
+              ),
             ),
             FullNameInput(vm: fullName),
             EmailInput(vm: email),
@@ -62,6 +59,10 @@ class UserProfileSheet extends StatelessWidget {
               onPressed: onPressedSave,
               child: Text(S.current.save),
             ),
+            const ShadSeparator.horizontal(
+              margin: EdgeInsets.symmetric(horizontal: 20),
+            ),
+            const TextVersion(),
           ],
         ),
       ),

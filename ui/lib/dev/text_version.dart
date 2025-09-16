@@ -6,18 +6,20 @@ class TextVersion extends StatelessWidget {
   const TextVersion({super.key});
 
   @override
-  Widget build(BuildContext context) => FutureBuilder(
-    future: PackageInfo.fromPlatform(),
-    builder: (context, asyncSnapshot) {
-      if (asyncSnapshot.hasData) {
-        final packageInfo = asyncSnapshot.data!;
-        return Text(
-          '${packageInfo.version}+${packageInfo.buildNumber}',
-          style: ShadTheme.of(context).textTheme.muted,
-        );
-      } else {
-        return const SizedBox.shrink();
-      }
-    },
+  Widget build(BuildContext context) => Center(
+    child: FutureBuilder(
+      future: PackageInfo.fromPlatform(),
+      builder: (context, asyncSnapshot) {
+        if (asyncSnapshot.hasData) {
+          final packageInfo = asyncSnapshot.data!;
+          return Text(
+            '${packageInfo.version}+${packageInfo.buildNumber}',
+            style: ShadTheme.of(context).textTheme.muted.copyWith(fontSize: 12),
+          );
+        } else {
+          return const SizedBox.shrink();
+        }
+      },
+    ),
   );
 }
