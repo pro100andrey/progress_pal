@@ -19,9 +19,7 @@ bool selectEditProfileHasChanges(AppState state) {
   final birthdate = selectEditProfileBirthdate(state);
 
   final nameChanged = currentUser.name != fullName;
-  final d1 = currentUser.birthdate;
-  final d2 = birthdate;
-  final birthdateChanged = !d1.isAtSameMomentAs(d2);
+  final birthdateChanged = currentUser.birthdate != birthdate;
 
   return nameChanged || birthdateChanged;
 }
