@@ -1,5 +1,6 @@
 import 'package:async_redux/async_redux.dart';
 import 'package:business/redux/app_state.dart';
+import 'package:business/redux/database_exercises_view/database_exercises_view_selectors.dart';
 import 'package:business/redux/equipment/actions/retrieve_equipments_action.dart';
 import 'package:business/redux/equipment/equipments_selectors.dart';
 import 'package:business/redux/language/language_selectors.dart';
@@ -55,6 +56,7 @@ class _Factory extends VmFactory<AppState, HomePageConnector, _Vm> {
   _Vm fromStore() {
     final muscleGroupIsWaiting = selectMuscleGroupsIsWaiting(state);
     final myExercisesIsWaiting = selectMyExercisesIsWaiting(state);
+    final databaseExercisesIsWaiting = selectDatabaseExercisesIsWaiting(state);
     final equipmentIsWaiting = selectEquipmentIsWaiting(state);
     final recordingTypeIsWaiting = selectRecordingTypesIsWaiting(state);
     final language = selectLanguage(state);
@@ -63,7 +65,8 @@ class _Factory extends VmFactory<AppState, HomePageConnector, _Vm> {
         muscleGroupIsWaiting ||
         equipmentIsWaiting ||
         recordingTypeIsWaiting ||
-        myExercisesIsWaiting;
+        myExercisesIsWaiting ||
+        databaseExercisesIsWaiting;
 
     final drawerItem = DrawerItem.values[connector.tab.index];
 
