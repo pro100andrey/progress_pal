@@ -9,18 +9,19 @@ import 'package:shadcn_ui/shadcn_ui.dart';
 import 'avatar.dart';
 import 'editor/circle_editor_crop_layer_painter.dart';
 import 'editor/image_editor.dart';
+import 'model.dart';
 
 class AvatarSelectorVm extends Equatable {
   const AvatarSelectorVm({
-    required this.src,
+    required this.image,
     required this.onImageSelect,
   });
 
-  final AvatarSource src;
+  final ImageVm image;
   final ValueChanged<({Uint8List bytes, String name})?> onImageSelect;
 
   @override
-  List<Object?> get props => [src, onImageSelect];
+  List<Object?> get props => [image, onImageSelect];
 }
 
 class AvatarSelector extends StatefulWidget {
@@ -56,7 +57,7 @@ class _AvatarSelectorState extends State<AvatarSelector> {
     controller: popoverController,
     child: Avatar(
       placeholder: const Icon(LucideIcons.user100, size: 54),
-      source: widget.vm.src,
+      source: widget.vm.image,
       onTap: () async => _handleTap(context),
       size: widget.size,
     ),
@@ -89,7 +90,7 @@ class _AvatarSelectorState extends State<AvatarSelector> {
   final _picker = ImagePicker();
 
   Future<void> _handleTap(BuildContext context) async {
-    if (widget.vm.src.isNone) {
+    if (widget.vm.image.isNone) {
       await _pickImage(context);
     } else {
       popoverController.toggle();

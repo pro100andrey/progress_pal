@@ -10,8 +10,8 @@ import 'package:business/redux/models/image_source.dart';
 import 'package:business/redux/session/session_selectors.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
-import 'package:ui/image/avatar.dart';
 import 'package:ui/image/avatar_selector.dart';
+import 'package:ui/image/model.dart';
 import 'package:ui/models/value_changed.dart';
 import 'package:ui/sheets/edit_profile_sheet.dart';
 
@@ -52,10 +52,10 @@ class _Factory extends VmFactory<AppState, EditProfileSheetConnector, _Vm> {
 
     return _Vm(
       avatarSelector: AvatarSelectorVm(
-        src: switch (avatar) {
-          MemoryImageSource(:final bytes) => AvatarSource.memory(bytes: bytes),
-          NetworkImageSource(:final url) => AvatarSource.network(url: url),
-          _ => const AvatarSource.none(),
+        image: switch (avatar) {
+          MemoryImageSource(:final bytes) => ImageVm.memory(bytes: bytes),
+          NetworkImageSource(:final url) => ImageVm.network(url: url),
+          _ => const ImageVm.none(),
         },
         onImageSelect: (v) => dispatchSync(
           SetAvatarAction(

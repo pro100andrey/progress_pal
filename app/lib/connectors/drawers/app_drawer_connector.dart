@@ -5,7 +5,7 @@ import 'package:business/redux/session/session_selectors.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:ui/drawers/app_drawer.dart';
-import 'package:ui/image/avatar.dart';
+import 'package:ui/image/model.dart';
 import 'package:ui/tiles/profile_tile.dart';
 
 import '../../navigation/navigation.dart';
@@ -41,7 +41,7 @@ class _Factory extends VmFactory<AppState, AppDrawerConnector, _Vm> {
       appDrawer: AppDrawerVm(
         profile: ProfileTileVm(
           userName: currentUser.name,
-          avatar: AvatarSource.raw(avatarUrl),
+          avatar: ImageVm.raw(avatarUrl),
         ),
         selectedItem: DrawerItem.values[connector.tab.index],
         onProgressPressed: navigation.goToProgress,

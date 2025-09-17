@@ -7,6 +7,7 @@ import 'package:business/redux/language/language_selectors.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:ui/cards/database_exercise_card.dart';
+import 'package:ui/image/model.dart';
 import 'package:ui/pages/database_exercises_page.dart';
 
 class DatabaseExercisesPageConnector extends StatelessWidget {
@@ -42,6 +43,7 @@ class _Factory
           final exercise = selectExerciseById(state, id: id);
 
           return DatabaseExerciseCardVm(
+            preview: const ImageVm.none(),
             title: exercise.title.get(language.locale)!,
             instructions: exercise.instructions!.get(language.locale)!,
           );

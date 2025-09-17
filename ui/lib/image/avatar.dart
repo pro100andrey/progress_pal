@@ -1,69 +1,9 @@
-import 'package:equatable/equatable.dart';
 import 'package:extended_image/extended_image.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
 
 import '../indicators/base_circle_indicator.dart';
-
-sealed class AvatarSource extends Equatable {
-  const AvatarSource._();
-
-  factory AvatarSource.raw(Object? source) => switch (source) {
-    final String url => AvatarSource.network(url: url),
-    final Uint8List bytes => AvatarSource.memory(bytes: bytes),
-    _ => const AvatarSource.none(),
-  };
-
-  const factory AvatarSource.none() = _NoneAvatarSrc;
-
-  const factory AvatarSource.network({required String url}) = _NetworkAvatarSrc;
-
-  const factory AvatarSource.memory({required Uint8List bytes}) =
-      _MemoryAvatarSrc;
-
-  T when<T>({
-    required T Function() none,
-    required T Function(String url) network,
-    required T Function(Uint8List bytes) memory,
-  }) {
-    switch (this) {
-      case _NetworkAvatarSrc(:final url):
-        return network(url);
-      case _MemoryAvatarSrc(:final bytes):
-        return memory(bytes);
-      case _NoneAvatarSrc():
-        return none();
-    }
-  }
-
-  bool get isNone => this is _NoneAvatarSrc;
-}
-
-class _NoneAvatarSrc extends AvatarSource {
-  const _NoneAvatarSrc() : super._();
-
-  @override
-  List<Object?> get props => [];
-}
-
-class _NetworkAvatarSrc extends AvatarSource {
-  const _NetworkAvatarSrc({required this.url}) : super._();
-
-  final String url;
-
-  @override
-  List<Object?> get props => [url];
-}
-
-class _MemoryAvatarSrc extends AvatarSource {
-  const _MemoryAvatarSrc({required this.bytes}) : super._();
-
-  final Uint8List bytes;
-
-  @override
-  List<Object?> get props => [bytes.length];
-}
+import 'model.dart';
 
 class Avatar extends StatelessWidget {
   const Avatar({
@@ -77,7 +17,7 @@ class Avatar extends StatelessWidget {
     super.key,
   });
 
-  final AvatarSource source;
+  final ImageVm source;
   final Widget? placeholder;
   final Size? size;
   final BoxShape? shape;
