@@ -30,13 +30,12 @@ class EditProfileSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => ShadSheet(
+    expandCrossSide: true,
     constraints: side == ShadSheetSide.left || side == ShadSheetSide.right
         ? const BoxConstraints(maxWidth: 320)
         : null,
     title: Text(S.current.editProfile),
     description: Text(S.current.editProfileInstructions),
-    actionsMainAxisSize: MainAxisSize.max,
-    actionsVerticalDirection: VerticalDirection.up,
     child: SingleChildScrollView(
       child: BaseForm(
         builder: (context, state) => Column(
