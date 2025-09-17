@@ -982,7 +982,7 @@ packages:
     source: sdk
     version: "0.0.0"
   source_gen:
-    dependency: "direct overridden"
+    dependency: transitive
     description:
       name: source_gen
       sha256: ccf30b0c9fbcd79d8b6f5bfac23199fb354938436f62475e14aea0f29ee0f800
@@ -1065,10 +1065,10 @@ packages:
     dependency: transitive
     description:
       name: theme_extensions_builder
-      sha256: f42489cecb82b924000c2f87c18d868c19b015515400b88fedf61143c58e02e9
+      sha256: "054dea36dd27f7af2143cd43718b52b66d3b580333eb749799ab146f7e1eafcb"
       url: "https://pub.dev"
     source: hosted
-    version: "5.1.0+1"
+    version: "5.1.1"
   theme_extensions_builder_annotation:
     dependency: transitive
     description:
