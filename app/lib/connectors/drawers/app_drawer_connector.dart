@@ -22,7 +22,7 @@ class AppDrawerConnector extends StatelessWidget {
     vm: () => _Factory(this),
     builder: (context, vm) => AppDrawer(
       vm: vm.appDrawer,
-      editProfile: const UserProfileSheetConnector(),
+      editProfile: const EditProfileSheetConnector(),
     ),
   );
 }

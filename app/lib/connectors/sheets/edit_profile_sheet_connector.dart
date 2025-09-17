@@ -15,8 +15,8 @@ import 'package:ui/sheets/edit_profile_sheet.dart';
 
 import '../../common/validators.dart';
 
-class UserProfileSheetConnector extends StatelessWidget {
-  const UserProfileSheetConnector({super.key});
+class EditProfileSheetConnector extends StatelessWidget {
+  const EditProfileSheetConnector({super.key});
 
   @override
   Widget build(BuildContext context) => StoreConnector<AppState, _Vm>(
@@ -37,7 +37,7 @@ class UserProfileSheetConnector extends StatelessWidget {
 }
 
 /// Factory that creates a view-model for the StoreConnector.
-class _Factory extends VmFactory<AppState, UserProfileSheetConnector, _Vm> {
+class _Factory extends VmFactory<AppState, EditProfileSheetConnector, _Vm> {
   _Factory(super._connector);
 
   @override
@@ -52,7 +52,11 @@ class _Factory extends VmFactory<AppState, UserProfileSheetConnector, _Vm> {
     return _Vm(
       avatarSelector: AvatarSelectorVm(
         src: AvatarSource.network(avatarUrl),
-        onImageSelect: (v) => {},
+        onImageSelect: (v) {
+          if (v == null) {
+            debugPrint('remove image');
+          }
+        },
       ),
       fullName: ValueChangedVm(
         value: fullName,
@@ -66,12 +70,6 @@ class _Factory extends VmFactory<AppState, UserProfileSheetConnector, _Vm> {
       birthdate: ValueChangedVm(
         value: birthdate,
         onChanged: (v) => dispatchSync(SetBirthdateAction(birthdate: v!)),
-        validator: (v) {
-          if (v == null) {
-            return 'A date of birth is required.';
-          }
-          return null;
-        },
       ),
       onPressedSave: hasChanges
           ? () => dispatch(SaveEditProfileAction())

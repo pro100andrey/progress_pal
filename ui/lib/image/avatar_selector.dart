@@ -13,7 +13,6 @@ import 'editor/image_editor.dart';
 class AvatarSelectorVm extends Equatable {
   const AvatarSelectorVm({
     required this.src,
-
     required this.onImageSelect,
   });
 
