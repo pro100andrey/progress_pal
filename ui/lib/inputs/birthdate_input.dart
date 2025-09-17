@@ -26,7 +26,7 @@ class BirthdateInput extends StatelessWidget {
     onChanged: vm.onChanged,
     validator: vm.validator,
     formatDate: (date) => DateFormat.yMd().format(date),
-    fromMonth: DateTime(195),
+    fromMonth: DateTime(1900),
     toMonth: DateTime.now(),
     closeOnSelection: true,
     allowDeselection: false,
