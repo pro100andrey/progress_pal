@@ -3,7 +3,7 @@ import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 class BaseCircleIndicator extends StatelessWidget {
   const BaseCircleIndicator({
-    this.size = 24,
+    this.size = 18,
     this.color = Colors.greenAccent,
     super.key,
   });

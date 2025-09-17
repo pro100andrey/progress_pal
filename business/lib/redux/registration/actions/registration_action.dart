@@ -4,6 +4,7 @@ import 'package:pocketbase/pocketbase.dart';
 
 import '../../action_mixins/waiting_for.dart';
 import '../../app_state.dart';
+import '../../models/image_source.dart';
 import '../models/registration_state.dart';
 import '../registration_selectors.dart';
 
@@ -29,7 +30,7 @@ class RegistrationAction extends ReduxAction<AppState> with WaitingFor {
               'passwordConfirm': password,
             },
             files: [
-              if (avatar != null)
+              if (avatar is MemoryImageSource)
                 http.MultipartFile.fromBytes(
                   'avatar',
                   avatar.bytes,

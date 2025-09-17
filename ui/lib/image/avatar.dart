@@ -4,52 +4,63 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
 
-typedef AvatarMemoryData = ({Uint8List bytes, String name});
-typedef AvatarNetworkData = String?;
-
 sealed class AvatarSource extends Equatable {
   const AvatarSource._();
 
-  const factory AvatarSource.network(AvatarNetworkData? data) =
-      _NetworkAvatarSrc;
-  const factory AvatarSource.memory(AvatarMemoryData? data) = _MemoryAvatarSrc;
-
-  bool get isEmpty => switch (this) {
-    _NetworkAvatarSrc(data: final data) => data == null,
-    _MemoryAvatarSrc(data: final data) => data == null,
+  factory AvatarSource.raw(Object? source) => switch (source) {
+    final String url => AvatarSource.network(url: url),
+    final Uint8List bytes => AvatarSource.memory(bytes: bytes),
+    _ => const AvatarSource.none(),
   };
 
+  const factory AvatarSource.none() = _NoneAvatarSrc;
+
+  const factory AvatarSource.network({required String url}) = _NetworkAvatarSrc;
+
+  const factory AvatarSource.memory({required Uint8List bytes}) =
+      _MemoryAvatarSrc;
+
   T? when<T>({
+    required T Function() none,
     required T Function(String url) network,
-    required T Function(AvatarMemoryData data) memory,
+    required T Function(Uint8List bytes) memory,
   }) {
     switch (this) {
-      case _NetworkAvatarSrc(data: final data) when data != null:
-        return network(data);
-      case _MemoryAvatarSrc(data: final data) when data != null:
-        return memory(data);
-      case _:
-        return null;
+      case _NetworkAvatarSrc(:final url):
+        return network(url);
+      case _MemoryAvatarSrc(:final bytes):
+        return memory(bytes);
+      case _NoneAvatarSrc():
+        return none();
     }
   }
+
+  bool get isNone => this is _NoneAvatarSrc;
+}
+
+class _NoneAvatarSrc extends AvatarSource {
+  const _NoneAvatarSrc() : super._();
+
+  @override
+  List<Object?> get props => [];
 }
 
 class _NetworkAvatarSrc extends AvatarSource {
-  const _NetworkAvatarSrc(this.data) : super._();
+  const _NetworkAvatarSrc({required this.url}) : super._();
 
-  final AvatarNetworkData? data;
+  final String url;
 
   @override
-  List<Object?> get props => [data];
+  List<Object?> get props => [url];
 }
 
 class _MemoryAvatarSrc extends AvatarSource {
-  const _MemoryAvatarSrc(this.data) : super._();
+  const _MemoryAvatarSrc({required this.bytes}) : super._();
 
-  final ({Uint8List bytes, String name})? data;
+  final Uint8List bytes;
 
   @override
-  List<Object?> get props => [data?.name];
+  List<Object?> get props => [bytes.length];
 }
 
 class Avatar extends StatelessWidget {
@@ -106,11 +117,12 @@ class Avatar extends StatelessWidget {
         loadStateChanged: loadStateChanged,
       ),
       memory: (data) => ExtendedImage.memory(
-        data.bytes,
+        data,
         shape: effectiveShape,
         border: effectiveBorder,
         loadStateChanged: loadStateChanged,
       ),
+      none: () => effectivePlaceholder,
     );
 
     final resultAvatar = SizedBox(

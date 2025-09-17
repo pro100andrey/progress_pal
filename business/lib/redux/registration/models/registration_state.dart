@@ -1,6 +1,6 @@
-import 'dart:typed_data';
-
 import 'package:freezed_annotation/freezed_annotation.dart';
+
+import '../../models/image_source.dart';
 
 part 'registration_state.freezed.dart';
 
@@ -12,6 +12,6 @@ abstract class RegistrationState with _$RegistrationState {
     DateTime? birthdate,
     String? password,
     String? confirmPassword,
-    ({Uint8List bytes, String name})? avatar,
+    @Default(NoneImageSource()) ImageSource avatar,
   }) = _RegistrationState;
 }

@@ -1,5 +1,6 @@
 import 'package:async_redux/async_redux.dart';
 import 'package:business/redux/app_state.dart';
+import 'package:business/redux/models/image_source.dart';
 import 'package:business/redux/registration/actions/registration_action.dart';
 import 'package:business/redux/registration/actions/set_avatar_action.dart';
 import 'package:business/redux/registration/actions/set_birthdate_action.dart';
@@ -53,8 +54,21 @@ class _Factory extends VmFactory<AppState, RegistrationPageConnector, _Vm> {
 
     return _Vm(
       avatar: AvatarSelectorVm(
-        src: AvatarSource.memory(avatar),
-        onImageSelect: (v) => dispatchSync(SetAvatarAction(avatar: v)),
+        src: switch (avatar) {
+          MemoryImageSource(:final bytes) => AvatarSource.memory(bytes: bytes),
+          _ => const AvatarSource.none(),
+        },
+        onImageSelect: (v) => dispatchSync(
+          SetAvatarAction(
+            avatar: switch (v) {
+              (:final bytes, :final name) => MemoryImageSource(
+                bytes: bytes,
+                name: name,
+              ),
+              null => const NoneImageSource(),
+            },
+          ),
+        ),
       ),
       fullName: ValueChangedVm(
         value: fullName,

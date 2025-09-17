@@ -1,4 +1,5 @@
 import '../app_state.dart';
+import '../models/image_source.dart';
 import '../session/session_selectors.dart';
 import 'actions/save_edit_profile_action.dart';
 
@@ -11,6 +12,9 @@ String selectEditProfileFullName(AppState state) => state.editProfile.fullName!;
 /// Returns birthdate
 DateTime selectEditProfileBirthdate(AppState state) =>
     state.editProfile.birthdate!;
+
+ImageSource selectEditProfileAvatar(AppState state) =>
+    state.editProfile.avatar;
 
 /// Returns true if there are changes in the edit profile form
 bool selectEditProfileHasChanges(AppState state) {

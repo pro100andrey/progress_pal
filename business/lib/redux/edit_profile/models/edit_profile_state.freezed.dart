@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$EditProfileState {
 
- String? get fullName; DateTime? get birthdate;
+ String? get fullName; DateTime? get birthdate; ImageSource get avatar;
 /// Create a copy of EditProfileState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,16 +25,16 @@ $EditProfileStateCopyWith<EditProfileState> get copyWith => _$EditProfileStateCo
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is EditProfileState&&(identical(other.fullName, fullName) || other.fullName == fullName)&&(identical(other.birthdate, birthdate) || other.birthdate == birthdate));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is EditProfileState&&(identical(other.fullName, fullName) || other.fullName == fullName)&&(identical(other.birthdate, birthdate) || other.birthdate == birthdate)&&(identical(other.avatar, avatar) || other.avatar == avatar));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,fullName,birthdate);
+int get hashCode => Object.hash(runtimeType,fullName,birthdate,avatar);
 
 @override
 String toString() {
-  return 'EditProfileState(fullName: $fullName, birthdate: $birthdate)';
+  return 'EditProfileState(fullName: $fullName, birthdate: $birthdate, avatar: $avatar)';
 }
 
 
@@ -45,11 +45,11 @@ abstract mixin class $EditProfileStateCopyWith<$Res>  {
   factory $EditProfileStateCopyWith(EditProfileState value, $Res Function(EditProfileState) _then) = _$EditProfileStateCopyWithImpl;
 @useResult
 $Res call({
- String? fullName, DateTime? birthdate
+ String? fullName, DateTime? birthdate, ImageSource avatar
 });
 
 
-
+$ImageSourceCopyWith<$Res> get avatar;
 
 }
 /// @nodoc
@@ -62,14 +62,24 @@ class _$EditProfileStateCopyWithImpl<$Res>
 
 /// Create a copy of EditProfileState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? fullName = freezed,Object? birthdate = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? fullName = freezed,Object? birthdate = freezed,Object? avatar = null,}) {
   return _then(_self.copyWith(
 fullName: freezed == fullName ? _self.fullName : fullName // ignore: cast_nullable_to_non_nullable
 as String?,birthdate: freezed == birthdate ? _self.birthdate : birthdate // ignore: cast_nullable_to_non_nullable
-as DateTime?,
+as DateTime?,avatar: null == avatar ? _self.avatar : avatar // ignore: cast_nullable_to_non_nullable
+as ImageSource,
   ));
 }
-
+/// Create a copy of EditProfileState
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$ImageSourceCopyWith<$Res> get avatar {
+  
+  return $ImageSourceCopyWith<$Res>(_self.avatar, (value) {
+    return _then(_self.copyWith(avatar: value));
+  });
+}
 }
 
 
@@ -78,11 +88,12 @@ as DateTime?,
 
 
 class _EditProfileState implements EditProfileState {
-  const _EditProfileState({this.fullName, this.birthdate});
+  const _EditProfileState({this.fullName, this.birthdate, this.avatar = const NoneImageSource()});
   
 
 @override final  String? fullName;
 @override final  DateTime? birthdate;
+@override@JsonKey() final  ImageSource avatar;
 
 /// Create a copy of EditProfileState
 /// with the given fields replaced by the non-null parameter values.
@@ -94,16 +105,16 @@ _$EditProfileStateCopyWith<_EditProfileState> get copyWith => __$EditProfileStat
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _EditProfileState&&(identical(other.fullName, fullName) || other.fullName == fullName)&&(identical(other.birthdate, birthdate) || other.birthdate == birthdate));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _EditProfileState&&(identical(other.fullName, fullName) || other.fullName == fullName)&&(identical(other.birthdate, birthdate) || other.birthdate == birthdate)&&(identical(other.avatar, avatar) || other.avatar == avatar));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,fullName,birthdate);
+int get hashCode => Object.hash(runtimeType,fullName,birthdate,avatar);
 
 @override
 String toString() {
-  return 'EditProfileState(fullName: $fullName, birthdate: $birthdate)';
+  return 'EditProfileState(fullName: $fullName, birthdate: $birthdate, avatar: $avatar)';
 }
 
 
@@ -114,11 +125,11 @@ abstract mixin class _$EditProfileStateCopyWith<$Res> implements $EditProfileSta
   factory _$EditProfileStateCopyWith(_EditProfileState value, $Res Function(_EditProfileState) _then) = __$EditProfileStateCopyWithImpl;
 @override @useResult
 $Res call({
- String? fullName, DateTime? birthdate
+ String? fullName, DateTime? birthdate, ImageSource avatar
 });
 
 
-
+@override $ImageSourceCopyWith<$Res> get avatar;
 
 }
 /// @nodoc
@@ -131,15 +142,25 @@ class __$EditProfileStateCopyWithImpl<$Res>
 
 /// Create a copy of EditProfileState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? fullName = freezed,Object? birthdate = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? fullName = freezed,Object? birthdate = freezed,Object? avatar = null,}) {
   return _then(_EditProfileState(
 fullName: freezed == fullName ? _self.fullName : fullName // ignore: cast_nullable_to_non_nullable
 as String?,birthdate: freezed == birthdate ? _self.birthdate : birthdate // ignore: cast_nullable_to_non_nullable
-as DateTime?,
+as DateTime?,avatar: null == avatar ? _self.avatar : avatar // ignore: cast_nullable_to_non_nullable
+as ImageSource,
   ));
 }
 
-
+/// Create a copy of EditProfileState
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$ImageSourceCopyWith<$Res> get avatar {
+  
+  return $ImageSourceCopyWith<$Res>(_self.avatar, (value) {
+    return _then(_self.copyWith(avatar: value));
+  });
+}
 }
 
 // dart format on

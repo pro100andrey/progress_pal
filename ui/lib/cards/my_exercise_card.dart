@@ -32,6 +32,11 @@ class MyExerciseCard extends StatelessWidget {
     trailing: MyExerciseActions(vm: vm.actions),
     padding: const EdgeInsets.all(16),
     title: Text(vm.title),
-    description: vm.instructions != null ? Text(vm.instructions!) : null,
+    description: vm.instructions != null
+        ? Text(
+            vm.instructions!.trim().replaceAll('\n', ' '),
+            maxLines: 4,
+          )
+        : null,
   );
 }

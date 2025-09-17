@@ -2,9 +2,11 @@ import 'package:async_redux/async_redux.dart';
 import 'package:business/redux/app_state.dart';
 import 'package:business/redux/edit_profile/actions/begin_edit_profile_action.dart';
 import 'package:business/redux/edit_profile/actions/save_edit_profile_action.dart';
+import 'package:business/redux/edit_profile/actions/set_avatar_action.dart';
 import 'package:business/redux/edit_profile/actions/set_birthdate_action.dart';
 import 'package:business/redux/edit_profile/actions/set_full_name_action.dart';
 import 'package:business/redux/edit_profile/edit_profile_selectors.dart';
+import 'package:business/redux/models/image_source.dart';
 import 'package:business/redux/session/session_selectors.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
@@ -43,20 +45,29 @@ class _Factory extends VmFactory<AppState, EditProfileSheetConnector, _Vm> {
   @override
   _Vm fromStore() {
     final currentUser = selectSessionCurrentUser(state)!;
-    final avatarUrl = selectSessionCurrentUserAvatarUrl(state);
-
     final fullName = selectEditProfileFullName(state);
     final birthdate = selectEditProfileBirthdate(state);
     final hasChanges = selectEditProfileHasChanges(state);
+    final avatar = selectEditProfileAvatar(state);
 
     return _Vm(
       avatarSelector: AvatarSelectorVm(
-        src: AvatarSource.network(avatarUrl),
-        onImageSelect: (v) {
-          if (v == null) {
-            debugPrint('remove image');
-          }
+        src: switch (avatar) {
+          MemoryImageSource(:final bytes) => AvatarSource.memory(bytes: bytes),
+          NetworkImageSource(:final url) => AvatarSource.network(url: url),
+          _ => const AvatarSource.none(),
         },
+        onImageSelect: (v) => dispatchSync(
+          SetAvatarAction(
+            avatar: switch (v) {
+              (:final bytes, :final name) => MemoryImageSource(
+                bytes: bytes,
+                name: name,
+              ),
+              null => const RemovedImageSource(),
+            },
+          ),
+        ),
       ),
       fullName: ValueChangedVm(
         value: fullName,

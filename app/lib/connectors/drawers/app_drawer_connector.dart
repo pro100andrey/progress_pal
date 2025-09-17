@@ -20,6 +20,7 @@ class AppDrawerConnector extends StatelessWidget {
   Widget build(BuildContext context) => StoreConnector<AppState, _Vm>(
     debug: this,
     vm: () => _Factory(this),
+    shouldUpdateModel: selectSessionIsLoggedIn,
     builder: (context, vm) => AppDrawer(
       vm: vm.appDrawer,
       editProfile: const EditProfileSheetConnector(),
@@ -40,7 +41,7 @@ class _Factory extends VmFactory<AppState, AppDrawerConnector, _Vm> {
       appDrawer: AppDrawerVm(
         profile: ProfileTileVm(
           userName: currentUser.name,
-          avatar: AvatarSource.network(avatarUrl),
+          avatar: AvatarSource.raw(avatarUrl),
         ),
         selectedItem: DrawerItem.values[connector.tab.index],
         onProgressPressed: navigation.goToProgress,

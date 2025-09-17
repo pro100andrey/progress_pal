@@ -9,5 +9,5 @@ class SetAvatarAction extends ReduxAction<AppState> {
   final ImageSource avatar;
 
   @override
-  AppState reduce() => state.copyWith.registration(avatar: avatar);
+  AppState reduce() => state.copyWith.editProfile(avatar: avatar);
 }

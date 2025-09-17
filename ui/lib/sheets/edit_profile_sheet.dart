@@ -32,7 +32,7 @@ class EditProfileSheet extends StatelessWidget {
   Widget build(BuildContext context) => ShadSheet(
     expandCrossSide: true,
     constraints: side == ShadSheetSide.left || side == ShadSheetSide.right
-        ? const BoxConstraints(maxWidth: 320)
+        ? const BoxConstraints(maxWidth: 420)
         : null,
     title: Text(S.current.editProfile),
     description: Text(S.current.editProfileInstructions),

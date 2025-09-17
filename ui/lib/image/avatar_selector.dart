@@ -89,7 +89,7 @@ class _AvatarSelectorState extends State<AvatarSelector> {
   final _picker = ImagePicker();
 
   Future<void> _handleTap(BuildContext context) async {
-    if (widget.vm.src.isEmpty) {
+    if (widget.vm.src.isNone) {
       await _pickImage(context);
     } else {
       popoverController.toggle();
