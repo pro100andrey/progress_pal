@@ -1,32 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 class BaseCircleIndicator extends StatelessWidget {
   const BaseCircleIndicator({
-    this.size = 16,
+    this.size = 18,
     this.color = Colors.greenAccent,
-    this.strokeWidth,
-    this.value,
     super.key,
   });
 
   final double size;
-  final Color? color;
-  final double? strokeWidth;
-  final double? value;
+  final Color color;
 
   @override
-  Widget build(BuildContext context) {
-    final width = size;
-    final height = size;
-
-    return SizedBox(
-      width: width,
-      height: height,
-      child: CircularProgressIndicator(
-        value: value,
+  Widget build(BuildContext context) =>
+      LoadingAnimationWidget.threeArchedCircle(
         color: color,
-        strokeWidth: strokeWidth ?? 3,
-      ),
-    );
-  }
+        size: size,
+      );
 }

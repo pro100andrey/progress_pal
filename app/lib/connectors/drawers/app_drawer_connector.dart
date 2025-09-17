@@ -5,11 +5,11 @@ import 'package:business/redux/session/session_selectors.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:ui/drawers/app_drawer.dart';
-import 'package:ui/image/avatar.dart';
+import 'package:ui/image/model.dart';
 import 'package:ui/tiles/profile_tile.dart';
 
 import '../../navigation/navigation.dart';
-import '../sheets/user_profile_sheet_connector.dart';
+import '../sheets/edit_profile_sheet_connector.dart';
 
 class AppDrawerConnector extends StatelessWidget {
   const AppDrawerConnector({required this.tab, super.key});
@@ -20,9 +20,10 @@ class AppDrawerConnector extends StatelessWidget {
   Widget build(BuildContext context) => StoreConnector<AppState, _Vm>(
     debug: this,
     vm: () => _Factory(this),
+    shouldUpdateModel: selectSessionIsLoggedIn,
     builder: (context, vm) => AppDrawer(
       vm: vm.appDrawer,
-      editProfile: const UserProfileSheetConnector(),
+      editProfile: const EditProfileSheetConnector(),
     ),
   );
 }
@@ -40,7 +41,7 @@ class _Factory extends VmFactory<AppState, AppDrawerConnector, _Vm> {
       appDrawer: AppDrawerVm(
         profile: ProfileTileVm(
           userName: currentUser.name,
-          avatar: AvatarSource.network(avatarUrl),
+          avatar: ImageVm.raw(avatarUrl),
         ),
         selectedItem: DrawerItem.values[connector.tab.index],
         onProgressPressed: navigation.goToProgress,

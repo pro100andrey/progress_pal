@@ -1,7 +1,10 @@
 import 'package:async_redux/async_redux.dart';
 import 'package:business/redux/app_state.dart';
+import 'package:business/redux/database_exercises_view/database_exercises_view_selectors.dart';
 import 'package:business/redux/equipment/actions/retrieve_equipments_action.dart';
 import 'package:business/redux/equipment/equipments_selectors.dart';
+import 'package:business/redux/language/language_selectors.dart';
+import 'package:business/redux/language/models/language_state.dart';
 import 'package:business/redux/muscle_groups/actions/retrieve_muscle_groups_action.dart';
 import 'package:business/redux/muscle_groups/muscle_groups_selectors.dart';
 import 'package:business/redux/my_exercises_view/my_exercises_view_selectors.dart';
@@ -36,7 +39,7 @@ class HomePageConnector extends StatelessWidget {
       ]);
     },
     builder: (context, vm) => HomePage(
-      tabTitle: vm.tabTitle,
+      drawerItem: vm.drawerItem,
       dataIsWaiting: vm.dataIsWaiting,
       drawer: AppDrawerConnector(tab: tab),
       languageSelector: const LanguageSelectorConnector(),
@@ -53,18 +56,24 @@ class _Factory extends VmFactory<AppState, HomePageConnector, _Vm> {
   _Vm fromStore() {
     final muscleGroupIsWaiting = selectMuscleGroupsIsWaiting(state);
     final myExercisesIsWaiting = selectMyExercisesIsWaiting(state);
+    final databaseExercisesIsWaiting = selectDatabaseExercisesIsWaiting(state);
     final equipmentIsWaiting = selectEquipmentIsWaiting(state);
     final recordingTypeIsWaiting = selectRecordingTypesIsWaiting(state);
+    final language = selectLanguage(state);
 
     final dataIsWaiting =
         muscleGroupIsWaiting ||
         equipmentIsWaiting ||
         recordingTypeIsWaiting ||
-        myExercisesIsWaiting;
+        myExercisesIsWaiting ||
+        databaseExercisesIsWaiting;
+
+    final drawerItem = DrawerItem.values[connector.tab.index];
 
     return _Vm(
       dataIsWaiting: dataIsWaiting,
-      tabTitle: DrawerItem.values[connector.tab.index].title,
+      drawerItem: drawerItem,
+      language: language,
     );
   }
 }
@@ -73,15 +82,14 @@ class _Factory extends VmFactory<AppState, HomePageConnector, _Vm> {
 class _Vm extends Vm with EquatableMixin {
   _Vm({
     required this.dataIsWaiting,
-    required this.tabTitle,
+    required this.drawerItem,
+    required this.language,
   });
 
   final bool dataIsWaiting;
-  final String tabTitle;
+  final DrawerItem drawerItem;
+  final SupportedLanguage language;
 
   @override
-  List<Object?> get props => [
-    dataIsWaiting,
-    tabTitle,
-  ];
+  List<Object?> get props => [dataIsWaiting, drawerItem, language];
 }

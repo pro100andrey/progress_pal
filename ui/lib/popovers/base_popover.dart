@@ -56,9 +56,11 @@ final class ActionsPopover extends BasePopover {
   ActionsPopover({
     required super.builder,
     required ActionsPopoverBuilder actionsBuilder,
+    super.anchor = const ShadAnchorAuto(
+      targetAnchor: Alignment.topCenter,
+    ),
     super.key,
   }) : super(
-         anchor: const ShadAnchorAuto(targetAnchor: Alignment.topCenter),
          padding: const EdgeInsets.all(8),
          constraints: const BoxConstraints(maxWidth: 200),
          popover: (context, controller) => Column(

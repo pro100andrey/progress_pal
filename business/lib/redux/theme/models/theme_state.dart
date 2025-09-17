@@ -4,5 +4,7 @@ part 'theme_state.freezed.dart';
 
 @freezed
 abstract class ThemeState with _$ThemeState {
-  const factory ThemeState({String? value}) = _ThemeState;
+  const factory ThemeState({
+    String? value,
+  }) = _ThemeState;
 }

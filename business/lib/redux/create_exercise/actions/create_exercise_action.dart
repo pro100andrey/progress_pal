@@ -31,7 +31,7 @@ class CreateExerciseAction extends ReduxAction<AppState> with WaitingFor {
         body: ExerciseBody(
           title: titleLanguageString,
           instructions: instructionsLanguageString,
-          muscleGroupId: muscleGroupId,
+          muscleGroupId: [muscleGroupId],
           equipmentId: equipmentId,
           recordingTypeId: recordingTypeId,
           createdById: currentUser.id,

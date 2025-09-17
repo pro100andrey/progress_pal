@@ -5,6 +5,7 @@ import 'confirm_verification/models/confirm_verification_state.dart';
 import 'connectivity/models/connectivity_state.dart';
 import 'create_exercise/models/create_exercise_state.dart';
 import 'database_exercises_view/models/database_exercises_view_state.dart';
+import 'edit_profile/models/edit_profile_state.dart';
 import 'equipment/models/equipments_state.dart';
 import 'exercises/models/exercises_state.dart';
 import 'forgot_password/models/forgot_password_state.dart';
@@ -43,6 +44,7 @@ abstract class AppState with _$AppState {
     required MyExercisesViewState myExercisesView,
     required DatabaseExercisesViewState databaseExercisesView,
     required ProgressViewState progressView,
+    required EditProfileState editProfile,
     required Wait wait,
   }) = _AppState;
 
@@ -64,6 +66,7 @@ abstract class AppState with _$AppState {
     myExercisesView: MyExercisesViewState(),
     databaseExercisesView: DatabaseExercisesViewState(),
     progressView: ProgressViewState(),
+    editProfile: EditProfileState(),
     wait: Wait.empty,
   );
 }

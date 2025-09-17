@@ -46,7 +46,7 @@ class _Factory extends VmFactory<AppState, ResetPasswordPageConnector, _Vm> {
       password: ValueChangedVm(
         value: password,
         validator: passwordValidator.call,
-        onChanged: (value) => dispatchSync(SetPasswordAction(value!)),
+        onChanged: (v) => dispatchSync(SetPasswordAction(password: v!)),
       ),
       confirmPassword: ValueChangedVm(
         value: confirmPassword,
@@ -56,7 +56,8 @@ class _Factory extends VmFactory<AppState, ResetPasswordPageConnector, _Vm> {
 
           return confirmPasswordError ?? passwordsMatchError;
         },
-        onChanged: (value) => dispatchSync(SetConfirmPasswordAction(value!)),
+        onChanged: (v) =>
+            dispatchSync(SetConfirmPasswordAction(confirmPassword: v!)),
       ),
       onResetPasswordPressed: () async {
         final status = await dispatchAndWait(ResetPasswordAction());

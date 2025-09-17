@@ -2,6 +2,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 
 import '../image/avatar.dart';
+import '../image/model.dart';
 
 class ProfileTileVm extends Equatable {
   const ProfileTileVm({
@@ -9,7 +10,7 @@ class ProfileTileVm extends Equatable {
     required this.avatar,
   });
 
-  final AvatarSource avatar;
+  final ImageVm avatar;
   final String userName;
 
   @override

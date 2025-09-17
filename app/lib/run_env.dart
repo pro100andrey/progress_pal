@@ -36,7 +36,7 @@ Future<void> runEnv(Environment env) async {
     await windowManager.ensureInitialized();
 
     const windowOptions = WindowOptions(
-      minimumSize: Size(320, 640),
+      minimumSize: Size(320, 320),
       skipTaskbar: false,
     );
 

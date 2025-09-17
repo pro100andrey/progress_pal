@@ -1,6 +1,5 @@
-import 'dart:typed_data';
-
 import '../app_state.dart';
+import '../models/image_source.dart';
 import 'actions/registration_action.dart';
 
 /// Returns waiting true if registration is in progress
@@ -9,6 +8,10 @@ bool selectRegistrationIsWaiting(AppState state) =>
 
 /// Returns email value
 String? selectRegistrationEmail(AppState state) => state.registration.email;
+
+/// Returns birthdate value
+DateTime? selectRegistrationBirthdate(AppState state) =>
+    state.registration.birthdate;
 
 /// Returns password value
 String? selectRegistrationPassword(AppState state) =>
@@ -23,5 +26,5 @@ String? selectRegistrationConfirmPassword(AppState state) =>
     state.registration.confirmPassword;
 
 /// Returns avatar value
-({Uint8List bytes, String name})? selectRegistrationAvatar(AppState state) =>
+ImageSource selectRegistrationAvatar(AppState state) =>
     state.registration.avatar;

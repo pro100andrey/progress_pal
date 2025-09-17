@@ -1,7 +1,9 @@
 import 'package:async_redux/async_redux.dart';
 import 'package:business/redux/app_state.dart';
+import 'package:business/redux/models/image_source.dart';
 import 'package:business/redux/registration/actions/registration_action.dart';
 import 'package:business/redux/registration/actions/set_avatar_action.dart';
+import 'package:business/redux/registration/actions/set_birthdate_action.dart';
 import 'package:business/redux/registration/actions/set_confirm_password_action.dart';
 import 'package:business/redux/registration/actions/set_email_action.dart';
 import 'package:business/redux/registration/actions/set_full_name_action.dart';
@@ -9,8 +11,8 @@ import 'package:business/redux/registration/actions/set_password_action.dart';
 import 'package:business/redux/registration/registration_selectors.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
-import 'package:ui/image/avatar.dart';
 import 'package:ui/image/avatar_selector.dart';
+import 'package:ui/image/model.dart';
 import 'package:ui/models/value_changed.dart';
 import 'package:ui/pages/registration_page.dart';
 
@@ -28,6 +30,7 @@ class RegistrationPageConnector extends StatelessWidget {
       avatar: vm.avatar,
       fullName: vm.fullName,
       email: vm.email,
+      birthdate: vm.birthdate,
       password: vm.password,
       confirmPassword: vm.confirmPassword,
       onRegisterPressed: vm.onRegisterPressed,
@@ -44,30 +47,48 @@ class _Factory extends VmFactory<AppState, RegistrationPageConnector, _Vm> {
   _Vm fromStore() {
     final fullName = selectRegistrationFullName(state);
     final email = selectRegistrationEmail(state);
+    final birthdate = selectRegistrationBirthdate(state);
     final password = selectRegistrationPassword(state);
     final confirmPassword = selectRegistrationConfirmPassword(state);
     final avatar = selectRegistrationAvatar(state);
 
     return _Vm(
       avatar: AvatarSelectorVm(
-        src: AvatarSource.memory(avatar),
-        onImageSelect: (xfile) => dispatchSync(SetAvatarAction(avatar: xfile)),
+        image: switch (avatar) {
+          MemoryImageSource(:final bytes) => ImageVm.memory(bytes: bytes),
+          _ => const ImageVm.none(),
+        },
+        onImageSelect: (v) => dispatchSync(
+          SetAvatarAction(
+            avatar: switch (v) {
+              (:final bytes, :final name) => MemoryImageSource(
+                bytes: bytes,
+                name: name,
+              ),
+              null => const NoneImageSource(),
+            },
+          ),
+        ),
       ),
       fullName: ValueChangedVm(
         value: fullName,
-        onChanged: (value) => dispatchSync(SetFullNameAction(fullName: value!)),
+        onChanged: (v) => dispatchSync(SetFullNameAction(fullName: v!)),
         validator: nameValidator.call,
       ),
-
       email: ValueChangedVm(
         value: email,
         validator: emailValidator.call,
-        onChanged: (value) => dispatchSync(SetEmailAction(value!)),
+        onChanged: (v) => dispatchSync(SetEmailAction(email: v!)),
+      ),
+      birthdate: ValueChangedVm(
+        value: birthdate,
+        validator: (v) => requiredValidator(v?.toString() ?? ''),
+        onChanged: (v) => dispatchSync(SetBirthdateAction(birthdate: v!)),
       ),
       password: ValueChangedVm(
         value: password,
         validator: passwordValidator.call,
-        onChanged: (value) => dispatchSync(SetPasswordAction(value!)),
+        onChanged: (v) => dispatchSync(SetPasswordAction(password: v!)),
       ),
       confirmPassword: ValueChangedVm(
         value: confirmPassword,
@@ -76,7 +97,8 @@ class _Factory extends VmFactory<AppState, RegistrationPageConnector, _Vm> {
           final passwordsMatchError = passwordsMatchValidator(password, v);
           return confirmPasswordError ?? passwordsMatchError;
         },
-        onChanged: (value) => dispatchSync(SetConfirmPasswordAction(value!)),
+        onChanged: (v) =>
+            dispatchSync(SetConfirmPasswordAction(confirmPassword: v!)),
       ),
       onRegisterPressed: () async {
         final status = await dispatchAndWait(RegistrationAction());
@@ -98,6 +120,7 @@ class _Vm extends Vm with EquatableMixin {
     required this.avatar,
     required this.fullName,
     required this.email,
+    required this.birthdate,
     required this.password,
     required this.confirmPassword,
     required this.onRegisterPressed,
@@ -107,6 +130,7 @@ class _Vm extends Vm with EquatableMixin {
   final AvatarSelectorVm avatar;
   final ValueChangedVm<String?> fullName;
   final ValueChangedVm<String?> email;
+  final ValueChangedVm<DateTime?> birthdate;
   final ValueChangedVm<String?> password;
   final ValueChangedVm<String?> confirmPassword;
   final Future<bool> Function() onRegisterPressed;
@@ -117,6 +141,7 @@ class _Vm extends Vm with EquatableMixin {
     avatar,
     fullName,
     email,
+    birthdate,
     password,
     confirmPassword,
   ];

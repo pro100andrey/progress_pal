@@ -13,7 +13,7 @@ class BarrierOverlay extends StatelessWidget {
       const ModalBarrier(dismissible: false),
       BackdropFilter(
         filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
-        child: const Center(child: BaseCircleIndicator()),
+        child: const Center(child: BaseCircleIndicator(size: 42)),
       ),
     ],
   );

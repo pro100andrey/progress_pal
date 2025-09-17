@@ -9,19 +9,19 @@ import 'package:shadcn_ui/shadcn_ui.dart';
 import 'avatar.dart';
 import 'editor/circle_editor_crop_layer_painter.dart';
 import 'editor/image_editor.dart';
+import 'model.dart';
 
 class AvatarSelectorVm extends Equatable {
   const AvatarSelectorVm({
-    required this.src,
-
+    required this.image,
     required this.onImageSelect,
   });
 
-  final AvatarSource src;
+  final ImageVm image;
   final ValueChanged<({Uint8List bytes, String name})?> onImageSelect;
 
   @override
-  List<Object?> get props => [src, onImageSelect];
+  List<Object?> get props => [image, onImageSelect];
 }
 
 class AvatarSelector extends StatefulWidget {
@@ -49,19 +49,24 @@ class _AvatarSelectorState extends State<AvatarSelector> {
 
   @override
   Widget build(BuildContext context) => ShadPopover(
+    anchor: const ShadAnchor(
+      childAlignment: Alignment.center,
+      overlayAlignment: Alignment.bottomCenter,
+    ),
+    padding: const EdgeInsets.all(8),
     controller: popoverController,
     child: Avatar(
       placeholder: const Icon(LucideIcons.user100, size: 54),
-      source: widget.vm.src,
+      source: widget.vm.image,
       onTap: () async => _handleTap(context),
       size: widget.size,
     ),
-    popover: (context) => SizedBox(
-      width: 200,
+    popover: (_) => SizedBox(
+      width: 240,
       child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.stretch,
-        spacing: 16,
+        spacing: 8,
         children: [
           ShadButton.destructive(
             onPressed: () {
@@ -85,7 +90,7 @@ class _AvatarSelectorState extends State<AvatarSelector> {
   final _picker = ImagePicker();
 
   Future<void> _handleTap(BuildContext context) async {
-    if (widget.vm.src.isEmpty) {
+    if (widget.vm.image.isNone) {
       await _pickImage(context);
     } else {
       popoverController.toggle();
@@ -102,6 +107,7 @@ class _AvatarSelectorState extends State<AvatarSelector> {
       if (pickedFile != null) {
         final name = pickedFile.name;
         final ext = name.split('.').last.toLowerCase();
+
         if (!allowedExtension.contains(ext) && context.mounted) {
           ShadToaster.of(context).show(
             ShadToast(

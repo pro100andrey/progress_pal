@@ -12,6 +12,7 @@ import '../tiles/auth_header.dart';
 
 class LogInPage extends StatelessWidget {
   const LogInPage({
+    required this.languageSelector,
     required this.email,
     required this.password,
     required this.onLogInPressed,
@@ -20,6 +21,7 @@ class LogInPage extends StatelessWidget {
     super.key,
   });
 
+  final Widget languageSelector;
   final ValueChangedVm<String?> email;
   final ValueChangedVm<String?> password;
   final VoidCallback onLogInPressed;
@@ -28,6 +30,9 @@ class LogInPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Scaffold(
+    appBar: AppBar(
+      actions: [languageSelector],
+    ),
     body: FormContainer(
       centered: true,
       footer: const TextVersion(),
@@ -49,7 +54,6 @@ class LogInPage extends StatelessWidget {
               ),
             ),
             ShadButton(
-              width: 120,
               onPressed: () => _validateForm(formKey),
               child: Text(S.current.signIn),
             ),

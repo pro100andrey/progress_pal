@@ -136,7 +136,7 @@ mixin PBListMixin<R extends RecordModel> on PBCollection<R> {
   }
 
   /// Fetch a paginated list of records.
-  Future<List<R>> getList({
+  Future<ResultList<R>> getList({
     int page = 1,
     int perPage = 30,
     bool skipTotal = false,
@@ -161,7 +161,7 @@ mixin PBListMixin<R extends RecordModel> on PBCollection<R> {
           headers: headers,
         );
 
-    return response as List<R>;
+    return response as ResultList<R>;
   }
 
   /// Fetch the first item from a list of records.

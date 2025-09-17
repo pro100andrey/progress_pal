@@ -1,7 +1,8 @@
 name: _
 publish_to: none
 environment: 
-  sdk: ^3.9.0
+  sdk: ^3.9.2
+
 workspace:
   - app
   - business
@@ -9,3 +10,7 @@ workspace:
   - localization
   - storage
   - ui
+
+dependency_overrides:
+  build: ^4.0.0
+  connectivity_plus: ^7.0.0 

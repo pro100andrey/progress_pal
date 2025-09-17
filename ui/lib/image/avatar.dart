@@ -1,56 +1,9 @@
-import 'package:equatable/equatable.dart';
 import 'package:extended_image/extended_image.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
 
-typedef AvatarMemoryData = ({Uint8List bytes, String name});
-typedef AvatarNetworkData = String?;
-
-sealed class AvatarSource extends Equatable {
-  const AvatarSource._();
-
-  const factory AvatarSource.network(AvatarNetworkData? data) =
-      _NetworkAvatarSrc;
-  const factory AvatarSource.memory(AvatarMemoryData? data) = _MemoryAvatarSrc;
-
-  bool get isEmpty => switch (this) {
-    _NetworkAvatarSrc(data: final data) => data == null,
-    _MemoryAvatarSrc(data: final data) => data == null,
-  };
-
-  T? when<T>({
-    required T Function(String url) network,
-    required T Function(AvatarMemoryData data) memory,
-  }) {
-    switch (this) {
-      case _NetworkAvatarSrc(data: final data) when data != null:
-        return network(data);
-      case _MemoryAvatarSrc(data: final data) when data != null:
-        return memory(data);
-      case _:
-        return null;
-    }
-  }
-}
-
-class _NetworkAvatarSrc extends AvatarSource {
-  const _NetworkAvatarSrc(this.data) : super._();
-
-  final AvatarNetworkData? data;
-
-  @override
-  List<Object?> get props => [data];
-}
-
-class _MemoryAvatarSrc extends AvatarSource {
-  const _MemoryAvatarSrc(this.data) : super._();
-
-  final ({Uint8List bytes, String name})? data;
-
-  @override
-  List<Object?> get props => [data?.name];
-}
+import '../indicators/base_circle_indicator.dart';
+import 'model.dart';
 
 class Avatar extends StatelessWidget {
   const Avatar({
@@ -64,7 +17,7 @@ class Avatar extends StatelessWidget {
     super.key,
   });
 
-  final AvatarSource source;
+  final ImageVm source;
   final Widget? placeholder;
   final Size? size;
   final BoxShape? shape;
@@ -74,19 +27,20 @@ class Avatar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = ShadTheme.of(context);
     final effectiveSize = size ?? const Size.square(40);
     final effectiveShape = shape ?? BoxShape.circle;
     final effectiveFit = fit ?? BoxFit.fill;
     final effectivePlaceholder =
-        placeholder ?? const Icon(LucideIcons.user100, size: 24);
+        placeholder ?? const Icon(LucideIcons.user100, size: 18);
     final effectiveBorder =
-        border ?? Border.all(color: const Color(0xFF3B3B3B));
+        border ?? Border.all(color: const Color(0x483B3B3B));
 
     Widget? loadStateChanged(
       ExtendedImageState state,
     ) => switch (state.extendedImageLoadState) {
       LoadState.loading => const Center(
-        child: CircularProgressIndicator(),
+        child: BaseCircleIndicator(size: 24),
       ),
       LoadState.completed => ExtendedRawImage(
         image: state.extendedImageInfo?.image,
@@ -94,7 +48,6 @@ class Avatar extends StatelessWidget {
         height: effectiveSize.height,
         fit: effectiveFit,
       ),
-
       LoadState.failed => Center(child: effectivePlaceholder),
     };
 
@@ -106,31 +59,29 @@ class Avatar extends StatelessWidget {
         loadStateChanged: loadStateChanged,
       ),
       memory: (data) => ExtendedImage.memory(
-        data.bytes,
+        data,
         shape: effectiveShape,
         border: effectiveBorder,
         loadStateChanged: loadStateChanged,
       ),
-    );
-
-    final resultAvatar = SizedBox(
-      width: effectiveSize.width,
-      height: effectiveSize.height,
-      child:
-          avatar ??
-          DecoratedBox(
-            decoration: BoxDecoration(
-              border: effectiveBorder,
-              shape: effectiveShape,
-            ),
-            child: Center(child: effectivePlaceholder),
-          ),
+      none: () => DecoratedBox(
+        decoration: BoxDecoration(
+          border: effectiveBorder,
+          shape: effectiveShape,
+          color: theme.colorScheme.card,
+        ),
+        child: Center(child: effectivePlaceholder),
+      ),
     );
 
     return Stack(
       alignment: Alignment.center,
       children: [
-        resultAvatar,
+        SizedBox(
+          width: effectiveSize.width,
+          height: effectiveSize.height,
+          child: avatar,
+        ),
 
         if (onTap != null)
           Material(

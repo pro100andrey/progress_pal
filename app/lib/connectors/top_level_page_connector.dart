@@ -2,6 +2,7 @@ import 'package:async_redux/async_redux.dart';
 import 'package:business/redux/app_state.dart';
 import 'package:business/redux/connectivity/connectivity_selectors.dart';
 import 'package:business/redux/create_exercise/create_exercise_selectors.dart';
+import 'package:business/redux/edit_profile/edit_profile_selectors.dart';
 import 'package:business/redux/forgot_password/forgot_password_selectors.dart';
 import 'package:business/redux/log_in/log_in_selectors.dart';
 import 'package:business/redux/registration/registration_selectors.dart';
@@ -48,7 +49,8 @@ class _Factory extends VmFactory<AppState, TopLevelPageConnector, _Vm> {
         selectRegistrationIsWaiting(state) ||
         selectForgotPasswordIsWaiting(state) ||
         selectResetPasswordIsWaiting(state) ||
-        selectCreateExerciseIsWaiting(state)) {
+        selectCreateExerciseIsWaiting(state) ||
+        selectEditProfileIsWaiting(state)) {
       overlay = _Overlay.barrier;
     }
 

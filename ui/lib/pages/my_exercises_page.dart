@@ -29,9 +29,7 @@ class MyExercisesPage extends StatelessWidget {
     body: LayoutBuilder(
       builder: (context, constraints) {
         if (isWaiting && exercises.isEmpty) {
-          return const Center(
-            child: Icon(LucideIcons.ellipsis100),
-          );
+          return const SizedBox.expand();
         }
 
         if (exercises.isEmpty) {

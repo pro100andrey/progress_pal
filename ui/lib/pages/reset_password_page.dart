@@ -42,7 +42,6 @@ class ResetPasswordPage extends StatelessWidget {
               child: Text(S.current.resetPassword),
             ),
             const ShadSeparator.horizontal(
-              thickness: 1,
               margin: EdgeInsets.symmetric(horizontal: 20),
             ),
             TextButton(

@@ -5,6 +5,7 @@ import 'package:shadcn_ui/shadcn_ui.dart';
 import '../forms/base_form.dart';
 import '../forms/form_container.dart';
 import '../image/avatar_selector.dart';
+import '../inputs/birthdate_input.dart';
 import '../inputs/confirm_password_input.dart';
 import '../inputs/email_input.dart';
 import '../inputs/full_name_input.dart';
@@ -17,6 +18,7 @@ class RegistrationPage extends StatelessWidget {
     required this.avatar,
     required this.fullName,
     required this.email,
+    required this.birthdate,
     required this.password,
     required this.confirmPassword,
     required this.onRegisterPressed,
@@ -27,6 +29,7 @@ class RegistrationPage extends StatelessWidget {
   final AvatarSelectorVm avatar;
   final ValueChangedVm<String?> fullName;
   final ValueChangedVm<String?> email;
+  final ValueChangedVm<DateTime?> birthdate;
   final ValueChangedVm<String?> password;
   final ValueChangedVm<String?> confirmPassword;
   final Future<bool> Function() onRegisterPressed;
@@ -47,15 +50,14 @@ class RegistrationPage extends StatelessWidget {
             AvatarSelector(vm: avatar),
             FullNameInput(vm: fullName),
             EmailInput(vm: email),
+            BirthdateInput(vm: birthdate),
             PasswordInput(vm: password),
             ConfirmPasswordInput(vm: confirmPassword),
             ShadButton(
-              width: 120,
               onPressed: () async => _validateForm(formKey, context),
               child: Text(S.current.signUp),
             ),
             const ShadSeparator.horizontal(
-              thickness: 1,
               margin: EdgeInsets.symmetric(horizontal: 20),
             ),
             TextButton(

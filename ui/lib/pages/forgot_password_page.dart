@@ -41,7 +41,6 @@ class ForgotPasswordPage extends StatelessWidget {
               child: Text(S.current.sendResetLink),
             ),
             const ShadSeparator.horizontal(
-              thickness: 1,
               margin: EdgeInsets.symmetric(horizontal: 20),
             ),
             TextButton(

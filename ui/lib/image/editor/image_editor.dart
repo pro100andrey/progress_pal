@@ -78,7 +78,11 @@ class _ImageEditorState extends State<ImageEditor> {
           ),
           ShadButton(
             onPressed: () async {
-              final result = await _editorController.exportImage(widget.bytes);
+              final result = await _editorController.exportImage(
+                widget.bytes,
+                maxSize: widget.maxSize,
+              );
+
               if (context.mounted) {
                 Navigator.of(context).pop(result);
               }

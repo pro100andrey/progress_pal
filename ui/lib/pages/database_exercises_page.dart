@@ -1,14 +1,44 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
+
+import '../cards/database_exercise_card.dart';
 
 class DatabaseExercisesPage extends StatelessWidget {
   const DatabaseExercisesPage({
+    required this.isWaiting,
+    required this.exercises,
     super.key,
   });
 
+  final bool isWaiting;
+  final List<DatabaseExerciseCardVm> exercises;
+
   @override
   Widget build(BuildContext context) => Scaffold(
-    body: ListView(
-      padding: const EdgeInsets.all(16),
+    body: LayoutBuilder(
+      builder: (context, constraints) {
+        if (isWaiting && exercises.isEmpty) {
+          return const SizedBox.expand();
+        }
+
+        final columnWidth = constraints.maxWidth / 300;
+        final columnCount = columnWidth > 1 ? columnWidth.floor() : 1;
+
+        return GridView.builder(
+          padding: const EdgeInsets.all(16),
+          shrinkWrap: true,
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: max(columnCount, 1),
+            crossAxisSpacing: 16,
+            mainAxisSpacing: 16,
+          ),
+          itemCount: exercises.length,
+          itemBuilder: (context, index) => DatabaseExerciseCard(
+            vm: exercises[index],
+          ),
+        );
+      },
     ),
   );
 }

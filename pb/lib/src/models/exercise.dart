@@ -12,7 +12,8 @@ extension type Exercise(RecordModel exercise) implements RecordModel {
       exercise.get<LanguageString?>('instructions');
 
   /// Returns the muscle group targeted by the exercise.
-  MuscleGroup get muscleGroup => exercise.get<MuscleGroup>('muscle_group');
+  List<MuscleGroup> get muscleGroup =>
+      exercise.getListValue<MuscleGroup>('muscle_group');
 
   /// Returns the equipment required for the exercise.
   Equipment get equipment => exercise.get<Equipment>('equipment');
