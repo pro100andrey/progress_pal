@@ -64,7 +64,7 @@ class _Factory extends VmFactory<AppState, EditProfileSheetConnector, _Vm> {
                 bytes: bytes,
                 name: name,
               ),
-              null => const RemovedImageSource(),
+              null => const NoneImageSource(),
             },
           ),
         ),

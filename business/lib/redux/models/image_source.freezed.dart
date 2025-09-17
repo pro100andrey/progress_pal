@@ -208,36 +208,4 @@ as String,
 
 }
 
-/// @nodoc
-
-
-class RemovedImageSource implements ImageSource {
-  const RemovedImageSource();
-  
-
-
-
-
-
-
-@override
-bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is RemovedImageSource);
-}
-
-
-@override
-int get hashCode => runtimeType.hashCode;
-
-@override
-String toString() {
-  return 'ImageSource.removed()';
-}
-
-
-}
-
-
-
-
 // dart format on

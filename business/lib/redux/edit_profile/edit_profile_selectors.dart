@@ -13,17 +13,43 @@ String selectEditProfileFullName(AppState state) => state.editProfile.fullName!;
 DateTime selectEditProfileBirthdate(AppState state) =>
     state.editProfile.birthdate!;
 
-ImageSource selectEditProfileAvatar(AppState state) =>
-    state.editProfile.avatar;
+ImageSource selectEditProfileAvatar(AppState state) => state.editProfile.avatar;
+
+/// Returns true if avatar is changed
+bool selectEditProfileAvatarIsChanged(AppState state) {
+  final currentUserAvatar = selectSessionCurrentUserAvatarUrl(state);
+  final avatar = selectEditProfileAvatar(state);
+
+  return avatar !=
+      switch (currentUserAvatar) {
+        null => const NoneImageSource(),
+        final String url => NetworkImageSource(url: url),
+      };
+}
+
+/// Returns true if full name is changed
+bool selectEditProfileFullNameIsChanged(AppState state) {
+  final currentUser = selectSessionCurrentUser(state)!;
+  final fullName = selectEditProfileFullName(state);
+
+  return currentUser.name != fullName;
+}
+
+/// Returns true if birthdate is changed
+bool selectEditProfileBirthdateIsChanged(AppState state) {
+  final currentUser = selectSessionCurrentUser(state)!;
+  final birthdate = selectEditProfileBirthdate(state);
+
+  return currentUser.birthdate != birthdate;
+}
 
 /// Returns true if there are changes in the edit profile form
 bool selectEditProfileHasChanges(AppState state) {
-  final currentUser = selectSessionCurrentUser(state)!;
-  final fullName = selectEditProfileFullName(state);
-  final birthdate = selectEditProfileBirthdate(state);
+  final fullNameIsChanged = selectEditProfileFullNameIsChanged(state);
+  final birthdateIsChanged = selectEditProfileBirthdateIsChanged(state);
+  final avatarIsChanged = selectEditProfileAvatarIsChanged(state);
 
-  final nameChanged = currentUser.name != fullName;
-  final birthdateChanged = currentUser.birthdate != birthdate;
+  final result = fullNameIsChanged || birthdateIsChanged || avatarIsChanged;
 
-  return nameChanged || birthdateChanged;
+  return result;
 }

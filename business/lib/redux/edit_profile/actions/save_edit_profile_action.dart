@@ -1,8 +1,11 @@
 import 'package:async_redux/async_redux.dart';
+import 'package:http/http.dart' as http;
 import 'package:pb/collections.dart';
+import 'package:pb/models.dart';
 
 import '../../action_mixins/waiting_for.dart';
 import '../../app_state.dart';
+import '../../models/image_source.dart';
 import '../edit_profile_selectors.dart';
 
 class SaveEditProfileAction extends ReduxAction<AppState> with WaitingFor {
@@ -10,14 +13,36 @@ class SaveEditProfileAction extends ReduxAction<AppState> with WaitingFor {
   Future<AppState?> reduce() async {
     final fullName = selectEditProfileFullName(state);
     final birthdate = selectEditProfileBirthdate(state);
+    final avatar = selectEditProfileAvatar(state);
+    final avatarIsChanged = selectEditProfileAvatarIsChanged(state);
+    final deleteAvatar = avatarIsChanged && avatar is NoneImageSource;
 
-    await getPocketBase.x.users.update(
+    final result = await getPocketBase.x.users.update(
       state.session.currentUser!.id,
       body: UserBody(
         name: fullName,
         birthdate: birthdate,
+        deleteAvatar: deleteAvatar,
       ),
+      files: [
+        if (avatar is MemoryImageSource)
+          http.MultipartFile.fromBytes(
+            'avatar',
+            avatar.bytes,
+            filename: avatar.name,
+          ),
+      ],
     );
+
+    if (avatar is MemoryImageSource) {
+      final user = User(result);
+      final imageSource = switch (user.avatarUrl(getPocketBase.baseURL)) {
+        null => const NoneImageSource(),
+        final String url => NetworkImageSource(url: url),
+      };
+
+      return state.copyWith.editProfile(avatar: imageSource);
+    }
 
     return null;
   }

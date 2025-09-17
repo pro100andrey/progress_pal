@@ -60,7 +60,7 @@ class _AvatarSelectorState extends State<AvatarSelector> {
       onTap: () async => _handleTap(context),
       size: widget.size,
     ),
-    popover: (context) => SizedBox(
+    popover: (_) => SizedBox(
       width: 240,
       child: Column(
         mainAxisSize: MainAxisSize.min,

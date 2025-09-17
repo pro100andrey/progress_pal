@@ -19,5 +19,4 @@ sealed class ImageSource with _$ImageSource {
     required String name,
   }) = MemoryImageSource;
 
-  const factory ImageSource.removed() = RemovedImageSource;
 }

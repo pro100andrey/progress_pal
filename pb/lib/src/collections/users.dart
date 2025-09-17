@@ -17,14 +17,17 @@ class UserBody extends PBToJson {
   const UserBody({
     this.name,
     this.birthdate,
+    this.deleteAvatar = false,
   });
 
   final String? name;
   final DateTime? birthdate;
+  final bool deleteAvatar;
 
   @override
   Map<String, dynamic> toJson() => {
     'name': ?name,
     'birthdate': ?birthdate?.toUtc().toIso8601String(),
+    if (deleteAvatar) 'avatar': null,
   };
 }
