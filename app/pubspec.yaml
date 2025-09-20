@@ -17,12 +17,12 @@ dependencies:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
-  go_router: ^16.2.1
+  go_router: ^16.2.2
   localization:
     path: ../localization
   pro_pretty_logging: ^2.0.0
   pro_validator: ^2.0.1
-  shadcn_ui: ^0.31.6
+  shadcn_ui: ^0.31.7
   ui:
     path: ../ui
   window_manager: ^0.5.1

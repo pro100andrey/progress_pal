@@ -22,7 +22,7 @@ dependencies:
   localization:
     path: ../localization
   package_info_plus: ^9.0.0
-  shadcn_ui: ^0.31.6
+  shadcn_ui: ^0.31.7
   theme_extensions_builder_annotation: ^5.1.0
   wheel_picker: ^0.2.2
 
