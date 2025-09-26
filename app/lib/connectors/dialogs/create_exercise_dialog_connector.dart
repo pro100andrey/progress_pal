@@ -17,6 +17,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:ui/dialogs/create_exercise_dialog.dart';
 import 'package:ui/inputs/select_input.dart';
+import 'package:ui/inputs/select_multiple_input.dart';
 import 'package:ui/models/value_changed.dart';
 
 import '../../common/validators.dart';
@@ -63,14 +64,14 @@ class _Factory extends VmFactory<AppState, CreateExerciseDialogConnector, _Vm> {
 
     final muscleGroupItems = selectMuscleGroups(state)
         .map(
-          (item) => SelectInputItem(
+          (item) => SelectMultipleInputItem(
             label: item.name.get(language.locale)!,
             onSelect: () => dispatchSync(
               SetMuscleGroupAction(muscleGroupId: item.id),
             ),
           ),
         )
-        .toList(growable: false);
+        .toSet();
 
     final equipmentsItems = selectEquipments(state)
         .map(
@@ -98,15 +99,10 @@ class _Factory extends VmFactory<AppState, CreateExerciseDialogConnector, _Vm> {
         onChanged: (value) => dispatchSync(SetTitleAction(title: value!)),
         validator: requiredValidator.call,
       ),
-      instructions: ValueChangedVm(
-        value: instructions,
-        onChanged: (value) =>
-            dispatchSync(SetInstructionsAction(instructions: value!)),
-      ),
-      muscleGroup: SelectInputVm(
-        initialValue: muscleGroupItems[muscleGroupIdx],
+      muscleGroup: SelectMultipleInputVm(
+        initialValue: {muscleGroupItems.elementAt(muscleGroupIdx)},
         items: muscleGroupItems,
-        validator: (value) => requiredValidator(value?.label ?? ''),
+        validator: (value) => nonEmptyIterableValidator(value),
       ),
       equipment: SelectInputVm(
         initialValue: equipmentsItems[equipmentIdx],
@@ -117,6 +113,11 @@ class _Factory extends VmFactory<AppState, CreateExerciseDialogConnector, _Vm> {
         initialValue: recordTypesItems[recordingTypeIdx],
         items: recordTypesItems,
         validator: (value) => requiredValidator(value?.label ?? ''),
+      ),
+      instructions: ValueChangedVm(
+        value: instructions,
+        onChanged: (value) =>
+            dispatchSync(SetInstructionsAction(instructions: value!)),
       ),
       onCreatePressed: () async {
         final status = await dispatchAndWait(CreateExerciseAction());
@@ -140,7 +141,7 @@ class _Vm extends Vm with EquatableMixin {
 
   final ValueChangedVm<String?> title;
   final ValueChangedVm<String?> instructions;
-  final SelectInputVm muscleGroup;
+  final SelectMultipleInputVm muscleGroup;
   final SelectInputVm equipment;
   final SelectInputVm recordingType;
   final Future<bool> Function() onCreatePressed;

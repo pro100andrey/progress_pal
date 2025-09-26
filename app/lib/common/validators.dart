@@ -37,3 +37,27 @@ final nameValidator = MultiValidator(
     MinLengthValidator(min: 2, error: S.current.minimumLengthSymbols(2)),
   ],
 );
+
+abstract class IterableValidator<T> extends Validator<Iterable<T>?> {
+  const IterableValidator({required super.error});
+
+  @override
+  String? call(Iterable<T>? value) {
+    if (value == null) {
+      return null;
+    }
+
+    return value.isEmpty ? super(value) : null;
+  }
+}
+
+class NonEmptyIterableValidator<T> extends IterableValidator<T> {
+  const NonEmptyIterableValidator({required super.error});
+
+  @override
+  bool isValid(Iterable<T>? value) => value != null && value.isNotEmpty;
+}
+
+const nonEmptyIterableValidator = NonEmptyIterableValidator(
+  error: 'This field requires at least one selection',
+);

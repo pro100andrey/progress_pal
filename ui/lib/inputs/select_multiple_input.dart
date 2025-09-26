@@ -24,15 +24,16 @@ class SelectMultipleInputVm extends Equatable {
     this.validator,
   });
 
-  final SelectMultipleInputItem? initialValue;
-  final List<SelectMultipleInputItem> items;
-  final String? Function(SelectMultipleInputItem?)? validator;
+  final Set<SelectMultipleInputItem>? initialValue;
+  final Set<SelectMultipleInputItem> items;
+  final String? Function(Set<SelectMultipleInputItem>?)? validator;
 
   @override
   List<Object?> get props => [items, validator != null];
 }
 
-class SelectMultipleInput extends ShadSelectFormField<SelectMultipleInputItem> {
+class SelectMultipleInput
+    extends ShadSelectMultipleFormField<SelectMultipleInputItem> {
   SelectMultipleInput({
     required this.vm,
     super.id,
@@ -48,11 +49,20 @@ class SelectMultipleInput extends ShadSelectFormField<SelectMultipleInputItem> {
          description: description != null ? Text(description) : null,
          placeholder: placeholder != null ? Text(placeholder) : null,
          validator: vm.validator,
-         itemCount: vm.items.length,
-         selectedOptionBuilder: (context, value) => Text(value.label),
+         selectedOptionsBuilder: (context, values) => Wrap(
+           spacing: 8,
+           runSpacing: 4,
+           children: values
+               .map(
+                 (value) => ShadBadge.outline(child: Text(value.label)),
+               )
+               .toList(growable: false),
+         ),
          trailing: const Icon(LucideIcons.chevronsUpDown200),
          initialValue: vm.initialValue,
-         onChanged: (value) => value!.onSelect(),
+         onChanged: (values) {
+           debugPrint('Selected values: $values');
+         },
          options: vm.items.map(
            (item) => ShadOption(value: item, child: Text(item.label)),
          ),
@@ -60,3 +70,9 @@ class SelectMultipleInput extends ShadSelectFormField<SelectMultipleInputItem> {
 
   final SelectMultipleInputVm vm;
 }
+
+Widget test() => ShadSelect<String>.multiple(
+  selectedOptionsBuilder: (context, values) => Column(
+    children: values.map(Text.new).toList(),
+  ),
+);

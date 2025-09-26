@@ -15,3 +15,11 @@ IMap<String, Exercise> selectExercisesTable(AppState state) =>
 /// Returns [Exercise] value by id
 Exercise selectExerciseById(AppState state, {required String id}) =>
     selectExercisesTable(state)[id]!;
+
+List<String> selectMyExercisesPreviews(AppState state, {required String id}) {
+  final exercise = selectExerciseById(state, id: id);
+
+  return exercise.previewUrlsPath
+      .map((e) => getPocketBase.baseURL + e)
+      .toList(growable: false);
+}

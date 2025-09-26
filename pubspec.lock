@@ -82,7 +82,7 @@ packages:
     source: hosted
     version: "2.2.1"
   build:
-    dependency: "direct overridden"
+    dependency: transitive
     description:
       name: build
       sha256: "5b887c55a0f734b433b3b2d89f9cd1f99eb636b17e268a5b4259258bc916504b"
@@ -370,18 +370,18 @@ packages:
     dependency: transitive
     description:
       name: flutter_gen_core
-      sha256: eda54fdc5de08e7eeea663eb8442aafc8660b5a13fda4e0c9e572c64e50195fb
+      sha256: b6bafbbd981da2f964eb45bcb8b8a7676a281084f8922c0c75de4cfbaa849311
       url: "https://pub.dev"
     source: hosted
-    version: "5.11.0"
+    version: "5.12.0"
   flutter_gen_runner:
     dependency: transitive
     description:
       name: flutter_gen_runner
-      sha256: "669bf8b7a9b4acbdcb7fcc5e12bf638aca19acedf43341714cbca3bf3a219521"
+      sha256: c99b10af9d404e3f46fd1927e7d90099779e935e86022674c4c2a9e6c2a93b29
       url: "https://pub.dev"
     source: hosted
-    version: "5.11.0"
+    version: "5.12.0"
   flutter_localizations:
     dependency: transitive
     description: flutter
@@ -460,10 +460,10 @@ packages:
     dependency: transitive
     description:
       name: go_router
-      sha256: b1488741c9ce37b72e026377c69a59c47378493156fc38efb5a54f6def3f92a3
+      sha256: c752e2d08d088bf83742cb05bf83003f3e9d276ff1519b5c92f9d5e60e5ddd23
       url: "https://pub.dev"
     source: hosted
-    version: "16.2.2"
+    version: "16.2.4"
   graphs:
     dependency: transitive
     description:
@@ -956,10 +956,10 @@ packages:
     dependency: transitive
     description:
       name: shadcn_ui
-      sha256: "11c33f47634641fb9ab71aeb31402d8f513440c4b61b8e4873f15ace7d3ad559"
+      sha256: "9e4032c8a2deaabb458e3f52e3b0ca0591d1656381f31fe886ab8f4b28416a32"
       url: "https://pub.dev"
     source: hosted
-    version: "0.31.7"
+    version: "0.31.9"
   shelf:
     dependency: transitive
     description:

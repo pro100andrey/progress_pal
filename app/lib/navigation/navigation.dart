@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import '../connectors/body_stats_page_connector.dart';
 import '../connectors/confirm_verification_page_connector.dart';
 import '../connectors/database_exercises_page_connector.dart';
+import '../connectors/exercise_details_page_connector.dart';
 import '../connectors/exercises_page_connector.dart';
 import '../connectors/forgot_password_page_connector.dart';
 import '../connectors/home_page_connector.dart';
@@ -130,12 +131,19 @@ class Navigation {
           ),
         ],
       ),
+      GoRoute(
+        path: '/home/exercises/details/:id',
+        builder: (context, state) {
+          final id = state.pathParameters['id']!;
+          return ExerciseDetailsPageConnector(exerciseId: id);
+        },
+      ),
     ],
     redirect: (context, state) {
       final isLoggedIn = _delegate.isLoggedIn;
       final cr = _CurrentRoute(state);
 
-      const defaultExercisesTab = '/home/exercises/my';
+      const defaultExercisesTab = '/home/exercises/database';
       const defaultLogsTab = '/home/progress/logs';
 
       switch ((isLoggedIn, cr)) {
@@ -146,7 +154,7 @@ class Navigation {
           return '/auth/login';
         case (true, _CurrentRoute(isAuth: true)):
         case (true, _CurrentRoute(isIndex: true)):
-          return defaultLogsTab;
+          return defaultExercisesTab;
         case (true, _CurrentRoute(isExercises: true)):
           return defaultExercisesTab;
         case (true, _CurrentRoute(isProgress: true)):
@@ -189,6 +197,10 @@ class Navigation {
 
   /// Navigate to the notes tab.
   void goToNotes() => router.go('/home/progress/notes');
+
+  /// Navigate to the exercise details page.
+  Future<T?> pushExerciseDetails<T>(String exerciseId) async =>
+      router.push<T>('/home/exercises/details/$exerciseId');
 
   /// Refresh the route. Needs to be called for redirection to take effect.
   void refresh() => router.refresh();
