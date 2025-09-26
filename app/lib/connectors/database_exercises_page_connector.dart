@@ -4,6 +4,7 @@ import 'package:business/redux/database_exercises_view/actions/retrieve_database
 import 'package:business/redux/database_exercises_view/database_exercises_view_selectors.dart';
 import 'package:business/redux/exercises/exercises_selectors.dart';
 import 'package:business/redux/language/language_selectors.dart';
+import 'package:business/redux/muscle_groups/muscle_groups_selectors.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:ui/cards/database_exercise_card.dart';
@@ -50,11 +51,18 @@ class _Factory
 
           final title = exercise.title.get(language.locale)!;
           final instructions = exercise.instructions!.get(language.locale)!;
+          final muscleGroups = exercise.muscleGroupIds
+              .map((id) {
+                final mg = selectMuscleGroupById(state, id: id);
+                return mg.name.get(language.locale)!;
+              })
+              .toList(growable: false);
 
           return DatabaseExerciseCardVm(
             preview: preview,
             title: title,
             instructions: instructions,
+            muscleGroups: muscleGroups,
             onPressed: () async => navigation.pushExerciseDetails(exercise.id),
           );
         })

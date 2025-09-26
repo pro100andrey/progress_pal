@@ -10,16 +10,18 @@ class DatabaseExerciseCardVm extends Equatable {
     required this.title,
     required this.preview,
     required this.instructions,
+    required this.muscleGroups,
     required this.onPressed,
   });
 
   final String title;
   final ImageVm preview;
   final String instructions;
+  final List<String> muscleGroups;
   final VoidCallback onPressed;
 
   @override
-  List<Object?> get props => [title, preview, instructions];
+  List<Object?> get props => [title, preview, instructions, muscleGroups];
 }
 
 class DatabaseExerciseCard extends StatelessWidget {
@@ -54,10 +56,12 @@ class DatabaseExerciseCard extends StatelessWidget {
                 ),
               ),
               Text(vm.title, style: ShadTheme.of(context).textTheme.h4),
-              const Row(
+              Row(
                 children: [
-                  ShadBadge.outline(
-                    child: Text('Arms'),
+                  ...vm.muscleGroups.map(
+                    (mg) => ShadBadge.outline(
+                      child: Text(mg),
+                    ),
                   ),
                 ],
               ),
