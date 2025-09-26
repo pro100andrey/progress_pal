@@ -2,6 +2,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
 
+import '../image/image_preview.dart';
 import '../image/model.dart';
 
 class DatabaseExerciseCardVm extends Equatable {
@@ -9,11 +10,13 @@ class DatabaseExerciseCardVm extends Equatable {
     required this.title,
     required this.preview,
     required this.instructions,
+    required this.onPressed,
   });
 
   final String title;
   final ImageVm preview;
   final String instructions;
+  final VoidCallback onPressed;
 
   @override
   List<Object?> get props => [title, preview, instructions];
@@ -29,11 +32,45 @@ class DatabaseExerciseCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => ShadCard(
-    padding: const EdgeInsets.all(16),
-    title: Text(vm.title),
-    description: Text(
-      vm.instructions.trim().replaceAll('\n', ' '),
-      maxLines: 4,
+    padding: EdgeInsets.zero,
+    child: Material(
+      color: Colors.transparent,
+      child: InkWell(
+        onTap: vm.onPressed,
+        highlightColor: Colors.transparent,
+        splashColor: ShadTheme.of(context).colorScheme.primary.withAlpha(50),
+        hoverDuration: const Duration(milliseconds: 300),
+        hoverColor: Colors.blueGrey.withAlpha(20),
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            spacing: 8,
+            children: [
+              Expanded(
+                child: ImagePreview(
+                  source: vm.preview,
+                  borderRadius: BorderRadius.circular(8),
+                ),
+              ),
+              Text(vm.title, style: ShadTheme.of(context).textTheme.h4),
+              const Row(
+                children: [
+                  ShadBadge.outline(
+                    child: Text('Arms'),
+                  ),
+                ],
+              ),
+              Text(
+                vm.instructions.trim().replaceAll('\n', ' '),
+                maxLines: 5,
+                overflow: TextOverflow.ellipsis,
+                style: ShadTheme.of(context).textTheme.muted,
+              ),
+            ],
+          ),
+        ),
+      ),
     ),
   );
 }

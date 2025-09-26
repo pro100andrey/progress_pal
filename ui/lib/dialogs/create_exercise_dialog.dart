@@ -10,6 +10,7 @@ import '../inputs/instructions_input.dart';
 import '../inputs/muscle_group_input.dart';
 import '../inputs/recording_type_input.dart';
 import '../inputs/select_input.dart';
+import '../inputs/select_multiple_input.dart';
 import '../models/value_changed.dart';
 
 class CreateExerciseDialogVm extends Equatable {
@@ -49,7 +50,7 @@ class CreateExerciseDialog extends StatelessWidget {
 
   final ValueChangedVm<String?> title;
   final ValueChangedVm<String?> instructions;
-  final SelectInputVm muscleGroup;
+  final SelectMultipleInputVm muscleGroup;
   final SelectInputVm equipment;
   final SelectInputVm recordingType;
   final Future<bool> Function() onCreatePressed;

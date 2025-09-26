@@ -10,6 +10,8 @@ import 'package:ui/cards/database_exercise_card.dart';
 import 'package:ui/image/model.dart';
 import 'package:ui/pages/database_exercises_page.dart';
 
+import '../navigation/navigation.dart';
+
 class DatabaseExercisesPageConnector extends StatelessWidget {
   const DatabaseExercisesPageConnector({super.key});
 
@@ -41,11 +43,19 @@ class _Factory
     final exercises = view
         .map((id) {
           final exercise = selectExerciseById(state, id: id);
+          final previews = selectMyExercisesPreviews(state, id: id);
+          final preview = previews.isEmpty
+              ? const ImageVm.none()
+              : ImageVm.network(url: previews.first);
+
+          final title = exercise.title.get(language.locale)!;
+          final instructions = exercise.instructions!.get(language.locale)!;
 
           return DatabaseExerciseCardVm(
-            preview: const ImageVm.none(),
-            title: exercise.title.get(language.locale)!,
-            instructions: exercise.instructions!.get(language.locale)!,
+            preview: preview,
+            title: title,
+            instructions: instructions,
+            onPressed: () async => navigation.pushExerciseDetails(exercise.id),
           );
         })
         .toList(growable: false);

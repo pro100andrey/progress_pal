@@ -32,6 +32,7 @@ class DatabaseExercisesPage extends StatelessWidget {
             crossAxisCount: max(columnCount, 1),
             crossAxisSpacing: 16,
             mainAxisSpacing: 16,
+            childAspectRatio: 0.65,
           ),
           itemCount: exercises.length,
           itemBuilder: (context, index) => DatabaseExerciseCard(
