@@ -40,10 +40,12 @@ class _Factory extends VmFactory<AppState, MyExercisesConnector, _Vm> {
     final exercises = view
         .map((id) {
           final exercise = selectExerciseById(state, id: id);
+          final title = exercise.title.$;
+          final instructions = exercise.instructions?.$;
 
           return MyExerciseCardVm(
-            title: exercise.title.$,
-            instructions: exercise.instructions?.$,
+            title: title,
+            instructions: instructions,
             actions: MyExerciseActionsVm(
               isDeleting: selectMyExercisesIsDeleting(
                 state,

@@ -14,6 +14,74 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart' as _svg;
 import 'package:vector_graphics/vector_graphics.dart' as _vg;
 
+class $AssetsEquipmentsGen {
+  const $AssetsEquipmentsGen();
+
+  /// File path: assets/equipments/bands_256.jpg
+  AssetGenImage get bands256 =>
+      const AssetGenImage('assets/equipments/bands_256.jpg');
+
+  /// File path: assets/equipments/barbell_256.jpg
+  AssetGenImage get barbell256 =>
+      const AssetGenImage('assets/equipments/barbell_256.jpg');
+
+  /// File path: assets/equipments/bench_256.jpg
+  AssetGenImage get bench256 =>
+      const AssetGenImage('assets/equipments/bench_256.jpg');
+
+  /// File path: assets/equipments/body_weight_256.jpg
+  AssetGenImage get bodyWeight256 =>
+      const AssetGenImage('assets/equipments/body_weight_256.jpg');
+
+  /// File path: assets/equipments/cardio_machine_256.jpg
+  AssetGenImage get cardioMachine256 =>
+      const AssetGenImage('assets/equipments/cardio_machine_256.jpg');
+
+  /// File path: assets/equipments/dumbbell_256.jpg
+  AssetGenImage get dumbbell256 =>
+      const AssetGenImage('assets/equipments/dumbbell_256.jpg');
+
+  /// File path: assets/equipments/exercise_ball_256.jpg
+  AssetGenImage get exerciseBall256 =>
+      const AssetGenImage('assets/equipments/exercise_ball_256.jpg');
+
+  /// File path: assets/equipments/ez_curl_bar_256.jpg
+  AssetGenImage get ezCurlBar256 =>
+      const AssetGenImage('assets/equipments/ez_curl_bar_256.jpg');
+
+  /// File path: assets/equipments/kettlebell_256.jpg
+  AssetGenImage get kettlebell256 =>
+      const AssetGenImage('assets/equipments/kettlebell_256.jpg');
+
+  /// File path: assets/equipments/pull_up_bar_256.jpg
+  AssetGenImage get pullUpBar256 =>
+      const AssetGenImage('assets/equipments/pull_up_bar_256.jpg');
+
+  /// File path: assets/equipments/strength_machine_256.jpg
+  AssetGenImage get strengthMachine256 =>
+      const AssetGenImage('assets/equipments/strength_machine_256.jpg');
+
+  /// File path: assets/equipments/weight_plate_256.jpg
+  AssetGenImage get weightPlate256 =>
+      const AssetGenImage('assets/equipments/weight_plate_256.jpg');
+
+  /// List of all assets
+  List<AssetGenImage> get values => [
+    bands256,
+    barbell256,
+    bench256,
+    bodyWeight256,
+    cardioMachine256,
+    dumbbell256,
+    exerciseBall256,
+    ezCurlBar256,
+    kettlebell256,
+    pullUpBar256,
+    strengthMachine256,
+    weightPlate256,
+  ];
+}
+
 class $AssetsFlagsGen {
   const $AssetsFlagsGen();
 
@@ -45,8 +113,104 @@ class Assets {
 
   static const String package = 'ui';
 
+  static const $AssetsEquipmentsGen equipments = $AssetsEquipmentsGen();
   static const $AssetsFlagsGen flags = $AssetsFlagsGen();
   static const $AssetsLogoGen logo = $AssetsLogoGen();
+}
+
+class AssetGenImage {
+  const AssetGenImage(
+    this._assetName, {
+    this.size,
+    this.flavors = const {},
+    this.animation,
+  });
+
+  final String _assetName;
+
+  static const String package = 'ui';
+
+  final Size? size;
+  final Set<String> flavors;
+  final AssetGenImageAnimation? animation;
+
+  Image image({
+    Key? key,
+    AssetBundle? bundle,
+    ImageFrameBuilder? frameBuilder,
+    ImageErrorWidgetBuilder? errorBuilder,
+    String? semanticLabel,
+    bool excludeFromSemantics = false,
+    double? scale,
+    double? width,
+    double? height,
+    Color? color,
+    Animation<double>? opacity,
+    BlendMode? colorBlendMode,
+    BoxFit? fit,
+    AlignmentGeometry alignment = Alignment.center,
+    ImageRepeat repeat = ImageRepeat.noRepeat,
+    Rect? centerSlice,
+    bool matchTextDirection = false,
+    bool gaplessPlayback = true,
+    bool isAntiAlias = false,
+    @Deprecated('Do not specify package for a generated library asset')
+    String? package = package,
+    FilterQuality filterQuality = FilterQuality.medium,
+    int? cacheWidth,
+    int? cacheHeight,
+  }) {
+    return Image.asset(
+      _assetName,
+      key: key,
+      bundle: bundle,
+      frameBuilder: frameBuilder,
+      errorBuilder: errorBuilder,
+      semanticLabel: semanticLabel,
+      excludeFromSemantics: excludeFromSemantics,
+      scale: scale,
+      width: width,
+      height: height,
+      color: color,
+      opacity: opacity,
+      colorBlendMode: colorBlendMode,
+      fit: fit,
+      alignment: alignment,
+      repeat: repeat,
+      centerSlice: centerSlice,
+      matchTextDirection: matchTextDirection,
+      gaplessPlayback: gaplessPlayback,
+      isAntiAlias: isAntiAlias,
+      package: package,
+      filterQuality: filterQuality,
+      cacheWidth: cacheWidth,
+      cacheHeight: cacheHeight,
+    );
+  }
+
+  ImageProvider provider({
+    AssetBundle? bundle,
+    @Deprecated('Do not specify package for a generated library asset')
+    String? package = package,
+  }) {
+    return AssetImage(_assetName, bundle: bundle, package: package);
+  }
+
+  String get path => _assetName;
+
+  String get keyName => 'packages/ui/$_assetName';
+}
+
+class AssetGenImageAnimation {
+  const AssetGenImageAnimation({
+    required this.isAnimation,
+    required this.duration,
+    required this.frames,
+  });
+
+  final bool isAnimation;
+  final Duration duration;
+  final int frames;
 }
 
 class SvgGenImage {
