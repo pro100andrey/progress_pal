@@ -14,7 +14,7 @@ class HomePage extends StatelessWidget {
     super.key,
   });
 
-   final DrawerItem drawerItem;
+  final DrawerItem drawerItem;
   final bool dataIsWaiting;
   final Widget child;
   final Widget drawer;

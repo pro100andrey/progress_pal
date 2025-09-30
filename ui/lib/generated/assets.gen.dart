@@ -37,6 +37,10 @@ class $AssetsEquipmentsGen {
   AssetGenImage get cardioMachine256 =>
       const AssetGenImage('assets/equipments/cardio_machine_256.jpg');
 
+  /// File path: assets/equipments/custom_256.jpg
+  AssetGenImage get custom256 =>
+      const AssetGenImage('assets/equipments/custom_256.jpg');
+
   /// File path: assets/equipments/dumbbell_256.jpg
   AssetGenImage get dumbbell256 =>
       const AssetGenImage('assets/equipments/dumbbell_256.jpg');
@@ -48,6 +52,10 @@ class $AssetsEquipmentsGen {
   /// File path: assets/equipments/ez_curl_bar_256.jpg
   AssetGenImage get ezCurlBar256 =>
       const AssetGenImage('assets/equipments/ez_curl_bar_256.jpg');
+
+  /// File path: assets/equipments/foam_roll_256.jpg
+  AssetGenImage get foamRoll256 =>
+      const AssetGenImage('assets/equipments/foam_roll_256.jpg');
 
   /// File path: assets/equipments/kettlebell_256.jpg
   AssetGenImage get kettlebell256 =>
@@ -72,9 +80,11 @@ class $AssetsEquipmentsGen {
     bench256,
     bodyWeight256,
     cardioMachine256,
+    custom256,
     dumbbell256,
     exerciseBall256,
     ezCurlBar256,
+    foamRoll256,
     kettlebell256,
     pullUpBar256,
     strengthMachine256,
@@ -108,6 +118,64 @@ class $AssetsLogoGen {
   List<SvgGenImage> get values => [noBg, withBg];
 }
 
+class $AssetsMuscleGroupsGen {
+  const $AssetsMuscleGroupsGen();
+
+  /// File path: assets/muscle_groups/back_back.svg
+  SvgGenImage get backBack =>
+      const SvgGenImage('assets/muscle_groups/back_back.svg');
+
+  /// File path: assets/muscle_groups/back_glutes.svg
+  SvgGenImage get backGlutes =>
+      const SvgGenImage('assets/muscle_groups/back_glutes.svg');
+
+  /// File path: assets/muscle_groups/back_triceps.svg
+  SvgGenImage get backTriceps =>
+      const SvgGenImage('assets/muscle_groups/back_triceps.svg');
+
+  /// File path: assets/muscle_groups/front_abs.svg
+  SvgGenImage get frontAbs =>
+      const SvgGenImage('assets/muscle_groups/front_abs.svg');
+
+  /// File path: assets/muscle_groups/front_biceps.svg
+  SvgGenImage get frontBiceps =>
+      const SvgGenImage('assets/muscle_groups/front_biceps.svg');
+
+  /// File path: assets/muscle_groups/front_chest.svg
+  SvgGenImage get frontChest =>
+      const SvgGenImage('assets/muscle_groups/front_chest.svg');
+
+  /// File path: assets/muscle_groups/front_forearms.svg
+  SvgGenImage get frontForearms =>
+      const SvgGenImage('assets/muscle_groups/front_forearms.svg');
+
+  /// File path: assets/muscle_groups/front_lower_legs.svg
+  SvgGenImage get frontLowerLegs =>
+      const SvgGenImage('assets/muscle_groups/front_lower_legs.svg');
+
+  /// File path: assets/muscle_groups/front_shoulders.svg
+  SvgGenImage get frontShoulders =>
+      const SvgGenImage('assets/muscle_groups/front_shoulders.svg');
+
+  /// File path: assets/muscle_groups/front_upper_legs.svg
+  SvgGenImage get frontUpperLegs =>
+      const SvgGenImage('assets/muscle_groups/front_upper_legs.svg');
+
+  /// List of all assets
+  List<SvgGenImage> get values => [
+    backBack,
+    backGlutes,
+    backTriceps,
+    frontAbs,
+    frontBiceps,
+    frontChest,
+    frontForearms,
+    frontLowerLegs,
+    frontShoulders,
+    frontUpperLegs,
+  ];
+}
+
 class Assets {
   const Assets._();
 
@@ -116,6 +184,7 @@ class Assets {
   static const $AssetsEquipmentsGen equipments = $AssetsEquipmentsGen();
   static const $AssetsFlagsGen flags = $AssetsFlagsGen();
   static const $AssetsLogoGen logo = $AssetsLogoGen();
+  static const $AssetsMuscleGroupsGen muscleGroups = $AssetsMuscleGroupsGen();
 }
 
 class AssetGenImage {

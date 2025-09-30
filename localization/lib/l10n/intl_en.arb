@@ -84,5 +84,6 @@
   "addBodyStat": "Add Body Stat",
   "noNotes": "No Notes",
   "youDontHaveAnyNotesForThisDay": "You don't have any notes for this day.",
-  "addNote": "Add Note"
+  "addNote": "Add Note",
+  "targetedMuscleGroups": "Targeted Muscle Groups"
 }

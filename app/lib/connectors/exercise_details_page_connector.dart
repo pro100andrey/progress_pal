@@ -1,12 +1,18 @@
 import 'package:async_redux/async_redux.dart';
 import 'package:business/redux/app_state.dart';
+import 'package:business/redux/equipment/equipments_selectors.dart';
 import 'package:business/redux/exercises/exercises_selectors.dart';
 import 'package:business/redux/language/language_selectors.dart';
 import 'package:business/redux/muscle_groups/muscle_groups_selectors.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:ui/image/model.dart';
+import 'package:ui/items/equipment_item.dart';
+import 'package:ui/items/muscle_group_item.dart';
 import 'package:ui/pages/exercise_details_page.dart';
+
+import '../map/equipment.dart';
+import '../map/muscule_groups.dart';
 
 class ExerciseDetailsPageConnector extends StatelessWidget {
   const ExerciseDetailsPageConnector({required this.exerciseId, super.key});
@@ -20,6 +26,7 @@ class ExerciseDetailsPageConnector extends StatelessWidget {
     builder: (context, vm) => ExerciseDetailsPage(
       title: vm.title,
       preview: vm.preview,
+      equipment: vm.equipment,
       instructions: vm.instructions,
       muscleGroups: vm.muscleGroups,
     ),
@@ -45,13 +52,28 @@ class _Factory extends VmFactory<AppState, ExerciseDetailsPageConnector, _Vm> {
     final muscleGroups = exercise.muscleGroupIds
         .map((id) {
           final mg = selectMuscleGroupById(state, id: id);
-          return mg.name.get(language.locale)!;
+          final name = mg.name.get(language.locale)!;
+          final slug = mg.slug;
+
+          return MuscleGroupItemVm(
+            name: name,
+            type: mapSlugToMuscleGroupType(slug),
+            onPressed: null,
+          );
         })
         .toList(growable: false);
+
+    final equipment = selectEquipmentById(state, id: exercise.equipmentId);
+    final slug = equipment.slug;
 
     return _Vm(
       title: title,
       preview: preview,
+      equipment: EquipmentItemVm(
+        name: equipment.name.get(language.locale)!,
+        type: mapSlugToEquipmentType(slug),
+        onPressed: null,
+      ),
       instructions: instructions,
       muscleGroups: muscleGroups,
     );
@@ -63,15 +85,23 @@ class _Vm extends Vm with EquatableMixin {
   _Vm({
     required this.title,
     required this.preview,
+    required this.equipment,
     required this.instructions,
     required this.muscleGroups,
   });
 
   final String title;
   final ImageVm preview;
+  final EquipmentItemVm equipment;
   final String instructions;
-  final List<String> muscleGroups;
+  final List<MuscleGroupItemVm> muscleGroups;
 
   @override
-  List<Object?> get props => [title, preview, instructions, muscleGroups];
+  List<Object?> get props => [
+    title,
+    preview,
+    equipment,
+    instructions,
+    muscleGroups,
+  ];
 }

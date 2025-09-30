@@ -93,7 +93,6 @@ class _Factory extends VmFactory<AppState, CreateExerciseDialogConnector, _Vm> {
         )
         .toList(growable: false);
 
-
     return _Vm(
       title: ValueChangedVm(
         value: title,

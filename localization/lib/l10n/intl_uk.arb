@@ -84,5 +84,6 @@
   "addBodyStat": "Додати показники тіла",
   "noNotes": "Немає нотаток",
   "youDontHaveAnyNotesForThisDay": "У вас немає жодних нотаток за цей день.",
-  "addNote": "Додати нотатку"
+  "addNote": "Додати нотатку",
+  "targetedMuscleGroups": "Цільові м’язові групи"
 }

@@ -738,6 +738,16 @@ class S {
   String get addNote {
     return Intl.message('Add Note', name: 'addNote', desc: '', args: []);
   }
+
+  /// `Targeted Muscle Groups`
+  String get targetedMuscleGroups {
+    return Intl.message(
+      'Targeted Muscle Groups',
+      name: 'targetedMuscleGroups',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

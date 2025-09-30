@@ -154,6 +154,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "supportedImageFormats": MessageLookupByLibrary.simpleMessage(
       "Підтримуються: jpg, jpeg, png",
     ),
+    "targetedMuscleGroups": MessageLookupByLibrary.simpleMessage(
+      "Цільові м’язові групи",
+    ),
     "thisFieldIsRequired": MessageLookupByLibrary.simpleMessage(
       "Це поле є обов’язковим",
     ),

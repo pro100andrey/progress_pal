@@ -16,7 +16,7 @@ extension type Exercise(RecordModel record) implements RecordModel {
       record.getListValue<String>('muscle_group');
 
   /// Returns the equipment required for the exercise.
-  Equipment get equipment => record.get<Equipment>('equipment');
+  String get equipmentId => record.getStringValue('equipment');
 
   /// Returns the recording type for the exercise.
   RecordingType get recordingType =>

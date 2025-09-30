@@ -140,6 +140,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "supportedImageFormats": MessageLookupByLibrary.simpleMessage(
       "Supported: jpg, jpeg, png",
     ),
+    "targetedMuscleGroups": MessageLookupByLibrary.simpleMessage(
+      "Targeted Muscle Groups",
+    ),
     "thisFieldIsRequired": MessageLookupByLibrary.simpleMessage(
       "This field is required",
     ),
