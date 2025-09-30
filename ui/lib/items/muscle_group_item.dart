@@ -27,8 +27,7 @@ enum MuscleGroupType {
       case MuscleGroupType.biceps:
         return Assets.muscleGroups.frontBiceps;
       case MuscleGroupType.cardio:
-        // TODO(ai): add cardio image
-        return Assets.muscleGroups.frontAbs;
+        return Assets.muscleGroups.frontCardio;
       case MuscleGroupType.chest:
         return Assets.muscleGroups.frontChest;
       case MuscleGroupType.forearms:

@@ -141,6 +141,10 @@ class $AssetsMuscleGroupsGen {
   SvgGenImage get frontBiceps =>
       const SvgGenImage('assets/muscle_groups/front_biceps.svg');
 
+  /// File path: assets/muscle_groups/front_cardio.svg
+  SvgGenImage get frontCardio =>
+      const SvgGenImage('assets/muscle_groups/front_cardio.svg');
+
   /// File path: assets/muscle_groups/front_chest.svg
   SvgGenImage get frontChest =>
       const SvgGenImage('assets/muscle_groups/front_chest.svg');
@@ -168,6 +172,7 @@ class $AssetsMuscleGroupsGen {
     backTriceps,
     frontAbs,
     frontBiceps,
+    frontCardio,
     frontChest,
     frontForearms,
     frontLowerLegs,
