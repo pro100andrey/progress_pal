@@ -28,67 +28,81 @@ class ExerciseDetailsPage extends StatelessWidget {
     appBar: AppBar(title: Text(title)),
     body: SingleChildScrollView(
       padding: const EdgeInsets.all(16),
-      child: Column(
-        spacing: 16,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Center(
-            child: SizedBox(
-              height: 400,
-              child: ImagePreview(
-                source: preview,
-                borderRadius: const BorderRadius.all(Radius.circular(8)),
-                cacheSize: const Size.square(1024),
-              ),
-            ),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      child: Center(
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 1000),
+          child: Column(
+            spacing: 16,
             crossAxisAlignment: CrossAxisAlignment.start,
-            spacing: 8,
             children: [
-              Flexible(
-                child: Column(
-                  spacing: 8,
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      S.current.targetedMuscleGroups,
-                      style: ShadTheme.of(context).textTheme.h4,
-                    ),
-                    Wrap(
-                      spacing: 8,
-                      runSpacing: 8,
-                      children: [
-                        ...muscleGroups.map(
-                          (e) => MuscleGroupItem(vm: e),
-                        ),
-                      ],
-                    ),
-                  ],
+              Center(
+                child: SizedBox(
+                  height: 400,
+                  child: ImagePreview(
+                    source: preview,
+                    borderRadius: const BorderRadius.all(Radius.circular(8)),
+                    cacheSize: const Size.square(1024),
+                  ),
                 ),
               ),
-              Column(
-                mainAxisSize: MainAxisSize.min,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 spacing: 8,
                 children: [
-                  Text(
-                    S.current.equipment,
-                    style: ShadTheme.of(context).textTheme.h4,
+                  Flexible(
+                    child: Column(
+                      spacing: 8,
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          S.current.targetedMuscleGroups,
+                          style: ShadTheme.of(context).textTheme.h4,
+                        ),
+                        Wrap(
+                          spacing: 8,
+                          runSpacing: 8,
+                          children: [
+                            ...muscleGroups.map(
+                              (e) => MuscleGroupItem(vm: e),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
-                  EquipmentItem(vm: equipment),
+                  Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    spacing: 8,
+                    children: [
+                      Text(
+                        S.current.equipment,
+                        style: ShadTheme.of(context).textTheme.h4,
+                      ),
+                      EquipmentItem(vm: equipment),
+                    ],
+                  ),
+                ],
+              ),
+              Column(
+                spacing: 16,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    S.current.instructions,
+                    style: ShadTheme.of(context).textTheme.h2,
+                  ),
+                  Text(
+                    instructions,
+                    style: ShadTheme.of(context).textTheme.p,
+                  ),
                 ],
               ),
             ],
           ),
-
-          Text(
-            instructions,
-            style: ShadTheme.of(context).textTheme.p,
-          ),
-        ],
+        ),
       ),
     ),
   );
