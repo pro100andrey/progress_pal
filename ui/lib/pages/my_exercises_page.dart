@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:localization/generated/l10n.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
@@ -38,17 +36,10 @@ class MyExercisesPage extends StatelessWidget {
           );
         }
 
-        final columnWidth = constraints.maxWidth / 300;
-        final columnCount = columnWidth > 1 ? columnWidth.floor() : 1;
-
-        return GridView.builder(
+        return ListView.builder(
           padding: const EdgeInsets.all(16),
           shrinkWrap: true,
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: max(columnCount, 1),
-            crossAxisSpacing: 16,
-            mainAxisSpacing: 16,
-          ),
+
           itemCount: exercises.length,
           itemBuilder: (context, index) => MyExerciseCard(vm: exercises[index]),
         );

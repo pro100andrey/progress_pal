@@ -1,4 +1,4 @@
-import 'package:ui/items/equipment_item.dart';
+import 'package:ui/models/equipment_type.dart';
 
 EquipmentType mapSlugToEquipmentType(String slug) {
   switch (slug) {

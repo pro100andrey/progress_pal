@@ -51,7 +51,7 @@ class _Factory extends VmFactory<AppState, ExerciseDetailsPageConnector, _Vm> {
     final instructions = exercise.instructions!.get(language.locale)!;
     final muscleGroups = exercise.muscleGroupIds
         .map((id) {
-          final mg = selectMuscleGroupById(state, id: id);
+          final mg = selectMuscleGroupById(state, id: id)!;
           final name = mg.name.get(language.locale)!;
           final slug = mg.slug;
 
@@ -64,14 +64,13 @@ class _Factory extends VmFactory<AppState, ExerciseDetailsPageConnector, _Vm> {
         .toList(growable: false);
 
     final equipment = selectEquipmentById(state, id: exercise.equipmentId);
-    final slug = equipment.slug;
 
     return _Vm(
       title: title,
       preview: preview,
       equipment: EquipmentItemVm(
         name: equipment.name.get(language.locale)!,
-        type: mapSlugToEquipmentType(slug),
+        type: mapSlugToEquipmentType(equipment.slug),
         onPressed: null,
       ),
       instructions: instructions,

@@ -1,4 +1,4 @@
-import 'package:ui/items/muscle_group_item.dart';
+import 'package:ui/models/muscle_group_type.dart';
 
 MuscleGroupType mapSlugToMuscleGroupType(String slug) {
   switch (slug) {

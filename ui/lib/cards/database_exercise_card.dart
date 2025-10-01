@@ -59,9 +59,7 @@ class DatabaseExerciseCard extends StatelessWidget {
               Row(
                 children: [
                   ...vm.muscleGroups.map(
-                    (mg) => ShadBadge.outline(
-                      child: Text(mg),
-                    ),
+                    (mg) => ShadBadge.outline(child: Text(mg)),
                   ),
                 ],
               ),

@@ -1,6 +1,9 @@
 import 'package:async_redux/async_redux.dart';
 import 'package:business/redux/app_state.dart';
+import 'package:business/redux/equipment/equipments_selectors.dart';
 import 'package:business/redux/exercises/exercises_selectors.dart';
+import 'package:business/redux/language/language_selectors.dart';
+import 'package:business/redux/muscle_groups/muscle_groups_selectors.dart';
 import 'package:business/redux/my_exercises_view/actions/delete_my_exercise_action.dart';
 import 'package:business/redux/my_exercises_view/actions/retrieve_my_exercises_action.dart';
 import 'package:business/redux/my_exercises_view/my_exercises_view_selectors.dart';
@@ -10,6 +13,7 @@ import 'package:ui/cards/my_exercise_card.dart';
 import 'package:ui/pages/my_exercises_page.dart';
 import 'package:ui/popovers/my_exercise_actions.dart';
 
+import '../map/equipment.dart';
 import 'dialogs/create_exercise_dialog_connector.dart';
 
 class MyExercisesConnector extends StatelessWidget {
@@ -36,6 +40,7 @@ class _Factory extends VmFactory<AppState, MyExercisesConnector, _Vm> {
   _Vm fromStore() {
     final view = selectMyExercisesView(state);
     final isWaiting = selectMyExercisesIsWaiting(state);
+    final language = selectLanguage(state);
 
     final exercises = view
         .map((id) {
@@ -43,9 +48,22 @@ class _Factory extends VmFactory<AppState, MyExercisesConnector, _Vm> {
           final title = exercise.title.$;
           final instructions = exercise.instructions?.$;
 
+          final muscleGroups = exercise.muscleGroupIds
+              .map((id) {
+                final mg = selectMuscleGroupById(state, id: id)!;
+                return mg.name.get(language.locale)!;
+              })
+              .toList(growable: false);
+
+          final equipment = selectEquipmentById(
+            state,
+            id: exercise.equipmentId,
+          );
+
           return MyExerciseCardVm(
             title: title,
             instructions: instructions,
+            muscleGroups: muscleGroups,
             actions: MyExerciseActionsVm(
               isDeleting: selectMyExercisesIsDeleting(
                 state,
@@ -56,6 +74,7 @@ class _Factory extends VmFactory<AppState, MyExercisesConnector, _Vm> {
                 DeleteMyExerciseAction(exerciseId: exercise.id),
               ),
             ),
+            equipmentType: mapSlugToEquipmentType(equipment.slug),
           );
         })
         .toList(growable: false);
