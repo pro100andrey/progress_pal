@@ -1,4 +1,3 @@
-import 'package:async_redux/async_redux.dart';
 import 'package:collection/collection.dart';
 import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import 'package:pb/models.dart';
@@ -38,11 +37,4 @@ Equipment? selectEquipmentBySlug(AppState state, {required String slug}) {
 
 /// Returns the index of a [Equipment] value by id
 int selectEquipmentIndexById(AppState state, {required String id}) =>
-    _selectEquipmentValuesCache(state.equipments.view)(id);
-
-/// Caches the index of a [Equipment] value by id
-final _selectEquipmentValuesCache =
-    cache1state_1param<int, IList<String>, String>(
-      (view) =>
-          (id) => view.indexOf(id),
-    );
+    selectEquipmentsView(state).indexOf(id);

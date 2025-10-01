@@ -18,7 +18,7 @@ class ExerciseBody extends PBToJson {
     this.title,
     this.instructions,
     this.createdById,
-    this.muscleGroupId,
+    this.muscleGroupIds,
     this.equipmentId,
     this.recordingTypeId,
   });
@@ -26,7 +26,7 @@ class ExerciseBody extends PBToJson {
   final LanguageString? title;
   final LanguageString? instructions;
   final String? createdById;
-  final List<String>? muscleGroupId;
+  final List<String>? muscleGroupIds;
   final String? equipmentId;
   final String? recordingTypeId;
 
@@ -35,7 +35,7 @@ class ExerciseBody extends PBToJson {
     'title': title,
     'instructions': instructions,
     'created_by': createdById,
-    'muscle_group': muscleGroupId,
+    'muscle_group': muscleGroupIds,
     'equipment': equipmentId,
     'recording_type': recordingTypeId,
   };

@@ -15,7 +15,7 @@ class CreateExerciseAction extends ReduxAction<AppState> with WaitingFor {
     final currentUser = selectSessionCurrentUser(state)!;
     final title = selectCreateExerciseTitle(state)!;
     final instructions = selectCreateExerciseInstructions(state);
-    final muscleGroupId = selectCreateExerciseMuscleGroupId(state)!;
+    final muscleGroupIds = selectCreateExerciseMuscleGroupIds(state);
     final equipmentId = selectCreateExerciseEquipmentId(state)!;
     final recordingTypeId = selectCreateExerciseRecordingTypeId(state)!;
 
@@ -31,7 +31,7 @@ class CreateExerciseAction extends ReduxAction<AppState> with WaitingFor {
         body: ExerciseBody(
           title: titleLanguageString,
           instructions: instructionsLanguageString,
-          muscleGroupId: [muscleGroupId],
+          muscleGroupIds: muscleGroupIds.toList(growable: false),
           equipmentId: equipmentId,
           recordingTypeId: recordingTypeId,
           createdById: currentUser.id,

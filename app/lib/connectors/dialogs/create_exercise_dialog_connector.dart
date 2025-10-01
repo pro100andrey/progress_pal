@@ -15,9 +15,9 @@ import 'package:business/redux/muscle_groups/muscle_groups_selectors.dart';
 import 'package:business/redux/recording_types/recording_types_selectors.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
+import 'package:pb/models.dart';
 import 'package:ui/dialogs/create_exercise_dialog.dart';
 import 'package:ui/inputs/select_input.dart';
-import 'package:ui/inputs/select_multiple_input.dart';
 import 'package:ui/models/value_changed.dart';
 
 import '../../common/validators.dart';
@@ -50,8 +50,7 @@ class _Factory extends VmFactory<AppState, CreateExerciseDialogConnector, _Vm> {
   _Vm fromStore() {
     final title = selectCreateExerciseTitle(state);
     final instructions = selectCreateExerciseInstructions(state);
-    final muscleGroupId = selectCreateExerciseMuscleGroupId(state)!;
-    final muscleGroupIdx = selectMuscleGroupIndexById(state, id: muscleGroupId);
+    final muscleGroupIds = selectCreateExerciseMuscleGroupIds(state);
     final equipmentId = selectCreateExerciseEquipmentId(state)!;
     final equipmentIdx = selectEquipmentIndexById(state, id: equipmentId);
     final recordingTypeId = selectCreateExerciseRecordingTypeId(state)!;
@@ -62,23 +61,28 @@ class _Factory extends VmFactory<AppState, CreateExerciseDialogConnector, _Vm> {
 
     final language = selectLanguage(state);
 
-    final muscleGroupItems = selectMuscleGroups(state)
+    final muscleGroupItems = selectMuscleGroupsByView(state)
         .map(
-          (item) => SelectMultipleInputItem(
+          (item) => SelectInputItem(
             label: item.name.get(language.locale)!,
-            onSelect: () => dispatchSync(
-              SetMuscleGroupAction(muscleGroupId: item.id),
-            ),
+            data: item,
           ),
         )
-        .toSet();
+        .toList(growable: false);
+
+    final initialMuscleGroups = muscleGroupIds
+        .map(
+          (id) => muscleGroupItems.firstWhere(
+            (element) => element.data.id == id,
+          ),
+        )
+        .toList(growable: false);
 
     final equipmentsItems = selectEquipments(state)
         .map(
           (item) => SelectInputItem(
             label: item.name.get(language.locale)!,
-            onSelect: () =>
-                dispatchSync(SetEquipmentAction(equipmentId: item.id)),
+            data: item,
           ),
         )
         .toList(growable: false);
@@ -87,8 +91,7 @@ class _Factory extends VmFactory<AppState, CreateExerciseDialogConnector, _Vm> {
         .map(
           (item) => SelectInputItem(
             label: item.name.get(language.locale)!,
-            onSelect: () =>
-                dispatchSync(SetRecordingTypeAction(recordingTypeId: item.id)),
+            data: item,
           ),
         )
         .toList(growable: false);
@@ -100,19 +103,35 @@ class _Factory extends VmFactory<AppState, CreateExerciseDialogConnector, _Vm> {
         validator: requiredValidator.call,
       ),
       muscleGroup: SelectMultipleInputVm(
-        initialValue: {muscleGroupItems.elementAt(muscleGroupIdx)},
+        initial: initialMuscleGroups,
         items: muscleGroupItems,
         validator: (value) => nonEmptyIterableValidator(value),
+        onChanged: (values) => dispatchSync(
+          SetMuscleGroupAction(
+            muscleGroupIds: values
+                .castItems<MuscleGroup>()
+                .map((e) => e.data.id)
+                .toList(growable: false),
+          ),
+        ),
       ),
       equipment: SelectInputVm(
         initialValue: equipmentsItems[equipmentIdx],
         items: equipmentsItems,
         validator: (value) => requiredValidator(value?.label ?? ''),
+        onSelect: (value) => dispatchSync(
+          SetEquipmentAction(equipmentId: value!.cast<Equipment>().id),
+        ),
       ),
       recordingType: SelectInputVm(
         initialValue: recordTypesItems[recordingTypeIdx],
         items: recordTypesItems,
         validator: (value) => requiredValidator(value?.label ?? ''),
+        onSelect: (value) => dispatchSync(
+          SetRecordingTypeAction(
+            recordingTypeId: value!.cast<RecordingType>().id,
+          ),
+        ),
       ),
       instructions: ValueChangedVm(
         value: instructions,

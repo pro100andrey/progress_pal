@@ -143,7 +143,7 @@ class Navigation {
       final isLoggedIn = _delegate.isLoggedIn;
       final cr = _CurrentRoute(state);
 
-      const defaultExercisesTab = '/home/exercises/database';
+      const defaultExercisesTab = '/home/exercises/my';
       const defaultLogsTab = '/home/progress/logs';
 
       switch ((isLoggedIn, cr)) {

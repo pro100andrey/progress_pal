@@ -10,7 +10,7 @@ import '../inputs/instructions_input.dart';
 import '../inputs/muscle_group_input.dart';
 import '../inputs/recording_type_input.dart';
 import '../inputs/select_input.dart';
-import '../inputs/select_multiple_input.dart';
+
 import '../models/value_changed.dart';
 
 class CreateExerciseDialogVm extends Equatable {

@@ -1,4 +1,5 @@
 import 'package:async_redux/async_redux.dart';
+import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 
 import '../../app_state.dart';
 import '../../equipment/equipments_selectors.dart';
@@ -17,7 +18,7 @@ class InitCreateExerciseAction extends ReduxAction<AppState> {
 
     return state.copyWith.createExercise(
       title: null,
-      muscleGroupId: muscleGroup.id,
+      muscleGroupIds: [muscleGroup.id].lock,
       equipmentId: equipment.id,
       recordingTypeId: recordingType.id,
       instructions: null,

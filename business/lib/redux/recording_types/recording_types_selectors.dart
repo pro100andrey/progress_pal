@@ -1,4 +1,3 @@
-import 'package:async_redux/async_redux.dart';
 import 'package:collection/collection.dart';
 import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import 'package:pb/models.dart';
@@ -42,11 +41,4 @@ RecordingType? selectRecordingTypeBySlug(
 
 /// Returns the index of a [RecordingType] value by id
 int selectRecordingTypeIndexById(AppState state, {required String id}) =>
-    _selectRecordingTypesValuesCache(state.recordingTypes.view)(id);
-
-/// Caches the index of a [RecordingType] value by id
-final _selectRecordingTypesValuesCache =
-    cache1state_1param<int, IList<String>, String>(
-      (view) =>
-          (id) => view.indexOf(id),
-    );
+    selectRecordingTypesView(state).indexOf(id);
