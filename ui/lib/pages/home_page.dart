@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:shadcn_ui/shadcn_ui.dart';
 
 import '../drawers/app_drawer.dart';
 import '../indicators/base_circle_indicator.dart';
-import '../sizer/sizer.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({
@@ -21,13 +21,15 @@ class HomePage extends StatelessWidget {
   final Widget languageSelector;
 
   @override
-  Widget build(BuildContext context) => LayoutBuilder(
-    builder: (context, constraints) => Row(
+  Widget build(BuildContext context) {
+    final sm = context.breakpoint <= ShadTheme.of(context).breakpoints.sm;
+
+    return Row(
       children: [
-        if (Device.screenType != ScreenType.mobile) drawer,
+        if (!sm) drawer,
         Expanded(
           child: Scaffold(
-            drawer: Device.screenType == ScreenType.mobile ? drawer : null,
+            drawer: sm ? drawer : null,
             appBar: AppBar(
               title: Text(drawerItem.title),
               centerTitle: false,
@@ -47,6 +49,6 @@ class HomePage extends StatelessWidget {
           ),
         ),
       ],
-    ),
-  );
+    );
+  }
 }
