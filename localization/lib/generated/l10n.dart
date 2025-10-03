@@ -748,6 +748,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Start Typing...`
+  String get startTyping {
+    return Intl.message(
+      'Start Typing...',
+      name: 'startTyping',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

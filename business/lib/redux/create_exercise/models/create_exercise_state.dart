@@ -1,3 +1,4 @@
+import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'create_exercise_state.freezed.dart';
@@ -6,7 +7,7 @@ part 'create_exercise_state.freezed.dart';
 abstract class CreateExerciseState with _$CreateExerciseState {
   const factory CreateExerciseState({
     String? title,
-    String? muscleGroupId,
+    @Default(IListConst<String>([])) IList<String> muscleGroupIds,
     String? equipmentId,
     String? recordingTypeId,
     String? instructions,

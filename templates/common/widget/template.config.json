@@ -1,5 +1,5 @@
 {
-    "name": "StatelessWidget with Vm",
+    "name": "Widget",
     "variables": [
         {
             "name": "widgetName",

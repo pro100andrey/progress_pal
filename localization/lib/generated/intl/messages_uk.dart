@@ -150,6 +150,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "signIn": MessageLookupByLibrary.simpleMessage("Увійти"),
     "signUp": MessageLookupByLibrary.simpleMessage("Зареєструватися"),
+    "startTyping": MessageLookupByLibrary.simpleMessage("Почніть вводити..."),
     "successful": MessageLookupByLibrary.simpleMessage("Успішно!"),
     "supportedImageFormats": MessageLookupByLibrary.simpleMessage(
       "Підтримуються: jpg, jpeg, png",

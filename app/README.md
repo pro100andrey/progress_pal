@@ -7,9 +7,8 @@ A new Flutter project.
 Create a `.env` file in the root of the project (`app/.env`) with the following content:
 
 ```bash
-BASE_URL=https://api.example.com
+PB_URL=https://api.example.com
 ```
-
 
 ## Cleanup
 

@@ -53,7 +53,7 @@ class _Factory
           final instructions = exercise.instructions!.get(language.locale)!;
           final muscleGroups = exercise.muscleGroupIds
               .map((id) {
-                final mg = selectMuscleGroupById(state, id: id);
+                final mg = selectMuscleGroupById(state, id: id)!;
                 return mg.name.get(language.locale)!;
               })
               .toList(growable: false);

@@ -56,12 +56,12 @@ class DatabaseExerciseCard extends StatelessWidget {
                 ),
               ),
               Text(vm.title, style: ShadTheme.of(context).textTheme.h4),
-              Row(
+              Wrap(
+                spacing: 4,
+                runSpacing: 4,
                 children: [
                   ...vm.muscleGroups.map(
-                    (mg) => ShadBadge.outline(
-                      child: Text(mg),
-                    ),
+                    (mg) => ShadBadge.outline(child: Text(mg)),
                   ),
                 ],
               ),

@@ -1,4 +1,3 @@
-import 'package:async_redux/async_redux.dart';
 import 'package:collection/collection.dart';
 import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import 'package:pb/models.dart';
@@ -18,11 +17,11 @@ IMap<String, MuscleGroup> selectMuscleGroupsTable(AppState state) =>
 IList<String> selectMuscleGroupsView(AppState state) => state.muscleGroups.view;
 
 /// Returns [MuscleGroup] value by id
-MuscleGroup selectMuscleGroupById(AppState state, {required String id}) =>
-    selectMuscleGroupsTable(state)[id]!;
+MuscleGroup? selectMuscleGroupById(AppState state, {required String id}) =>
+    selectMuscleGroupsTable(state)[id];
 
 /// Returns all [MuscleGroup] values in view order
-IList<MuscleGroup> selectMuscleGroups(AppState state) {
+IList<MuscleGroup> selectMuscleGroupsByView(AppState state) {
   final table = selectMuscleGroupsTable(state);
   final view = selectMuscleGroupsView(state);
 
@@ -35,14 +34,3 @@ MuscleGroup? selectMuscleGroupBySlug(AppState state, {required String slug}) {
 
   return table.values.firstWhereOrNull((mg) => mg.slug == slug);
 }
-
-/// Returns the index of a [MuscleGroup] value by id
-int selectMuscleGroupIndexById(AppState state, {required String id}) =>
-    _selectMuscleGroupValuesCache(state.muscleGroups.view)(id);
-
-/// Caches the index of a [MuscleGroup] value by id
-final _selectMuscleGroupValuesCache =
-    cache1state_1param<int, IList<String>, String>(
-      (view) =>
-          (id) => view.indexOf(id),
-    );
