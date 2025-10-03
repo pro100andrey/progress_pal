@@ -8,6 +8,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_quill/flutter_quill.dart';
 import 'package:localization/generated/l10n.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
 
@@ -48,24 +49,13 @@ class _AppConnectorState extends State<AppConnector> with NavigationDelegate {
       ),
       routerConfig: navigation.router,
       themeMode: ThemeMode.dark,
-      darkTheme: ShadThemeData(
-        brightness: Brightness.dark,
-        colorScheme:
-            ShadColorScheme.fromName(
-              'zinc',
-              brightness: Brightness.dark,
-            ).copyWith(
-              background: const Color(0xFF131316),
-              card: const Color(0xFF161618),
-              selection: const Color(0xFFE25D5D),
-              popover: const Color(0xff161618),
-            ),
-      ),
+      darkTheme: _theme,
       localizationsDelegates: const [
         S.delegate,
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
+        FlutterQuillLocalizations.delegate,
       ],
       supportedLocales: S.delegate.supportedLocales,
       locale: Locale(vm.language.locale),
@@ -78,6 +68,20 @@ class _AppConnectorState extends State<AppConnector> with NavigationDelegate {
         ),
       ),
     ),
+  );
+
+  ShadThemeData get _theme => ShadThemeData(
+    brightness: Brightness.dark,
+    colorScheme:
+        ShadColorScheme.fromName(
+          'zinc',
+          brightness: Brightness.dark,
+        ).copyWith(
+          background: const Color(0xFF131316),
+          card: const Color(0xFF161618),
+          selection: const Color(0xFFE25D5D),
+          popover: const Color(0xff161618),
+        ),
   );
 
   @override

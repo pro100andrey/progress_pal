@@ -1,7 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 
-@immutable
 class ___WidgetName___Vm extends Equatable {
   const ___WidgetName___Vm({this.onPressed});
 
@@ -17,6 +16,9 @@ class ___WidgetName___ extends StatelessWidget {
   final ___WidgetName___Vm vm;
 
   @override
-  Widget build(BuildContext context) =>
-      Row(children: const [Text('___WidgetName___')]);
+  Widget build(BuildContext context) => Row(
+    children: const [
+      Text('___WidgetName___'),
+    ],
+  );
 }

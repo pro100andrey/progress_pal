@@ -144,7 +144,7 @@ class Navigation {
       final cr = _CurrentRoute(state);
 
       const defaultExercisesTab = '/home/exercises/my';
-      const defaultLogsTab = '/home/progress/logs';
+      const defaultLogsTab = '/home/progress/notes';
 
       switch ((isLoggedIn, cr)) {
         case (true, _CurrentRoute(isNeedLogOut: true)):
@@ -154,7 +154,7 @@ class Navigation {
           return '/auth/login';
         case (true, _CurrentRoute(isAuth: true)):
         case (true, _CurrentRoute(isIndex: true)):
-          return defaultExercisesTab;
+          return defaultLogsTab;
         case (true, _CurrentRoute(isExercises: true)):
           return defaultExercisesTab;
         case (true, _CurrentRoute(isProgress: true)):

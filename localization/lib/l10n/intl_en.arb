@@ -85,5 +85,6 @@
   "noNotes": "No Notes",
   "youDontHaveAnyNotesForThisDay": "You don't have any notes for this day.",
   "addNote": "Add Note",
-  "targetedMuscleGroups": "Targeted Muscle Groups"
+  "targetedMuscleGroups": "Targeted Muscle Groups",
+  "startTyping": "Start Typing..."
 }

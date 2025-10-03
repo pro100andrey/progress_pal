@@ -136,6 +136,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "sendResetLink": MessageLookupByLibrary.simpleMessage("Send Reset Link"),
     "signIn": MessageLookupByLibrary.simpleMessage("Sign in"),
     "signUp": MessageLookupByLibrary.simpleMessage("Sign up"),
+    "startTyping": MessageLookupByLibrary.simpleMessage("Start Typing..."),
     "successful": MessageLookupByLibrary.simpleMessage("Successful!"),
     "supportedImageFormats": MessageLookupByLibrary.simpleMessage(
       "Supported: jpg, jpeg, png",
