@@ -59,15 +59,19 @@ mixin _$ColorsThemeExtensionMixin on ThemeExtension<ColorsThemeExtension> {
       return true;
     }
 
+    if (other.runtimeType != runtimeType) {
+      return false;
+    }
+
     final value = (this as ColorsThemeExtension);
-    return other.runtimeType == runtimeType &&
-        other is ColorsThemeExtension &&
-        identical(value.primary, other.primary) &&
-        identical(value.secondary, other.secondary) &&
-        identical(value.background, other.background) &&
-        identical(value.error, other.error) &&
-        identical(value.shade, other.shade) &&
-        identical(value.border, other.border);
+
+    return other is ColorsThemeExtension &&
+        other.primary == value.primary &&
+        other.secondary == value.secondary &&
+        other.background == value.background &&
+        other.error == value.error &&
+        other.shade == value.shade &&
+        other.border == value.border;
   }
 
   @override

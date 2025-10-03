@@ -36,12 +36,28 @@ class MyExercisesPage extends StatelessWidget {
           );
         }
 
-        return ListView.builder(
-          padding: const EdgeInsets.all(16),
-          shrinkWrap: true,
-
-          itemCount: exercises.length,
-          itemBuilder: (context, index) => MyExerciseCard(vm: exercises[index]),
+        return CustomScrollView(
+          slivers: [
+            SliverToBoxAdapter(
+              child: Center(
+                // Center the content horizontally
+                child: ConstrainedBox(
+                  constraints: const BoxConstraints(
+                    maxWidth: 1000,
+                  ), // Set your desired max width
+                  child: ListView.separated(
+                    padding: const EdgeInsets.all(16),
+                    shrinkWrap: true,
+                    itemCount: exercises.length,
+                    itemBuilder: (context, index) =>
+                        MyExerciseCard(vm: exercises[index]),
+                    separatorBuilder: (context, index) =>
+                        const SizedBox(height: 16),
+                  ),
+                ),
+              ),
+            ),
+          ],
         );
       },
     ),

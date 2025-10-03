@@ -2,6 +2,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
 
+import '../items/muscle_group_item.dart';
 import '../models/equipment_type.dart';
 import '../popovers/my_exercise_actions.dart';
 
@@ -17,7 +18,7 @@ class MyExerciseCardVm extends Equatable {
   final String title;
   final String? instructions;
   final EquipmentType equipmentType;
-  final List<String> muscleGroups;
+  final List<MuscleGroupItemVm> muscleGroups;
   final MyExerciseActionsVm actions;
 
   @override
@@ -36,30 +37,34 @@ class MyExerciseCard extends StatelessWidget {
   Widget build(BuildContext context) => ShadCard(
     trailing: MyExerciseActions(vm: vm.actions),
     padding: const EdgeInsets.all(16),
-
     child: Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       spacing: 16,
       children: [
-        vm.equipmentType.image.image(width: 50, height: 50),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          spacing: 8,
-          children: [
-            Text(vm.title, style: ShadTheme.of(context).textTheme.h3),
-            Row(
-              children: [
-                ...vm.muscleGroups.map(
-                  (mg) => ShadBadge.outline(child: Text(mg)),
-                ),
-              ],
-            ),
-            if (vm.instructions != null && vm.instructions!.isNotEmpty)
-              Text(
-                vm.instructions!.trim().replaceAll('\n', ' '),
-                maxLines: 4,
+        // vm.equipmentType.image.image(width: 50, height: 50),
+        Flexible(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            spacing: 8,
+            children: [
+              Text(vm.title, style: ShadTheme.of(context).textTheme.h3),
+              Wrap(
+                spacing: 8,
+                runSpacing: 8,
+                children: [
+                  ...vm.muscleGroups.map(
+                    (e) => MuscleGroupItem(vm: e),
+                  ),
+                ],
               ),
-          ],
+              if (vm.instructions != null && vm.instructions!.isNotEmpty)
+                Text(
+                  vm.instructions!.trim().replaceAll('\n', ' '),
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                ),
+            ],
+          ),
         ),
       ],
     ),

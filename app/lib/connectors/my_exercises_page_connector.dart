@@ -10,10 +10,12 @@ import 'package:business/redux/my_exercises_view/my_exercises_view_selectors.dar
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:ui/cards/my_exercise_card.dart';
+import 'package:ui/items/muscle_group_item.dart';
 import 'package:ui/pages/my_exercises_page.dart';
 import 'package:ui/popovers/my_exercise_actions.dart';
 
 import '../map/equipment.dart';
+import '../map/muscule_groups.dart';
 import 'dialogs/create_exercise_dialog_connector.dart';
 
 class MyExercisesConnector extends StatelessWidget {
@@ -51,7 +53,14 @@ class _Factory extends VmFactory<AppState, MyExercisesConnector, _Vm> {
           final muscleGroups = exercise.muscleGroupIds
               .map((id) {
                 final mg = selectMuscleGroupById(state, id: id)!;
-                return mg.name.get(language.locale)!;
+                final name = mg.name.get(language.locale)!;
+                final slug = mg.slug;
+
+                return MuscleGroupItemVm(
+                  name: name,
+                  type: mapSlugToMuscleGroupType(slug),
+                  onPressed: null,
+                );
               })
               .toList(growable: false);
 

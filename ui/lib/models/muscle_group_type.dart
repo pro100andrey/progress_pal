@@ -39,7 +39,7 @@ enum MuscleGroupType {
       case MuscleGroupType.lowerLegs:
         return Assets.muscleGroups.frontLowerLegs;
       case MuscleGroupType.other:
-        throw UnimplementedError();
+        return Assets.muscleGroups.frontOther;
     }
   }
 }
