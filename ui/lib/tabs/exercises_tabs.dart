@@ -28,8 +28,10 @@ class ExercisesTabs extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => ShadTabs<ExerciseTab>(
+    gap: 0,
     value: vm.value,
     scrollable: true,
+    padding: EdgeInsets.zero,
     onChanged: vm.onChangedSync,
     tabs: [
       ShadTab(

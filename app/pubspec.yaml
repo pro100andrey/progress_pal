@@ -25,7 +25,7 @@ dependencies:
     path: ../pb
   pro_pretty_logging: ^2.0.0
   pro_validator: ^2.0.1
-  shadcn_ui: ^0.35.1
+  shadcn_ui: ^0.36.1
   ui:
     path: ../ui
   window_manager: ^0.5.1

@@ -26,7 +26,11 @@ class DatabaseExercisesPage extends StatelessWidget {
         final columnCount = columnWidth > 1 ? columnWidth.floor() : 1;
 
         return GridView.builder(
-          padding: const EdgeInsets.all(16),
+          padding: const EdgeInsets.only(
+            left: 16,
+            right: 16,
+            bottom: 64, // FAB
+          ),
           shrinkWrap: true,
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: max(columnCount, 1),

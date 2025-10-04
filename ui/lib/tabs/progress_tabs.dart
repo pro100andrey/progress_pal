@@ -35,6 +35,7 @@ class ProgressTabs extends StatelessWidget {
   Widget build(BuildContext context) => Padding(
     padding: const EdgeInsets.symmetric(horizontal: 16),
     child: ShadTabs<ProgressTab>(
+      gap: 0,
       value: vm.value,
       scrollable: true,
       onChanged: vm.onChangedSync,

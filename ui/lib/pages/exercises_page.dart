@@ -20,7 +20,9 @@ class ExercisesPage extends StatelessWidget {
       children: [
         Padding(
           padding: const EdgeInsets.all(16),
-          child: ExercisesTabs(vm: tabs),
+          child: ExercisesTabs(
+            vm: tabs,
+          ),
         ),
         Expanded(child: child),
       ],
