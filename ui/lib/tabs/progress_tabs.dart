@@ -46,7 +46,7 @@ class ProgressTabs extends StatelessWidget {
             spacing: 8,
             children: [
               const Icon(LucideIcons.logs200),
-              if (!iconsMode) Text(S.current.logs),
+              if (!iconsMode) Text(ProgressTab.logs.title),
             ],
           ),
         ),
@@ -56,7 +56,7 @@ class ProgressTabs extends StatelessWidget {
             spacing: 8,
             children: [
               const Icon(LucideIcons.scale200),
-              if (!iconsMode) Text(S.current.bodyStats),
+              if (!iconsMode) Text(ProgressTab.bodyStats.title),
             ],
           ),
         ),
@@ -66,7 +66,7 @@ class ProgressTabs extends StatelessWidget {
             spacing: 8,
             children: [
               const Icon(LucideIcons.notebookPen200),
-              if (!iconsMode) Text(S.current.notes),
+              if (!iconsMode) Text(ProgressTab.notes.title),
             ],
           ),
         ),

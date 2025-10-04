@@ -36,11 +36,11 @@ class ExercisesTabs extends StatelessWidget {
     tabs: [
       ShadTab(
         value: ExerciseTab.my,
-        child: Text(S.current.my),
+        child: Text(ExerciseTab.my.title),
       ),
       ShadTab(
         value: ExerciseTab.database,
-        child: Text(S.current.database),
+        child: Text(ExerciseTab.database.title),
       ),
     ],
   );

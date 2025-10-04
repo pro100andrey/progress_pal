@@ -1,7 +1,7 @@
+import 'dart:convert';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_quill/flutter_quill.dart';
 import 'package:localization/generated/l10n.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
 
@@ -16,11 +16,9 @@ class CreateSessionNoteDialog extends StatefulWidget {
 }
 
 class _CreateSessionNoteDialogState extends State<CreateSessionNoteDialog> {
-  final _controller = QuillController.basic();
-  final _scrollController = ScrollController();
-  final _focusNode = FocusNode();
-
   bool _minimized = true;
+
+  final _editorKey = GlobalKey<TextEditorState>();
 
   @override
   Widget build(BuildContext context) {
@@ -36,13 +34,14 @@ class _CreateSessionNoteDialogState extends State<CreateSessionNoteDialog> {
           final effectiveConstraints = BoxConstraints(
             maxWidth: sm || !_minimized
                 ? constraints.maxWidth
-                : min(constraints.maxWidth, 960),
+                : min(constraints.maxWidth, 1024),
             maxHeight: sm || !_minimized
                 ? constraints.maxHeight
-                : min(constraints.maxHeight, 960),
+                : min(constraints.maxHeight, 600),
           );
 
           return ShadDialog(
+  
             closeIcon: Row(
               spacing: 8,
               children: [
@@ -73,9 +72,10 @@ class _CreateSessionNoteDialogState extends State<CreateSessionNoteDialog> {
             scrollable: false,
             constraints: effectiveConstraints,
             child: TextEditor(
-              controller: _controller,
-              scrollController: _scrollController,
-              focusNode: _focusNode,
+              key: _editorKey,
+              onDeltaChanged: (delta) {
+                debugPrint(jsonEncode(delta));
+              },
             ),
           );
         },
