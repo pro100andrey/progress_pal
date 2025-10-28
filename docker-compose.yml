@@ -1,0 +1,10 @@
+services:
+  progress-pal:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        PB_URL: ${PB_URL}
+    ports:
+      - "8080:80"
+    restart: unless-stopped

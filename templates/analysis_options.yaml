@@ -1,0 +1,6 @@
+analyzer:
+  exclude: 
+   - "common/**"
+
+formatter:
+  trailing_commas: preserve

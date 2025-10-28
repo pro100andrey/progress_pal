@@ -1,0 +1,62 @@
+[
+  {
+    "collectionId": "pbc_2576934281",
+    "collectionName": "recording_types",
+    "created": "2025-08-30 20:19:26.951Z",
+    "id": "66oiljicli0i96j",
+    "name": {
+      "en": "Reps and Duration",
+      "uk": "Повторення і тривалість"
+    },
+    "slug": "reps_and_duration",
+    "updated": "2025-09-07 14:48:53.025Z"
+  },
+  {
+    "collectionId": "pbc_2576934281",
+    "collectionName": "recording_types",
+    "created": "2025-08-30 20:19:05.583Z",
+    "id": "m0fqdheup4drnoj",
+    "name": {
+      "en": "Duration",
+      "uk": "Тривалість"
+    },
+    "slug": "duration",
+    "updated": "2025-09-07 14:48:59.787Z"
+  },
+  {
+    "collectionId": "pbc_2576934281",
+    "collectionName": "recording_types",
+    "created": "2025-08-30 20:18:38.777Z",
+    "id": "d6lpjwbxds8o189",
+    "name": {
+      "en": "Cardio",
+      "uk": "Кардіо"
+    },
+    "slug": "cardio",
+    "updated": "2025-09-07 14:49:05.385Z"
+  },
+  {
+    "collectionId": "pbc_2576934281",
+    "collectionName": "recording_types",
+    "created": "2025-08-30 20:18:24.127Z",
+    "id": "ipo6m6bdl4vz8mb",
+    "name": {
+      "en": "Reps",
+      "uk": "Повторення"
+    },
+    "slug": "reps",
+    "updated": "2025-09-07 14:49:10.180Z"
+  },
+  {
+    "collectionId": "pbc_2576934281",
+    "collectionName": "recording_types",
+    "created": "2025-08-30 20:18:03.354Z",
+    "id": "46b2vadr8xplm9y",
+    "name": {
+      "en": "Weight and Reps",
+      "uk": "Вага і повторення"
+    },
+    "slug": "weight_and_reps",
+    "updated": "2025-09-07 14:49:14.924Z"
+  }
+]

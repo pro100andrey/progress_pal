@@ -1,0 +1,11 @@
+{
+    "name": "Widget",
+    "variables": [
+        {
+            "name": "widgetName",
+            "style": {
+                "case": "auto"
+            }
+        }
+    ]
+}

@@ -1,0 +1,18 @@
+name: seeder
+description: The pocketbase seeder package.
+publish_to: "none"
+version: 1.0.0
+
+environment:
+  sdk: ^3.9.0
+
+dependencies:
+  args: ^2.7.0
+  dotenv: ^4.2.0
+  http: ^1.5.0
+  mason_logger: ^0.3.3
+  path: ^1.9.1
+  pocketbase: ^0.23.0
+
+dev_dependencies:
+  pro_lints: ^5.0.0

@@ -1,0 +1,146 @@
+[
+  {
+    "collectionId": "pbc_1705332104",
+    "collectionName": "muscle_groups",
+    "created": "2025-08-30 11:56:21.022Z",
+    "id": "ymu6kkxpiitkrk3",
+    "name": {
+      "en": "Other",
+      "uk": "Інше"
+    },
+    "slug": "other",
+    "updated": "2025-09-07 14:47:04.939Z"
+  },
+  {
+    "collectionId": "pbc_1705332104",
+    "collectionName": "muscle_groups",
+    "created": "2025-08-30 11:56:08.023Z",
+    "id": "b18closbedzr030",
+    "name": {
+      "en": "Lower Legs",
+      "uk": "Нижня частина ніг"
+    },
+    "slug": "lower_legs",
+    "updated": "2025-09-07 14:47:17.186Z"
+  },
+  {
+    "collectionId": "pbc_1705332104",
+    "collectionName": "muscle_groups",
+    "created": "2025-08-30 11:55:38.127Z",
+    "id": "fxren16uvva9cxx",
+    "name": {
+      "en": "Upper Legs",
+      "uk": "Верхня частина ніг"
+    },
+    "slug": "upper_legs",
+    "updated": "2025-09-07 14:47:22.655Z"
+  },
+  {
+    "collectionId": "pbc_1705332104",
+    "collectionName": "muscle_groups",
+    "created": "2025-08-30 11:55:26.066Z",
+    "id": "yrik5vcw3z0nfxt",
+    "name": {
+      "en": "Triceps",
+      "uk": "Трицепс"
+    },
+    "slug": "triceps",
+    "updated": "2025-09-07 14:47:27.812Z"
+  },
+  {
+    "collectionId": "pbc_1705332104",
+    "collectionName": "muscle_groups",
+    "created": "2025-08-30 11:54:21.325Z",
+    "id": "z93hhgx70szki8y",
+    "name": {
+      "en": "Shoulders",
+      "uk": "Плечі"
+    },
+    "slug": "shoulders",
+    "updated": "2025-09-07 14:47:34.281Z"
+  },
+  {
+    "collectionId": "pbc_1705332104",
+    "collectionName": "muscle_groups",
+    "created": "2025-08-30 11:54:00.277Z",
+    "id": "4chkqvl2rpxggkk",
+    "name": {
+      "en": "Glutes",
+      "uk": "Сідниці"
+    },
+    "slug": "glutes",
+    "updated": "2025-09-07 14:47:39.793Z"
+  },
+  {
+    "collectionId": "pbc_1705332104",
+    "collectionName": "muscle_groups",
+    "created": "2025-08-30 11:52:32.029Z",
+    "id": "1bwgax0mkmsad5u",
+    "name": {
+      "en": "Forearms",
+      "uk": "Передпліччя"
+    },
+    "slug": "forearms",
+    "updated": "2025-09-07 14:47:54.250Z"
+  },
+  {
+    "collectionId": "pbc_1705332104",
+    "collectionName": "muscle_groups",
+    "created": "2025-08-30 11:52:08.488Z",
+    "id": "srvsqub7qpwqp2c",
+    "name": {
+      "en": "Chest",
+      "uk": "Груди"
+    },
+    "slug": "chest",
+    "updated": "2025-09-07 14:48:00.472Z"
+  },
+  {
+    "collectionId": "pbc_1705332104",
+    "collectionName": "muscle_groups",
+    "created": "2025-08-30 11:51:05.584Z",
+    "id": "saapcyfu4kagf8d",
+    "name": {
+      "en": "Cardio",
+      "uk": "Кардіо"
+    },
+    "slug": "cardio",
+    "updated": "2025-09-07 14:48:06.725Z"
+  },
+  {
+    "collectionId": "pbc_1705332104",
+    "collectionName": "muscle_groups",
+    "created": "2025-08-30 11:50:38.774Z",
+    "id": "kpfire0faqq4g3d",
+    "name": {
+      "en": "Biceps",
+      "uk": "Біцепс"
+    },
+    "slug": "biceps",
+    "updated": "2025-09-07 14:48:14.632Z"
+  },
+  {
+    "collectionId": "pbc_1705332104",
+    "collectionName": "muscle_groups",
+    "created": "2025-08-30 11:50:16.585Z",
+    "id": "atvijtrqlo75gzp",
+    "name": {
+      "en": "Back",
+      "uk": "Спина"
+    },
+    "slug": "back",
+    "updated": "2025-09-07 14:48:23.629Z"
+  },
+  {
+    "collectionId": "pbc_1705332104",
+    "collectionName": "muscle_groups",
+    "created": "2025-08-30 11:49:54.217Z",
+    "id": "fmzxb9tdhqvqvcp",
+    "name": {
+      "en": "Abs",
+      "uk": "Прес"
+    },
+    "slug": "abs",
+    "updated": "2025-09-07 14:48:29.749Z"
+  }
+]

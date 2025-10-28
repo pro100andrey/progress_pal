@@ -1,0 +1,170 @@
+[
+  {
+    "collectionId": "pbc_3071488795",
+    "collectionName": "equipments",
+    "created": "2025-08-30 13:38:21.634Z",
+    "id": "lyuykw2dtcajrp1",
+    "name": {
+      "en": "Other",
+      "uk": "Інше"
+    },
+    "slug": "other",
+    "updated": "2025-09-07 14:49:33.900Z"
+  },
+  {
+    "collectionId": "pbc_3071488795",
+    "collectionName": "equipments",
+    "created": "2025-08-30 13:38:02.034Z",
+    "id": "4kgtvhksswaodt0",
+    "name": {
+      "en": "Weight plate",
+      "uk": "Диск від штанги"
+    },
+    "slug": "weight_plate",
+    "updated": "2025-09-07 14:49:38.955Z"
+  },
+  {
+    "collectionId": "pbc_3071488795",
+    "collectionName": "equipments",
+    "created": "2025-08-30 13:37:49.133Z",
+    "id": "dvx7odkbout2cju",
+    "name": {
+      "en": "Pullup Bar",
+      "uk": "Турнік"
+    },
+    "slug": "pullup_bar",
+    "updated": "2025-09-07 14:49:44.310Z"
+  },
+  {
+    "collectionId": "pbc_3071488795",
+    "collectionName": "equipments",
+    "created": "2025-08-30 13:37:29.460Z",
+    "id": "mn5k5slqwn1vyvg",
+    "name": {
+      "en": "Machine Strength",
+      "uk": "Силовий тренажер"
+    },
+    "slug": "machine_strength",
+    "updated": "2025-09-07 14:49:48.983Z"
+  },
+  {
+    "collectionId": "pbc_3071488795",
+    "collectionName": "equipments",
+    "created": "2025-08-30 13:36:55.115Z",
+    "id": "kqlkh3anl1c3oj1",
+    "name": {
+      "en": "Machine Cardio",
+      "uk": "Кардіотренажер"
+    },
+    "slug": "machine_cardio",
+    "updated": "2025-09-07 14:49:54.455Z"
+  },
+  {
+    "collectionId": "pbc_3071488795",
+    "collectionName": "equipments",
+    "created": "2025-08-30 13:36:17.468Z",
+    "id": "v2fi3sxwc4suogj",
+    "name": {
+      "en": "Kettlebell",
+      "uk": "Гиря"
+    },
+    "slug": "kettlebell",
+    "updated": "2025-09-07 14:50:00.173Z"
+  },
+  {
+    "collectionId": "pbc_3071488795",
+    "collectionName": "equipments",
+    "created": "2025-08-30 13:35:56.290Z",
+    "id": "9y3jkktiuvsk7s9",
+    "name": {
+      "en": "Foam roll",
+      "uk": "Масажний ролик"
+    },
+    "slug": "foam_roll",
+    "updated": "2025-09-07 14:50:07.977Z"
+  },
+  {
+    "collectionId": "pbc_3071488795",
+    "collectionName": "equipments",
+    "created": "2025-08-30 13:35:36.360Z",
+    "id": "o8utwxs6j39et92",
+    "name": {
+      "en": "Ez curl bar",
+      "uk": "EZ-гриф"
+    },
+    "slug": "ez_curl_bar",
+    "updated": "2025-09-07 14:50:15.019Z"
+  },
+  {
+    "collectionId": "pbc_3071488795",
+    "collectionName": "equipments",
+    "created": "2025-08-30 13:35:10.522Z",
+    "id": "4o4kvyn8837klhx",
+    "name": {
+      "en": "Exercise ball",
+      "uk": "Фітбол"
+    },
+    "slug": "exercise_ball",
+    "updated": "2025-09-07 14:50:20.456Z"
+  },
+  {
+    "collectionId": "pbc_3071488795",
+    "collectionName": "equipments",
+    "created": "2025-08-30 13:32:49.160Z",
+    "id": "d6nxh6697m6ma4g",
+    "name": {
+      "en": "Dumbbell",
+      "uk": "Гантеля"
+    },
+    "slug": "dumbbell",
+    "updated": "2025-09-07 14:50:27.003Z"
+  },
+  {
+    "collectionId": "pbc_3071488795",
+    "collectionName": "equipments",
+    "created": "2025-08-30 13:32:34.399Z",
+    "id": "ncqwe2y7i1d8k0d",
+    "name": {
+      "en": "Bench",
+      "uk": "Лава"
+    },
+    "slug": "bench",
+    "updated": "2025-09-07 14:50:33.674Z"
+  },
+  {
+    "collectionId": "pbc_3071488795",
+    "collectionName": "equipments",
+    "created": "2025-08-30 13:32:10.468Z",
+    "id": "0qp6kn6n4iqgwer",
+    "name": {
+      "en": "Barbell",
+      "uk": "Штанга"
+    },
+    "slug": "barbell",
+    "updated": "2025-09-07 14:50:38.537Z"
+  },
+  {
+    "collectionId": "pbc_3071488795",
+    "collectionName": "equipments",
+    "created": "2025-08-30 13:31:38.207Z",
+    "id": "v51abo4qs9txhle",
+    "name": {
+      "en": "Bands",
+      "uk": "Еспандери"
+    },
+    "slug": "bands",
+    "updated": "2025-09-07 14:50:43.552Z"
+  },
+  {
+    "collectionId": "pbc_3071488795",
+    "collectionName": "equipments",
+    "created": "2025-08-30 13:31:10.507Z",
+    "id": "nrfrqfyzyocw5np",
+    "name": {
+      "en": "Body weight",
+      "uk": "Власна вага"
+    },
+    "slug": "body_weight",
+    "updated": "2025-09-07 14:50:48.555Z"
+  }
+]

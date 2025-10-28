@@ -1,0 +1,15 @@
+name: _
+publish_to: none
+environment: 
+  sdk: ^3.9.2
+
+workspace:
+  - app
+  - business
+  - pb
+  - localization
+  - storage
+  - ui
+
+dependency_overrides:
+  connectivity_plus: ^7.0.0 
