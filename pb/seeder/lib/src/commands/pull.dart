@@ -2,11 +2,18 @@ import 'package:args/command_runner.dart';
 import 'package:mason_logger/mason_logger.dart';
 
 import '../config/config.dart';
-import '../models/result.dart';
+import '../models/credentials.dart';
 import '../pb_client.dart';
 
 class PullCommand extends Command {
-  PullCommand({required Logger logger}) : _logger = logger;
+  PullCommand({required Logger logger}) : _logger = logger {
+    argParser.addOption(
+      'batch-size',
+      abbr: 'b',
+      help: 'Number of records to create per batch. Maximum is 500.',
+      defaultsTo: '100',
+    );
+  }
 
   @override
   final name = 'pull';
@@ -20,23 +27,38 @@ class PullCommand extends Command {
 
   @override
   Future<int> run() async {
-    final result = Config.loadFromFile(globalResults!, _logger);
-
-    if (result case FailureResult(:final error)) {
+    // Load configuration
+    final configResult = await resolveConfig(globalResults!, _logger);
+    if (configResult case FailureResult(:final error)) {
       return error.code;
     }
 
-    final config = result.value;
+    final config = configResult.value;
+
+    final credentialsResult = resolveCredentials(globalResults!, _logger);
+    if (credentialsResult case FailureResult(:final error)) {
+      return error.code;
+    }
 
     final pb = PbClient(
-      pbUrl: config.pbUrl,
-      usernameOrEmail: config.usernameOrEmail,
-      password: config.password,
+      credentials: credentialsResult.value,
       logger: _logger,
     );
 
-    final logInResult = await pb.logInAsSuperuser();
-    if (logInResult case FailureResult(:final error)) {
+    // Log in as superuser
+    final logIn = await pb.logInAsSuperuser();
+    if (logIn case FailureResult(:final error)) {
+      return error.code;
+    }
+
+    final seederResult = await pb.seeder();
+    if (seederResult case FailureResult(:final error)) {
+      return error.code;
+    }
+
+    // Fetch the current schema from the remote PocketBase instance
+    final collectionsResult = await pb.getCollections();
+    if (collectionsResult case FailureResult(:final error)) {
       return error.code;
     }
 

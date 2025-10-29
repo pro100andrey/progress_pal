@@ -1665,39 +1665,9 @@
       },
       {
         "hidden": false,
-        "id": "json41586927",
+        "id": "json3414765911",
         "maxSize": 1,
-        "name": "muscle_groups_count",
-        "presentable": false,
-        "required": false,
-        "system": false,
-        "type": "json"
-      },
-      {
-        "hidden": false,
-        "id": "json2691859542",
-        "maxSize": 1,
-        "name": "equipments_count",
-        "presentable": false,
-        "required": false,
-        "system": false,
-        "type": "json"
-      },
-      {
-        "hidden": false,
-        "id": "json215794100",
-        "maxSize": 1,
-        "name": "recording_types_count",
-        "presentable": false,
-        "required": false,
-        "system": false,
-        "type": "json"
-      },
-      {
-        "hidden": false,
-        "id": "json2565223041",
-        "maxSize": 1,
-        "name": "system_exercises_count",
+        "name": "info",
         "presentable": false,
         "required": false,
         "system": false,
@@ -1706,6 +1676,6 @@
     ],
     "indexes": [],
     "system": false,
-    "viewQuery": "SELECT\n-1 AS id,\n-- (NOT EXISTS (SELECT 1 FROM muscle_groups LIMIT 1)) AS muscle_groups_is_empty,\n(SELECT COUNT(id) FROM muscle_groups) AS muscle_groups_count,\n-- (NOT EXISTS (SELECT 1 FROM equipments LIMIT 1)) AS equipments_is_empty,\n(SELECT COUNT(id) FROM equipments) AS equipments_count,\n-- (NOT EXISTS (SELECT 1 FROM recording_types LIMIT 1)) AS recording_types_is_empty,\n(SELECT COUNT(id) FROM recording_types) AS recording_types_count,\n-- (NOT EXISTS (SELECT 1 FROM exercises LIMIT 1)) AS exercises_is_empty\n(SELECT COUNT(id) FROM exercises WHERE is_system = TRUE) AS system_exercises_count;\n\n"
+    "viewQuery": "SELECT\n-1 AS id,\njson_object(\n  'muscle_groups', json_object(\n  'count', (SELECT COUNT(id) FROM muscle_groups),\n  'saveTo', 'muscle_group.json'\n  ),\n  'equipments', json_object(\n  'count', (SELECT COUNT(id) FROM equipments),\n  'saveTo', 'equipments.json'\n  ),\n  'recording_types', json_object(\n  'count', (SELECT COUNT(id) FROM recording_types),\n  'file', 'recording_types.json'\n  ),\n  'system_exercises', json_object(\n  'count', (SELECT COUNT(id) FROM exercises WHERE is_system = TRUE),\n  'saveTo', 'system_exercises.json'\n  )\n) AS info;\n\n"
   }
 ]

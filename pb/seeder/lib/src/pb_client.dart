@@ -1,30 +1,23 @@
 import 'package:mason_logger/mason_logger.dart';
 import 'package:pocketbase/pocketbase.dart';
 
+import 'models/credentials.dart';
 import 'models/result.dart';
+import 'models/seeder.dart';
 
-/// A view of the seeder status in the PocketBase instance.
-typedef SeederView = ({
-  int muscleGroupsCount,
-  int equipmentsCount,
-  int recordingTypesCount,
-  int systemExercisesCount,
-});
+export 'models/result.dart';
+export 'models/seeder.dart';
 
 final class PbClient {
   PbClient({
-    required String pbUrl,
-    required String usernameOrEmail,
-    required String password,
+    required Credentials credentials,
     required Logger logger,
-  }) : _usernameOrEmail = usernameOrEmail,
-       _password = password,
+  }) : _credentials = credentials,
        _logger = logger,
-       _pb = PocketBase(pbUrl);
+       _pb = PocketBase(credentials.url);
 
   final Logger _logger;
-  final String _usernameOrEmail;
-  final String _password;
+  final Credentials _credentials;
   final PocketBase _pb;
 
   PocketBase get instance => _pb;
@@ -36,7 +29,7 @@ final class PbClient {
   Future<Result<RecordAuth, ExitCode>> logInAsSuperuser() async => _op(
     () async => _pb
         .collection('_superusers')
-        .authWithPassword(_usernameOrEmail, _password),
+        .authWithPassword(_credentials.usernameOrEmail, _credentials.password),
     onSuccess: (authResponse) {
       _logger.detail('Auth token: ${authResponse.token}');
     },
@@ -74,26 +67,8 @@ final class PbClient {
     String collectionName,
   ) async => _op(() async => _pb.collections.truncate(collectionName));
 
-  Future<Result<SeederView, ExitCode>> seeder() async => _op(() async {
-    final existingItems = await _pb
-        .collection('_seeder')
-        .getOne(
-          '-1',
-          fields: [
-            'muscle_groups_count',
-            'equipments_count',
-            'recording_types_count',
-            'system_exercises_count',
-          ].join(','),
-        );
-
-    return (
-      muscleGroupsCount: existingItems.get<int>('muscle_groups_count'),
-      equipmentsCount: existingItems.get<int>('equipments_count'),
-      recordingTypesCount: existingItems.get<int>('recording_types_count'),
-      systemExercisesCount: existingItems.get<int>('system_exercises_count'),
-    );
-  });
+  Future<Result<SeederView, ExitCode>> seeder() async =>
+      _op(() async => SeederView(await _pb.collection('_seeder').getOne('-1')));
 
   /// Checks if the specified [collectionName] is empty.
   ///
