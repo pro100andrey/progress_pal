@@ -11,9 +11,9 @@
             "type": "dart",
             "flutterMode": "debug",
             "args": [
-                "export",
+                "push",
                 "--env=.env",
-                "--truncate",
+                // "--truncate",
                 "--verbose"
             ]
         },

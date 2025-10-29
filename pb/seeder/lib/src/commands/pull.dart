@@ -1,9 +1,9 @@
 import 'package:args/command_runner.dart';
 import 'package:mason_logger/mason_logger.dart';
-import 'package:pocketbase/pocketbase.dart';
 
 import '../config/config.dart';
 import '../models/result.dart';
+import '../pb_client.dart';
 
 class PullCommand extends Command {
   PullCommand({required Logger logger}) : _logger = logger;
@@ -22,18 +22,23 @@ class PullCommand extends Command {
   Future<int> run() async {
     final result = Config.loadFromFile(globalResults!, _logger);
 
-    if (result case FailureResult<Config, int>(:final error)) {
-      return error;
+    if (result case FailureResult(:final error)) {
+      return error.code;
     }
 
-    final config = (result as SuccessResult<Config>).value;
+    final config = result.value;
 
-    final pb = PocketBase(config.pbUrl);
-    final authResponse = await pb
-        .collection('_superusers')
-        .authWithPassword(config.adminEmail, config.adminPassword);
+    final pb = PbClient(
+      pbUrl: config.pbUrl,
+      usernameOrEmail: config.usernameOrEmail,
+      password: config.password,
+      logger: _logger,
+    );
 
-    _logger.info('Authenticated as: ${authResponse.record.get('email')}');
+    final logInResult = await pb.logInAsSuperuser();
+    if (logInResult case FailureResult(:final error)) {
+      return error.code;
+    }
 
     return ExitCode.success.code;
   }

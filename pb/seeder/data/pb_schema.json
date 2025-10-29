@@ -125,9 +125,7 @@
     },
     "passwordAuth": {
       "enabled": true,
-      "identityFields": [
-        "email"
-      ]
+      "identityFields": ["email"]
     },
     "mfa": {
       "enabled": false,
@@ -270,9 +268,7 @@
         "id": "file376926767",
         "maxSelect": 1,
         "maxSize": 0,
-        "mimeTypes": [
-          "image/jpeg"
-        ],
+        "mimeTypes": ["image/jpeg"],
         "name": "avatar",
         "presentable": false,
         "protected": false,
@@ -301,10 +297,7 @@
         "required": false,
         "system": false,
         "type": "select",
-        "values": [
-          "writer",
-          "admin"
-        ]
+        "values": ["writer", "admin"]
       },
       {
         "hidden": false,
@@ -352,9 +345,7 @@
     },
     "passwordAuth": {
       "enabled": true,
-      "identityFields": [
-        "email"
-      ]
+      "identityFields": ["email"]
     },
     "mfa": {
       "enabled": false,
@@ -1405,11 +1396,7 @@
         "required": true,
         "system": false,
         "type": "select",
-        "values": [
-          "published",
-          "draft",
-          "archived"
-        ]
+        "values": ["published", "draft", "archived"]
       },
       {
         "hidden": false,
@@ -1651,5 +1638,74 @@
     ],
     "indexes": [],
     "system": false
+  },
+  {
+    "id": "pbc_191998593",
+    "listRule": null,
+    "viewRule": null,
+    "createRule": null,
+    "updateRule": null,
+    "deleteRule": null,
+    "name": "_seeder",
+    "type": "view",
+    "fields": [
+      {
+        "autogeneratePattern": "",
+        "hidden": false,
+        "id": "text3208210256",
+        "max": 0,
+        "min": 0,
+        "name": "id",
+        "pattern": "^[a-z0-9]+$",
+        "presentable": false,
+        "primaryKey": true,
+        "required": true,
+        "system": true,
+        "type": "text"
+      },
+      {
+        "hidden": false,
+        "id": "json41586927",
+        "maxSize": 1,
+        "name": "muscle_groups_count",
+        "presentable": false,
+        "required": false,
+        "system": false,
+        "type": "json"
+      },
+      {
+        "hidden": false,
+        "id": "json2691859542",
+        "maxSize": 1,
+        "name": "equipments_count",
+        "presentable": false,
+        "required": false,
+        "system": false,
+        "type": "json"
+      },
+      {
+        "hidden": false,
+        "id": "json215794100",
+        "maxSize": 1,
+        "name": "recording_types_count",
+        "presentable": false,
+        "required": false,
+        "system": false,
+        "type": "json"
+      },
+      {
+        "hidden": false,
+        "id": "json1924361853",
+        "maxSize": 1,
+        "name": "exercises_count",
+        "presentable": false,
+        "required": false,
+        "system": false,
+        "type": "json"
+      }
+    ],
+    "indexes": [],
+    "system": false,
+    "viewQuery": "SELECT\n-1 AS id,\n-- (NOT EXISTS (SELECT 1 FROM muscle_groups LIMIT 1)) AS muscle_groups_is_empty,\n(SELECT COUNT(id) FROM muscle_groups) AS muscle_groups_count,\n-- (NOT EXISTS (SELECT 1 FROM equipments LIMIT 1)) AS equipments_is_empty,\n(SELECT COUNT(id) FROM equipments) AS equipments_count,\n-- (NOT EXISTS (SELECT 1 FROM recording_types LIMIT 1)) AS recording_types_is_empty,\n(SELECT COUNT(id) FROM recording_types) AS recording_types_count,\n-- (NOT EXISTS (SELECT 1 FROM exercises LIMIT 1)) AS exercises_is_empty\n(SELECT COUNT(id) FROM exercises WHERE is_system = TRUE) AS exercises_count;\n\n"
   }
 ]

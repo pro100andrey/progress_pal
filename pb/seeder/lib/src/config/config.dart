@@ -11,24 +11,15 @@ import '../utils.dart';
 /// from command-line arguments and a .env file.
 final class Config {
   Config._({
-    required this.pbUrl,
-    required this.adminEmail,
-    required this.adminPassword,
     required this.schemaFilePath,
     required this.equipmentFilePath,
     required this.muscleGroupsFilePath,
     required this.recordingTypesFilePath,
     required this.seedMap,
+    required this.pbUrl,
+    required this.usernameOrEmail,
+    required this.password,
   });
-
-  /// The URL of the PocketBase instance.
-  final String pbUrl;
-
-  /// The admin email for the PocketBase instance.
-  final String adminEmail;
-
-  /// The admin password for the PocketBase instance.
-  final String adminPassword;
 
   /// The path to the PocketBase schema file.
   final String schemaFilePath;
@@ -45,50 +36,65 @@ final class Config {
   /// A map of file paths to collection names for seeding.
   final Map<String, String> seedMap;
 
+  /// The PocketBase url.
+  final String pbUrl;
+
+  /// The PocketBase admin email or username.
+  final String usernameOrEmail;
+
+  /// The PocketBase admin password.
+  final String password;
+
   /// Loads the configuration from the command-line arguments and .env file.
   ///
   /// It resolves paths, validates the presence of required files and
   /// connection details, and returns a [Result] containing either the
   /// [Config] instance or an error code.
-  static Result<Config> loadFromFile(ArgResults globalResults, Logger logger) {
+  static Result<Config, ExitCode> loadFromFile(
+    ArgResults globalResults,
+    Logger logger,
+  ) {
     final dotenvFile = globalResults['env'] as String?;
     final resolvedDotenvFile = resolvePath(dotenvFile);
     final dotenvResult = tryParseDotenv(resolvedDotenvFile);
-    // Handle dotenv file not found case.
-    if (dotenvResult case DotenvResultFileNotFound()) {
-      logger.err(
-        'The specified .env file was not found: $resolvedDotenvFile',
-      );
-      return FailureResult(ExitCode.ioError.code);
-    }
-    // Handle dotenv path is not a file case.
-    if (dotenvResult case DotenvResultIsNotAFile()) {
-      logger.err(
-        'The specified .env path is not a file: $resolvedDotenvFile',
-      );
-      return FailureResult(ExitCode.usage.code);
-    }
-    // Handle dotenv invalid case.
-    if (dotenvResult case DotenvResultInvalid()) {
-      logger.err(
-        'The specified .env file is missing required variables: '
-        'PB_URL, PB_ADMIN_EMAIL, PB_ADMIN_PASSWORD',
-      );
-      return FailureResult(ExitCode.usage.code);
+
+    switch (dotenvResult) {
+      case DotenvResultFileNotFound():
+        logger.err(
+          'The specified .env file was not found: $resolvedDotenvFile',
+        );
+        return Result.failure(ExitCode.ioError);
+      case DotenvResultIsNotAFile():
+        logger.err(
+          'The specified .env path is not a file: $resolvedDotenvFile',
+        );
+        return Result.failure(ExitCode.usage);
+      case DotenvResultInvalid():
+        logger.err(
+          'The specified .env file is missing required variables: '
+          'PB_URL, PB_ADMIN_EMAIL, PB_ADMIN_PASSWORD',
+        );
+        return Result.failure(ExitCode.usage);
+
+      case DotenvResultData():
+        break;
+      case null:
+        throw UnimplementedError();
     }
 
     final dotenv = dotenvResult as DotenvResultData?;
-    final url = dotenv?.url ?? globalResults['url'] as String?;
-    final username = dotenv?.username ?? globalResults['username'] as String?;
+    final pbUrl = dotenv?.url ?? globalResults['url'] as String?;
+    final usernameOrEmail =
+        dotenv?.username ?? globalResults['username'] as String?;
     final password = dotenv?.password ?? globalResults['password'] as String?;
-    if (url == null || username == null || password == null) {
+    if (pbUrl == null || usernameOrEmail == null || password == null) {
       logger.err(
         'Missing connection details. You must provide either:'
         '\n1. All three global options: --url, --username, and --password.'
         '\n2. The global option -e, --env, pointing to a file with connection '
         'variables.',
       );
-      return FailureResult(ExitCode.usage.code);
+      return Result.failure(ExitCode.usage);
     }
 
     final data = globalResults['data-folder'] as String;
@@ -97,10 +103,10 @@ final class Config {
     if (!isPathExists(dataFolder)) {
       logger.err(
         'Data folder not found: $dataFolder\n'
-        'Use --data-folder option to specify the correct folder.',
+        'Use --data-folder or -d option to specify the correct folder.',
       );
 
-      return FailureResult(ExitCode.ioError.code);
+      return Result.failure(ExitCode.ioError);
     }
 
     final schemaFilePath = '$dataFolder/pb_schema.json';
@@ -123,24 +129,50 @@ final class Config {
       for (final filePath in missingFiles) {
         logger.err('Required seed file not found: $filePath');
       }
-      return FailureResult(ExitCode.ioError.code);
+      return Result.failure(ExitCode.ioError);
     }
 
     final seedMap = {
       for (final entry in requiredFiles.entries) entry.key: ?entry.value,
     };
-    
+
     final config = Config._(
       schemaFilePath: schemaFilePath,
       equipmentFilePath: equipmentFilePath,
       muscleGroupsFilePath: muscleGroupsFilePath,
       recordingTypesFilePath: recordingTypesFilePath,
-      pbUrl: url,
-      adminEmail: username,
-      adminPassword: password,
       seedMap: seedMap,
+      pbUrl: pbUrl,
+      usernameOrEmail: usernameOrEmail,
+      password: password,
     );
 
+    logger.detail('Loaded configuration: $config');
+
     return SuccessResult(config);
+  }
+
+  @override
+  String toString() {
+    final buf = StringBuffer()
+      ..writeln()
+      ..writeln('Config:')
+      ..writeln('  schemaFilePath: $schemaFilePath')
+      ..writeln('  equipmentFilePath: $equipmentFilePath')
+      ..writeln('  muscleGroupsFilePath: $muscleGroupsFilePath')
+      ..writeln('  recordingTypesFilePath: $recordingTypesFilePath')
+      ..writeln('  seedMap: {')
+      ..writeAll(
+        seedMap.entries.map(
+          (e) => '    ${e.key}: ${e.value}',
+        ),
+        '\n',
+      )
+      ..writeln('  }')
+      ..writeln('  pbUrl: $pbUrl')
+      ..writeln('  usernameOrEmail: $usernameOrEmail')
+      ..writeln('  password: ${'*' * password.length}');
+
+    return buf.toString();
   }
 }
