@@ -57,8 +57,6 @@ class PushCommand extends Command {
       return error.code;
     }
 
-    await pb.seeder();
-
     // Import the schema
     await _importPBSchema(config, pb);
 
@@ -258,21 +256,23 @@ class PushCommand extends Command {
   }) async {
     final emptyMap = <String, bool>{};
 
-    for (final entry in config.seedMap.entries) {
-      final collectionName = entry.value;
+    if (!truncate) {
+      final seederResult = await pb.seeder();
 
-      if (!truncate) {
-        final isEmptyResult = await pb.collectionIsEmpty(collectionName);
-        if (isEmptyResult case FailureResult(:final error)) {
-          _logger.err(
-            'Failed to check if $collectionName is empty: $error. '
-            'Seeding aborted.',
-          );
-          return;
-        }
-
-        emptyMap[collectionName] = isEmptyResult.value;
+      if (seederResult case FailureResult(:final error)) {
+        _logger.err(
+          'Failed to check seeder status: $error. '
+          'Cannot proceed with seeding.',
+        );
+        return;
       }
+
+      final seederView = seederResult.value;
+
+      emptyMap['muscle_groups'] = seederView.muscleGroupsCount == 0;
+      emptyMap['equipments'] = seederView.equipmentsCount == 0;
+      emptyMap['recording_types'] = seederView.recordingTypesCount == 0;
+      emptyMap['exercises'] = seederView.systemExercisesCount == 0;
     }
 
     if (!truncate && emptyMap.entries.any((e) => !e.value)) {

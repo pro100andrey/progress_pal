@@ -1695,9 +1695,9 @@
       },
       {
         "hidden": false,
-        "id": "json1924361853",
+        "id": "json2565223041",
         "maxSize": 1,
-        "name": "exercises_count",
+        "name": "system_exercises_count",
         "presentable": false,
         "required": false,
         "system": false,
@@ -1706,6 +1706,6 @@
     ],
     "indexes": [],
     "system": false,
-    "viewQuery": "SELECT\n-1 AS id,\n-- (NOT EXISTS (SELECT 1 FROM muscle_groups LIMIT 1)) AS muscle_groups_is_empty,\n(SELECT COUNT(id) FROM muscle_groups) AS muscle_groups_count,\n-- (NOT EXISTS (SELECT 1 FROM equipments LIMIT 1)) AS equipments_is_empty,\n(SELECT COUNT(id) FROM equipments) AS equipments_count,\n-- (NOT EXISTS (SELECT 1 FROM recording_types LIMIT 1)) AS recording_types_is_empty,\n(SELECT COUNT(id) FROM recording_types) AS recording_types_count,\n-- (NOT EXISTS (SELECT 1 FROM exercises LIMIT 1)) AS exercises_is_empty\n(SELECT COUNT(id) FROM exercises WHERE is_system = TRUE) AS exercises_count;\n\n"
+    "viewQuery": "SELECT\n-1 AS id,\n-- (NOT EXISTS (SELECT 1 FROM muscle_groups LIMIT 1)) AS muscle_groups_is_empty,\n(SELECT COUNT(id) FROM muscle_groups) AS muscle_groups_count,\n-- (NOT EXISTS (SELECT 1 FROM equipments LIMIT 1)) AS equipments_is_empty,\n(SELECT COUNT(id) FROM equipments) AS equipments_count,\n-- (NOT EXISTS (SELECT 1 FROM recording_types LIMIT 1)) AS recording_types_is_empty,\n(SELECT COUNT(id) FROM recording_types) AS recording_types_count,\n-- (NOT EXISTS (SELECT 1 FROM exercises LIMIT 1)) AS exercises_is_empty\n(SELECT COUNT(id) FROM exercises WHERE is_system = TRUE) AS system_exercises_count;\n\n"
   }
 ]

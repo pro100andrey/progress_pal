@@ -11,7 +11,8 @@
             "type": "dart",
             "flutterMode": "debug",
             "args": [
-                "--dart-define-from-file=.env"
+                // PB_URL=<your_production_url>
+                "--dart-define-from-file=.env.development"
             ]
         },
         {

@@ -5,13 +5,26 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Seeder (debug)",
+            "name": "Seeder Push (debug)",
             "request": "launch",
             "program": "seeder/bin/seeder.dart",
             "type": "dart",
             "flutterMode": "debug",
             "args": [
                 "push",
+                "--env=.env",
+                "--truncate",
+                "--verbose"
+            ]
+        },
+        {
+            "name": "Seeder Pull (debug)",
+            "request": "launch",
+            "program": "seeder/bin/seeder.dart",
+            "type": "dart",
+            "flutterMode": "debug",
+            "args": [
+                "pull",
                 "--env=.env",
                 // "--truncate",
                 "--verbose"

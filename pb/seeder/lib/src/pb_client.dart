@@ -3,6 +3,14 @@ import 'package:pocketbase/pocketbase.dart';
 
 import 'models/result.dart';
 
+/// A view of the seeder status in the PocketBase instance.
+typedef SeederView = ({
+  int muscleGroupsCount,
+  int equipmentsCount,
+  int recordingTypesCount,
+  int systemExercisesCount,
+});
+
 final class PbClient {
   PbClient({
     required String pbUrl,
@@ -66,22 +74,25 @@ final class PbClient {
     String collectionName,
   ) async => _op(() async => _pb.collections.truncate(collectionName));
 
-  Future<Result<bool, ExitCode>> seeder() async => _op(() async {
-    final watch = Stopwatch()..start();
+  Future<Result<SeederView, ExitCode>> seeder() async => _op(() async {
     final existingItems = await _pb
         .collection('_seeder')
         .getOne(
           '-1',
           fields: [
+            'muscle_groups_count',
             'equipments_count',
-            // 'muscle_groups_count',
-            // 'recording_types_count',
+            'recording_types_count',
+            'system_exercises_count',
           ].join(','),
         );
 
-    _logger.info('Seeder check took: ${watch.elapsedMilliseconds} ms');
-
-    return true;
+    return (
+      muscleGroupsCount: existingItems.get<int>('muscle_groups_count'),
+      equipmentsCount: existingItems.get<int>('equipments_count'),
+      recordingTypesCount: existingItems.get<int>('recording_types_count'),
+      systemExercisesCount: existingItems.get<int>('system_exercises_count'),
+    );
   });
 
   /// Checks if the specified [collectionName] is empty.
