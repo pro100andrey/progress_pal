@@ -1,7 +1,6 @@
 import 'package:args/command_runner.dart';
 import 'package:mason_logger/mason_logger.dart';
 
-import '../config/config.dart';
 import '../models/credentials.dart';
 import '../pb_client.dart';
 
@@ -27,39 +26,30 @@ class PullCommand extends Command {
 
   @override
   Future<int> run() async {
-    // Load configuration
-    final configResult = await resolveConfig(globalResults!, _logger);
-    if (configResult case FailureResult(:final error)) {
-      return error.code;
-    }
-
-    final config = configResult.value;
-
-    final credentialsResult = resolveCredentials(globalResults!, _logger);
+    final credentialsResult = resolveCredentials(globalResults!);
     if (credentialsResult case FailureResult(:final error)) {
-      return error.code;
+      return error.exitCode;
     }
 
-    final pb = PbClient(
-      credentials: credentialsResult.value,
-      logger: _logger,
-    );
+    final pb = PbClient(credentials: credentialsResult.value);
 
     // Log in as superuser
     final logIn = await pb.logInAsSuperuser();
-    if (logIn case FailureResult(:final error)) {
-      return error.code;
+    if (logIn.isFailure) {
+      _logger.err('Failed to log in: ${logIn.error}');
+      return logIn.error.exitCode;
     }
 
-    final seederResult = await pb.seeder();
-    if (seederResult case FailureResult(:final error)) {
-      return error.code;
+    final seeder = await pb.seeder();
+    if (seeder.isFailure) {
+      _logger.err('Failed to get seeder: ${seeder.error}');
+      return seeder.error.exitCode;
     }
 
     // Fetch the current schema from the remote PocketBase instance
-    final collectionsResult = await pb.getCollections();
-    if (collectionsResult case FailureResult(:final error)) {
-      return error.code;
+    final collections = await pb.getCollections();
+    if (collections.isFailure) {
+      return collections.error.exitCode;
     }
 
     return ExitCode.success.code;

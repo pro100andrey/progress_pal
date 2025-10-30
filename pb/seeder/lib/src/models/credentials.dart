@@ -1,8 +1,10 @@
 import 'package:args/args.dart';
-import 'package:mason_logger/mason_logger.dart';
+import 'package:io/io.dart' show ExitCode;
+import 'package:mason_logger/mason_logger.dart' show ExitCode;
 
 import '../utils/dotenv_parser.dart';
 import '../utils/utils.dart';
+import 'failure.dart';
 import 'result.dart';
 
 /// Model class to hold PocketBase admin credentials.
@@ -30,31 +32,25 @@ final class Credentials {
 /// It returns [Result.success] with the [Credentials] object if all three
 /// required pieces of information (url, username/email, password) are found.
 /// Otherwise, it returns [Result.failure] with the appropriate [ExitCode]
-Result<Credentials, ExitCode> resolveCredentials(
-  ArgResults args,
-  Logger logger,
-) {
+Result<Credentials, Failure> resolveCredentials(ArgResults args) {
   final dotenvFile = args['env'] as String?;
   final resolvedDotenvFile = resolvePath(dotenvFile);
   final dotenvResult = tryParseDotenv(resolvedDotenvFile);
 
   switch (dotenvResult) {
     case DotenvResultFileNotFound():
-      logger.err(
-        'The specified .env file was not found: $resolvedDotenvFile',
-      );
-      return Result.failure(ExitCode.ioError);
+      return Failure.noInput(
+        message: 'The specified .env file was not found: $resolvedDotenvFile',
+      ).toFailureResult();
     case DotenvResultIsNotAFile():
-      logger.err(
-        'The specified .env path is not a file: $resolvedDotenvFile',
-      );
-      return Result.failure(ExitCode.usage);
+      return Failure.data(
+        message: 'The specified .env path is not a file: $resolvedDotenvFile',
+      ).toFailureResult();
     case DotenvResultInvalid():
-      logger.err(
-        'The specified .env file is missing required variables: '
-        'PB_URL, PB_ADMIN_EMAIL, PB_ADMIN_PASSWORD',
-      );
-      return Result.failure(ExitCode.usage);
+      const message =
+          'The specified .env file is missing required variables: '
+          'PB_URL, PB_ADMIN_EMAIL, PB_ADMIN_PASSWORD';
+      return Failure.data(message: message).toFailureResult();
 
     case DotenvResultData():
       break;
@@ -69,14 +65,13 @@ Result<Credentials, ExitCode> resolveCredentials(
   final password = dotenv?.password ?? args['password'] as String?;
   // Validate presence of all required fields
   if (pbUrl == null || usernameOrEmail == null || password == null) {
-    logger.err(
-      'Missing connection details. You must provide either:'
-      '\n1. All three global options: --url, --username, and --password.'
-      '\n2. The global option -e, --env, pointing to a file with connection '
-      'variables.',
-    );
+    const message =
+        'Missing connection details. You must provide either:'
+        '\n1. All three global options: --url, --username, and --password.'
+        '\n2. The global option -e, --env, pointing to a file with connection '
+        'variables.';
 
-    return Result.failure(ExitCode.usage);
+    return Failure.usage(message: message).toFailureResult();
   }
 
   final credentials = Credentials(

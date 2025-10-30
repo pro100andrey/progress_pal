@@ -39,6 +39,23 @@ class PushCommand extends Command {
 
   @override
   Future<int> run() async {
+    final credentialsResult = resolveCredentials(globalResults!);
+
+    if (credentialsResult case FailureResult(:final error)) {
+      return error.exitCode;
+    }
+
+    final pb = PbClient(
+      credentials: credentialsResult.value,
+    );
+
+    // Log in as superuser
+    final logIn = await pb.logInAsSuperuser();
+
+    if (logIn case FailureResult(:final error)) {
+      return error.exitCode;
+    }
+
     // Load configuration
     final configResult = await resolveConfig(globalResults!, _logger);
     if (configResult case FailureResult(:final error)) {
@@ -46,26 +63,6 @@ class PushCommand extends Command {
     }
 
     final config = configResult.value;
-
-    final credentialsResult = resolveCredentials(
-      globalResults!,
-      _logger,
-    );
-
-    if (credentialsResult case FailureResult(:final error)) {
-      return error.code;
-    }
-
-    final pb = PbClient(
-      credentials: credentialsResult.value,
-      logger: _logger,
-    );
-
-    // Log in as superuser
-    final logIn = await pb.logInAsSuperuser();
-    if (logIn case FailureResult(:final error)) {
-      return error.code;
-    }
 
     // Import the schema
     await _importPBSchema(config, pb);
@@ -151,22 +148,22 @@ class PushCommand extends Command {
     final emptyMap = <String, bool>{};
 
     if (!truncate) {
-      final seederResult = await pb.seeder();
+      final seederView = await pb.seeder();
 
-      if (seederResult case FailureResult(:final error)) {
+      if (seederView.isFailure) {
         _logger.err(
-          'Failed to check seeder status: $error. '
-          'Cannot proceed with seeding.',
+          'Failed to retrieve seeder status from the server. '
+          'Seeding aborted.',
         );
         return;
       }
 
-      final seederView = seederResult.value;
+      final view = seederView.value;
 
-      emptyMap['muscle_groups'] = seederView.muscleGroupsInfo.count == 0;
-      emptyMap['equipments'] = seederView.equipmentsInfo.count == 0;
-      emptyMap['recording_types'] = seederView.recordingTypesInfo.count == 0;
-      emptyMap['exercises'] = seederView.systemExercisesInfo.count == 0;
+      emptyMap['muscle_groups'] = view.muscleGroupsInfo.count == 0;
+      emptyMap['equipments'] = view.equipmentsInfo.count == 0;
+      emptyMap['recording_types'] = view.recordingTypesInfo.count == 0;
+      emptyMap['exercises'] = view.systemExercisesInfo.count == 0;
     }
 
     if (!truncate && emptyMap.entries.any((e) => !e.value)) {
