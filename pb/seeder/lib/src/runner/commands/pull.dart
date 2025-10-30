@@ -1,15 +1,16 @@
 import 'package:args/command_runner.dart';
 import 'package:mason_logger/mason_logger.dart';
 
-import '../models/credentials.dart';
-import '../pb_client.dart';
+import '../../client/pb_client.dart';
+import '../../models/credentials.dart';
+import '../../models/failure.dart';
 
 class PullCommand extends Command {
   PullCommand({required Logger logger}) : _logger = logger {
     argParser.addOption(
       'batch-size',
       abbr: 'b',
-      help: 'Number of records to create per batch. Maximum is 500.',
+      help: 'Number of records to fetch per batch. Maximum is 500.',
       defaultsTo: '100',
     );
   }
@@ -40,16 +41,36 @@ class PullCommand extends Command {
       return logIn.error.exitCode;
     }
 
-    final seeder = await pb.seeder();
-    if (seeder.isFailure) {
-      _logger.err('Failed to get seeder: ${seeder.error}');
-      return seeder.error.exitCode;
+    _logger
+      ..info('Successfully authenticated as superuser.')
+      ..detail('Token: ${logIn.value.token}.');
+
+    // Get seeder view
+    final seederView = await pb.seeder();
+    if (seederView.isFailure) {
+      _logger.err('Failed to get seeder view: ${seederView.errorMessage}');
+      return seederView.error.exitCode;
     }
 
     // Fetch the current schema from the remote PocketBase instance
     final collections = await pb.getCollections();
     if (collections.isFailure) {
       return collections.error.exitCode;
+    }
+
+    final requiredCollections = [
+      'equipments',
+      'muscle_groups',
+      'recording_types',
+      'exercises',
+    ];
+
+    final requiredToFind = requiredCollections.toSet();
+    for (final e in collections.value) {
+      requiredToFind.remove(e.name);
+      if (requiredToFind.isEmpty) {
+        break;
+      }
     }
 
     return ExitCode.success.code;

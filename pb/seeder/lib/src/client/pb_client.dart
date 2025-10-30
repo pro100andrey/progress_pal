@@ -1,12 +1,12 @@
 import 'package:pocketbase/pocketbase.dart';
 
-import 'models/credentials.dart';
-import 'models/failure.dart';
-import 'models/result.dart';
-import 'models/seeder.dart';
+import '../models/credentials.dart';
+import '../models/failure.dart';
+import '../models/result.dart';
+import '../models/seeder.dart';
 
-export 'models/result.dart';
-export 'models/seeder.dart';
+export '../models/result.dart';
+export '../models/seeder.dart';
 
 final class PbClient {
   PbClient({
@@ -42,8 +42,9 @@ final class PbClient {
     String collectionName,
   ) async => _op(() async => _pb.collections.truncate(collectionName));
 
-  Future<Result<SeederView, Failure>> seeder() async =>
-      _op(() async => SeederView(await _pb.collection('_seeder').getOne('-1')));
+  Future<Result<SeederView, Failure>> seeder() async => _op(
+    () async => SeederView(await _pb.collection('_seeder').getOne('-1')),
+  );
 
   Future<Result<bool, Failure>> collectionIsEmpty(
     String collectionName,
@@ -61,9 +62,10 @@ final class PbClient {
       final result = await operation();
       return Result.success(result);
     } on ClientException catch (e) {
-      final message =
-          e.response['message'] ??
-          (e.statusCode == 404 ? 'Resource not found' : 'Unexpected error');
+      final message = switch (e.response) {
+        {'message': final String message} => '${e.statusCode} - $message',
+        _ => 'Unexpected error',
+      };
 
       final failure = Failure.fromHttpStatus(
         e.statusCode,

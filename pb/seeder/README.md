@@ -16,8 +16,8 @@ Create a `.env` file in the root of the `seeder` directory with the following co
 
 ```env
 PB_URL="localhost:8090"
-PB_ADMIN_EMAIL="admin@example.com"
-PB_ADMIN_PASSWORD="your_admin_password"
+PB_USERNAME="admin@example.com"
+PB_PASSWORD="your_admin_password"
 ```
 
 ## CLI Usage

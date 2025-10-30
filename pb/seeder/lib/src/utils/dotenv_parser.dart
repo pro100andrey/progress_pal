@@ -46,8 +46,8 @@ DotenvResult? tryParseDotenv(String? filePath) {
   final env = DotEnv()..load([filePath]);
 
   final url = env['PB_URL'];
-  final username = env['PB_ADMIN_EMAIL'];
-  final password = env['PB_ADMIN_PASSWORD'];
+  final username = env['PB_USERNAME'];
+  final password = env['PB_PASSWORD'];
 
   if (url == null || username == null || password == null) {
     return const DotenvResultInvalid();

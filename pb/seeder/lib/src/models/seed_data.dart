@@ -1,20 +1,14 @@
+import 'failure.dart';
+import 'result.dart';
+
 final class SeedData {
-  SeedData._({
-    required this.collectionName,
-    required this.data,
-  });
-
-  /// The name of the collection to seed.
-  final String collectionName;
-
-  /// The list of data entries to seed into the collection.
-  final List<Map<String, dynamic>> data;
+  const SeedData._();
 }
 
-SeedData resolveSeedData({
-  required String collectionName,
-  required List<Map<String, dynamic>> data,
-}) => SeedData._(
-  collectionName: collectionName,
-  data: data,
-);
+Result<SeedData, Failure> resolveSeedData({
+  required String seedDataDir,
+}) {
+  const result = SeedData._();
+
+  return Result.success(result);
+}

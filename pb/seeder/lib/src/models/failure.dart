@@ -1,5 +1,8 @@
 import 'result.dart';
 
+
+const int kSuccess = 0;
+
 /// Represents an application-level failure that can be reported with a
 /// specific exit code and message.
 ///
@@ -173,7 +176,19 @@ class Failure {
   String toString() => 'Failure: $message (exit code: $exitCode)';
 }
 
-extension FailureExtensions on Failure {
+extension FailureResultExtension on Failure {
   /// Returns a [Result.failure] wrapping this [Failure].
   Result<T, Failure> toFailureResult<T>() => Result.failure(this);
+}
+
+extension ResultFailureExtension<T> on Result<T, Failure> {
+  /// Returns the error message if this is a [FailureResult], otherwise null.
+  String? get errorMessage {
+    final result = this;
+
+    if (result is FailureResult<T, Failure>) {
+      return result.error.message;
+    }
+    return null;
+  }
 }

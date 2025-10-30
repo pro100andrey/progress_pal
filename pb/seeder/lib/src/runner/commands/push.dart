@@ -5,11 +5,11 @@ import 'package:args/command_runner.dart';
 import 'package:mason_logger/mason_logger.dart';
 import 'package:pocketbase/pocketbase.dart';
 
-import '../config/config.dart';
-import '../models/credentials.dart';
-import '../pb_client.dart';
-import '../utils/schema_checker.dart';
-import '../utils/utils.dart';
+import '../../client/pb_client.dart';
+import '../../config/config.dart';
+import '../../models/credentials.dart';
+import '../../utils/schema_checker.dart';
+import '../../utils/utils.dart';
 
 class PushCommand extends Command {
   PushCommand({required Logger logger}) : _logger = logger {
@@ -39,22 +39,27 @@ class PushCommand extends Command {
 
   @override
   Future<int> run() async {
-    final credentialsResult = resolveCredentials(globalResults!);
+    final credentials = resolveCredentials(globalResults!);
 
-    if (credentialsResult case FailureResult(:final error)) {
-      return error.exitCode;
+    if (credentials.isFailure) {
+      _logger.err(credentials.error.message);
+
+      return credentials.error.exitCode;
     }
 
-    final pb = PbClient(
-      credentials: credentialsResult.value,
-    );
+    final pb = PbClient(credentials: credentials.value);
 
     // Log in as superuser
     final logIn = await pb.logInAsSuperuser();
 
-    if (logIn case FailureResult(:final error)) {
-      return error.exitCode;
+    if (logIn.isFailure) {
+      _logger.err(logIn.error.message);
+      return logIn.error.exitCode;
     }
+
+    _logger
+      ..info('Successfully authenticated as superuser.')
+      ..detail('Token: ${logIn.value.token}.');
 
     // Load configuration
     final configResult = await resolveConfig(globalResults!, _logger);

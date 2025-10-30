@@ -49,7 +49,7 @@ Result<Credentials, Failure> resolveCredentials(ArgResults args) {
     case DotenvResultInvalid():
       const message =
           'The specified .env file is missing required variables: '
-          'PB_URL, PB_ADMIN_EMAIL, PB_ADMIN_PASSWORD';
+          'PB_URL, PB_USERNAME, PB_PASSWORD';
       return Failure.data(message: message).toFailureResult();
 
     case DotenvResultData():

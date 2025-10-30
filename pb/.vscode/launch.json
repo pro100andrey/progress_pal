@@ -26,7 +26,6 @@
             "args": [
                 "pull",
                 "--env=.env",
-                // "--truncate",
                 "--verbose"
             ]
         },
