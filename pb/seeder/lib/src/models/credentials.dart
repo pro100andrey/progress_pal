@@ -1,6 +1,5 @@
 import 'package:args/args.dart';
-import 'package:io/io.dart' show ExitCode;
-import 'package:mason_logger/mason_logger.dart' show ExitCode;
+import 'package:mason_logger/mason_logger.dart' show ExitCode, Logger;
 
 import '../utils/dotenv_parser.dart';
 import '../utils/utils.dart';
@@ -10,19 +9,59 @@ import 'result.dart';
 /// Model class to hold PocketBase admin credentials.
 final class Credentials {
   Credentials({
-    required this.url,
+    required this.host,
     required this.usernameOrEmail,
     required this.password,
   });
 
   /// The PocketBase instance URL.
-  final String url;
+  final String host;
 
   /// The admin username or email.
   final String usernameOrEmail;
 
   /// The admin password.
   final String password;
+}
+
+Result<Credentials, Failure> resolveCredentialsWithUserInput() {
+  final logger = Logger();
+
+  final host = logger
+      .prompt(
+        'Enter PocketBase host URL:',
+        defaultValue: 'http://localhost:8090',
+      )
+      .trim();
+  if (host.isEmpty) {
+    return Failure.data(
+      message: 'PocketBase host URL cannot be empty.',
+    ).toFailureResult();
+  }
+
+  final userNameOrEmail = logger
+      .prompt('Enter superuser username/email:')
+      .trim();
+  if (userNameOrEmail.isEmpty) {
+    return Failure.data(
+      message: 'Superuser username/email cannot be empty.',
+    ).toFailureResult();
+  }
+
+  final password = logger.prompt('Enter superuser password:', hidden: true);
+  if (password.isEmpty) {
+    return Failure.data(
+      message: 'Superuser password cannot be empty.',
+    ).toFailureResult();
+  }
+
+  final credentials = Credentials(
+    host: host,
+    usernameOrEmail: userNameOrEmail,
+    password: password,
+  );
+
+  return Result.success(credentials);
 }
 
 /// Attempts to determine and load the PocketBase admin credentials
@@ -75,7 +114,7 @@ Result<Credentials, Failure> resolveCredentials(ArgResults args) {
   }
 
   final credentials = Credentials(
-    url: pbUrl,
+    host: pbUrl,
     usernameOrEmail: usernameOrEmail,
     password: password,
   );

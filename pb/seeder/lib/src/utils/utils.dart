@@ -9,6 +9,13 @@ bool isFilePath(String path) {
   return type == io.FileSystemEntityType.file;
 }
 
+bool isDirectoryPath(String path) {
+  final type = io.FileSystemEntity.typeSync(path);
+  return type == io.FileSystemEntityType.directory;
+}
+
+bool isAbsolutePath(String? path) => path != null && p.isAbsolute(path);
+
 bool isPathExists(String? path) =>
     path != null &&
     io.FileSystemEntity.typeSync(path) != io.FileSystemEntityType.notFound;

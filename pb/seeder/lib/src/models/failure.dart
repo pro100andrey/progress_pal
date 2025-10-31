@@ -1,6 +1,5 @@
 import 'result.dart';
 
-
 const int kSuccess = 0;
 
 /// Represents an application-level failure that can be reported with a
@@ -22,6 +21,13 @@ class Failure {
   ///
   /// Exit code: **EX_GENERAL = 1**
   Failure.generic({required this.message}) : exitCode = exGeneric;
+
+  /// User aborted the operation.
+  ///
+  /// Use this when the user cancels an operation or declines a prompt.
+  ///
+  /// Exit code: **EX_USER_ABORTED = 2**
+  Failure.userAborted({required this.message}) : exitCode = exUserAborted;
 
   /// Command line usage error.
   ///
@@ -136,6 +142,9 @@ class Failure {
   /// Generic error
   static const int exGeneric = 1;
 
+  /// User aborted the operation.
+  static const int exUserAborted = 2;
+
   /// CLI usage error.
   static const int exUsage = 64;
 
@@ -188,6 +197,16 @@ extension ResultFailureExtension<T> on Result<T, Failure> {
 
     if (result is FailureResult<T, Failure>) {
       return result.error.message;
+    }
+    return null;
+  }
+
+  /// Returns the exit code if this is a [FailureResult], otherwise null.
+  int? get exitCode {
+    final result = this;
+
+    if (result is FailureResult<T, Failure>) {
+      return result.error.exitCode;
     }
     return null;
   }

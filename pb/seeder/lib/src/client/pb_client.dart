@@ -12,7 +12,7 @@ final class PbClient {
   PbClient({
     required Credentials credentials,
   }) : _credentials = credentials,
-       _pb = PocketBase(credentials.url);
+       _pb = PocketBase(credentials.host);
 
   final Credentials _credentials;
   final PocketBase _pb;
@@ -62,8 +62,18 @@ final class PbClient {
       final result = await operation();
       return Result.success(result);
     } on ClientException catch (e) {
-      final message = switch (e.response) {
-        {'message': final String message} => '${e.statusCode} - $message',
+      final originalError = e.originalError;
+
+      final type = originalError.runtimeType;
+
+      final message = switch (e) {
+        ClientException(response: {'message': final String message}) =>
+          '${e.statusCode} - $message',
+
+        ClientException(originalError: Exception())
+            when originalError != null =>
+          '$originalError',
+
         _ => 'Unexpected error',
       };
 

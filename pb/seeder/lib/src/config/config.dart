@@ -1,5 +1,4 @@
 import 'package:args/args.dart';
-import 'package:io/io.dart';
 import 'package:mason_logger/mason_logger.dart';
 
 import '../models/result.dart';

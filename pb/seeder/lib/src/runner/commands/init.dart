@@ -4,48 +4,80 @@ import 'package:mason_logger/mason_logger.dart';
 import '../../client/pb_client.dart';
 import '../../models/credentials.dart';
 import '../../models/failure.dart';
+import '../../models/seed_data_config.dart';
+import '../../utils/utils.dart';
 
-class PullCommand extends Command {
-  PullCommand({required Logger logger}) : _logger = logger {
+class InitCommand extends Command {
+  InitCommand({required Logger logger}) : _logger = logger {
     argParser.addOption(
-      'batch-size',
-      abbr: 'b',
-      help: 'Number of records to fetch per batch. Maximum is 500.',
-      defaultsTo: '100',
+      'data-dir',
+      abbr: 'd',
+      help: 'Path to the local seed data and schema directory.',
+      mandatory: true,
     );
   }
 
   @override
-  final name = 'pull';
+  final name = 'init';
 
   @override
-  final description =
-      'Pulls the remote PocketBase schema and collection data into local JSON '
-      'files.';
+  final description = 'Initializes the local seed configuration';
 
   final Logger _logger;
 
   @override
   Future<int> run() async {
-    final credentials = resolveCredentials(globalResults!);
+    final dataDir = resolveDataDir(argResults!['data-dir']);
+
+    if (dataDir.isFailure) {
+      _logger.err(dataDir.errorMessage);
+      return dataDir.exitCode!;
+    }
+
+    final envPath = '${dataDir.value.path}/.env';
+    final hasEnvFile = isPathExists(envPath);
+
+
+    final credentials = resolveCredentialsWithUserInput();
+
     if (credentials.isFailure) {
       _logger.err(credentials.error.message);
 
       return credentials.error.exitCode;
     }
 
-    final pb = PbClient(credentials: credentials.value);
+    final pb = PbClient(
+      credentials: credentials.value,
+    );
+
+    final logInProgress = _logger.progress(
+      'Attempting to authenticate with PocketBase...',
+    );
 
     // Log in as superuser
     final logIn = await pb.logInAsSuperuser();
     if (logIn.isFailure) {
-      _logger.err('Failed to log in: ${logIn.error}');
+      logInProgress.fail('Authentication failed: ${logIn.errorMessage}');
       return logIn.error.exitCode;
     }
 
-    _logger
-      ..info('Successfully authenticated as superuser.')
-      ..detail('Token: ${logIn.value.token}.');
+    logInProgress.complete('Successfully authenticated as superuser.');
+
+    final confirmed = _logger.confirm(
+      'Create .env file with these credentials?',
+    );
+
+    if (confirmed) {
+      _logger.flush();
+      return ExitCode.success.code;
+    }
+
+    // final credentials = resolveCredentials(globalResults!);
+    // if (credentials.isFailure) {
+    //   _logger.err(credentials.error.message);
+
+    //   return credentials.error.exitCode;
+    // }
 
     // Get seeder view
     final seederView = await pb.seeder();

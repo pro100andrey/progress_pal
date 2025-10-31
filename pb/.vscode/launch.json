@@ -29,5 +29,24 @@
                 "--verbose"
             ]
         },
+        {
+            "name": "Seeder Init (debug)",
+            "request": "launch",
+            "program": "seeder/bin/seeder.dart",
+            "type": "dart",
+            "flutterMode": "debug",
+            "console": "terminal",
+            "presentation": {
+                "order": 1,
+                "focus": true,
+                "hidden": false,
+                "group": "Seeder"
+            },
+            "args": [
+                "init",
+                "--verbose",
+                "--data-dir=./seeder_data"
+            ]
+        },
     ]
 }

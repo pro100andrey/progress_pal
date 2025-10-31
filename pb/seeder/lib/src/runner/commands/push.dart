@@ -7,6 +7,7 @@ import 'package:pocketbase/pocketbase.dart';
 
 import '../../client/pb_client.dart';
 import '../../config/config.dart';
+import '../../extensions/string_style.dart';
 import '../../models/credentials.dart';
 import '../../utils/schema_checker.dart';
 import '../../utils/utils.dart';
@@ -40,7 +41,6 @@ class PushCommand extends Command {
   @override
   Future<int> run() async {
     final credentials = resolveCredentials(globalResults!);
-
     if (credentials.isFailure) {
       _logger.err(credentials.error.message);
 
@@ -127,9 +127,7 @@ class PushCommand extends Command {
     final isSame = checkPBSchema(fromServer, fromJsonFile, _logger);
 
     if (isSame) {
-      _logger.info(
-        green.wrap('Schema is up to date!'),
-      );
+      _logger.info('Schema is up to date!'.green);
       return;
     }
 
@@ -139,9 +137,7 @@ class PushCommand extends Command {
     // call. await pb.collections.import(collections, deleteMissing: true);
     await pb.importCollections(fromJsonFile);
 
-    _logger.info(
-      green.wrap('Schema imported/updated successfully!'),
-    );
+    _logger.info('Schema imported/updated successfully!'.green);
   }
 
   Future<void> _seedCollections({
