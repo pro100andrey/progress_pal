@@ -44,9 +44,9 @@ Result<DataDir, Failure> resolveDataDir(String dataDir) {
     },
   );
 
-  final dataDirConfirmed = logger.confirm(confirmTitle, defaultValue: true);
+  final confirmed = logger.confirm(confirmTitle, defaultValue: true);
 
-  if (!dataDirConfirmed) {
+  if (!confirmed) {
     return Failure.userAborted(
       message: 'Operation aborted by user.',
     ).toFailureResult();
